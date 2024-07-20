@@ -1,0 +1,163 @@
+
+
+.sideNav-parent {
+    background: dimgrey;
+    height: 125vh;
+    width: 105%;
+}
+
+/*
+.sideNav-child1 {
+    padding-top: 2%;
+    padding-left: 1%;
+    padding-right: 2%;
+}
+*/
+
+.sideNav-child1 {
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 4px;
+}
+
+/*
+.icn{
+  width: 50%;
+  height: 40%;
+  margin-left:2.5%;
+}
+
+.icn2{
+  width: 50%;
+  height: 40%;
+  margin-left:2.5%;
+}
+*/
+
+
+
+.itm:hover {
+    background-color: DarkSlateGray;
+}
+
+/*
+.itm2:hover {
+  background-color: DarkSlateGray;
+}
+*/
+
+.itm4:hover {
+  background-color: DarkSlateGray;
+}
+
+/*
+
+.itm{
+  background-color: black;
+  margin-top:0.2%;   
+  margin-bottom:0.2%;
+  height: 4.25vh;
+  align-items: center;
+}
+
+*/
+
+.itm{
+    background-color: black;
+    margin-top:0.5px; 
+    margin-bottom:0.5px;
+    height: 40px;
+    align-items: center;
+}
+
+/*
+.itm2{
+  background-color: black;
+  margin-top:0.25%;
+  margin-bottom:0.25%;
+
+}
+*/
+
+.itm2{
+  background-color: black;
+  margin-top:1px;
+  margin-bottom:1px;
+
+}
+
+.itm4{
+  background-color: #1b1c1b;
+  margin-top:1px;
+  margin-bottom:1px;
+
+}
+
+
+.mitm:hover {
+  background-color: DarkSlateGray;
+}
+
+.mitm{
+  background-color: black;
+  margin-top:0.5px;
+  margin-bottom:0.5px;
+  height: 42px;
+  align-items: center;
+}
+
+
+
+/* font-size: 0.8vw; */
+.itsbtxt{
+    font-size: 14px;
+    color: white;
+    font-weight: normal;
+    margin-left:7.5%;
+}
+
+/* font-size: 0.8vw;
+.ittxt{
+    font-size: 0.8vw;
+    color: white;
+    font-weight: bold;
+    margin-left:4px;
+    margin-top:none;
+    margin-bottom:5px;
+
+}
+*/
+
+.ittxt{
+    font-size:16px;
+    color: white;
+    font-weight: bold;
+    margin-left:10px;
+    margin-top:none;
+    margin-bottom:5px;
+
+}
+
+.ittxt2{
+  font-size:16px;
+  color: white;
+  font-weight: bold;
+  margin-left:10px;
+  /*margin-left:0.10%;*/
+  margin-top:none;
+  margin-bottom:5px;
+
+}
+
+.lnk{
+  margin-top:1%;
+}
+
+.mat-icon {
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top : 2px;
+  }
+
+
