@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from './_services/user-auth.service';
 
@@ -10,7 +10,21 @@ import { UserAuthService } from './_services/user-auth.service';
 export class AppComponent {
   title = 'ym';
 
+
   isSidebarVisible: boolean = true;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkMobileView();
+  }
+
+  checkMobileView(): boolean {
+    return window.innerWidth < 576; // Define mobile view breakpoint
+  }
+
+  isMobileView(): boolean {
+    return this.checkMobileView();
+  }
+
 
   constructor(
     private userAuthService: UserAuthService,

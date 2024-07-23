@@ -8,17 +8,18 @@
 
 <!--class="container-fluid px-0 overflow-hidden"-->
 <div class="container-fluid px-0 overflow-hidden"  >
-<div class="row" *ngIf=" isLoggedIn() && isVisibleSidebar()">
+<div class="row" *ngIf=" isLoggedIn() && isVisibleSidebar()"> <!--  -->
 
 
-  <div class="d-none d-sm-block col-lg-2 col-md-3 col-sm-2 min-vh-100 " style="background: #1b1c1b;" >
+  <div class="  col-lg-2   col-md-3 col-4 min-vh-100 " style="background: #1b1c1b;" >
     <app-sidenav  ></app-sidenav>
   </div>
-  <div class="pg col-lg-10 col-md-9 col-sm-10  col-xs-12 min-vh-100" >
+  <div class="pg col-lg-10 col-md-9 col-8   min-vh-100 "  >
 
     <button class="collapse-button btn " type="button" (click)="toggleSidebar()">||||</button>
-
-    <router-outlet></router-outlet>
+    <div [ngClass]="{'disable-on-mobile': isSidebarVisible && isMobileView()}">
+    <router-outlet  ></router-outlet>
+    </div>
   </div>
 
 
@@ -26,7 +27,7 @@
 </div>
 
 <div class="container-fluid px-0 overflow-hidden"  >
-<div class="row"  *ngIf=" !isLoggedIn()  ||  !isVisibleSidebar()">
+<div class="row"  *ngIf=" !isLoggedIn() || !isVisibleSidebar() "> <!-- ||  !isVisibleSidebar()-->
 
   <div class="pg min-vh-100">
     <button class="collapse-button btn " type="button" (click)="toggleSidebar()" *ngIf="isLoggedIn()" >||||</button>
