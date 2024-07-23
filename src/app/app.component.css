@@ -9,6 +9,14 @@
 
 }
 
+.collapse-button {
+    margin-top:10px;
+    margin-left:5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
 
 .sdNav {
     background: grey ;
