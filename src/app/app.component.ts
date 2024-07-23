@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'ym';
 
 
-  isSidebarVisible: boolean = true;
+  isSidebarVisible: boolean = false;
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.checkMobileView();
