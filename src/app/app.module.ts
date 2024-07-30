@@ -16,6 +16,7 @@ import { TestComponent } from './global_comman/test/test.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './global_comman/signup/signup.component';
+import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SignupComponent } from './global_comman/signup/signup.component';
     FooterComponent,
     LoginComponent,
     TestComponent,
-    SignupComponent
+    SignupComponent,
+    SelectavatarComponent
   ],
   imports: [
     BrowserModule,

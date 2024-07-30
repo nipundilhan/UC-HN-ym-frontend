@@ -21,6 +21,10 @@ export class SignupComponent implements OnInit {
     "gender": new FormControl("", Validators.required ),
   });
 
+  next(){
+    this.router.navigate(['/select-avatar']);
+  }
+
   onDateChange(event: any) {
     const date = event.target.value; // This will be in format "yyyy-mm-dd"
     this.dob = date; // Directly assign the formatted date
