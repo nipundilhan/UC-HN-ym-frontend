@@ -1,0 +1,92 @@
+
+<div class="p1dv1 col-11">
+    <div class="col-12 mt-5 container">
+        <!-- add reactive form module in app.module.ts-->
+        <form [formGroup]="form" (ngSubmit)="signup()">
+
+            <div class="row">
+                <div class="col-md-4 col-12" >
+                    <label class="inputLable d-flex justify-content-start align-items-center" >User Name</label>
+                </div>
+                <div class="col-md-8 col-12" >
+                    <input type="text" maxlength="100" name="userName" formControlName="userName"  [(ngModel)]="userName" class="form-control" id="userName" placeholder="eg : HirashaP9603 - FirstName,FistLetterofLastName,dob,YYMM"
+                [ngClass]="{ 'is-invalid': form.controls['userName'].invalid && (form.controls['userName'].dirty || form.controls['userName'].touched) }">
+                </div>
+            </div>
+           <!-- 
+                    <div class="row">
+                        <div class="form-group col-md-4 ">
+                            <label class="inputLable d-flex justify-content-start align-items-center" >User Name</label>
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            <input type="text" maxlength="100" name="userName" formControlName="userName"  [(ngModel)]="userName" class="form-control" id="userName" placeholder="eg : HirashaP9603 - FirstName,FistLetterofLastName,dob,YYMM"
+                            [ngClass]="{ 'is-invalid': form.controls['userName'].invalid && (form.controls['userName'].dirty || form.controls['userName'].touched) }">
+                        </div>
+                    </div>
+            -->
+
+        <div class="row formRaw">
+            <div class="form-group col-md-4 col-s-12">
+                <label class="inputLable  d-flex justify-content-start align-items-center" for="inputDescription">Email</label>
+            </div>
+            <div class="form-group col-md-8 col-s-12">
+                <input type="email" name="email" formControlName="email" maxlength="100"  [(ngModel)]="email" class="form-control" id="email" placeholder="enter the email"
+                [ngClass]="{ 'is-invalid': form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched) }"  >
+                
+            </div>
+            <div *ngIf="form.controls['email'].touched && form.controls['email'].invalid" class="alert alert-danger">
+                <div *ngIf="form.controls['email'].hasError('required')" class="error">Please enter email address</div>
+                <div *ngIf="form.controls['email'].hasError('email')">Please Enter valid email</div>
+            </div> 
+            
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 col-s-12">
+                <label class="inputLable d-flex justify-content-start align-items-center" >Date of Birth</label>
+            </div>
+            <div class="form-group col-md-8 col-s-12">
+                <input type="date"  id="dob"  (change)="onDateChange($event)" maxlength="100" name="dob" formControlName="dob"  [(ngModel)]="dob" class="form-control"placeholder="eg : 1996-03-18"
+                [ngClass]="{ 'is-invalid': form.controls['dob'].invalid && (form.controls['dob'].dirty || form.controls['dob'].touched) }">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 col-s-12">
+                <label class="inputLable d-flex justify-content-start align-items-center" >Gender</label>
+            </div>
+            <div class="form-group col-md-8 col-s-12">
+                <select id="gender" formControlName="gender" name="gender" [(ngModel)]="gender" [ngClass]="{ 'is-invalid': form.controls['gender'].invalid && (form.controls['gender'].dirty || form.controls['gender'].touched) }">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="form-group col-md-4 col-s-12">
+                <label class="inputLable d-flex justify-content-start align-items-center" >Password</label>
+            </div>
+            <div class="form-group col-md-8 col-s-12">
+                <input type="text" maxlength="100" name="password" formControlName="password"  [(ngModel)]="password" class="form-control" id="password" placeholder="eg : hn@9603"
+                [ngClass]="{ 'is-invalid': form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched) }">
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row formRaw">
+            <div class="form-group col-md-4 col-s-12">
+                
+            </div>
+            <div class="form-group col-md-8 col-s-12 d-flex justify-content-end">
+                <button type="submit"   [disabled]="!form.valid" class="btn btn-success btn-sm">Sign Up</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
