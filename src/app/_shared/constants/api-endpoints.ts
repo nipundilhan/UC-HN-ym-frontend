@@ -1,6 +1,6 @@
 const AUTH_BASE = '/auth';
 const TOUR_BASE = '/tours';
-const USER_BASE = '/users';
+const USER_BASE = '/user';
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     BASE: USER_BASE,
+    SIGNUP: `${USER_BASE}/signup`,   
     SEARCH: (params: { [key: string]: any }) => {
       const queryParams = new URLSearchParams(params).toString();
       return `${USER_BASE}/search?${queryParams}`; // Param map example

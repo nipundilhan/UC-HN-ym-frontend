@@ -15,6 +15,7 @@ import { TestComponent } from './global_comman/test/test.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './global_comman/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,15 @@ import { HttpClientModule } from '@angular/common/http';
     SidenavComponent,
     FooterComponent,
     LoginComponent,
-    TestComponent
+    TestComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
