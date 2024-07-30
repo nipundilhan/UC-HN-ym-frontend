@@ -1,0 +1,23 @@
+.p1dv1{
+    padding-left: 0.25%;
+    padding-right: 0.25%;
+    padding-top: 0.20%;
+    padding-bottom: 0.5%;
+    margin-left:1%;
+    margin-right:1%;
+    margin-top:0.5%;
+    background-color: whitesmoke;
+  }
+  .inputLable{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .form-group {
+    width: 100%; /* Ensure the parent container has 100% width */
+  }
+  
+  .full-width-input {
+    height: 180% !important;
+    width: 100% !important;
+  }  
