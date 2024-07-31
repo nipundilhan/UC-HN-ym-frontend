@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataTransferService } from 'src/app/_secondary_services/data-transfer.service';
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
-import { UserSignup } from 'src/app/_shared/resources/userSignup';
+import { UserSignup } from 'src/app/_shared/resources/UserSignup';
 
 @Component({
   selector: 'app-signup',
@@ -31,7 +32,7 @@ export class SignupComponent implements OnInit {
     alert(this.dob); // For debugging or further processing
   }
 
-  constructor(public apiCallService: ApiCallService , private router: Router) { }
+  constructor(public apiCallService: ApiCallService , private router: Router ,  private dataTrnfrSrvc: DataTransferService ) { }
 
   ngOnInit(): void {
   }
@@ -48,7 +49,8 @@ export class SignupComponent implements OnInit {
     password : "",
     email : "",
     dob : "",
-    gender: ""
+    gender: "",
+    avatarCode : ""
   }
 
   signup(){
@@ -59,6 +61,10 @@ export class SignupComponent implements OnInit {
     this.usrSngUp.dob =  this.dob;
     this.usrSngUp.gender =  this.gender;
 
+    this.dataTrnfrSrvc.setData(this.usrSngUp);
+    this.router.navigate(['/select-avatar']);
+
+    /*
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.USERS.SIGNUP,this.usrSngUp).subscribe(
       (response: any) => {
 
@@ -74,6 +80,8 @@ export class SignupComponent implements OnInit {
         
       }   
     );
+
+    */
   }
 
 }
