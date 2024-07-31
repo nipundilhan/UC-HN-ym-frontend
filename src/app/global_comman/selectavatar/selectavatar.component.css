@@ -1,0 +1,15 @@
+.p1dv1{
+    padding-left: 0.25%;
+    padding-right: 0.25%;
+    padding-top: 0.20%;
+    padding-bottom: 0.5%;
+    margin-left:1%;
+    margin-right:1%;
+    margin-top:0.5%;
+    background-color: whitesmoke;
+  }
+
+  .disabled {
+    filter: grayscale(50%);
+    opacity: 0.5;
+  }

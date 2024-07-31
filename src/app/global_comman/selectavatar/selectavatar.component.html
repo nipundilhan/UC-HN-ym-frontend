@@ -12,10 +12,33 @@
 
     <div class="img mt-3">
         <!--<img src="https://i.assetzen.net/i/2VY7rX5z2Jh1/w:1920/h:/q:70.jpg"  class="img-fluid imgcus1" alt="Responsive image">-->
-        <div class="row">
-            <div >
-                
+        <div class="row " style="font-weight: bold;margin-top: 4px;"> <!--col-xs not working after bootstrap 4 so use just only col -->
+            <div class="  col-xl-2 col-lg-3  col-md-4 col-sm-4 col-6 mb-3" *ngFor="let a of avatars">
+                <div class="box shadow-sm rounded">
+                    <img class="img1 border border-success rounded shadow  mb-1 bg-white rounded"
+                    [src]="a.path"  [class.disabled]="!a.selected"  width="200px;" alt=" " height="220px;" alt="Responsive image">
+                    
+                    
+                    
+                    <div class="row">
+                        
+
+                        <div class=" col-xl-6 col-lg-6 col-sm-6 d-flex justify-content-end  mb-1 "> 
+                            <button class="btn btn-primary btn-sm  " (click)="selectImage(a)" [disabled]="a.selected" > SELECT</button></div>
+                    </div>
+                </div>
             </div>
+
+
+            <div class="row formRaw">
+                <div class="form-group col-md-4 col-s-12">
+                    
+                </div>
+                <div class="form-group col-md-8 col-s-12 d-flex justify-content-end">
+                    <button type="submit" (click)="submit()"  class="btn btn-success btn-sm">Sign Up</button>
+                </div>
+            </div>
+
 
         </div>
         

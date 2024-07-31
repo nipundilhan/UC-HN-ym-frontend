@@ -4,4 +4,5 @@ export interface UserSignup{
     email : null | string,
     dob : null | string,
     gender : null | string,
+    avatarCode : null | string,
  }

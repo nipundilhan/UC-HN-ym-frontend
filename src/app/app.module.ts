@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './global_comman/signup/signup.component';
 import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar.component';
+import { DataTransferService } from './_secondary_services/data-transfer.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DataTransferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
