@@ -1,0 +1,20 @@
+
+<div *ngIf="loading" class="loading-spinner">
+    <!-- You can use a spinner icon or any loading animation here -->
+    <p style="margin-left:200px;">Loading...</p>
+  </div>
+
+<div  class="task-container mt-5">
+
+    <button  type="button" class="btn btn-success" (click)="goToAddTute()" >ADD TUTORIAL</button> 
+    <h3 class="student-title">Your Total points  : {{ studentData.module1.game1.gamePoints }}</h3>
+    <div class="card-list">
+      <div *ngFor="let task of studentData.module1.game1.tasks" class="task-card">
+        <h4 class="task-title">{{ task.name }}</h4>
+        <p class="task-description">Description: {{ task.description }}</p>
+        <p class="task-date">Date: {{ task.date }}</p>
+        <p class="task-percentage">Completion Percentage: {{ task.completePercentage }}%</p>
+        <p class="task-points">Points: {{ task.points }}</p>
+      </div>
+    </div>
+  </div>

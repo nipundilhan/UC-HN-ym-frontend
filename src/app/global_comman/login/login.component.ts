@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         this.userAuthService.setRole(response.user.role);
         this.userAuthService.setToken(response.jwtToken);
         this.userAuthService.setUserName(response.user.username);
+        this.userAuthService.setUserId(response.user.userId);
         
         const role = response.user.role;
 
