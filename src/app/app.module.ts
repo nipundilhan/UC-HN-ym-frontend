@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './global_comman/signup/signup.component';
 import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar.component';
 import { DataTransferService } from './_secondary_services/data-transfer.service';
+import { TutorialSubmissionComponent } from './module1_exam_prep/game1_tutorials/tutorial-submission/tutorial-submission.component';
+import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/mindmap-submission.component';
+import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view-tutorials/view-tutorials.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { DataTransferService } from './_secondary_services/data-transfer.service
     LoginComponent,
     TestComponent,
     SignupComponent,
-    SelectavatarComponent
+    SelectavatarComponent,
+    TutorialSubmissionComponent,
+    MindmapSubmissionComponent,
+    ViewTutorialsComponent
   ],
   imports: [
     BrowserModule,

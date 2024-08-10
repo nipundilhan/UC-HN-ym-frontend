@@ -32,6 +32,14 @@ export class UserAuthService {
     return localStorage.getItem('userName')! ;
   }
 
+  public setUserId(userId: string) {
+    localStorage.setItem('userId', userId);
+  }
+
+  public getUserId(): string {
+    return localStorage.getItem('userId')! ;
+  }
+
   
   public setRole(role: string) {
     localStorage.setItem('role', role);

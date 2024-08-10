@@ -1,6 +1,7 @@
 const AUTH_BASE = '/auth';
 const TOUR_BASE = '/tours';
 const USER_BASE = '/user';
+const TUTE_BASE = '/tutorial';
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -11,6 +12,12 @@ export const API_ENDPOINTS = {
   TOURS: {
     BASE: TOUR_BASE,
     GET_ALL: `${TOUR_BASE}/all`,
+    CREATE: `${TOUR_BASE}/create`,
+    GET_ONE: (id: string) => `${TOUR_BASE}${id}`, // Path variable example
+  },  
+  TUTORIALS: {
+    BASE: TUTE_BASE,
+    GET_BY_STUDENT_ID: `${TUTE_BASE}/findByStudent/`,
     CREATE: `${TOUR_BASE}/create`,
     GET_ONE: (id: string) => `${TOUR_BASE}${id}`, // Path variable example
   },
