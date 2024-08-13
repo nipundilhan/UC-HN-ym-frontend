@@ -5,30 +5,42 @@
 }
 
 .uN {
-  color: yellow;
+  color: rgb(79, 8, 8);
   font-size: 20px;
-  padding-top:10px;
+  /* padding-top:10px; */
   text-decoration: none; 
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-family: 'MedievalSharp', sans-serif; 
 }
 
 .navbar {
-    background-color: midnightblue;
+    background-color: rgb(205, 65, 18);
     
     .navbar-brand {
       color: white;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 30px;
+      font-family: 'MedievalSharp', sans-serif; 
+      margin-left: 1em;
     }
 
-
+    .navbar-nav {
+      width: 100%; /* Full width to allow centering */
+      display: flex;
+      justify-content: right; /* Center the nav items horizontally */
+      align-items: left; /* Center the nav items vertically */
+    }
   
     .nav-link {
       color: white;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
+      border-radius: 15px;
+      font-family: 'MedievalSharp', sans-serif; 
+      width: 100px;
+      text-align: center;
       &:hover {
-        background-color: royalblue;
+        background-color:  rgb(0, 0, 0);
       }
     }
 
@@ -37,7 +49,7 @@
     .navbar-toggler {
       border-color: rgba(255, 255, 255, 0.1);
       margin-right: 2px !important;
-      background-color: midnightblue; /* Match background to navbar */
+      background-color: rgb(70, 14, 1); /* Match background to navbar */
       color: white;
       border: none; /* Remove border if not needed */
       
@@ -56,6 +68,41 @@
     }
   
     .nav-item:hover {
-      background-color: royalblue;
+      background-color: rgb(0, 0, 0);
+      border-radius: 15px;
+    }
+  }
+  .logout-btn {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'MedievalSharp', sans-serif; 
+    width: 100px;
+    text-align: center;
+    padding: 10px; /* Add some padding for better spacing */
+    background-color: transparent; /* Ensure the background is transparent initially */
+    border: none; /* Remove any default border */
+    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transition for hover effects */
+    cursor: pointer; /* Show a pointer cursor on hover */
+  }
+
+  .logout-btn:hover {
+    background-color: rgb(0, 0, 0); /* Match the hover background color of nav links */
+    border-radius: 15px; /* Add rounded corners on hover */
+  }
+
+  @media (max-width: 600px) {
+    .navbar-nav {
+      flex-direction: column;
+    }
+
+    .nav-link {
+      width: auto; /* Full width in mobile view */
+      text-align: left; /* Align text to the left in mobile view */
+    }
+
+    .logout-btn {
+      width: auto; /* Full width in mobile view */
+      text-align: left; /* Align text to the left in mobile view */
     }
   }

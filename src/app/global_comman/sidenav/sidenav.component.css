@@ -1,9 +1,11 @@
 
 
 .sideNav-parent {
-    background: dimgrey;
-    height: 125vh;
-    width: 105%;
+    /* background: dimgrey; */
+    /* height: 125vh; */
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
 }
 
 /*
@@ -37,7 +39,7 @@
 
 
 .itm:hover {
-    background-color: DarkSlateGray;
+    background-color: rgb(226, 137, 20);
 }
 
 /*
@@ -63,11 +65,13 @@
 */
 
 .itm{
-    background-color: black;
-    margin-top:0.5px; 
-    margin-bottom:0.5px;
+    background-color: rgb(240, 193, 143) ;
+    margin-top:5px; 
+    margin-bottom:5px;
     height: 40px;
+    justify-content: center;
     align-items: center;
+    border-radius: 12px;
 }
 
 /*
@@ -129,12 +133,14 @@
 */
 
 .ittxt{
-    font-size:16px;
-    color: white;
+    font-size:18px;
+    color: rgb(0, 0, 0);
     font-weight: bold;
-    margin-left:10px;
-    margin-top:none;
-    margin-bottom:5px;
+    margin-left:20px;
+    /* margin-top:none; */
+    /* margin-bottom:5px; */
+    font-family: 'MedievalSharp', sans-serif; 
+    text-align: center; /* Center text inside the nav link */
 
 }
 
@@ -150,7 +156,7 @@
 }
 
 .lnk{
-  margin-top:1%;
+  margin-top:0%;
 }
 
 .mat-icon {
@@ -160,4 +166,7 @@
     margin-top : 2px;
   }
 
-
+.nav-link{
+    text-align: center; /* Center text inside the nav link */
+    align-items: center; /* Center items vertically */
+  }

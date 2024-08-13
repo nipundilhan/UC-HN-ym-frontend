@@ -1,0 +1,129 @@
+/* src/app/login/login.component.css */
+
+/* Ensure the background image covers the entire viewport */
+:host ::ng-deep .background {
+    background-image: url('/assets/background01.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styles specific to the login box */
+  .login-box {
+    background-color: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */
+    border-radius: 15px; /* More rounded corners */
+    padding: 30px; /* Increased padding for a larger box */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow */
+    width: 700px; /* Adjust width to be larger */
+    max-width: 100%; /* Ensure the box does not exceed the viewport width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+  
+  .login-box h2 {
+    text-align: center;
+    color: #333; 
+    margin-top: 0; 
+    font-family: 'MedievalSharp', sans-serif; 
+  }
+  
+  .login-box .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .login-box .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-family: 'MedievalSharp', sans-serif; 
+    font-size: 1.3rem; /* Font size for buttons */
+  }
+  
+  .login-box .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #c99865;
+    border-radius: 5px;
+    box-sizing: border-box; 
+  }
+
+
+  .login-box .btn-submit {
+    display: block; /* Make the button a block-level element */
+    width: 40%;
+    margin: 0 auto;
+    padding: 0px;
+    background-color: #d96e10; /* Dark button color */
+    color: #000000; /* White text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2rem; /* Font size for buttons */
+    text-align: center;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-family: 'MedievalSharp', sans-serif; 
+  }
+  
+  .login-box .btn-submit:hover {
+    background-color: #ffeb09; /* Slightly lighter on hover */
+  }
+  
+
+
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .login-box {
+    width: 80%; /* Reduce width for smaller screens */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .login-box h2 {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+
+  .login-box .btn-submit {
+    width: 80%; /* Adjust button width for smaller screens */
+    font-size: 1.2rem; /* Adjust button font size for smaller screens */
+    margin: 0 auto;
+  }
+
+  .login-box  .input-group label {
+    font-size: 1rem; /* Font size for buttons */
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    width: 80%; /* Full width for very small screens */
+    padding: 15px; /* Adjust padding for very small screens */
+  }
+
+  .login-box h2 {
+    font-size: 1.2rem; /* Adjust font size for very small screens */
+  }
+
+  .login-box .btn-submit {
+    width: 40%; /* Full width button for very small screens */
+    font-size: 1.2rem; /* Adjust button font size for very small screens */
+    margin : 0 auto;
+  }
+
+  .inline-group {
+    flex-direction: column; /* Stack fields vertically on very small screens */
+  }
+
+  .inline-group .form-group {
+    width: 100%; /* Full width for form groups on very small screens */
+  }
+
+  .login-box .input-group label {
+    font-size: 0.9rem; /* Font size for buttons */
+  }
+}
+
+
