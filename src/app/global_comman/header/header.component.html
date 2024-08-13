@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">YM</a>
+      <a class="navbar-brand" routerLink="/">YoungMind</a>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,19 +8,22 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li style="margin-top:4px;margin-right:40px;">
-            <a class="uN  disabled" *ngIf=" isLoggedIn()"  >Hi! {{getUserName()}}</a>
+            <a class="uN  disabled" *ngIf=" isLoggedIn()"  >{{getUserName()}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/signup">Test</a>
+            <a class="nav-link" routerLink="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/select-avatar">Avatar</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/login" *ngIf=" !isLoggedIn()">Login</a>
           </li>
           <li class="nav-item">
-            <button  type="button" class="btn btn-danger" (click)="logout()" *ngIf=" isLoggedIn()" >LOGOUT</button> 
+            <button type="button" class="logout-btn" (click)="logout()" *ngIf=" isLoggedIn()" >Logout</button> 
           </li>
         </ul>
       </div>

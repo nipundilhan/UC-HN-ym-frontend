@@ -1,8 +1,8 @@
 export interface UserSignup{
-    username : null | string,
-    password : null | string,
-    email : null | string,
-    dob : null | string,
-    gender : null | string,
-    avatarCode : null | string,
+    username :  string,
+    password :  string,
+    email : string,
+    dob : string,
+    gender :string,
+    avatarCode :  string,
  }

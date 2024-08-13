@@ -1,13 +1,14 @@
-.pg {
-    
-    background: lightgray ;
-
-    /*
-    background: sprindarggreen ;
-    height: 1250px; */
-
-
+.pg { 
+    background: rgba(252,226,172,255);
 }
+
+/* .pg {
+  background-image: url('/assets/background01.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100vh; /* Adjust based on the height of your container }*/
 
 .collapse-button {
     margin-top:10px;

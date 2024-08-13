@@ -1,15 +1,105 @@
-.p1dv1{
-    padding-left: 0.25%;
-    padding-right: 0.25%;
-    padding-top: 0.20%;
-    padding-bottom: 0.5%;
-    margin-left:1%;
-    margin-right:1%;
-    margin-top:0.5%;
-    background-color: whitesmoke;
-  }
 
   .disabled {
     filter: grayscale(50%);
     opacity: 0.5;
   }
+
+  /* :host ::ng-deep .background {
+    background-color: rgb(248, 216, 192);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  } */
+
+  :host ::ng-deep .background {
+    background-image: url('/assets/background02.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+
+
+  .avatar-selection-box {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: center; /* Center the avatars within the box */
+    align-items: center; /* Center the content vertically */
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    width: 70%;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow: auto;
+}
+.col-xl-3, .col-lg-3, .col-6 {
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  padding: 5px; /* Add some padding if needed */
+}
+
+.avatar-selection-box img {
+  width: 100%; /* Image takes up full width of its container */
+  height: auto; /* Maintain aspect ratio */
+  /* max-height: 150px; */
+  max-width: 160px; /* Prevents the image from being too large */
+  object-fit: cover; /* Ensures the image covers the container */
+  /* margin-bottom: 5px; */
+  justify-content: center; /* Center the avatars within the box */
+  align-items: center; /* Center the content vertically */
+  /* margin:5px; */
+  display: block; /* Ensure the image behaves as a block-level element */
+
+  /* padding: 20%; */
+  
+/* Add Bootstrap-like styles */
+border: 2px solid #dc970c; /* Equivalent to Bootstrap's border class */
+border-radius: 8rem; /* Equivalent to Bootstrap's rounded class */
+box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075); /* Equivalent to Bootstrap's shadow class */
+background-color: white; /* Equivalent to Bootstrap's bg-white class */
+/* margin-bottom: 0.25rem; /* Equivalent to Bootstrap's mb-1 class */
+}
+
+.avatar-selection-box .btn-submit {
+  display: block; /* Make the button a block-level element */
+  width: 100%;
+  margin: 0 auto;
+  /* padding: 5px; */
+  background-color: #d96e10; /* Dark button color */
+  color: #000000; /* White text */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.5rem; /* Font size for buttons */
+  text-align: center;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  font-family: 'MedievalSharp', sans-serif; 
+  justify-content: center;
+}
+
+h2 {
+  text-align: center;
+  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+  color: #333; 
+  margin-top: 0; 
+  margin-bottom: 0; 
+  font-family: 'MedievalSharp', sans-serif; 
+  width: 100%; /* Ensure h1 takes full width */
+}
+

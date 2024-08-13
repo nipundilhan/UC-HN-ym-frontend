@@ -1,93 +1,138 @@
 
-<div class="p1dv1 col-11">
-    <button (click)="next()">Next</button>
-    <div class="col-12 mt-5 container">
+<div class="background">
+   
+    <div class = "signup-box">
+
+        <h1>Get Started!</h1>
+    <!-- <div class="col-12 mt-5 container"> -->
         <!-- add reactive form module in app.module.ts-->
-        <form [formGroup]="form" (ngSubmit)="signup()">
+        <form [formGroup]="form" >
 
-            <div class="row">
-                <div class="col-md-4 col-12" >
-                    <label class="inputLable d-flex justify-content-start align-items-center" >User Name</label>
+   
+
+              <div class="form-group input-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  formControlName="username"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+                />
+                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                  <div *ngIf="f['username'].errors['required']">Username is required</div>
+                  <div *ngIf="f['username'].errors['minlength']">
+                    Username must be at least 6 characters
+                  </div>
+                  <div *ngIf="f['username'].errors['maxlength']">
+                    Username must not exceed 20 characters
+                  </div>
                 </div>
-                <div class="col-md-8 col-12" >
-                    <input type="text" maxlength="100" name="userName" formControlName="userName"  [(ngModel)]="userName" class="form-control" id="userName" placeholder="eg : HirashaP9603 - FirstName,FistLetterofLastName,dob,YYMM"
-                [ngClass]="{ 'is-invalid': form.controls['userName'].invalid && (form.controls['userName'].dirty || form.controls['userName'].touched) }">
+              </div>
+
+            <div class="form-group input-group">
+                <label>Email</label>
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors['required']">Email is required</div>
+                  <div *ngIf="f['email'].errors['email']">Email is invalid</div>
                 </div>
-            </div>
-           <!-- 
-                    <div class="row">
-                        <div class="form-group col-md-4 ">
-                            <label class="inputLable d-flex justify-content-start align-items-center" >User Name</label>
-                        </div>
-                        <div class="form-group col-md-4 ">
-                            <input type="text" maxlength="100" name="userName" formControlName="userName"  [(ngModel)]="userName" class="form-control" id="userName" placeholder="eg : HirashaP9603 - FirstName,FistLetterofLastName,dob,YYMM"
-                            [ngClass]="{ 'is-invalid': form.controls['userName'].invalid && (form.controls['userName'].dirty || form.controls['userName'].touched) }">
-                        </div>
-                    </div>
-            -->
+              </div>
 
-        <div class="row formRaw">
-            <div class="form-group col-md-4 col-s-12">
-                <label class="inputLable  d-flex justify-content-start align-items-center" for="inputDescription">Email</label>
+            <div class="inline-group">
+
+                <div class="form-group input-group">
+                    <label>Date of Birth</label>
+                    <input
+                      type="date"
+                      formControlName="dob"
+                      (change)="onDateChange($event)"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['dob'].errors }"
+                    />
+                    <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
+                      <!-- <div *ngIf="f['dob'].invalid" class="alert alert-danger"> -->
+                      <div *ngIf="f['dob'].hasError('invalidDate')">Please enter a past date</div> 
+                      <div *ngIf="f['dob'].errors['required']">Date of Birth is required</div>
+                    <!-- <div *ngIf="f['dob'].errors['dob']">DOB is invalid</div> -->
+                    <!-- </div> -->
+                  </div>
+             </div> 
+
+            <div class="form-group input-group">
+                <label>Gender</label>
+                <select
+                  formControlName="gender"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }">
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="OTHER">Other</option>
+                  <option value="NOT PREFERRED">Prefer not to say</option>
+                </select>  
+
+                <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
+                  <div *ngIf="f['gender'].errors['required']">Gender is required</div>
+                  <!-- <div *ngIf="f['gender'].errors['gender']">Email is invalid</div> -->
+                </div>
+              </div>
+
+          </div>
+
+          <div class="inline-group">
+          <div class="form-group input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            />
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+              <div *ngIf="f['password'].errors['minlength']">
+                Password must be at least 6 characters
+              </div>
+              <div *ngIf="f['password'].errors['maxlength']">
+                Username must not exceed 40 characters
+              </div>
             </div>
-            <div class="form-group col-md-8 col-s-12">
-                <input type="email" name="email" formControlName="email" maxlength="100"  [(ngModel)]="email" class="form-control" id="email" placeholder="enter the email"
-                [ngClass]="{ 'is-invalid': form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched) }"  >
-                
+          </div>
+          
+
+          <div class="form-group input-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+            />
+            <div
+              *ngIf="submitted && f['confirmPassword'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['confirmPassword'].errors['required']">
+                Confirm Password is required
+              </div>
+              <div *ngIf="f['confirmPassword'].errors['matching']">
+                Confirm Password does not match
+              </div>
             </div>
-            <div *ngIf="form.controls['email'].touched && form.controls['email'].invalid" class="alert alert-danger">
-                <div *ngIf="form.controls['email'].hasError('required')" class="error">Please enter email address</div>
-                <div *ngIf="form.controls['email'].hasError('email')">Please Enter valid email</div>
-            </div> 
-            
+          </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-4 col-s-12">
-                <label class="inputLable d-flex justify-content-start align-items-center" >Date of Birth</label>
-            </div>
-            <div class="form-group col-md-8 col-s-12">
-                <input type="date"  id="dob"  (change)="onDateChange($event)" maxlength="100" name="dob" formControlName="dob"  [(ngModel)]="dob" class="form-control"placeholder="eg : 1996-03-18"
-                [ngClass]="{ 'is-invalid': form.controls['dob'].invalid && (form.controls['dob'].dirty || form.controls['dob'].touched) }">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4 col-s-12">
-                <label class="inputLable d-flex justify-content-start align-items-center" >Gender</label>
-            </div>
-            <div class="form-group col-md-8 col-s-12">
-                <select id="gender" formControlName="gender" name="gender" [(ngModel)]="gender" [ngClass]="{ 'is-invalid': form.controls['gender'].invalid && (form.controls['gender'].dirty || form.controls['gender'].touched) }">
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
-                </select>
-            </div>
-        </div>
+          <div class="form-group input-group">
+            <button type="submit" class="btn btn-submit" (click)="next()"> Next</button> 
+            <!-- <input type="submit" value="Next" [disabled]="!form.valid" class="btn btn-submit" (click)="next()">  -->
+          </div>
 
         
-        <div class="row">
-            <div class="form-group col-md-4 col-s-12">
-                <label class="inputLable d-flex justify-content-start align-items-center" >Password</label>
-            </div>
-            <div class="form-group col-md-8 col-s-12">
-                <input type="text" maxlength="100" name="password" formControlName="password"  [(ngModel)]="password" class="form-control" id="password" placeholder="eg : hn@9603"
-                [ngClass]="{ 'is-invalid': form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched) }">
-            </div>
-        </div>
-
-
-
-
-
-
-        <div class="row formRaw">
-            <div class="form-group col-md-4 col-s-12">
-                
-            </div>
-            <div class="form-group col-md-8 col-s-12 d-flex justify-content-end">
-                <button type="submit"   [disabled]="!form.valid" class="btn btn-success btn-sm">Sign Up</button>
-            </div>
-        </div>
         </form>
-    </div>
 </div>
+</div>
+
