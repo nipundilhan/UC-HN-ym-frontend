@@ -55,14 +55,14 @@
   .login-box .btn-submit {
     display: block; /* Make the button a block-level element */
     width: 40%;
-    margin: 0 auto;
+    margin: 5px auto;
     padding: 0px;
     background-color: #d96e10; /* Dark button color */
     color: #000000; /* White text */
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 2rem; /* Font size for buttons */
+    font-size: 1.5rem; /* Font size for buttons */
     text-align: center;
     transition: background-color 0.3s; /* Smooth transition for hover effect */
     font-family: 'MedievalSharp', sans-serif; 

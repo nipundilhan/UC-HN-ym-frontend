@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-    //this.usrNm = "";
+    // Clear user data and navigate
     this.userAuthService.clear();
     this.router.navigate(['/home']);
   }
