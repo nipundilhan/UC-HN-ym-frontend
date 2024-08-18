@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from './_services/user-auth.service';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 @Component({
   selector: 'app-root',

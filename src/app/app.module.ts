@@ -21,6 +21,8 @@ import { DataTransferService } from './_secondary_services/data-transfer.service
 import { TutorialSubmissionComponent } from './module1_exam_prep/game1_tutorials/tutorial-submission/tutorial-submission.component';
 import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/mindmap-submission.component';
 import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view-tutorials/view-tutorials.component';
+import { Module1EnterGameComponent } from './module1_exam_prep/common/module1-enter-game/module1-enter-game.component';
+import { HometestComponent } from './global_comman/hometest/hometest.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view
     SelectavatarComponent,
     TutorialSubmissionComponent,
     MindmapSubmissionComponent,
-    ViewTutorialsComponent
+    ViewTutorialsComponent,
+    Module1EnterGameComponent,
+    HometestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,108 +1,200 @@
-
-.btn-d{
-  margin-top:0.5vh;
-  font-weight: bold;
-}
-
-.uN {
-  color: rgb(79, 8, 8);
-  font-size: 20px;
-  /* padding-top:10px; */
-  text-decoration: none; 
-  /* font-weight: bold; */
-  font-family: 'MedievalSharp', sans-serif; 
-}
-
+/* General navbar styling */
 .navbar {
-    background-color: rgb(205, 65, 18);
-    
-    .navbar-brand {
-      color: white;
-      font-weight: bold;
-      font-size: 30px;
-      font-family: 'MedievalSharp', sans-serif; 
-      margin-left: 1em;
-    }
+  background-color: rgb(205, 65, 18);
+  display: flex;
+  justify-content: space-between; /* Space out navbar-brand and nav items */
+  align-items: center; /* Center items vertically */
+  padding: 0 1em; /* Add padding for consistent spacing */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+}
 
-    .navbar-nav {
-      width: 100%; /* Full width to allow centering */
-      display: flex;
-      justify-content: right; /* Center the nav items horizontally */
-      align-items: left; /* Center the nav items vertically */
-    }
-  
-    .nav-link {
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 15px;
-      font-family: 'MedievalSharp', sans-serif; 
-      width: 100px;
-      text-align: center;
-      &:hover {
-        background-color:  rgb(0, 0, 0);
-      }
-    }
+/* Navbar Brand styling */
+.navbar-brand {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: 'MedievalSharp', sans-serif;
+  margin: 0; /* Reset margin to ensure alignment */
+}
 
+/* Navbar collapse styling */
+.navbar-collapse {
+  flex-grow: 1; /* Allow it to take up available space */
+  display: flex; /* Ensure it uses flexbox layout */
+  justify-content: flex-end; /* Push items to the right */
+}
 
-  
-    .navbar-toggler {
-      border-color: rgba(255, 255, 255, 0.1);
-      margin-right: 2px !important;
-      background-color: rgb(70, 14, 1); /* Match background to navbar */
-      color: white;
-      border: none; /* Remove border if not needed */
-      
-      .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-        background-size: 24px 24px; /* Adjust size as needed */
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-  
-      &:focus,
-      &:active {
-        margin-right: 2px !important;
-        outline: 2px solid white !important; /* Ensure specificity and use !important */
-      }
-    }
-  
-    .nav-item:hover {
-      background-color: rgb(0, 0, 0);
-      border-radius: 15px;
-    }
+/* Navbar nav items styling */
+.navbar-nav {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping of nav items */
+  margin: 0; /* Reset margin */
+}
+
+/* Nav link styling */
+.nav-link {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 15px;
+  font-family: 'MedievalSharp', sans-serif;
+  /* padding: 10px; */
+  margin-left: 20px;
+  margin-top: 3px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+/* Nav link hover styling */
+.nav-link:hover {
+  background-color: rgb(0, 0, 0);
+  color: white; /* Ensure font color remains white on hover */
+}
+
+/* Ensure text color stays white in dropdown */
+.nav-item.active .nav-link,
+.nav-item:focus .nav-link,
+.nav-item:hover .nav-link {
+  color: white; /* Ensure font color remains white */
+  background-color: rgb(0, 0, 0); /* Ensure background color is correct */
+  border-radius: 15px;
+}
+
+/* Profile picture styling */
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+/* Points Icon styling */
+.points-icon {
+  width: 42px; 
+  height: 42px; 
+  object-fit: contain;
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Points Count styling */
+.points-count {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'MedievalSharp', sans-serif;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 15px;
+  padding: 0;
+}
+
+.dropdown-item {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'MedievalSharp', sans-serif;
+  padding: 10px 20px;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(205, 65, 18, 0.8);
+  border-radius: 15px;
+}
+
+.dropdown-divider {
+  background-color: rgb(0, 0, 0);
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically */
+    padding: 0; /* Remove padding if needed */
   }
-  .logout-btn {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'MedievalSharp', sans-serif; 
-    width: 100px;
-    text-align: center;
-    padding: 10px; /* Add some padding for better spacing */
-    background-color: transparent; /* Ensure the background is transparent initially */
-    border: none; /* Remove any default border */
-    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transition for hover effects */
-    cursor: pointer; /* Show a pointer cursor on hover */
+
+  .navbar-brand {
+    font-size: 24px; /* Adjust font size for mobile */
   }
 
-  .logout-btn:hover {
-    background-color: rgb(0, 0, 0); /* Match the hover background color of nav links */
-    border-radius: 15px; /* Add rounded corners on hover */
+  .navbar-collapse {
+    display: flex;
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: stretch; /* Stretch to full width */
+    width: 100%; /* Ensure full width */
   }
 
-  @media (max-width: 600px) {
-    .navbar-nav {
-      flex-direction: column;
-    }
-
-    .nav-link {
-      width: auto; /* Full width in mobile view */
-      text-align: left; /* Align text to the left in mobile view */
-    }
-
-    .logout-btn {
-      width: auto; /* Full width in mobile view */
-      text-align: left; /* Align text to the left in mobile view */
-    }
+  .navbar-nav {
+    flex-direction: column; /* Stack nav items vertically */
+    padding: 0; /* Remove padding if needed */
+    margin: 0; /* Reset margin */
   }
+
+  .nav-link {
+    width: 100%;  /* Full width for nav items */
+    text-align: center; /* Center text */
+    padding: 10px; /* Adjust padding */
+    font-size: 15px;
+    margin: auto;
+  }
+
+  .dropdown-menu {
+    position: absolute; /* Position dropdown statically for mobile */
+    width: 100%; /* Full width for dropdown on mobile */
+    box-shadow: none; /* Remove box shadow if needed */
+    margin-top: 0; /* Remove margin if needed */
+  }
+
+  .dropdown-item {
+    font-size: 15px;
+  }
+
+  .points-icon {
+    width: 40px; /* Smaller size for mobile */
+    height: 40px;
+  }
+
+  .points-count {
+    font-size: 15px; /* Adjust font size for mobile */
+  }
+}
+
+/* Styles for very small devices */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5em; /* Reduce padding for smaller screens */
+  }
+
+  .navbar-brand {
+    font-size: 20px; /* Smaller font size for very small screens */
+  }
+
+  .nav-link {
+    font-size: 14px; /* Smaller font size for nav links */
+    padding: 8px; /* Adjust padding for smaller screens */
+    margin: auto;
+  }
+
+  .dropdown-menu {
+    width: 100%; /* Ensure dropdown takes full width */
+  }
+
+  .profile-pic {
+    width: 30px; /* Smaller profile picture for very small screens */
+    height: 30px; /* Adjust height accordingly */
+  }
+
+  .points-icon {
+    width: 28px; /* Smaller size for very small screens */
+    height: 28px;
+  }
+
+  .points-count {
+    font-size: 14px; /* Adjust font size for very small screens */
+  }
+}

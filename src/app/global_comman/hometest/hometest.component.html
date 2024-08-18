@@ -1,0 +1,66 @@
+<!-- <div class="home-container">
+  <div class="game-scroll" *ngFor="let game of games">
+    <div class="scroll-background" [ngStyle]="{'background-image': 'url(' + game.scrollImage + ')'}">
+      <div class="game-details">
+        <h2>{{ game.name }}</h2>
+        <p class="hieroglyph">{{ game.hieroglyph }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="background">
+  <div class="home-container">
+    <div class="game-scroll" *ngFor="let game of games">
+      <div class="scroll-background" [ngStyle]="{'background-image': 'url(' + game.scrollImage + ')'}">
+        <div class="game-details">
+          <h2>{{ game.name }}</h2>
+          <img class="hieroglyph-image" [src]="game.hieroglyphImage" alt="Hieroglyph">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="background">
+  <div class="home-container">
+    <div class="game-scroll" *ngFor="let game of games">
+      <div class="white-block">
+        <div class="game-details">
+          <h2>{{ game.name }}</h2>
+          <img class="hieroglyph-image" [src]="game.hieroglyphImage" alt="Hieroglyph">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Narrator Image and Mood Selector -->
+  <div id="narrator-container" class="narrator-container">
+    <img id="narrator" class="narrator-image" src="/assets/egyptian-god.png" alt="Egyptian God">
+    <div class="dialog-box">
+      <p>How are you feeling today?</p>
+      <div class="mood-options">
+        <label>
+          <input type="radio" name="mood" value="happy">
+          😊 Happy
+        </label>
+        <label>
+          <input type="radio" name="mood" value="sad">
+          😢 Sad
+        </label>
+        <label>
+          <input type="radio" name="mood" value="neutral">
+          😐 Neutral
+        </label>
+        <label>
+          <input type="radio" name="mood" value="excited">
+          😄 Excited
+        </label>
+        <label>
+          <input type="radio" name="mood" value="angry">
+          😠 Angry
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

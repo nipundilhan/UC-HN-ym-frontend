@@ -7,6 +7,8 @@ import { SignupComponent } from './global_comman/signup/signup.component';
 import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar.component';
 import { TutorialSubmissionComponent } from './module1_exam_prep/game1_tutorials/tutorial-submission/tutorial-submission.component';
 import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view-tutorials/view-tutorials.component';
+import { HometestComponent } from './global_comman/hometest/hometest.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,7 +17,8 @@ const routes: Routes = [
   { path: 'select-avatar', component: SelectavatarComponent },
   { path: 'tutorial-submission', component: TutorialSubmissionComponent },
   { path: 'view-tutorials', component: ViewTutorialsComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'hometest', component: HometestComponent }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/">YoungMind</a>
       
@@ -28,4 +28,49 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
+  
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">YoungMind</a> 
+      
+      <!-- Comment out or remove the navbar-toggler button -->
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>-->
+
+      <div class="collapse navbar-collapse show"> <!--Ensure .show class is added to keep it visible -->
+          <ul class="navbar-nav ms-auto">
+
+                    <!-- Points Nav Item -->
+              <li class="nav-item">
+                <a *ngIf=" isLoggedIn()" class="nav-link d-flex align-items-center">
+                  <img src="assets/coin.png" alt="Points" class="points-icon me-2">
+                  <span class="points-count">100</span>
+                </a>
+              </li>
+
+
+              <li class="nav-item dropdown">
+                  <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="assets/photos/avatars/ava01.png" alt="" class="profile-pic me-2">
+                      {{getUserName()}}
+                  </a>
+                  <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                      <li> <a class="dropdown-item" routerLink="/home"><i class="fas fa-home icon-home" style="color: #070707;"></i>  Home</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fas fa-user icon-profile" style="color: #070707;"></i>  Profile</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-power-off" style="color: #070707;"></i>  Logout</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item" routerLink="/login" *ngIf=" !isLoggedIn()">
+                <a class="nav-link">Login</a>
+              </li>
+              <li class="nav-item" routerLink="/hometest">
+                <a class="nav-link">hometest</a>
+              </li>
+          </ul>
+      </div>
+  </div> 
+</nav>
