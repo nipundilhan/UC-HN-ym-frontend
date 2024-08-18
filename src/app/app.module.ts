@@ -22,6 +22,7 @@ import { TutorialSubmissionComponent } from './module1_exam_prep/game1_tutorials
 import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/mindmap-submission.component';
 import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view-tutorials/view-tutorials.component';
 import { Module1EnterGameComponent } from './module1_exam_prep/common/module1-enter-game/module1-enter-game.component';
+import { HometestComponent } from './global_comman/hometest/hometest.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { Module1EnterGameComponent } from './module1_exam_prep/common/module1-en
     TutorialSubmissionComponent,
     MindmapSubmissionComponent,
     ViewTutorialsComponent,
-    Module1EnterGameComponent
+    Module1EnterGameComponent,
+    HometestComponent
   ],
   imports: [
     BrowserModule,
