@@ -1,6 +1,6 @@
 
-<div *ngIf="loading" class="loading-spinner">
-    <!-- You can use a spinner icon or any loading animation here -->
+<!-- <div *ngIf="loading" class="loading-spinner">
+ 
     <p style="margin-left:200px;">Loading...</p>
   </div>
 
@@ -17,4 +17,59 @@
         <p class="task-points">Points: {{ task.points }}</p>
       </div>
     </div>
+  </div> -->
+
+
+<div class="background">
+<div class="container">
+  <h1>Tutorial Records</h1>
+  <!-- <button class="add-button" (click)="goToAddTute()">✨ Add Tutorial ✨</button> -->
+  <button class="add-button" (click)="openModal()">✨ Add Tutorial ✨</button>
+
+  <div class="records-container">
+    <div class="record-card" *ngFor="let task of studentData.module1.game1.tasks" (click)="openTaskDetails(task)">
+      <div class="record-image">
+        <img src="/assets/home_icon.png" alt="Egyptian Theme">
+      </div>
+      <div class="record-header">
+        <h3>{{ task.name }}</h3>
+        <!-- <p>{{ task.date }}</p> -->
+      </div>
+      <div class="record-body">
+        <!-- <p>{{ record.description }}</p> -->
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="task.completePercentage"></div>
+        </div>
+        <p>{{ task.completePercentage }}%</p>
+      </div>
+      <!-- <div class="record-footer"> -->
+        <!-- <button class="view-btn" (click)="viewRecord(record)">🔍 View</button>
+        <button class="edit-btn" (click)="editRecord(record)">✏️ Edit</button> -->
+        <!-- <button class="view-btn">🔍 View</button>
+        <button class="edit-btn">✏️ Edit</button>
+      </div> -->
+    </div>
   </div>
+
+
+ <!-- Task Details Modal -->
+ <div *ngIf="isTaskModalOpen" class="modal">
+  <div class="modal-content-view">
+    <span class="close-btn" (click)="closeTaskModal()">&times;</span>
+    <h2>{{ selectedTask.name }}</h2>
+    <p><strong>Date:</strong> {{ selectedTask.date }}</p>
+    <p><strong>Progress:</strong> {{ selectedTask.completePercentage }}%</p>
+    <p><strong>Description:</strong> {{ selectedTask.description }}</p>
+    <button class="edit-btn" (click)="editTask(selectedTask)">Edit</button>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content-add">
+    <span class="close-btn" (click)="closeModal()">&times;</span>
+    <app-tutorial-submission (submitEvent)="closeModal()"></app-tutorial-submission>
+    <!-- <app-tutorial-submission></app-tutorial-submission> -->
+  </div>
+</div>
+
+</div>

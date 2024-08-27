@@ -30,6 +30,13 @@
     margin-top: 0; 
     font-family: 'MedievalSharp', sans-serif; 
   }
+
+  .login-box h6 {
+    text-align: center;
+    color: #333; 
+    margin-top: 10px; 
+    font-family: 'MedievalSharp', sans-serif; 
+  }
   
   .login-box .input-group {
     margin-bottom: 15px;

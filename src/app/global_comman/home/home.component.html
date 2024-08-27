@@ -1,4 +1,4 @@
-<div class="p1dv1 col-8" >
+<!-- <div class="p1dv1 col-8" > -->
 
     <!-- <div class="row">
         <div class="col-3 ">
@@ -10,7 +10,7 @@
         </div>
     </div> -->
 
-    <div class="img mt-4">
+    <!-- <div class="img mt-4">
         <div class="row">
             <div >
                 <img src="/assets/map2.png" class="imgcus1" alt="Responsive image">
@@ -18,8 +18,8 @@
 
         </div>
         
-        
-    </div>
+         -->
+    <!-- </div> -->
     <!-- <div>
       <br> 
       <br>  
@@ -30,4 +30,78 @@
          - YM Team
         </p>
     </div>     -->
-</div>
+<!-- </div> -->
+
+
+
+<div class="background">
+    <div class="home-container">
+      <div class="game-scroll" *ngFor="let game of games">
+        <div class="white-block">
+          <div class="game-details" (click)="navigateToGame(game)">
+            <h2>{{ game.name }}</h2>
+            <img class="hieroglyph-image" [src]="game.hieroglyphImage" alt="Hieroglyph">
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Narrator Image and Mood Selector -->
+  <div id="narrator-container" class="narrator-container">
+    <img id="narrator" class="narrator-image" src="/assets/narrator.png" alt="Egyptian God">
+    <div class="dialog-box">
+      <p>How are you feeling today?</p>
+      <!-- <div class="mood-options">
+        <label>
+          <input type="radio" name="mood" value="happy">
+          😊 Happy
+        </label>
+        <label>
+          <input type="radio" name="mood" value="sad">
+          😢 Sad
+        </label>
+        <label>
+          <input type="radio" name="mood" value="neutral">
+          😐 Neutral
+        </label>
+        <label>
+          <input type="radio" name="mood" value="excited">
+          😄 Excited
+        </label>
+        <label>
+          <input type="radio" name="mood" value="angry">
+          😠 Angry
+        </label>
+      </div> -->
+  
+      <div class="mood-options">
+        <label>
+          <input type="radio" name="mood" value="angry">
+          <img src="assets/angry.jpg" alt="Angry">
+        </label>
+        <label>
+          <input type="radio" name="mood" value="sad">
+          <img src="assets/sad.jpg" alt="Sad">
+        </label>
+        <label>
+          <input type="radio" name="mood" value="neutral">
+          <img src="assets/neutral.jpg" alt="Neutral">
+        </label>
+        <label>
+          <input type="radio" name="mood" value="happy">
+          <img src="assets/happy.jpg" alt="Happy">
+        </label>
+        <label>
+          <input type="radio" name="mood" value="excited">
+          <img src="assets/excited.jpg" alt="Excited">
+        </label>
+      </div>
+      <button id="submit-mood">Submit</button>
+      <button id="later">Later</button>
+    </div>
+  </div>
+  
+  </div>
+  
+  

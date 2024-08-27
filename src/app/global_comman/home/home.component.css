@@ -1,15 +1,6 @@
-
-/*.p1dv1{
-
-    margin-top:2%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
-}*/
+/* 
 
 .p1dv1{
-    /* background-image: url('/assets/map.png'); */
     background-color: rgb(241, 217, 191) ;
     background-size: cover;
     background-repeat: no-repeat;
@@ -42,6 +33,300 @@ p {
     width: 100%;
     height: auto; 
     display: flex;
-    /* width: 100%;
-    height:100%; */
-} 
+}  */
+
+:host ::ng-deep .background {
+    background-image: url('/assets/background03.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .home-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 60px;
+  }
+  
+  .game-scroll {
+    /* max-width: 300px; */
+    width: 300px; /* Fixed width for consistent block size */
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .game-scroll:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* .scroll-background {
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; 
+  } */
+  
+  .white-block {
+    background-color: rgba(255, 255, 255, 0.75); /* White background */
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Stack children vertically */
+    height: 280px; /* Fixed height for consistency */
+    cursor: pointer;
+  }
+  
+  .game-details {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* border-radius: 10px; */
+    padding: 45px;
+  }
+  
+  h2 {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 1.6em;
+    color: #020202;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgb(255, 255, 255), /* Outer glow */
+                 0 0 20px rgba(255, 255, 255, 0.825), /* Middle glow */
+                 0 0 30px rgba(255, 255, 255, 0.507); /* Inner glow */
+  }
+  
+  /* .hieroglyph {
+    font-size: 4em;
+    color: #212020;
+  } */
+  
+  .hieroglyph-image {
+    max-width: 100px; /* Adjust the size of the hieroglyph image */
+    margin-top: 10px;
+  }
+  
+  
+  /* Narrator Image and Dialog Box Styles */
+  .narrator-container {
+    position: fixed;
+    bottom: -180px; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 300px;
+    transition: bottom 0.5s ease;
+  }
+  /* 
+  .narrator-container.hidden {
+    display: none;
+  }
+  
+  .narrator-container.visible {
+    display: flex;
+    bottom: 50px; 
+  } */
+  
+  
+  .narrator-container.show {
+    bottom: 50px; /* Move into view */
+    display: flex;
+  }
+  
+  
+  
+  .narrator-image {
+    width: 100px; /* Adjust size of the narrator image */
+    display: block;
+    margin-bottom: -50px;
+    filter: drop-shadow(0 0 15px rgb(255, 255, 255)); /* Yellow glow effect */
+  
+  }
+  
+  
+  .dialog-box {
+    background-color: rgba(255, 255, 255);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px; /* Space between the image and the dialog box */
+  }
+  
+  .dialog-box p {
+  font-family: 'MedievalSharp', sans-serif;
+  font-size: 1.2em;
+  }
+  
+  
+  /* .mood-options label {
+    display: block;
+    margin: 10px 0;
+  } */
+  .mood-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Adjust spacing between each mood */
+    margin-bottom : 40px;
+  }
+  
+  .mood-options label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .mood-options img {
+    width: 70px; 
+    height: 70px;
+    border-radius: 10px; 
+    transition: transform 0.2s ease;
+  }
+  
+  .mood-options label:hover img {
+    transform: scale(1.1); 
+  }
+  
+  .mood-options input[type="radio"] {
+    display: none; 
+  }
+  
+  .mood-options input[type="radio"]:checked + img {
+    border: 2px solid #333; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  }
+  
+  /* button {
+    margin: 5px; 
+  } */
+  
+  /* #later {
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc;
+    color: #333;
+  } */
+  
+  .dialog-box button {
+    background-color: #feddc8; /* Light color for the Later button */
+    /* border: 1px solid #d46821; */
+    border: none;
+    color: #333;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem; /* Font size for buttons */
+    text-align: center;
+    font-family: 'MedievalSharp', sans-serif; 
+    margin: 5px;
+    width: 20%;
+  }
+  
+  @media (max-width: 768px) {
+    .game-scroll {
+      max-width: 45%;
+    }
+  
+    /* .scroll-background {
+      height: 300px; 
+    } */
+  
+    .white-block {
+      height: auto;
+    }
+  
+    .narrator-container {
+      width: 80%; /* Make the narrator container take up more width */
+      bottom: -130px; /* Adjust bottom position for smaller screens */
+  
+    }
+  
+    .narrator-image {
+      width: 90px; /* Reduce the size of the narrator image */
+      margin-bottom: -30px;
+    }
+  
+    .dialog-box {
+      padding: 15px; /* Reduce padding inside the dialog box */
+      width: 100%; /* Make the dialog box take up the full width of the container */
+    }
+    .dialog-box p {
+      font-size: 1em;
+      }
+  
+    .dialog-box button {
+        font-size: 0.9em;
+        }
+  
+    .mood-options {
+        gap : 5px;
+        margin-bottom : 20px;
+      }
+  
+    .mood-options img {
+      width: 50px; 
+      height: 50px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .game-scroll {
+      max-width: 100%;
+    }
+  
+    /* .scroll-background {
+      height: 250px; 
+    } */
+  
+    .white-block {
+      height: auto;
+    }
+  
+    .narrator-container {
+      width: 90%; /* Make the narrator container full-width */
+      bottom: -115px; /* Adjust bottom position for smaller screens */
+    }
+  
+    .narrator-image {
+      width: 70px; /* Further reduce the size of the narrator image */
+      margin-bottom: -20px;
+    }
+  
+    .dialog-box {
+      padding: 10px; /* Further reduce padding */
+      width: 100%; /* Full width of the container */
+    }
+  
+    .dialog-box p {
+      font-size: 1em;
+      }
+  
+    .dialog-box button {
+      font-size: 0.8em;
+      width: fit-content;
+      }
+  
+    .mood-options {
+      gap : 5px;
+      margin-bottom : 20px;
+  
+    }
+    .mood-options img {
+      width: 40px; 
+      height: 40px;
+      gap: 10px;
+    }
+  }
+  

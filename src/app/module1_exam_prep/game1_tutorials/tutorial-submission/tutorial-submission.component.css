@@ -1,0 +1,139 @@
+:host ::ng-deep .background {
+    background-image: url('/assets/background01.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tutorial-box {
+    background-image: linear-gradient(rgb(255 255 255 / 64%),
+     #e9ecef), url('/assets/background01.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    border-radius: 15px; 
+    padding: 20px; /* Increased padding for a larger box */
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  */
+    width: 800px; /* Adjust width to be larger */
+    max-width: 100%; /* Ensure the box does not exceed the viewport width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+  
+  .tutorial-box h1 {
+    text-align: center;
+    text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+    color: #333; 
+    margin-top: 0; 
+    font-family: 'MedievalSharp', sans-serif; 
+  }
+  
+  .tutorial-box .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .tutorial-box .form-group label {
+    margin-bottom: 3px;
+    color: #333;
+    font-family: 'MedievalSharp', sans-serif; 
+    font-size: 1.3rem; /* Font size for labels */
+  }
+  
+  .tutorial-box .form-group input,
+  .tutorial-box .form-group select,
+  .tutorial-box .form-group textarea {
+    width: 100%;
+    padding: 3px;
+    border: 2px solid #c99865;
+    border-radius: 5px;
+    box-sizing: border-box; 
+  }
+  
+  .tutorial-box .btn-submit {
+    display: block; /* Make the button a block-level element */
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #d96e10; /* Dark button color */
+    color: #000000; /* Dark text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem; /* Font size for buttons */
+    text-align: center;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-family: 'MedievalSharp', sans-serif; 
+  }
+  
+  .tutorial-box .btn-submit:hover {
+    background-color: #ffeb09; /* Slightly lighter on hover */
+  }
+  
+  .form-group {
+    width: 100%; /* Ensure the parent container has 100% width */
+  }
+  
+  .inline-group {
+    display: flex;
+    gap: 15px; /* Space between fields */
+  }
+  
+  .inline-group .form-group {
+    flex: 1; /* Make form groups take up equal space */
+  }
+  
+  @media (max-width: 768px) {
+    .tutorial-box {
+      width: 100%; /* Reduce width for smaller screens */
+      padding: 20px; /* Adjust padding for smaller screens */
+    }
+  
+    .tutorial-box h1 {
+      font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+  
+    .tutorial-box .btn-submit {
+      width: 80%; /* Adjust button width for smaller screens */
+      font-size: 1.2rem; /* Adjust button font size for smaller screens */
+      margin: 0 auto;
+    }
+  
+    .tutorial-box .form-group label {
+      font-size: 1rem; /* Font size for labels */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tutorial-box {
+      width: 100%; /* Full width for very small screens */
+      padding: 15px; /* Adjust padding for very small screens */
+    }
+  
+    .tutorial-box h1 {
+      font-size: 1.2rem; /* Adjust font size for very small screens */
+    }
+  
+    .tutorial-box .btn-submit {
+      width: 100%; /* Full width button for very small screens */
+      font-size: 1.2rem; /* Adjust button font size for very small screens */
+      margin: 0 auto;
+    }
+  
+    .inline-group {
+      flex-direction: column; /* Stack fields vertically on very small screens */
+    }
+  
+    .inline-group .form-group {
+      width: 100%; /* Full width for form groups on very small screens */
+    }
+  
+    .tutorial-box .form-group label {
+      font-size: 0.9rem; /* Font size for labels */
+    }
+  }
+  

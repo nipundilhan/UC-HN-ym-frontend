@@ -30,7 +30,7 @@
 <div class="row"  *ngIf=" !isLoggedIn() || !isVisibleSidebar() "> <!-- ||  !isVisibleSidebar()-->
 
   <div class="pg min-vh-100">
-    <button class="collapse-button btn " type="button" (click)="toggleSidebar()" *ngIf="isLoggedIn()" >||||</button>
+    <!-- <button class="collapse-button btn " type="button" (click)="toggleSidebar()" *ngIf="isLoggedIn()" >||||</button> -->
     <router-outlet></router-outlet>
   </div>
 </div>
