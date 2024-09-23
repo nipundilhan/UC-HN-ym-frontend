@@ -43,8 +43,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
   background-size: contain; /* Ensure the whole image is shown */
   background-repeat: no-repeat; /* Prevent image repetition */
   background-position: center; /* Center the image */
@@ -52,6 +52,12 @@
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease;
+}
+
+
+/* Ensure consistent padding/margins */
+.option-block {
+  margin: 0 auto; /* Center horizontally */
 }
 
 /* Specific images for Learn and Play blocks */
@@ -67,9 +73,14 @@
 .option-text {
   font-size: 2rem;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   z-index: 1;
   position: relative;
+}
+
+/* Add margin-left to the option-text in the first block */
+.option-block:nth-child(1) .option-text {
+  margin-left: 45px; /* Add a small left margin to the text in the first block */
 }
 
 /* Hover effect */
@@ -81,15 +92,22 @@
 @media (max-width: 768px) {
   .options-blocks {
     flex-direction: column;
+    align-items: center; /* Center align in column direction */
     gap: 15px;
   }
 
   .option-block {
-    width: 100%; /* Full width on mobile */
-    height: 150px;
+    max-width: 100%; /* Full width on mobile */
+    width: 300px; /* Set a max width to ensure consistent size */
+    height: 200px;
   }
 
   .option-text {
     font-size: 1.5rem; /* Slightly smaller text on mobile */
   }
+
+    /* Add margin-left to the second block only in responsive mode */
+    .option-block:nth-child(2) {
+      margin-left: 50px; /* Add margin-left to the second block */
+    }
 }
