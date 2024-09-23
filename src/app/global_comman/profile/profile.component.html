@@ -1,0 +1,269 @@
+<div class="background">
+<!-- Profile Page Container -->
+<div class="profile-page-container">
+
+  <!-- Row 1: Profile Details and Mood History -->
+  <div class="row">
+
+    <!-- Profile Details -->
+<!-- Profile Details with Camera Icon -->
+<div class="profile-details card">
+  <div class="avatar-container">
+    <img src="assets/avatar-img/ava01.png" alt="User Avatar" class="avatar">
+    <i class="camera-icon" (click)="openAvatarSelectionModal()">
+      <i class="fas fa-camera"></i>
+    </i>
+  </div>
+  <div class="profile-info">
+    <h2>{{userName}}</h2>
+    <p><strong>Email:</strong> {{userEmail}}</p>
+    <p><strong>Birthday:</strong> {{userBirthday}}</p>
+    <p><strong>Gender:</strong> {{userGender}}</p>
+    <div class="profile-buttons">
+      <button class="btn-edit" (click)="openEditDetailsModal()">Edit Details</button>
+      <button class="btn-password" (click)="openChangePasswordModal()">Change Password</button>
+    </div>
+  </div>
+</div>
+
+    
+    <!-- Avatar Selection Modal -->
+    <div class="modal" [class.show]="isAvatarSelectionModalVisible">
+      <div class="modal-content">
+        <span class="close-btn" (click)="closeAvatarSelectionModal()">&times;</span>
+        <h2>Select Avatar</h2>
+        <div class="avatar-selection-box">
+          <div class="avatar-item" *ngFor="let a of avatars">
+            <img [src]="a.path" [class.selected]="a.selected" (click)="selectImage(a)" alt="Avatar">
+          </div>
+          <button (click)="confirmAvatarSelection()" class="btn-submit">Confirm</button>
+        </div>
+      </div>
+    </div>
+  
+
+<!-- Edit Profile Details Modal -->
+<div class="modal" [class.show]="isEditDetailsModalVisible">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeEditDetailsModal()">&times;</span>
+    <h2>Edit Profile</h2>
+
+    <form (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="userName" name="username" (input)="onFieldChange()" required>
+      </div>
+
+      <!-- Birthday -->
+      <div class="form-group">
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" [(ngModel)]="userBirthday" name="birthday" (input)="onFieldChange()" required>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" [(ngModel)]="userGender" name="gender" (change)="onFieldChange()" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Save Changes Button (Disabled until changes are made) -->
+      <div class="button-container">
+        <button type="submit" class="btn btn-password" [disabled]="!isSaveChangesEnabled">Save Changes</button>
+      </div>
+      </form>
+  </div>
+</div>
+
+                                                                                                                                                    
+<!-- Change Password Modal -->
+<div class="modal" [class.show]="isChangePasswordModalVisible">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeChangePasswordModal()">&times;</span>
+    <h2>Change Password</h2>
+
+    <form (ngSubmit)="onChangePasswordSubmit()">
+      <!-- Current Password -->
+      <div class="form-group">
+        <label for="current-password">Current Password:</label>
+        <input
+          type="password"
+          id="current-password"
+          [(ngModel)]="currentPassword"
+          name="currentPassword"
+          required
+        />
+      </div>
+
+      <!-- New Password -->
+      <div class="form-group password-group">
+        <label for="new-password">New Password:</label>
+        <input
+          [type]="isNewPasswordVisible ? 'text' : 'password'"
+          id="new-password"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+          (input)="onPasswordFieldChange()"
+          required
+          minlength="6" 
+        />
+        <i class="eye-icon" (click)="togglePasswordVisibility('new')">
+          <i [class]="isNewPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </i>
+        <div *ngIf="newPassword && newPassword.length < 6" class="error">
+          Password must be at least 6 characters long
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group password-group">
+        <label for="confirm-password">Confirm Password:</label>
+        <input
+          [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+          id="confirm-password"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          (input)="onPasswordFieldChange()"
+          required
+        />
+        <i class="eye-icon" (click)="togglePasswordVisibility('confirm')">
+          <i [class]="isConfirmPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </i>
+        <div *ngIf="confirmPassword && confirmPassword !== newPassword" class="error">
+          Passwords do not match
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button
+          type="submit"
+          class="btn btn-password"
+          [disabled]="!isSaveChangesEnabled || newPassword.length < 6 || confirmPassword !== newPassword"
+        >
+          Change Password
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- Mood History Section -->
+    <div class="mood-history card">
+      <h3>My Moods</h3>
+      <div class="mood-list">
+        <div *ngFor="let mood of displayedMoods">
+          <img [src]="getMoodIcon(mood.mood)" alt="{{mood.mood}}" class="mood-img">
+          <p>{{mood.date}}</p>
+        </div>
+      </div>
+      <button class="btn btn-link show-more" (click)="showMoreMoods()">
+        <i class="bi bi-three-dots"></i> <!-- Bootstrap icon for "show more" -->
+      </button>
+    </div>
+  </div>
+
+      <!-- Mood History Popup -->
+      <div class="mood-popup" *ngIf="showPopup">
+        <div class="mood-popup-content">
+          <span (click)="closePopup()" class="close-btn">&times;</span>
+          <h3>Full Mood History</h3>
+          <div class="mood-list">
+            <div *ngFor="let mood of userMoodHistory">
+              <img [src]="getMoodIcon(mood.mood)" alt="{{mood.mood}}" class="mood-img">
+              <p>{{mood.date}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Row 2: Tab Section -->
+  <div class="tab-section card">
+    <ul class="nav nav-tabs" id="profileTabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="progress-tab" data-bs-toggle="tab" href="#progress" role="tab">My Progress</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="badges-tab" data-bs-toggle="tab" href="#badges" role="tab">My Badges</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="other-tab" data-bs-toggle="tab" href="#other" role="tab">Shared</a>
+      </li>
+    </ul>
+    
+    <div class="tab-content" id="profileTabContent">
+
+      <!-- My Progress Tab Content -->
+      <div class="tab-pane fade show active" id="progress" role="tabpanel">
+        <div class="exam-date-container">
+          <div class="exam-date">
+            <label for="exam-date-input">Exam Date : </label>
+            <input type="date" id="exam-date-input" [value]="examDate" [min]="minDate" (change)="onExamDateChange($event)" />
+      
+            <!-- Pencil Icon for Edit -->
+            <i class="fas fa-pencil-alt edit-icon" (click)="enableEdit()"></i>
+          </div>
+          <div class="days-left">
+            <p>{{ daysLeftMessage }}</p>
+          </div>
+        </div>
+  
+          <div class="progress-container">
+            <!-- Game 1 Box -->
+            <div class="game-box">
+              <img src="assets/hieroglyph1.png" alt="Game 1 Icon" class="game-icon">
+              <div class="game-info">
+                <h4>Eye of Horus</h4>
+                <p>Completed: 5 Tutorials</p>
+              </div>
+            </div>
+
+            <!-- Game 2 Box -->
+            <div class="game-box">
+              <img src="assets/hieroglyph2.png" alt="Game 2 Icon" class="game-icon">
+              <div class="game-info">
+                <h4>Sekhmats Map</h4>
+                <p>Completed: 8 Mind Maps</p>
+              </div>
+            </div>
+
+            <!-- Game 3 Box -->
+            <div class="game-box">
+              <img src="assets/hieroglyph3.png" alt="Game 3 Icon" class="game-icon">
+              <div class="game-info">
+                <h4>Sword of Anubis</h4>
+                <p>Completed: 10 activities</p>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- My Badges Tab Content -->
+      <div class="tab-pane fade" id="badges" role="tabpanel">
+        <div class="badge-list">
+          <div *ngFor="let badge of userBadges">
+            <img [src]="badge.image" alt="{{badge.name}}" [class.locked]="!badge.earned" class="badge-img">
+            <p>{{badge.name}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Tab Content -->
+      <div class="tab-pane fade" id="other" role="tabpanel">
+        <h3>Other Tab</h3>
+        <p>Content for another tab goes here.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>

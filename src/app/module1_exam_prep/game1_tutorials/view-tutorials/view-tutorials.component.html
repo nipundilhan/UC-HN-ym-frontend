@@ -1,75 +1,177 @@
-
-<!-- <div *ngIf="loading" class="loading-spinner">
- 
-    <p style="margin-left:200px;">Loading...</p>
-  </div>
-
-<div  class="task-container mt-5">
-
-    <button  type="button" class="btn btn-success" (click)="goToAddTute()" >ADD TUTORIAL</button> 
-    <h3 class="student-title">Your Total points  : {{ studentData.module1.game1.gamePoints }}</h3>
-    <div class="card-list">
-      <div *ngFor="let task of studentData.module1.game1.tasks" class="task-card">
-        <h4 class="task-title">{{ task.name }}</h4>
-        <p class="task-description">Description: {{ task.description }}</p>
-        <p class="task-date">Date: {{ task.date }}</p>
-        <p class="task-percentage">Completion Percentage: {{ task.completePercentage }}%</p>
-        <p class="task-points">Points: {{ task.points }}</p>
-      </div>
-    </div>
-  </div> -->
-
-
 <div class="background">
-<div class="container">
-  <h1>Tutorial Records</h1>
-  <!-- <button class="add-button" (click)="goToAddTute()">✨ Add Tutorial ✨</button> -->
-  <button class="add-button" (click)="openModal()">✨ Add Tutorial ✨</button>
-
-  <div class="records-container">
-    <div class="record-card" *ngFor="let task of studentData.module1.game1.tasks" (click)="openTaskDetails(task)">
-      <div class="record-image">
-        <img src="/assets/home_icon.png" alt="Egyptian Theme">
-      </div>
-      <div class="record-header">
-        <h3>{{ task.name }}</h3>
-        <!-- <p>{{ task.date }}</p> -->
-      </div>
-      <div class="record-body">
-        <!-- <p>{{ record.description }}</p> -->
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="task.completePercentage"></div>
+  <div class="container">
+  
+    <div class="header-container">
+      <h1>Tutorial and Lab Records</h1>
+      <button class="add-button" (click)="openModal()">✨ Add Tutorial or Lab✨</button>
+    </div>
+    <div class="records-container" *ngIf="studentData?.module1?.game1?.tasks?.length > 0">
+      <div class="record-card" *ngFor="let task of studentData.module1.game1.tasks" (click)="openTaskDetails(task)">
+        <div class="record-image">
+          <img src="/assets/home_icon.png" alt="Egyptian Theme">
         </div>
-        <p>{{ task.completePercentage }}%</p>
+        <div class="record-header">
+          <h3>{{ task.name }}</h3>
+        </div>
+        <div class="record-body">
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="task.completePercentage"></div>
+          </div>
+          <p>{{ task.completePercentage }}%</p>
+        </div>
       </div>
-      <!-- <div class="record-footer"> -->
-        <!-- <button class="view-btn" (click)="viewRecord(record)">🔍 View</button>
-        <button class="edit-btn" (click)="editRecord(record)">✏️ Edit</button> -->
-        <!-- <button class="view-btn">🔍 View</button>
-        <button class="edit-btn">✏️ Edit</button>
-      </div> -->
+    </div>
+
+<!-- Achievement Popup -->
+<div *ngIf="isAchievementPopupOpen" class="modal">
+  <div class="achievement-wrapper">
+
+    <!-- Sage Image Container (Outside the Popup) -->
+    <div class="sage-image-container">
+      <img src="/assets/narrator.png" alt="Sage" class="sage-image">
+    </div>
+
+    <!-- Achievement Popup -->
+    <div class="achievement-popup">
+      <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
+      <h2>Congratulations!</h2>
+      <p>You've unlocked the "Eye of Horus"</p>
+
+      <!-- Badge Image with animation class -->
+      <!-- <div class="badge-container"> -->
+        <!-- Padlock GIF -->
+        <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
+
+        <!-- Badge Image -->
+        <img *ngIf="showBadge" src="/assets/bagdes/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+      <!-- </div> -->
+
+      <button class="btn share-btn" (click)="shareAchievement()">Share</button>
     </div>
   </div>
-
-
- <!-- Task Details Modal -->
- <div *ngIf="isTaskModalOpen" class="modal">
-  <div class="modal-content-view">
-    <span class="close-btn" (click)="closeTaskModal()">&times;</span>
-    <h2>{{ selectedTask.name }}</h2>
-    <p><strong>Date:</strong> {{ selectedTask.date }}</p>
-    <p><strong>Progress:</strong> {{ selectedTask.completePercentage }}%</p>
-    <p><strong>Description:</strong> {{ selectedTask.description }}</p>
-    <button class="edit-btn" (click)="editTask(selectedTask)">Edit</button>
-  </div>
 </div>
 
-<div *ngIf="isModalOpen" class="modal">
-  <div class="modal-content-add">
-    <span class="close-btn" (click)="closeModal()">&times;</span>
-    <app-tutorial-submission (submitEvent)="closeModal()"></app-tutorial-submission>
-    <!-- <app-tutorial-submission></app-tutorial-submission> -->
-  </div>
-</div>
 
+
+
+
+    
+
+
+    <!-- Task Details Modal -->
+    <div *ngIf="isTaskModalOpen" class="modal">
+      <div class="modal-background">
+      <div class="modal-content-view">
+        <span class="close-btn" (click)="closeTaskModal()">&times;</span>
+        <h2>{{ selectedTask.name }}</h2>
+        
+        <form (ngSubmit)="onUpdate()">
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="taskDate" [(ngModel)]="selectedTask.date" name="date" [disabled]="false" [max]="getTodayDate()" required />
+          </div>
+
+          <div class="form-group">
+            <label for="progress">Progress:</label>
+            <select id="taskProgress" [(ngModel)]="selectedTask.completePercentage" name="completePercentage" [disabled]="!isProgressEditable">
+              <option *ngFor="let option of progressOptions" [value]="option">{{ option }}%</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="taskDescription" [(ngModel)]="selectedTask.description" name="description" [disabled]="false"></textarea>
+          </div>
+
+          
+
+          <div class="button-container">
+            <button type="submit" class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
+            <button type="button" class="btn cancel-btn" (click)="closeTaskModal()">Cancel</button>
+            <button class="btn delete-btn" *ngIf="selectedTask.completePercentage < 100" (click)="deleteTask(selectedTask)">Delete</button>
+
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+
+    <!-- Add Tutorial Modal -->
+
+    <div *ngIf="isModalOpen" class="modal">
+      <div class="modal-content-add">
+        <div class="tutorial-box">
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+
+        <h2>Log New Tutorial</h2>
+      <form [formGroup]="tutorialForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label for="tutorialName">Tutorial Name:</label>
+              <input
+                  type="text"
+                  id="tutorialName"
+                  formControlName="tutorialName"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['tutorialName'].errors }"
+              />
+              <div *ngIf="submitted && f['tutorialName'].errors" class="invalid-feedback">
+                  <div *ngIf="f['tutorialName'].errors['required']">Tutorial Name is required</div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="date">Date:</label>
+              <input
+                  type="date"
+                  id="date"
+                  formControlName="date"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+                  [max]="getTodayDate()" 
+              /> <!-- Restrict future dates -->
+              <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['date'].errors['required']">Date is required</div>
+              </div>
+          </div>
+
+          <div class="form-group input-group">
+            <label for="progress">Progress</label>
+            <select
+              id = "progress"
+              formControlName="progress"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['progress'].errors }"
+            >
+              <option value="" disabled>Select progress</option>
+              <option *ngFor="let option of progressOptions" [value]="option">{{ option }}%</option>
+            </select>
+            <div *ngIf="submitted && f['progress'].errors" class="invalid-feedback">
+              <div *ngIf="f['progress'].errors['required']">Progress is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea
+                  id="description"
+                  formControlName="description"
+                  rows="4"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+              ></textarea>
+              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                  <div *ngIf="f['description'].errors['required']">Description is required</div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <button type="submit" class="btn-submit">Submit</button>
+          </div>
+      </form>
+    </div>
+
+        <!-- <app-tutorial-submission (submitEvent)="closeModal()"></app-tutorial-submission> -->
+      </div>
+    </div>
+  </div>
 </div>

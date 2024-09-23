@@ -1,0 +1,95 @@
+:host ::ng-deep .background {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.3), /* Semi-transparent white */
+    rgba(255, 255, 255, 0.76)
+  ), url('/assets/background-img/background08.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+.game-options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  font-family: 'MedievalSharp', sans-serif;
+
+}
+
+.game-title {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Flexbox layout for the two blocks */
+.options-blocks {
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* Space between the blocks */
+  width: 100%;
+}
+
+/* Individual block styles */
+.option-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  background-size: contain; /* Ensure the whole image is shown */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  background-position: center; /* Center the image */
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Specific images for Learn and Play blocks */
+.learn-block {
+  background-image: url('/assets/learn.png'); /* Add the image path */
+}
+
+.play-block {
+  background-image: url('/assets/play.png'); /* Add the image path */
+}
+
+/* Centered text styling */
+.option-text {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  position: relative;
+}
+
+/* Hover effect */
+.option-block:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .options-blocks {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .option-block {
+    width: 100%; /* Full width on mobile */
+    height: 150px;
+  }
+
+  .option-text {
+    font-size: 1.5rem; /* Slightly smaller text on mobile */
+  }
+}

@@ -1,106 +1,75 @@
-/* .task-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .student-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #343a40;
-  }
-  
-  .card-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-  }
-  
-  .task-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    width: calc(50% - 16px);
-    box-sizing: border-box;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .task-card:hover {
-    transform: translateY(-5px);
-    background-color: lightgreen;
-  }
-  
-  .task-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 8px;
-  }
-  
-  .task-description,
-  .task-date,
-  .task-percentage,
-  .task-points {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 4px;
-  } */
-
   :host ::ng-deep .background {
     background-image: linear-gradient(
       rgba(255, 255, 255, 0.3), /* Semi-transparent white */
       rgba(255, 255, 255, 0.76)
-    ), url('/assets/background04.jpg');
+    ), url('/assets/background-img/background05.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
     height: 100%; 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Align items at the top */
+    align-items: stretch;
   }
   
   .container {
-    /* background-color: #f0e4d7;  */
     padding: 20px;
-    font-family: 'MedievalSharp', sans-serif; 
+    font-family: 'MedievalSharp', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
   }
   
-  h1 {
-    color: #c89f5f; /* Gold color */
+   h1 {
+    color: #000000;
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
+    font-size: 2.5em;
+    margin: 10px 0;
+    flex: 1;
+    animation: scrollReveal 2s ease-out; /* Apply the scrollReveal animation */
+    text-shadow: 0 0 10px rgb(0, 0, 0); /* Add glow effect */
+
+  } 
   
+  @keyframes scrollReveal {
+    0% {
+      transform: scaleX(0);
+      transform-origin: left;
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
   .add-button {
-    background-color: #cc4211; /* Turquoise */
+    background-color: #a26b1f;
     color: white;
-    border: none;
+    border-color: rgb(107, 83, 50);
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 1.2em;
     margin: 10px 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-block;
   }
-  
+
   .records-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
-  }
+    justify-content: flex-start; /* Align items to the left */
+}
   
   .record-card {
     background-color: #fff;
@@ -131,14 +100,13 @@
   }
   
   .record-image img {
-    width: 60%;
+    width: 40%;
     height: auto;
     object-fit: cover; /* Ensure image covers the area */
   }
   
-  .record-header h2 {
+  .record-header h3 {
     margin: 0;
-    color: #007a7a; /* Turquoise */
   }
   
   .record-header p {
@@ -170,22 +138,6 @@
     margin-top: auto; /* Pushes footer to the bottom */
   }
   
-  /* .view-btn, .edit-btn {
-    background-color: #37984e;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 0.9em;
-    flex: 1; 
-    margin: 5px;
-  } */
-  
-  /* .edit-btn {
-    background-color: #c27d2a; 
-  } */
-  
   .view-btn:hover, .edit-btn:hover {
     opacity: 0.8;
   }
@@ -214,31 +166,35 @@
 } 
 
 .modal-content-add {
-  background-color: #fff;
+  background-image: url('/assets/background-img/brick_background.jpg'); 
   border-radius: 15px;
-  padding: 5px;
+  padding: 10px;
   width: 80%;
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
 }
-
-.modal-content-view {
-  /* background-image: url('/assets/brick_background.jpg'); */
-  background-color: #fff;
+.modal-background{
   border-radius: 15px;
-  padding: 15px;
+  padding: 10px;
   width: 80%;
   max-width: 1000px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
+  background-image: url('/assets/background-img/brick_background.jpg'); 
+}
+
+.modal-content-view {
+  background-color: #f9e7d4;
+  padding: 18px;
+  border-radius: 10px;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5em;
+  top: 5px;
+  right: 20px;
+  font-size: 2em;
   cursor: pointer;
 }
 
@@ -253,6 +209,373 @@
 }
 
 .edit-btn:hover {
+  opacity: 0.6;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 2px solid #c99865;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Container for buttons */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Optional: space between the buttons */
+}
+
+/* Buttons styles */
+.save-btn, .cancel-btn, .delete-btn{
+  background-color: #c27d2a; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.delete-btn{
+  background-color: #c2392a;
+}
+
+.save-btn:hover,
+.cancel-btn:hover, 
+.delete-btn:hover{
   opacity: 0.8;
+}
+
+.add-button:hover{
+  background-color: #ce8928;
+}
+
+.achievement-popup h2, 
+.achievement-popup p
+{
+  position: relative;
+  z-index: 1; /* Ensure these stay on top */
+}
+
+/* Wrapper to hold both the image and popup */
+.achievement-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; /* Flexbox for layout */
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Sage Image Container (outside popup) */
+.sage-image-container {
+  margin-right: 15px; /* Space between the image and the popup */
+  position: relative; /* Allow custom positioning if needed */
+}
+
+.sage-image {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 15px rgb(255, 255, 255)); /* Yellow glow effect */
+}
+
+
+/* Achievement Popup */
+.achievement-popup {
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 500px;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Ensure it's above other elements */
+  text-align: center; /* Center the content */
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  justify-content: center;
+  align-items: center; /* Align items in the center horizontally */
+  transition: width 0.3s ease; /* Optional: smooth width transition */
+}
+
+/* Achievement message text container */
+.achievement-message {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Badge Container */
+.badge-container {
+  position: absolute; /* Position badge independently */
+  top: 50%; /* Adjust position as needed */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; /* Space around the badge */
+}
+
+/* Badge Image */
+.badge-image {
+  width: 150px;
+  height: auto;
+  opacity: 0; /* Initially hidden */
+  transform: scale(0.5); /* Start at a smaller size */
+  z-index: 1;
+  position: absolute;
+}
+
+/* Unlocking animation */
+@keyframes unlockBadge {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); /* Start smaller */
+    filter: grayscale(100%); /* Start with grayscale */
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.8); /* Slightly larger midway */
+    filter: grayscale(100%); /* Still in grayscale */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.9); 
+    filter: grayscale(0%); /* Turn to original color */
+  }
+}
+
+/* Apply animation */
+.unlocking-animation {
+  animation: unlockBadge 2s ease-out forwards; /* Trigger on appearance */
+}
+
+/* Padlock styles */
+.padlock-gif {
+  width: 90px;
+  height: auto;
+  z-index: 2;
+  opacity: 0; /* Initially invisible */
+  transition: opacity 1s ease-in-out; /* Smooth fade-out effect */
+}
+
+/* When padlock is visible, set opacity to 1 */
+.padlock-visible {
+  opacity: 1;
+}
+
+/* When padlock becomes invisible, opacity transitions to 0 */
+.padlock-gif:not(.padlock-visible) {
+  opacity: 0; /* Fully transparent */
+}
+
+@media (max-width: 768px) {
+  .sage-image-container {
+    margin-right: 5px; /* Less space on smaller screens */
+  }
+  
+  .sage-image {
+    width: 80px; /* Make the image smaller on mobile */
+  }
+
+  .achievement-popup {
+    width: 280px; /* Adjust for smaller screens */
+    padding: 10px;
+    height: 350px;
+  }
+  .badge-image {
+    width: 80px;
+    position: relative;
+  }
+
+  .padlock-gif {
+    width: 60px;
+    position: absolute;
+  }
+}
+
+.share-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width : 50%;
+  margin-top: 25px; /* Space above the button */
+  position: relative;
+  z-index: 1; /* Ensure these stay on top */
+}
+
+.share-btn:hover {
+  background-color: #218838;
+}
+
+
+.tutorial-box {
+  background-color: #f9e7d4;
+  border-radius: 15px; 
+  padding: 18px; /* Increased padding for a larger box */
+  width: 800px; /* Adjust width to be larger */
+  max-width: 100%; /* Ensure the box does not exceed the viewport width */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.tutorial-box h2 {
+  text-align: center;
+  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+  color: #333; 
+  margin-top: 0; 
+  font-family: 'MedievalSharp', sans-serif; 
+}
+
+.tutorial-box .form-group {
+  margin-bottom: 15px;
+}
+
+.tutorial-box .form-group label {
+  margin-bottom: 3px;
+  color: #333;
+  font-family: 'MedievalSharp', sans-serif; 
+  font-size: 1.3rem; /* Font size for labels */
+}
+
+.tutorial-box .form-group input,
+.tutorial-box .form-group select,
+.tutorial-box .form-group textarea {
+  width: 100%;
+  padding: 3px;
+  border: 2px solid #c99865;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+.tutorial-box .btn-submit {
+  display: block; /* Make the button a block-level element */
+  width: 40%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #d96e10; /* Dark button color */
+  color: #000000; /* Dark text */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.5rem; /* Font size for buttons */
+  text-align: center;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  font-family: 'MedievalSharp', sans-serif; 
+}
+
+.tutorial-box .btn-submit:hover {
+  /*background-color: #ffeb09; /* Slightly lighter on hover */
+  background-color: #e4af0e;
+}
+
+.form-group {
+  width: 100%; /* Ensure the parent container has 100% width */
+}
+
+.inline-group {
+  display: flex;
+  gap: 15px; /* Space between fields */
+}
+
+.inline-group .form-group {
+  flex: 1; /* Make form groups take up equal space */
+}
+
+@media (max-width: 768px) {
+  .tutorial-box {
+    width: 100%; /* Reduce width for smaller screens */
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .tutorial-box h1 {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+
+  .tutorial-box .btn-submit {
+    width: 80%; /* Adjust button width for smaller screens */
+    font-size: 1.2rem; /* Adjust button font size for smaller screens */
+    margin: 0 auto;
+  }
+
+  .tutorial-box .form-group label {
+    font-size: 1rem; /* Font size for labels */
+  }
+}
+
+@media (max-width: 480px) {
+  .tutorial-box {
+    width: 100%; /* Full width for very small screens */
+    padding: 15px; /* Adjust padding for very small screens */
+  }
+
+  .tutorial-box h1 {
+    font-size: 1.2rem; /* Adjust font size for very small screens */
+  }
+
+  .tutorial-box .btn-submit {
+    width: 100%; /* Full width button for very small screens */
+    font-size: 1.2rem; /* Adjust button font size for very small screens */
+    margin: 0 auto;
+  }
+
+  .inline-group {
+    flex-direction: column; /* Stack fields vertically on very small screens */
+  }
+
+  .inline-group .form-group {
+    width: 100%; /* Full width for form groups on very small screens */
+  }
+
+  .tutorial-box .form-group label {
+    font-size: 0.9rem; /* Font size for labels */
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .container {
+    justify-content: center;
+  }
+
+  .records-container{
+    justify-content: center;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* margin-left: 0; */
+    align-self: center;
+  }
 }
 

@@ -1,0 +1,145 @@
+<div class="background">
+  <div class="content-wrapper">
+    <div class="tabs-container">
+      <button (click)="switchTab('notifications')" [class.active]="selectedTab === 'notifications'">
+        <img src="/assets/icons/icon03.png" alt="Notifications Icon">
+        Notifications
+      </button>
+      <button (click)="switchTab('myPeers')" [class.active]="selectedTab === 'myPeers'">
+        <img src="/assets/icons/icon05.png" alt="My Peers Icon">
+        My Peers
+      </button>
+      <button (click)="switchTab('mindmaps')" [class.active]="selectedTab === 'mindmaps'">
+        <img src="/assets/icons/icon04.png" alt="Mind Maps Icon">
+        Mind Maps
+      </button>
+      <button (click)="switchTab('other')" [class.active]="selectedTab === 'other'">
+        <img src="/assets/icons/icon01.png" alt="Other Icon">
+        Other
+      </button>
+    </div>
+
+    <div class="feed-container">
+      <!-- Notifications content -->
+      <div *ngIf="selectedTab === 'notifications'">
+        <div *ngFor="let item of paginatedItems" class="feed-item" [style.borderBottom]="'1px solid #e0e0e0'">
+          <div class="user-info">
+            <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+            <div class="user-details">
+              <span class="username">{{ item.username }}</span>
+              <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+            </div>
+          </div>
+          <div class="shared-content">
+            <ng-container [ngSwitch]="item.type">
+              <div *ngSwitchCase="'badge'" class="content-section">
+                <p>{{ item.description }}</p>
+                <img [src]="item.imageUrl" alt="Badge Image" class="shared-image badge-image">
+              </div>
+              <div *ngSwitchCase="'mindmap'" class="content-section">
+                <p>{{ item.description }}</p>
+                <img [src]="item.imageUrl" alt="Mindmap" class="shared-image mindmap-image" (click)="openMindMap(item)">
+              </div>
+              <div *ngSwitchCase="'other'" class="content-section">
+                <p>{{ item.description }}</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    
+
+      <div *ngIf="selectedTab === 'myPeers'" class="feed-item">
+        <div class="peers-list">
+          <div *ngFor="let peer of peers" class="peer-item">
+            <img [src]="peer.avatarUrl" alt="{{ peer.username }} Avatar" class="peer-avatar">
+            <div class="peer-details">
+              <span class="peer-username">{{ peer.username }}</span>
+              <span class="peer-points">
+                <img src="assets/coin.png" alt="Coin" class="coin-icon"> <!-- Coin image -->
+                {{ peer.points }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Mind Maps content -->
+      <div *ngIf="selectedTab === 'mindmaps'">
+        <div class="mindmap-grid">
+          <ng-container *ngFor="let item of paginatedItems">
+            <div *ngIf="item.type === 'mindmap'" class="mindmap-card" (click)="openMindMap(item)">
+              <div class="user-info">
+                <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+                <div class="user-details">
+                  <span class="username">{{ item.username }}</span>
+                  <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+                </div>
+              </div>
+              <img [src]="item.imageUrl" alt="Mind Map" class="mindmap-image">
+              <p>{{ item.title }}</p>
+              <div class="like-container">
+                <button (click)="likeMindMap()" class="like-button">
+                  <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
+                </button>
+                <span class="like-count">{{ item.likes }} Likes</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    
+      <!-- Other content -->
+      <div *ngIf="selectedTab === 'other'" class="feed-item">
+        <!-- Other content goes here -->
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Mind Map Modal -->
+  <div class="modal" *ngIf="selectedMindMap">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      
+      <div class="modal-header">
+        <div class="user-info">
+          <img [src]="getUserAvatar(selectedMindMap.userId)" alt="User Avatar" class="user-avatar">
+          <div class="user-details">
+            <span class="username">{{ selectedMindMap.username }}</span>
+            <span class="shared-date">{{ selectedMindMap.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <p>{{ selectedMindMap.title }}</p>
+      
+      <img [src]="selectedMindMap.imageUrl" alt="Mind Map" class="large-mindmap-image">
+      
+      <div class="like-container">
+        <button (click)="likeMindMap()" class="like-button">
+          <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
+        </button>
+        <span class="like-count">{{ selectedMindMap.likes }} Likes</span>
+        <div class="download-container"> <!-- Wrap in a container -->
+          <button (click)="downloadMindMap()" class="download-button">
+            <i class="fas fa-download"></i> <!-- Font Awesome download icon -->
+          </button>
+          <span class="tooltip">Download</span> <!-- Tooltip text -->
+        </div>
+      </div>      
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+
+    <!-- Show page numbers -->
+    <span *ngFor="let page of [].constructor(totalPages()); let i = index">
+      <button (click)="goToPage(i + 1)" [class.active]="currentPage === i + 1">{{ i + 1 }}</button>
+    </span>
+
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages()">Next</button>
+  </div>
+</div>

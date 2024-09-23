@@ -1,0 +1,649 @@
+:host ::ng-deep .background {
+    /* background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    min-height: 100vh;*/
+    display: flex;
+    justify-content: space-around;
+    font-family: 'MedievalSharp', sans-serif;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block; /* Ensure it wraps around the avatar and camera icon */
+}
+  
+  .avatar {
+    width: 120px;
+    height: auto;
+    border-radius: 60%;
+    background-color: #f3f3f3;
+    margin-right: 20px;
+  }
+  
+  .camera-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px; /* Width of the icon container */
+    height: 30px; /* Height of the icon container */
+    background: white;
+    border-radius: 50%; /* Ensure the background is circular */
+    display: flex; /* Center the icon */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #555;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+  }
+
+  .avatar-selection-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically if needed */
+  }
+  
+  .avatar-item {
+    flex: 1 0 21%; /* Adjust the number to fit your design */
+    margin: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center; /* Center avatar images horizontally */
+    align-items: center; /* Center avatar images vertically */
+    max-width: 150px; /* Ensure avatars do not grow too large */
+
+    }
+  
+  .avatar-item img {
+    width: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    max-width: 120px; /* Limit the maximum size of avatar images */
+
+  }
+  
+  .avatar-item img.selected {
+    border: 2px solid #4CAF50; /* Highlight selected avatar */
+  }
+  
+  .btn-submit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    display: block; /* Ensure it's a block-level element */
+    margin: 20px auto; /* Center the button horizontally and add top margin */
+  }
+  
+  .btn-submit:hover {
+    background-color: #45a049;
+  }
+
+  .modal {
+    /* display: none; 
+    position: fixed;
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);  */
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal.show {
+    display: block; /* Show the modal */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+
+  /* Flexbox styling to align input and eye icon for password fields */
+.form-group.password-group {
+    position: relative; /* Position relative for absolute positioning of the eye icon */
+    margin-bottom: 30px; /* Add space to fit the error message */
+  }
+  
+  .form-group.password-group label {
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Make label a block element */
+  }
+  
+  /* Ensure input field and eye icon are aligned */
+  .form-group.password-group input {
+    padding-right: 35px; /* Space for the eye icon */
+    width: 100%; /* Full width of the container */
+    border-radius: 5px;
+    border: 2px solid #c99865;
+  }
+  
+  /* Eye icon inside the input field */
+  .form-group.password-group .eye-icon {
+    position: absolute;
+    right: 10px; /* Adjust the position from the right edge */
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Validation error message for password fields */
+  .form-group.password-group .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    position: absolute; /* Positioning to avoid affecting field alignment */
+    bottom: -20px; /* Position the error message below the input */
+    left: 0;
+  }
+  
+  /* General form group styling */
+  .form-group {
+    margin-bottom: 15px; /* Space between fields */
+    position: relative; /* Needed for the error positioning */
+  }
+  
+  /* General validation error message */
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  
+  .form-group label {
+    display: block; /* Make label a block element */
+    margin-bottom: 5px; /* Space between label and input */
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%; /* Full width of the container */
+    padding: 8px; /* Space inside the input */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    border-radius: 5px;
+    border: 2px solid #c27d2a;
+  }
+  
+  /* Responsive styling */
+  @media screen and (max-width: 600px) {
+    .modal-content {
+      width: 90%;
+    }
+  }
+  
+  
+
+* {
+    box-sizing: border-box;
+}
+
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    width: 100%;
+    max-width: 1000px;
+    /* padding: 0 20px; */
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.profile-details, .mood-history {
+    margin-right: 15px; /* Add margin to create space between containers */
+    width: calc(50% - 15px); /* Set equal width minus spacing */
+}
+
+
+.profile-mood-container {
+    width: 100%;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 60%;
+    padding: 10px;
+}
+.profile-details .edit-icon {
+    top: 20px;
+    right: 20px;
+    position: absolute;
+  }
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+  }
+  
+  .profile-buttons button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  /* Container for the button */
+.button-container {
+    text-align: right; /* Aligns the button to the right */
+  }
+  
+  .btn-edit {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px; /* Add some padding */
+  }
+  
+  /* .btn-edit:disabled {
+    background-color: #4CAF50; 
+    cursor: pointer;
+  } */
+
+  
+  .btn-password {
+    background-color: #c27d2a; /* Red */
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .profile-buttons button:hover {
+    opacity: 0.9;
+  }
+
+.mood-history {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 40%;
+    position: relative;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0; /* Remove right margin from the last item */
+}
+
+.mood-history .h3 {
+    align-items: left;
+}
+
+.mood-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.mood-img {
+    height: 50px;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.show-more {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #007bff;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    background: none;
+    border: none;
+}
+
+.mood-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.mood-popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    max-width: 500px;
+    position: relative;
+    gap: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000000;
+}
+
+.badges {
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px;
+}
+
+.badge-img {
+    height: 100px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.badge-img:hover {
+    transform: translateY(-10px);
+}
+
+
+.badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+.badge-list div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img.locked {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.tab-section {
+    width: 100%; /* Full width for the tab-section */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    height: 300px; /* Fixed height */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.tab-pane {
+    padding: 15px;
+}
+
+/* Optional: Customize the scroll bar (for Webkit browsers) */
+/* .tab-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tab-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.tab-section::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.tab-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} */
+
+.exam-date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    margin-bottom: 20px;
+  }
+  
+  .exam-date {
+    display: flex;
+    align-items: center;
+  }
+  
+  #exam-date-input {
+    padding: 5px;
+    font-size: 1rem;
+    width: auto; /* Adjusts width for responsiveness */
+    border-color: #c27d2a;
+    border-radius: 5px;
+  }
+  
+  .edit-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1rem; /* Increase icon size for better visibility on small screens */
+  }
+  
+  .edit-icon:hover {
+    color: #007bff; /* Change the color when hovering */
+  }
+  
+  .days-left {
+    margin-top: 10px; /* Add spacing between the date and days left on smaller screens */
+  }
+
+
+.progress-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto new lines if there's not enough space */
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+
+  .game-box {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.33% - 15px); /* Flex grow, shrink, and basis for responsiveness */
+    max-width: calc(33.33% - 15px); /* Ensures boxes don’t exceed 33.33% width */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.game-box:hover {
+    transform: translateY(-10px);
+}
+
+  
+  .game-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .game-info h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .game-info p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+@media (max-width: 1024px) {
+    .game-box {
+      flex: 1 1 calc(50% - 15px); /* Adjust to 2 boxes per row for tablets */
+      max-width: calc(50% - 15px);
+    }
+  }
+
+@media (max-width: 768px) {
+  .avatar-item {
+    flex: 1 0 30%; /* Avatars take up about 30% of the width */
+    max-width: 120px; /* Ensure the avatars don't stretch */
+  }
+
+    .tab-section {
+        width: 100%; /* Reset to full width on smaller screens */
+        height: 400px; /* Adjust height for smaller screens */
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profile-details, .mood-history {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+    }
+
+    .badge-list, .mood-list {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .avatar {
+        width: 120px;
+        height: auto;
+    }
+
+    .mood-popup-content {
+        width: 80%;
+    }
+
+    .game-box {
+        flex: 1 1 100%; /* Full width for mobile devices */
+        max-width: 100%;
+}
+
+      .nav-tabs {
+        display: flex;
+        justify-content: space-between; /* Distribute space evenly */
+        flex-wrap: nowrap; /* Prevent wrapping */
+    }
+    
+    .nav-tabs .nav-item {
+        flex: 1 1 auto; /* Make each tab flexible and take up equal space */
+        text-align: center; /* Center-align the text in the tabs */
+        padding: 8px; /* Adjust padding for mobile */
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+        /* Optional: Customize scrollbar for horizontal tabs */
+        .nav-tabs::-webkit-scrollbar {
+            height: 8px;
+        }
+        .nav-tabs::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        .nav-tabs::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    
+        .exam-date-container {
+            flex-direction: column; /* Stack the exam date and days left vertically */
+            align-items: flex-start; /* Align items to the left */
+          }
+        
+          .exam-date {
+            margin-bottom: 10px; /* Add space between the exam date and the pencil icon */
+          }
+        
+          #exam-date-input {
+            width: 100%; /* Full width on smaller screens */
+          }
+        
+          .edit-icon {
+            margin-left: 5px; /* Reduce space between input and pencil icon on smaller screens */
+          }
+        
+          .days-left {
+            margin-top: 5px;
+          }
+        
+          .btn-submit {
+            width: 100%; /* Make the button full-width on smaller screens */
+            padding: 12px; /* Adjust padding if needed */
+          }
+}
+
+@media (max-width: 480px) {
+  .avatar-item {
+    flex: 1 0 45%; /* Avatars take up about 45% of the width on smaller screens */
+    margin: 5px; /* Reduce margin for better spacing */
+    max-width: 100px; /* Limit size on smaller screens */
+  }
+  .tab-section {
+    height: 300px; /* Further adjust height for mobile screens */
+}
+
+    .avatar {
+        width: 100px;
+    }
+
+    h2, h3 {
+        font-size: 1.2rem;
+    }
+
+    .badge-list img, .mood-list img {
+        width: 50px;
+        height: auto;
+    }
+    .edit-icon {
+        font-size: 1.2rem; /* Reduce icon size for very small screens */
+      }
+    
+      #exam-date-input {
+        font-size: 0.9rem;
+        padding: 4px; /* Reduce padding for smaller input on mobile */
+      }
+    
+      .days-left p {
+        font-size: 0.9rem; /* Make the text smaller on very small screens */
+      }
+}

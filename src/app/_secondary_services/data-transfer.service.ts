@@ -5,16 +5,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataTransferService {
-  constructor() { }
-
-
-  // mention the service in providers array app.module.ts
-  // providers: [DataTransferService]
-  
-  private dataSubject = new BehaviorSubject<any>(null); // Replace 'any' with your specific data type
+  private dataSubject = new BehaviorSubject<any>(null);
   data$ = this.dataSubject.asObservable();
 
-  setData(data: any) {
+  private submitEventSubject = new BehaviorSubject<void>(void 0);
+  submitEvent$ = this.submitEventSubject.asObservable();
+  
+  setData(data: any): void {
     this.dataSubject.next(data);
+  }
+
+  emitSubmitEvent(): void {
+    this.submitEventSubject.next();
   }
 }

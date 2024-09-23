@@ -1,0 +1,17 @@
+<div class = "background"> 
+   <div class="game-options-container">
+        <h2 class="game-title">{{ game?.name }}</h2>
+        
+        <div class="options-blocks">
+        <!-- Learn Block with Image as Button -->
+        <div class="option-block learn-block" (click)="navigateToLearn()">
+            <span class="option-text">Learn</span>
+        </div>
+    
+        <!-- Play Block with Image as Button -->
+        <div class="option-block play-block" (click)="navigateToPlay()">
+            <span class="option-text">Play</span>
+        </div>
+        </div>
+    </div>
+</div> 

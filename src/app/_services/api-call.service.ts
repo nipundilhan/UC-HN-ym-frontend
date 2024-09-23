@@ -46,4 +46,10 @@ export class ApiCallService {
     });
   }
 
+  public executeDeleteNoAuth(url: string){
+    return this.httpclient.delete<any>(this.PATH_OF_API +url, {
+      headers: this.requestHeader,
+    });
+  }
+
 }

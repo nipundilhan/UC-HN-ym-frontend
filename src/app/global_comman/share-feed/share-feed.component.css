@@ -1,0 +1,446 @@
+:host ::ng-deep .background {
+  background-image: url('/assets/background-img/background04.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100%; 
+  font-family: 'MedievalSharp', sans-serif;
+  padding: 10px;
+}
+
+.content-wrapper {
+  display: flex;
+  height: auto; /* Make sure it occupies the full height */
+}
+
+.tabs-container {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  padding: 20px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+  align-items: flex-start;
+}
+
+.tabs-container button {
+  display: flex;
+  min-width: 150px;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; 
+  text-align: left; 
+  transition: background-color 0.3s, transform 0.2s; /* Animation effects */
+}
+
+.tabs-container button img {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  filter: drop-shadow(0 0 10px rgb(255, 255, 255));
+}
+
+.tabs-container button:hover {
+  background-color: #e7a748; /* Slightly darker on hover */
+  transform: scale(1.05); /* Slightly grow on hover */
+}
+
+.tabs-container button.active {
+  background-color: #7f5924;
+  border-color: #e89623;
+  color: #fff;
+}
+
+
+.feed-container {
+  flex-grow: 1; /* Take up remaining space */
+  padding: 30px 40px;
+  overflow-y: auto; /* Add scroll if content overflows */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+}
+
+.feed-item {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 1px solid #dcdcdc;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.shared-date {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.shared-content {
+  margin-top: 15px;
+}
+
+.shared-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.badge-image {
+  width: 80px; /* Smaller size for badges */
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.2s; /* Animation on hover */
+  cursor: pointer;
+}
+
+.mindmap-image {
+  width: 150px; /* Slightly larger size for mind maps */
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.badge-image:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.mindmap-grid {
+  display: grid;  
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Allow flexible column count */
+  gap: 10px; /* Space between cards */
+}
+
+.mindmap-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  height: 300px; /* Fixed height for cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between content and footer */
+  align-items: center; /* Center content */
+  transition: transform 0.2s; /* Animation on hover */
+}
+
+.mindmap-card img {
+  max-width: 100%; /* Ensure the image fits within the card */
+  max-height: 200px; /* Set a max height for the mind map image */
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+.mindmap-card .mindmap-image{
+  height:80px;
+  width: auto;
+}
+
+.mindmap-card p {
+  margin: 10px 0; /* Space between description and likes */
+  text-align: center; /* Center-align description */
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  margin: 0 5px;
+  padding:  5px 10px;
+  background-color: #e8930a;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.pagination-controls button.active {
+  background-color: #c17a08;
+  border: 2px solid #935d07;
+}
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it is above other content */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+  position: relative; /* For close button positioning */
+  width: 60%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Ensures left alignment */
+  margin-bottom: 15px; /* Space between header and content */
+  width: 100%; /* Ensures it takes full width */
+}
+
+.modal-content .user-info{
+  margin-left: 0; /* No margin to ensure it starts from the left */
+  }
+
+.modal-content   .user-avatar {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%; /* Round avatar */
+    margin-right: 10px; /* Space to the right of the avatar */
+  }
+
+.modal-content .username{
+    text-align: left; /* Ensure text is left-aligned */
+  }
+
+.modal-content p {
+  text-align: left; /* Ensure the description is left-aligned */
+  margin-top: 10px; /* Space from the header */
+  width: 100%; /* Make sure it takes the full width */
+}
+
+.large-mindmap-image {
+  width: 60%;
+  height: auto;
+  max-width: 600px; /* Set a max-width for large images */
+  border-radius: 10px;
+  margin-bottom: 20px; /* Space between image and buttons */
+}
+.download-container {
+  position: relative; /* For positioning the tooltip */
+  display: inline-block; /* Aligns with other buttons */
+}
+
+.tooltip {
+  visibility: hidden; /* Hidden by default */
+  width: 100px; /* Set a width for the tooltip */
+  background-color: rgb(205, 205, 200); /* Background color of the tooltip */
+  color: black; /* Text color */
+  text-align: center; /* Centered text */
+  border-radius: 10px; /* Rounded corners */
+  padding: 5px; /* Padding for the text */
+  position: absolute; /* Position relative to the container */
+  z-index: 10; /* Ensure it appears above other elements */
+  bottom: 80%; /* Position above the button */
+  left: 210%; /* Center horizontally */
+  transform: translateX(-50%); /* Center the tooltip */
+  transition: visibility 0s, opacity 0.3s ease; /* Fade-in effect */
+  opacity: 0; /* Initially hidden */
+}
+
+.download-container:hover .tooltip {
+  visibility: visible; /* Show the tooltip on hover */
+  opacity: 1; /* Fade in */
+}
+.download-button {
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-left: 10px; /* Space between like button and download button */
+  font-size: 20px; /* Adjust icon size */
+}
+
+.download-button:hover .tooltip {
+  visibility: visible; /* Show the tooltip on hover */
+  opacity: 1; /* Fade in */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.like-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+
+.like-button {
+  background-color: transparent; /* Make background transparent */
+  border: none; /* Remove border */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.like-icon {
+  width: 20px; /* Size of the heart icon */
+  height: 20px;
+  margin-right: 5px; /* Space between icon and count */
+  transition: transform 0.2s; /* Animation on hover */
+}
+
+.like-button:hover .like-icon {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+.like-count {
+  margin-right: 70px;
+  font-weight: bold;
+}
+
+.peers-list {
+  padding: 10px;
+}
+
+.peer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space out items */
+  padding: 10px;
+  border: 1px solid #f4d0af; /* Box border */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 10px; /* Space between items */
+  background-color: #f7f3d8; /* Background color */
+  margin-left: 20px;
+  transition: transform 0.2s; /* Animation on hover */
+  cursor: pointer;
+}
+
+.peer-item:hover{
+  transform: scale(1.02);
+}
+
+.peer-avatar {
+  width: 50px; /* Avatar size */
+  height: auto;
+  border-radius: 50%; /* Circular avatar */
+  margin-right: 10px; /* Space between avatar and text */
+}
+
+.peer-details {
+  flex-grow: 1; /* Allow this to take remaining space */
+  display: flex;
+  justify-content: space-between; /* Align items within details */
+  align-items: center; /* Center items vertically */
+}
+
+.peer-username {
+  font-weight: bold; /* Highlight username */
+}
+
+.peer-points {
+  display: flex;
+  align-items: center; /* Center points with coin */
+  margin-left: auto; /* Push points to the right */
+  margin-right: 30px;
+}
+
+.coin-icon {
+  width: 35px; /* Adjust coin icon size */
+  height: auto;
+  margin-right: 5px; /* Space between points and coin */
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .tabs-container {
+    flex-direction: row;
+    /* justify-content: space-around; */
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding: 10px 0; /* Add padding for better spacing */
+
+  }
+  .tabs-container button{
+    flex: 1; /* Allow buttons to stretch equally */
+    margin-right: 5px; /* Space between buttons */
+  }
+
+  .tabs-container button img{
+    height: 30px;
+    width: 30px;
+  }
+  .tabs-container button:last-child {
+    margin-right: 0; /* Remove right margin for last button */
+  }
+  .feed-container {
+    width: 90%;
+    padding-left: 20px;
+    margin-left: 20px;
+  }
+  .badge-image {
+    width: 30%; /* Smaller size for badges */
+  }
+
+  .mindmap-image {
+    width: 55%; /* Slightly larger size for mind maps */
+  }
+
+  .modal-content {
+    width: 80%; 
+  }
+
+  .mindmap-card {
+    height: auto; /* Allow height to adjust */
+  }
+  .peer-points{
+    margin-right: 20px;
+  }
+  .coin-icon{
+    width:20px;
+  }
+  .peer-item{
+    margin-left: 10px;
+  }
+}

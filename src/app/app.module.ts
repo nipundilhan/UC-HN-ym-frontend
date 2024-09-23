@@ -23,6 +23,10 @@ import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/m
 import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view-tutorials/view-tutorials.component';
 import { Module1EnterGameComponent } from './module1_exam_prep/common/module1-enter-game/module1-enter-game.component';
 import { HometestComponent } from './global_comman/hometest/hometest.component';
+import { IntroPageComponent } from './global_comman/intro-page/intro-page.component';
+import { ProfileComponent } from './global_comman/profile/profile.component';
+import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
+import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { HometestComponent } from './global_comman/hometest/hometest.component';
     MindmapSubmissionComponent,
     ViewTutorialsComponent,
     Module1EnterGameComponent,
-    HometestComponent
+    HometestComponent,
+    IntroPageComponent,
+    ProfileComponent,
+    ShareFeedComponent,
+    GameOptionsComponent
   ],
   imports: [
     BrowserModule,
