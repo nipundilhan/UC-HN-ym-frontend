@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 import { UserAuthService } from './_services/user-auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 @Component({
@@ -10,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 })
 export class AppComponent {
   title = 'ym';
+  showHeader = true;
 
 
   isSidebarVisible: boolean = false;
@@ -29,7 +31,8 @@ export class AppComponent {
 
   constructor(
     private userAuthService: UserAuthService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
 
 
@@ -38,6 +41,13 @@ export class AppComponent {
 
    }
 
+ ngOnInit(): void {
+    // Check if the current route has 'hideHeader' in its data
+    this.router.events.subscribe(() => {
+      const hideHeader = this.activatedRoute.snapshot.firstChild?.data['hideHeader'];
+      this.showHeader = !hideHeader; // If hideHeader is true, hide the header
+    });
+  }
 
 
    toggleSidebar() {
