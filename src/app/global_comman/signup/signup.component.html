@@ -53,6 +53,7 @@
                       (change)="onDateChange($event)"
                       class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['dob'].errors }"
+                      [max]="getTodayDate()" 
                     />
                     <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
                       <!-- <div *ngIf="f['dob'].invalid" class="alert alert-danger"> -->

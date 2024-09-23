@@ -108,6 +108,10 @@ export class SignupComponent implements OnInit {
   //   };
   // }
 
+  getTodayDate(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];  // Returns 'YYYY-MM-DD' format
+  } 
   
   onDateChange(event: any) {
     const date = event.target.value; // This will be in format "yyyy-mm-dd"

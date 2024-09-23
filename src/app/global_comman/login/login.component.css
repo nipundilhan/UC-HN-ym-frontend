@@ -2,7 +2,7 @@
 
 /* Ensure the background image covers the entire viewport */
 :host ::ng-deep .background {
-    background-image: url('/assets/background01.jpg');
+    background-image: url('/assets/background-img/background01.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

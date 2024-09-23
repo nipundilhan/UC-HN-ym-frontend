@@ -32,7 +32,7 @@
   
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">YoungMind</a> 
+      <a class="navbar-brand" routerLink="/introduction">YoungMind</a> 
       
       <!-- Comment out or remove the navbar-toggler button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,12 +53,13 @@
 
               <li class="nav-item dropdown">
                   <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="assets/photos/avatars/ava01.png" alt="" class="profile-pic me-2">
+                      <img src="assets/avatar-img/ava01.png" alt="" class="profile-pic me-2">
                       {{getUserName()}}
                   </a>
                   <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                       <li> <a class="dropdown-item" routerLink="/home"><i class="fas fa-home icon-home" style="color: #070707;"></i>  Home</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-user icon-profile" style="color: #070707;"></i>  Profile</a></li>
+                      <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user-circle"></i>  Profile</a></li>
+                      <li><a class="dropdown-item"routerLink="/share"><i class="fas fa-users" style="color: #070707;"></i>  Share</a></li>
                       <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-power-off" style="color: #070707;"></i>  Logout</a></li>

@@ -1,42 +1,6 @@
-/* 
-
-.p1dv1{
-    background-color: rgb(241, 217, 191) ;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100%;
-    height: 100vh; 
-    display: block;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-  } 
-
-p {
-    text-indent: auto;
-    text-align: justify;
-    letter-spacing: 1px;
-    font-size:18px;
-}
-
-.hmPgTtl{
-    font-size:27px;
-    font-weight: bold;
-}
-
-.imgcus1{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: auto; 
-    display: flex;
-}  */
 
 :host ::ng-deep .background {
-    background-image: url('/assets/background03.jpg');
+    background-image: url('/assets/background-img/background03.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -164,6 +128,7 @@ p {
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-top: 20px; /* Space between the image and the dialog box */
+    cursor: pointer;
   }
   
   .dialog-box p {

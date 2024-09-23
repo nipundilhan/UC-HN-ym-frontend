@@ -97,7 +97,9 @@ ngOnInit(): void {
 }
 
 navigateToGame(game: any) {
-  this.router.navigate([game.route]); // Navigate to the route defined in the game object
+  // this.router.navigate([game.route]); // Navigate to the route defined in the game object
+  this.router.navigate(['/game-options', game.id]); // Navigate to the game options page, passing the game ID
+
 }
 
 }

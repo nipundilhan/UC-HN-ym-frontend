@@ -17,7 +17,7 @@
   } */
 
   :host ::ng-deep .background {
-    background-image: url('/assets/background02.png');
+    background-image: url('/assets/background-img/background02.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

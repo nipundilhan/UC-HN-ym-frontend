@@ -35,14 +35,14 @@ export class SelectavatarComponent implements OnInit {
   }
 
   public  avatars: Avatar[] = [
-    { code: 'AVTR01', path: 'assets/photos/avatars/ava01.png', selected: false},
-    { code: 'AVTR02', path: 'assets/photos/avatars/ava02.png', selected: false },
-    { code: 'AVTR03', path: 'assets/photos/avatars/ava03.png', selected: false},
-    { code: 'AVTR04', path: 'assets/photos/avatars/ava04.png', selected: false },
-    { code: 'AVTR05', path: 'assets/photos/avatars/ava05.png', selected: false },
-    { code: 'AVTR06', path: 'assets/photos/avatars/ava06.png', selected: false },
-    { code: 'AVTR07', path: 'assets/photos/avatars/ava07.png', selected: false },
-    { code: 'AVTR08', path: 'assets/photos/avatars/ava08.png', selected: false }
+    { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
+    { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
+    { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false},
+    { code: 'AVTR04', path: 'assets/avatar-img/ava04.png', selected: false },
+    { code: 'AVTR05', path: 'assets/avatar-img/ava05.png', selected: false },
+    { code: 'AVTR06', path: 'assets/avatar-img/ava06.png', selected: false },
+    { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
+    { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
   ];
 
   ngOnInit(): void {
