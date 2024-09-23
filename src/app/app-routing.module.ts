@@ -12,6 +12,7 @@ import { IntroPageComponent } from './global_comman/intro-page/intro-page.compon
 import { ProfileComponent } from './global_comman/profile/profile.component';
 import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
 import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
+import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/learn-tutorials/learn-tutorials.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,8 +27,7 @@ const routes: Routes = [
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
   { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
-
-
+  { path: 'learn-tutorials', component: LearnTutorialsComponent },
 ];
 
 @NgModule({

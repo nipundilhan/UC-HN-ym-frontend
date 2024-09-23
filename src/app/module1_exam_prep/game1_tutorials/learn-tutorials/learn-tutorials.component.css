@@ -1,0 +1,161 @@
+/* Container styling */
+.learn-page-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.3), /* Semi-transparent white */
+        rgba(255, 255, 255, 0.76)
+      ), url('/assets/background-img/background03.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    /* font-family: 'MedievalSharp', sans-serif; */
+  }
+  
+  /* Narrator */
+  .narrator {
+    position: relative;
+  }
+  
+  .narrator-image {
+    max-width: 250px;
+    animation: fadeInUp 2s ease-in-out; /* Narrator animation */
+    margin-right: 10px;
+    filter: drop-shadow(0 0 15px rgb(255, 255, 255)); /* Yellow glow effect */
+  }
+  
+  /* Speech Bubble */
+  .speech-bubble {
+    background-color: #f5f5f4;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin-bottom: 150px;
+    position: relative;
+    animation: fadeIn 1s ease-in-out; /* Speech bubble animation */
+    text-align: center;
+    overflow: auto; /* Allow scrolling if content is too large */
+  }
+
+  /* This adds the triangular "tail" of the speech bubble */
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    top: 30%; /* Center the tail vertically */
+    left: -20px; /* Position the tail to the left of the bubble */
+    transform: translateY(-50%); /* Center it vertically */
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 20px solid #f5f5f4; /* Color of the speech bubble */
+  }
+  
+  /* Image and Video Styling */
+  .tip-image {
+    max-width: 90%;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+  
+  .bubble-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    background-color: #c4a748;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #d4b25f;
+  }
+
+  .arrow-btn {
+    width: 60px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .arrow-btn:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .narrator-image {
+      max-width: 100px;
+      margin-left: -20px;
+    }
+  
+    .speech-bubble {
+      max-width: 95%;
+      font-size: 1rem;
+    }
+  
+    .btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    .arrow-btn {
+        width: 40px;
+        height: 40px;
+      }
+      .tip-image {
+        max-width: 100%; /* Full width for images on smaller screens */
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

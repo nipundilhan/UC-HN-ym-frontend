@@ -1,0 +1,30 @@
+<div class="learn-page-container">
+    <div class="narrator">
+      <img src="/assets/narrator.png" alt="Narrator" class="narrator-image">
+    </div>
+
+      <div class="speech-bubble">
+        <p id="tip-text">{{ tips[currentTipIndex].text }}</p>
+        
+        <div id="tip-image">
+            <img *ngFor="let img of tips[currentTipIndex].images" [src]="img" class="tip-image" alt="Tip Image">
+        </div>
+
+        <div id="tip-video" *ngIf="safeVideoUrl">
+            <div class="video-container">
+                <iframe [src]="safeVideoUrl"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="bubble-buttons">
+          <img class = "arrow-btn" *ngIf="currentTipIndex > 0" src="/assets/previous-arrow.png" alt="Previous" (click)="previousTip()">
+          <img class = "arrow-btn" *ngIf="currentTipIndex < tips.length - 1" src="/assets/next-arrow.png" alt="Next" (click)="nextTip()">
+        </div>
+
+      </div>
+  </div>
+  
