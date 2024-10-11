@@ -1,0 +1,122 @@
+.games-page {
+    width: 90%;
+    margin: 0 auto;
+    /* padding: 20px; */
+  }
+  
+  h3 {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .game-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+  }
+  
+  .game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .game-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .game-detail-field {
+    display: flex;
+    flex-direction: column;
+    /* width: 30%; */
+  }
+  .game-name-field input {
+    width: 300px;  /* Adjust the width of the Game Name field */
+  }
+  
+  .game-badge-field input {
+    width: 200px;  /* Adjust the width of the Game Name field */
+  }
+
+  .points-margin-field input {
+    width: 100px;  /* Adjust the width of the Points Margin field */
+  }
+  
+  input[type="text"], input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .badge-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-top: 5px;
+    /* border-radius: 50%; */
+    /* border: 2px solid #ddd; */
+  }
+  
+  .save-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background-color: #218838;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .toggle-switch input {
+    display: none;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #28a745;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  

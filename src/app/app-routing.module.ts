@@ -13,6 +13,13 @@ import { ProfileComponent } from './global_comman/profile/profile.component';
 import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
 import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
 import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/learn-tutorials/learn-tutorials.component';
+import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/mindmap-submission.component';
+import { ViewQuestionsComponent } from './module1_exam_prep/game1_questions/view-questions/view-questions.component';
+import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { UsersComponent } from './admin/users/users.component';
+import { GamesComponent } from './admin/games/games.component';
+import { UserActivityComponent } from './admin/user-activity/user-activity.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -28,6 +35,26 @@ const routes: Routes = [
   { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
   { path: 'learn-tutorials', component: LearnTutorialsComponent },
+  { path: 'play-mindmaps', component: MindmapSubmissionComponent },
+  { path: 'play-questions', component: ViewQuestionsComponent },
+
+
+  {
+    path: 'admin',
+    component: AdminLayoutComponent, data: { hideHeader: true },// Admin layout with sidebar
+    children: [
+      { path: '', component: AdminDashboardComponent }, // Default to dashboard
+      { path: 'users', component: UsersComponent },
+      { path: 'games', component: GamesComponent },
+      { path: 'user-activity', component: UserActivityComponent },
+    ]
+  },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' }, // Redirect root to /admin
+  { path: '**', redirectTo: '/admin' } // Fallback route
+
+
+
+
 ];
 
 @NgModule({

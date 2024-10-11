@@ -1,0 +1,211 @@
+.users-container {
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+  
+  .user-type-cards {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .card {
+    width: 180px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .card img{
+    align-self: center;
+    margin-bottom: 5px;
+  }
+
+  .active-card {
+    border: 1px solid blue; /* Change color for active state */
+    background-color: #f0f8ff; /* Light background for active card */
+  }
+
+  .user-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-list th, .user-list td {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .card-icon {
+    width: 50px; 
+    height: 50px;
+  }
+  
+  /* .user-list {
+    margin-top: 20px;
+  }
+  
+  .user-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  } */
+  
+  .user-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height:20px;
+  }
+
+  .user-actions button:hover{
+    color: rgb(84, 114, 156);
+  }
+  
+  .user-actions .material-icons {
+    cursor: pointer;
+    color: black;
+  }
+
+  
+  .add-user-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Adjust the width as necessary */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+  }
+  .edit-user-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Adjust the width as necessary */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+  }
+
+  .add-user-popup .edit-user-popup h2 {
+    text-align: center; /* Center text horizontally */
+    width: 100%; /* Ensure it spans the full width */
+    margin-bottom: 20px; /* Add spacing below the heading */
+  }
+
+  .delete-user-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Adjust the width as necessary */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+  }
+
+.add-user-popup button,
+.edit-user-popup button { 
+        margin-top: 20px;
+    }  
+
+
+    .button-container {
+        display: flex;
+        justify-content: flex-end; /* Align buttons to the right */
+        gap: 10px; /* Optional: space between the buttons */
+        margin-top: 10px;
+      }
+      
+  /* Close button styling */
+  .close {
+    top: 10px;
+    font-size: 1.5em;
+    color: #aaa;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+  }
+  
+  .close:hover {
+    color: #000;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure form fields span the full modal width */
+  }
+  
+  label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="password"],
+  select,
+  textarea{
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #9fa2a8;
+    width: 100%; /* Ensure inputs span the full width of the form */
+  }
+  
+  input[type="file"] {
+    margin-top: 5px;
+  }
+
+  button {
+    /* margin-top: 20px; */
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .delete-btn {
+    background-color: #e35e21;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

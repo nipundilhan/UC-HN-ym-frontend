@@ -1,0 +1,37 @@
+<div class="games-page">
+    <h3>Manage Games Settings</h3>
+  
+    <div class="game-card" *ngFor="let game of games">
+      <div class="game-header">
+        <h4>{{ game.name }}</h4>
+        <label class="toggle-switch">
+          <input type="checkbox" [(ngModel)]="game.active" (ngModelChange)="game.active = !game.active">
+          <span class="slider round"></span>
+        </label>
+      </div>
+  
+      <div class="game-details">
+        <div class="game-detail-field game-name-field">
+          <label for="game-name-{{game.id}}">Game Name:</label>
+          <input id="game-name-{{game.id}}" [(ngModel)]="game.name" (ngModelChange)="game.name" type="text" placeholder="Enter game name">
+        </div>
+  
+        <div class="game-detail-field game-badge-field">
+          <label for="badge-image-{{game.id}}">Achievement Badge Image:</label>
+          <input id="badge-image-{{game.id}}" type="file" (change)="onBadgeImageChange($event, game)">
+          <img [src]="game.badgeImage" alt="Badge Image" class="badge-preview">
+        </div>
+  
+        <div class="game-detail-field points-margin-field">
+          <label for="points-margin-{{game.id}}">Points Margin:</label>
+          <input id="points-margin-{{game.id}}" [(ngModel)]="game.margin" (ngModelChange)="game.margin" type="number" placeholder="Enter points margin">
+        </div>
+      </div>
+  
+      <!-- Show save button only if changes are detected -->
+      <button class="save-btn" *ngIf="hasChanges(game)" (click)="saveGameSettings(game)">
+        Save Settings
+      </button>
+    </div>
+  </div>
+  

@@ -1,0 +1,156 @@
+<div class="users-container">
+    <!-- Add User Button -->
+    <div class="header">
+      <button class="add-user-btn" (click)="openAddUserPopup()">Add New User</button>
+    </div>
+  
+    <!-- User Type Cards -->
+    <div class="user-type-cards">
+      <div 
+        class="card" 
+        (click)="switchToStudents()" 
+        [ngClass]="{ 'active-card': userType === 'students' }">
+        <img src="/assets/admin/students.png" alt="Students" class="card-icon" />
+        <h3>Students</h3>
+      </div>
+      <div 
+        class="card" 
+        (click)="switchToInstructors()" 
+        [ngClass]="{ 'active-card': userType === 'instructors' }">
+        <img src="/assets/admin/instructor.png" alt="Instructors" class="card-icon" />
+        <h3>Instructors</h3>
+      </div>
+    </div>
+  
+    <!-- User List -->
+    <div class="user-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td class="user-actions">
+              <button (click)="openEditUserPopup(user)">
+                <span class="material-icons">edit</span>
+              </button>
+              <button (click)="openDeleteConfirmationPopup(user)">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Edit User Popup -->
+<div *ngIf="showEditUserPopup" class="edit-user-popup">
+    <span class="close" (click)="closeEditUserPopup()">&times;</span>
+    
+    <h2>Edit User</h2>
+    <form>
+      <label for="name">Name</label>
+      <input id="name" type="text" [(ngModel)]="selectedUser.name">
+  
+      <label for="email">Email</label>
+      <input id="email" type="email" [(ngModel)]="selectedUser.email">
+      
+      <label for="gender">Gender</label>
+      <select id="gender" [(ngModel)]="selectedUser.gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+  
+      <button type="button" (click)="updateUser()">Submit</button>
+    </form>
+  </div>
+  
+  <!-- Delete Confirmation Popup -->
+  <div *ngIf="showDeleteConfirmationPopup" class="delete-user-popup">
+    
+    <p>Do you want to delete this user?</p>
+    <div class="button-container">
+        <button class = "delete-btn" (click)="confirmDelete()">Yes</button>
+        <button (click)="cancelDelete()">No</button>
+    </div>
+  </div>
+  
+<!-- Add User Popup (Modal) -->
+<div *ngIf="showAddUserPopup" class="add-user-popup">
+    <span class="close" (click)="closeAddUserPopup()">&times;</span>
+    
+    <h2>Add New User</h2>
+    
+    <!-- User Role Dropdown -->
+    <form>
+      <label for="role">User Role</label>
+      <select id="role" [(ngModel)]="newUser.role" name="role">
+        <option value="" disabled>Select Role</option>
+        <option value="student">Student</option>
+        <option value="instructor">Instructor</option>
+      </select>
+    </form>
+    
+    <!-- Conditionally rendered form fields and submit button -->
+    <form *ngIf="newUser.role">
+      <!-- Fields for Students -->
+      <div *ngIf="newUser.role === 'student'">
+        <label for="username">Username</label>
+        <input id="username" type="text" [(ngModel)]="newUser.username" name="username" placeholder="Enter username">
+        
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="newUser.email" name="email" placeholder="Enter email">
+  
+        <label for="dob">Date of Birth</label>
+        <input id="dob" type="date" [(ngModel)]="newUser.dob" name="dob">
+  
+        <label for="gender">Gender</label>
+        <select id="gender" [(ngModel)]="newUser.gender" name="gender">
+          <option value="" disabled>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" [(ngModel)]="newUser.password" name="password" placeholder="Enter password">
+        
+       
+      </div>
+  
+      <!-- Fields for Instructors -->
+      <div *ngIf="newUser.role === 'instructor'">
+        <label for="name">Name</label>
+        <input id="name" type="text" [(ngModel)]="newUser.name" name="name" placeholder="Enter full name">
+  
+        <label for="gender">Gender</label>
+        <select id="gender" [(ngModel)]="newUser.gender" name="gender">
+          <option value="" disabled>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+  
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="newUser.email" name="email" placeholder="Enter email">
+
+        <label for="password">Password</label>
+        <input id="password" type="password" [(ngModel)]="newUser.password" name="password" placeholder="Enter password">
+        
+      </div>
+  
+      <button type="button" (click)="addUser()">Submit</button>
+    </form>
+  </div>
+  
+  
+  
+  
