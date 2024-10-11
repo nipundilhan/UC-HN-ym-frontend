@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -28,6 +27,12 @@ import { ProfileComponent } from './global_comman/profile/profile.component';
 import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
 import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
 import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/learn-tutorials/learn-tutorials.component';
+import { ViewQuestionsComponent } from './module1_exam_prep/game1_questions/view-questions/view-questions.component';
+import { UsersComponent } from './admin/users/users.component';
+import { GamesComponent } from './admin/games/games.component';
+import { UserActivityComponent } from './admin/user-activity/user-activity.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +54,14 @@ import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/lea
     ProfileComponent,
     ShareFeedComponent,
     GameOptionsComponent,
-    LearnTutorialsComponent
-  ],
+    LearnTutorialsComponent,
+    ViewQuestionsComponent,
+    UsersComponent,
+    GamesComponent,
+    UserActivityComponent,
+    AdminDashboardComponent,
+    AdminLayoutComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
