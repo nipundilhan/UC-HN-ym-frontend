@@ -45,7 +45,7 @@ export class TestUploadComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer // Inject DomSanitizer
   ) {
-    alert("agaya hey");
+    //alert("agaya hey");
     this.mindMapForm = this.fb.group({
       title: ['', Validators.required]
     });
