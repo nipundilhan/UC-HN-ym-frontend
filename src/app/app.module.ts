@@ -13,7 +13,7 @@ import { LoginComponent } from './global_comman/login/login.component';
 import { TestComponent } from './global_comman/test/test.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SignupComponent } from './global_comman/signup/signup.component';
 import { SelectavatarComponent } from './global_comman/selectavatar/selectavatar.component';
 import { DataTransferService } from './_secondary_services/data-transfer.service';
@@ -33,43 +33,41 @@ import { GamesComponent } from './admin/games/games.component';
 import { UserActivityComponent } from './admin/user-activity/user-activity.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
+import { QuillModule } from 'ngx-quill';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    SidenavComponent,
-    FooterComponent,
-    LoginComponent,
-    TestComponent,
-    SignupComponent,
-    SelectavatarComponent,
-    TutorialSubmissionComponent,
-    MindmapSubmissionComponent,
-    ViewTutorialsComponent,
-    Module1EnterGameComponent,
-    HometestComponent,
-    IntroPageComponent,
-    ProfileComponent,
-    ShareFeedComponent,
-    GameOptionsComponent,
-    LearnTutorialsComponent,
-    ViewQuestionsComponent,
-    UsersComponent,
-    GamesComponent,
-    UserActivityComponent,
-    AdminDashboardComponent,
-    AdminLayoutComponent
+
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        SidenavComponent,
+        FooterComponent,
+        LoginComponent,
+        TestComponent,
+        SignupComponent,
+        SelectavatarComponent,
+        TutorialSubmissionComponent,
+        MindmapSubmissionComponent,
+        ViewTutorialsComponent,
+        Module1EnterGameComponent,
+        HometestComponent,
+        IntroPageComponent,
+        ProfileComponent,
+        ShareFeedComponent,
+        GameOptionsComponent,
+        LearnTutorialsComponent,
+        ViewQuestionsComponent,
+        UsersComponent,
+        GamesComponent,
+        UserActivityComponent,
+        AdminDashboardComponent,
+        AdminLayoutComponent
     ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [DataTransferService],
-  bootstrap: [AppComponent]
-})
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        QuillModule.forRoot(),
+
+        
+        ReactiveFormsModule], providers: [DataTransferService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
