@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'MedievalSharp', sans-serif; 
   }
   
   /* Styles specific to the login box */

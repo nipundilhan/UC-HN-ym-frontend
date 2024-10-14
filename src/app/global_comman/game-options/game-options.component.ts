@@ -10,9 +10,9 @@ export class GameOptionsComponent implements OnInit {
   game: any;
 
   games = [
-    { id: 1, name: 'Eye of Horus', playRoute: '/view-tutorials', learnRoute: '/learn-tutorials' },
-    { id: 2, name: 'Sekhmats Map', playRoute: '/mind-maps', learnRoute: '/learn-mindmaps' },
-    { id: 3, name: 'Sword of Anubis', playRoute: '/game3', learnRoute: '/learn-game3' }
+    { id: 1, name: 'Tutorial and Labs Quest', playRoute: '/view-tutorials', learnRoute: '/learn-tutorials' },
+    { id: 2, name: 'Mind Mapping Mastery', playRoute: '/play-mindmaps', learnRoute: '/learn-mindmaps' },
+    { id: 3, name: 'Question Mastery', playRoute: '/play-questions', learnRoute: '/learn-game3' }
   ];
   constructor(private route: ActivatedRoute, private router: Router) { }
 

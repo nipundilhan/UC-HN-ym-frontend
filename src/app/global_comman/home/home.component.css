@@ -61,6 +61,26 @@
     /* border-radius: 10px; */
     padding: 45px;
   }
+
+  .game-title {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 22px; /* Example style */
+    font-weight: bold;    
+    color: #020202;
+    margin-bottom: 0; /* Remove margin between lines */
+    text-shadow: 0 0 10px rgb(255, 255, 255),
+                 0 0 20px rgba(255, 255, 255, 0.825),
+                 0 0 30px rgba(255, 255, 255, 0.507);
+  }
+  
+  .game-subtitle {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 16px; /* Example style */
+    color: gray;
+    color: #020202;
+    margin-top: 0; /* Optional: adjust top margin */
+  }
+
   
   h2 {
     font-family: 'MedievalSharp', sans-serif;

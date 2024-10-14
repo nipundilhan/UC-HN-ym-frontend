@@ -3,7 +3,8 @@
       <div class="game-scroll" *ngFor="let game of games">
         <div class="white-block">
           <div class="game-details" (click)="navigateToGame(game)">
-            <h2>{{ game.name }}</h2>
+            <h3 class="game-title">{{ game.name }}</h3>
+            <h4 class="game-subtitle">{{ game.subtitle }}</h4>  
             <img class="hieroglyph-image" [src]="game.hieroglyphImage" alt="Hieroglyph">
           </div>
         </div>

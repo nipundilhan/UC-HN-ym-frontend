@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AvatarService } from 'src/app/_services/avatar.service';  // Import the AvatarService
+import { ApiCallService } from 'src/app/_services/api-call.service';
+import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+
 
 interface Avatar {
   code: string;
@@ -14,16 +18,20 @@ interface Avatar {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  public avatarPath: string = ''; // Variable to store the avatar image path
 
+  constructor(
+    private userAuthService: UserAuthService ,
+    private router: Router, 
+    private fb: FormBuilder,
+    private avatarService: AvatarService,
+    public apiCallService: ApiCallService,) { }
 
-  constructor(private userAuthService: UserAuthService ,
-    private router: Router, private fb: FormBuilder) { }
-
-    // userMoodHistory: any[] = [];
     displayedMoods: any[] = [];
+    userMoodHistory: any[] = [];
     showPopup = false;
     
-    selectedAvatarPath: string = 'assets/avatar-img/ava01.png'; // Default avatar
+    selectedAvatarPath: string = ''; // Default avatar
 
     userName: string = 'John Doe';
     userBirthday: string = '2000-01-01';
@@ -51,18 +59,6 @@ export class ProfileComponent implements OnInit {
     minDate: string = ''; // Class property to hold the min date
     examDate: string = '2024-09-30'; // Default exam date
 
-    userMoodHistory = [
-      { date: "Sep 10", mood: 'happy' },
-      { date: "Sep 11", mood: 'miss' },
-      { date: "Sep 12", mood: 'happy' },
-      { date: "Sep 13", mood: 'happy' },
-      { date: "Sep 14", mood: 'happy' },
-      { date: "Sep 15", mood: 'neutral' },
-      { date: "Sep 16", mood: 'excited' },
-      { date: "Sep 17", mood: 'miss' },
-      { date: "Sep 18", mood: 'excited' },
-    ];
-
     avatars: Avatar[] = [
       { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
       { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
@@ -73,6 +69,7 @@ export class ProfileComponent implements OnInit {
       { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
       { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
     ];
+    
     isAvatarSelectionModalVisible: boolean = false;
 
     initializeAvatarSelection() {
@@ -198,7 +195,9 @@ onChangePasswordSubmit() {
 
     loadInitialMoods() {
       // Load the last 7 days of mood data
-      this.displayedMoods = this.userMoodHistory.slice(-5);
+      // this.displayedMoods = this.userMoodHistory.slice(-5).reverse();
+      this.displayedMoods = this.userMoodHistory.slice(0, 5);
+      console.log(this.userMoodHistory);
     }
 
 
@@ -231,12 +230,25 @@ onChangePasswordSubmit() {
     // }
 
   ngOnInit(): void {
-    // this.loadDummyData();
-    this.loadInitialMoods();
+    this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
+    // this.loadInitialMoods();
+    this.fetchMoodData();
     this.calculateDaysLeft();
     this.minDate = this.getTodayDate();
 
     }
+// Function to fetch mood data from API
+fetchMoodData(): void {
+  this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+    (response: any) => {
+      this.userMoodHistory = response.moods;
+      this.loadInitialMoods(); // Load initial moods after data is fetched
+    },
+    (error) => {
+      console.error('Error fetching mood data:', error);
+    }
+  );
+}
 
 getTodayDate(): string {
     const today = new Date();
@@ -275,3 +287,4 @@ getTodayDate(): string {
 
 
 }
+

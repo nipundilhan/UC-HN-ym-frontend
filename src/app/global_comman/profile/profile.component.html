@@ -9,7 +9,7 @@
 <!-- Profile Details with Camera Icon -->
 <div class="profile-details card">
   <div class="avatar-container">
-    <img src="assets/avatar-img/ava01.png" alt="User Avatar" class="avatar">
+    <img [src]="avatarPath" alt="User Avatar" class="avatar">
     <i class="camera-icon" (click)="openAvatarSelectionModal()">
       <i class="fas fa-camera"></i>
     </i>
@@ -153,24 +153,34 @@
 </div>
 
 
+ <!-- Mood History Section -->
+<!-- Mood History Section -->
+<div class="mood-history card">
+  <h3>My Moods</h3>
 
-
-
-
-    <!-- Mood History Section -->
-    <div class="mood-history card">
-      <h3>My Moods</h3>
-      <div class="mood-list">
-        <div *ngFor="let mood of displayedMoods">
-          <img [src]="getMoodIcon(mood.mood)" alt="{{mood.mood}}" class="mood-img">
-          <p>{{mood.date}}</p>
-        </div>
-      </div>
-      <button class="btn btn-link show-more" (click)="showMoreMoods()">
-        <i class="bi bi-three-dots"></i> <!-- Bootstrap icon for "show more" -->
-      </button>
+  <!-- Conditional display: mood list or "no moods" message -->
+  <div *ngIf="displayedMoods.length > 0; else noMoods" class="mood-list">
+    <!-- Loop through and display each mood -->
+    <div *ngFor="let mood of displayedMoods">
+      <img [src]="getMoodIcon(mood.mood)" alt="{{mood.mood}}" class="mood-img">
+      <p>{{mood.date | date: 'MMM d'}}</p>
     </div>
   </div>
+
+  <!-- Template for when no moods are logged -->
+  <ng-template #noMoods>
+    <div class="no-moods">
+      <p>No moods logged yet</p>
+    </div>
+  </ng-template>
+
+  <!-- "Show More" button only appears when there are moods -->
+  <button class="btn btn-link show-more" *ngIf="displayedMoods.length > 0" (click)="showMoreMoods()">
+    <i class="bi bi-three-dots"></i> <!-- Bootstrap icon for "show more" -->
+  </button>
+</div>
+
+
 
       <!-- Mood History Popup -->
       <div class="mood-popup" *ngIf="showPopup">
@@ -180,7 +190,7 @@
           <div class="mood-list">
             <div *ngFor="let mood of userMoodHistory">
               <img [src]="getMoodIcon(mood.mood)" alt="{{mood.mood}}" class="mood-img">
-              <p>{{mood.date}}</p>
+              <p>{{mood.date | date: 'MMM d'}}</p>
             </div>
           </div>
         </div>

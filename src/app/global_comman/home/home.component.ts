@@ -11,7 +11,9 @@ export class HomeComponent implements OnInit {
 games = [
   {
     id: 1,
+    // name: '<span class="game-title">Eye of Horus</span><span class="game-subtitle">Tutorial Quest</span>',
     name: 'Eye of Horus',
+    subtitle: 'Tutorial and Labs Quest',
     // hieroglyph: '𓂀',
     hieroglyphImage: 'assets/hieroglyph1.png', 
     scrollImage: 'assets/scroll.png',
@@ -19,14 +21,18 @@ games = [
   },
   {
     id: 2,
-    name: 'Sekhmats Map',
+    name: 'Ankh’s Chronicle',
+    subtitle: 'Mind Mapping Mastery',
     hieroglyphImage: 'assets/hieroglyph2.png', 
     // hieroglyph: '𓋹',
-    scrollImage: 'assets/scroll.png'
+    scrollImage: 'assets/scroll.png',
+    route: '/play-mindmaps' 
+
   },
   {
     id: 3,
-    name: 'Sword of Anubis',
+    name: 'Pharaoh’s Trial',
+    subtitle: 'Question Mastery',
     hieroglyphImage: 'assets/hieroglyph3.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png'

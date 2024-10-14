@@ -1,38 +1,6 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">YoungMind</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li style="margin-top:4px;margin-right:40px;">
-            <a class="uN  disabled" *ngIf=" isLoggedIn()"  >{{getUserName()}}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/signup">Sign up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/select-avatar">Avatar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login" *ngIf=" !isLoggedIn()">Login</a>
-          </li>
-          <li class="nav-item">
-            <button type="button" class="logout-btn" (click)="logout()" *ngIf=" isLoggedIn()" >Logout</button> 
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-  
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/introduction">YoungMind</a> 
+      <a class="navbar-brand" routerLink="/home">YoungMind</a> 
       
       <!-- Comment out or remove the navbar-toggler button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,19 +9,26 @@
 
       <div class="collapse navbar-collapse show"> <!--Ensure .show class is added to keep it visible -->
           <ul class="navbar-nav ms-auto">
-
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" routerLink="/admin">Admin</a>
+            </li>
                     <!-- Points Nav Item -->
               <li class="nav-item">
                 <a *ngIf=" isLoggedIn()" class="nav-link d-flex align-items-center">
                   <img src="assets/coin.png" alt="Points" class="points-icon me-2">
-                  <span class="points-count">100</span>
+                  <span class="points-count" *ngIf="studentData?.totalMarks !== undefined; else loading"> 
+                    {{ studentData.totalMarks }}
+                  </span>
+                  <ng-template #loading>
+                    <span>Loading points...</span>
+                  </ng-template>              
                 </a>
               </li>
 
 
               <li class="nav-item dropdown">
                   <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="assets/avatar-img/ava01.png" alt="" class="profile-pic me-2">
+                      <img [src]="avatarPath" alt="" class="profile-pic me-2">
                       {{getUserName()}}
                   </a>
                   <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
@@ -67,6 +42,9 @@
               </li>
               <li class="nav-item" routerLink="/login" *ngIf=" !isLoggedIn()">
                 <a class="nav-link">Login</a>
+              </li>
+              <li class="nav-item" routerLink="/signup" *ngIf=" !isLoggedIn()">
+                <a class="nav-link">Signup</a>
               </li>
           </ul>
       </div>
