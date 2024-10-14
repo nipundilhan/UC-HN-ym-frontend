@@ -1,3 +1,11 @@
+<h2>Angular Kolkov Text Editor</h2>
+<angular-editor [(ngModel)]="editorContent" [config]="editorConfig"></angular-editor>
+<button type="button" class="btn btn-success" (click)="submitAnswer()">Answer Submit</button>
+<div>
+  <h3>Preview</h3>
+  <div [innerHTML]="editorContent"></div>
+</div>
+
 
 <DIV class="row">
 <diV class="form-container col-6" >

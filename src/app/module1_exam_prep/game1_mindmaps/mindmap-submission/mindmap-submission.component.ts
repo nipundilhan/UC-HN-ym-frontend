@@ -9,6 +9,7 @@ import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { StudentTasks } from 'src/app/_shared/resources/StudentTask';
 import { Tsk } from 'src/app/_shared/resources/Task';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-mindmap-submission',
@@ -16,6 +17,25 @@ import { Tsk } from 'src/app/_shared/resources/Task';
   styleUrls: ['./mindmap-submission.component.css']
 })
 export class MindmapSubmissionComponent implements OnInit {
+
+
+  editorContent: string = '';  // This will store the editor's content
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '100px',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+    ]
+  };
+
+
   mindmapForm: FormGroup;
   mindmaps: any[] = [];
   submitted = false;
