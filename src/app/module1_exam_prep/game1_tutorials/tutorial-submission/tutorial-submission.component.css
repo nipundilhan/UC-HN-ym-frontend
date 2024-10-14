@@ -1,5 +1,5 @@
 :host ::ng-deep .background {
-    background-image: url('/assets/background01.jpg');
+    background-image: url('/assets/background-img/background01.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -11,21 +11,22 @@
   }
   
   .tutorial-box {
-    background-image: linear-gradient(rgb(255 255 255 / 64%),
-     #e9ecef), url('/assets/background01.jpg');
+    /* background-image: linear-gradient(rgb(255 255 255 / 64%),
+     #e9ecef), url('/assets/brick_background.jpg');
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center center;
+      background-position: center center; */
     /* background-color: rgba(255, 255, 255, 0.8); */
+    background-color: #f9e7d4;
     border-radius: 15px; 
-    padding: 20px; /* Increased padding for a larger box */
+    padding: 18px; /* Increased padding for a larger box */
     /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  */
     width: 800px; /* Adjust width to be larger */
     max-width: 100%; /* Ensure the box does not exceed the viewport width */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
   }
   
-  .tutorial-box h1 {
+  .tutorial-box h2 {
     text-align: center;
     text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
     color: #333; 

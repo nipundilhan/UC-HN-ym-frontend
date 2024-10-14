@@ -35,7 +35,7 @@ export class TutorialSubmissionComponent implements OnInit {
 
   tutorialForm: FormGroup;
   submitted = false;
-  progressOptions: string[] = ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'];
+  // progressOptions: string[] = ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,12 +48,12 @@ export class TutorialSubmissionComponent implements OnInit {
     this.tutorialForm = this.formBuilder.group({
       description: ['', Validators.required],
       date: ['', Validators.required],
-      progress: ['', Validators.required],
+      status: ['', Validators.required],
       tutorialName: [
         '',
         [
           Validators.required,
-          Validators.minLength(5)
+          // Validators.minLength(5)
         ]
       ]
     });
@@ -89,7 +89,8 @@ export class TutorialSubmissionComponent implements OnInit {
       name: this.tutorialForm.value.tutorialName,
       description: this.tutorialForm.value.description,
       date: this.tutorialForm.value.date,
-      completePercentage: Number(this.tutorialForm.value.progress.replace('%', '')), // Convert to number
+      status: this.tutorialForm.value.date,
+      // completePercentage: Number(this.tutorialForm.value.progress.replace('%', '')), // Convert to number
       points: 0 // Initialize points to 0 or any default value
     };
 
@@ -101,8 +102,11 @@ export class TutorialSubmissionComponent implements OnInit {
 
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.TUTORIALS.BASE, this.studentTute).subscribe(
       (response: any) => {
-       this.submitEvent.emit();
-      //  this.router.navigate(['/home']);
+      this.dataTrnfrSrvc.setData(response); // Update data in the service
+      console.log('Emitting submitEvent');
+      this.submitEvent.emit(); // Notify subscribers
+      this.router.navigate(['/view-tutorials']); // Navigate to view tutorials
+
        
         // alert("You have successfully recorded");
       },
