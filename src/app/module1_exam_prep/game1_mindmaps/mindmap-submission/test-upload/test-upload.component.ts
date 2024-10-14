@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-test-upload',
@@ -9,7 +10,31 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./test-upload.component.css']
 })
 export class TestUploadComponent implements OnInit {
+
+  editorContent: string = '';  // This will store the editor's content
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '100px',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['italic'],  // Hide italic button
+      ['underline'] ,// Hide underline button
+      ['insertImage', 'insertVideo']
+    ]
+  };
+
+
+
   mindMapForm: FormGroup;
+
+
+
   uploadedFiles: File[] = [];
   filePreviews: SafeUrl[] = [];
   studentId = '66f5f6609e6aa6e25feaa952'; // Hardcoded studentId
@@ -31,6 +56,9 @@ export class TestUploadComponent implements OnInit {
 
 
   ngOnInit() {
+    //this.editorContent = '';
+    this.editorContent ='<p><font face="Arial"><b>what are the parts of object oriented programming</b></font></p><ol><li><font face="Arial">inheritance</font></li><li><font face="Arial">encapsulation</font></li></ol>'
+            
     this.getGame2Details();
   }
 
@@ -130,6 +158,11 @@ export class TestUploadComponent implements OnInit {
 
   isImage(file: File): boolean {
     return file.type.startsWith('image/');
+  }
+
+
+  submitAnswer(){
+    alert(this.editorContent);
   }
 
   removeFile(file: File) {
