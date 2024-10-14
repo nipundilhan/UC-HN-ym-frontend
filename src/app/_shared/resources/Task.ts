@@ -3,6 +3,7 @@ export interface Tsk {
     name: string;
     description: string;
     date: string;
-    completePercentage: number;
+    // completePercentage: number;
+    status: string;
     points: number;
   }

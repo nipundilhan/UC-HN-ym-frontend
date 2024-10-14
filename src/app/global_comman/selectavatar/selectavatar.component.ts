@@ -22,7 +22,7 @@ export class SelectavatarComponent implements OnInit {
 
   isDisabled = true;
   avatarCode : string ="";
-
+  
   constructor(public apiCallService: ApiCallService, private router: Router ,  private dataTrnfrSrvc: DataTransferService  ) { }
 
   usrSngUp : UserSignup = {
@@ -35,6 +35,7 @@ export class SelectavatarComponent implements OnInit {
   }
 
   public  avatars: Avatar[] = [
+    // { code: 'default', path: 'assets/avatar-img/default-avatar.png', selected: false }, // Default avatar
     { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
     { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
     { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false},
@@ -44,6 +45,12 @@ export class SelectavatarComponent implements OnInit {
     { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
     { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
   ];
+
+
+  defaultAvatar = {
+    code: 'default',
+    path: 'assets/avatar-img/default-avatar.png'
+  };
 
   ngOnInit(): void {
 
@@ -69,8 +76,22 @@ export class SelectavatarComponent implements OnInit {
   }
 
 
+  // Skip method to assign the default avatar code only
+  skipAvatar() {
+    this.avatarCode = this.defaultAvatar.code; // Assign the "default" code
+
+    // Proceed to submit with the default avatar code
+    this.submit();
+  }
+
   submit(){
+    if (!this.avatarCode) {
+      alert('Please select an avatar or skip to proceed');
+      return;
+    }
+
     this.usrSngUp.avatarCode = this.avatarCode;
+    
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.USERS.SIGNUP,this.usrSngUp).subscribe(
       (response: any) => {
 
@@ -83,8 +104,7 @@ export class SelectavatarComponent implements OnInit {
       },
       (httpError: any) => {
         console.log(httpError);
-        alert("incorrect username or password")
-        
+        alert("An error occurred during registration");        
       }   
     );
   }

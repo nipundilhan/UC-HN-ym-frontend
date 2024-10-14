@@ -49,7 +49,14 @@ export class UserAuthService {
     return localStorage.getItem('role')! ;
   }
 
-  
+  public setUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  public getUser(): string {
+    return localStorage.getItem('user')! ;
+  }
+
   public setToHome(toHome: string) {
     localStorage.setItem('toHome', toHome);
   }

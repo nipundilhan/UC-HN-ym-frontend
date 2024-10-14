@@ -8,18 +8,29 @@
     <div class="records-container" *ngIf="studentData?.module1?.game1?.tasks?.length > 0">
       <div class="record-card" *ngFor="let task of studentData.module1.game1.tasks" (click)="openTaskDetails(task)">
         <div class="record-image">
-          <img src="/assets/home_icon.png" alt="Egyptian Theme">
+          <img src="/assets/eye-of-horus-icon.png" alt="Egyptian Theme">
         </div>
         <div class="record-header">
-          <h3>{{ task.name }}</h3>
+          <h4>{{ task.name }}</h4>
         </div>
-        <div class="record-body">
+        <!-- <div class="record-body">
           <div class="progress-bar">
             <div class="progress" [style.width.%]="task.completePercentage"></div>
           </div>
           <p>{{ task.completePercentage }}%</p>
+        </div> -->
+        <!-- <div class="record-body">
+          <p>{{ task.status }}</p>
+        </div> -->
+
+        <div class="status-tag" [ngClass]="getStatusClass(task.status)">
+          {{ task.status }}
         </div>
+        
       </div>
+    </div>
+    <div class = "no-tutorials" *ngIf="!studentData?.module1?.game1?.tasks?.length">
+      No Tutorials Added Yet.
     </div>
 
 <!-- Achievement Popup -->
@@ -43,20 +54,13 @@
         <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
         <!-- Badge Image -->
-        <img *ngIf="showBadge" src="/assets/bagdes/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
       <!-- </div> -->
 
       <button class="btn share-btn" (click)="shareAchievement()">Share</button>
     </div>
   </div>
 </div>
-
-
-
-
-
-    
-
 
     <!-- Task Details Modal -->
     <div *ngIf="isTaskModalOpen" class="modal">
@@ -71,15 +75,23 @@
             <input type="date" id="taskDate" [(ngModel)]="selectedTask.date" name="date" [disabled]="false" [max]="getTodayDate()" required />
           </div>
 
-          <div class="form-group">
-            <label for="progress">Progress:</label>
+          <!-- <div class="form-group">
+            <label for="taskProgress">Progress:</label>
             <select id="taskProgress" [(ngModel)]="selectedTask.completePercentage" name="completePercentage" [disabled]="!isProgressEditable">
               <option *ngFor="let option of progressOptions" [value]="option">{{ option }}%</option>
+            </select>
+          </div> -->
+          <div class="form-group">
+            <label for="taskStatus">Status:</label>
+            <select id="taskStatus" name="taskStatus" [(ngModel)]="selectedTask.status" [disabled]="!isStatusEditable" required>
+              <option value="Started">Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="description">Description:</label>
+            <label for="taskDescription">Description:</label>
             <textarea id="taskDescription" [(ngModel)]="selectedTask.description" name="description" [disabled]="false"></textarea>
           </div>
 
@@ -88,7 +100,7 @@
           <div class="button-container">
             <button type="submit" class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
             <button type="button" class="btn cancel-btn" (click)="closeTaskModal()">Cancel</button>
-            <button class="btn delete-btn" *ngIf="selectedTask.completePercentage < 100" (click)="deleteTask(selectedTask)">Delete</button>
+            <button class="btn delete-btn" *ngIf="selectedTask.status === 'Started' || selectedTask.status === 'In Progress'" (click)="deleteTask(selectedTask)">Delete</button>
 
           </div>
         </form>
@@ -134,7 +146,7 @@
               </div>
           </div>
 
-          <div class="form-group input-group">
+          <!-- <div class="form-group input-group">
             <label for="progress">Progress</label>
             <select
               id = "progress"
@@ -148,6 +160,15 @@
             <div *ngIf="submitted && f['progress'].errors" class="invalid-feedback">
               <div *ngIf="f['progress'].errors['required']">Progress is required</div>
             </div>
+          </div> -->
+          <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" formControlName="status" class="form-control">
+              <option value="" disabled>Select status</option>
+              <option value="Started">Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
           </div>
 
           <div class="form-group">

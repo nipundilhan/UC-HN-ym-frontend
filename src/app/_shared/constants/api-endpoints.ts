@@ -2,6 +2,7 @@ const AUTH_BASE = '/auth';
 const TOUR_BASE = '/tours';
 const USER_BASE = '/user';
 const TUTE_BASE = '/tutorial';
+const MODULE_BASE = '/modules';
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -29,6 +30,10 @@ export const API_ENDPOINTS = {
       return `${USER_BASE}/search?${queryParams}`; // Param map example
     }
   },
+  MODULES: {
+    BASE: MODULE_BASE,
+    GET_BY_STUDENT_ID: `${MODULE_BASE}/findPointsByStudent/`,
+  }
   
 
   /* 

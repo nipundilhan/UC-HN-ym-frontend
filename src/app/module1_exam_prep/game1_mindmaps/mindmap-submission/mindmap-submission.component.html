@@ -1,1 +1,146 @@
+<div class="background">
+    <div class="container">
+        <h1 class="game-title">Mind Mapping Mastery</h1>
+        <button class="add-button" (click)="openMindmapModal()">✨ Add New Mindmap✨</button>
+  
+       
+           <!-- Mind map grid layout -->
+           <div class="mind-map-grid">
+            <div *ngFor="let mindmap of mindmaps" class="mind-map-card" (click)="openMindmapDetails(mindmap)">
+              <img [src]="mindmap.image ? mindmap.image : '/assets/placeholder-mindmap.jpg'" alt="{{ mindmap.title }} Image" class="mind-map-image" />
+              <h4>{{ mindmap.title }}</h4>
+          
+              <!-- Status tag at the bottom of the card -->
+              <div class="status-tag" [ngClass]="getStatusClass(mindmap.status)">
+                {{ mindmap.status }}
+              </div>
+            </div>
+          </div>  
+  
+      <div class="no-mindmaps" *ngIf="mindmaps.length === 0">
+        No Mindmaps Added Yet.
+      </div>
+  
+      <!-- Mindmap Details Modal -->
+      <div *ngIf="isMindmapModalOpen" class="modal">
+        <div class="modal-background">
+          <div class="modal-content">
+            <span class="close" (click)="closeMindmapModal()">&times;</span>
+            <h2>{{ selectedMindmap.title }}</h2>
 
+            <!-- Display Mindmap Image in the Modal -->
+            <div class="image-preview">
+                <img 
+                  [src]="selectedMindmap.image ? selectedMindmap.image : '/assets/placeholder-mindmap.jpg'" 
+                  alt="{{ selectedMindmap.title }} Image Preview"
+                  class="mind-map-image"
+                >
+                <!-- Camera icon for changing the image -->
+                <span class="camera-icon" (click)="triggerImageUpload()">
+                    <i class="fa fa-camera"></i> <!-- Font Awesome camera icon -->
+                </span>
+              
+                <!-- Hidden input for file selection -->
+                <input type="file" id="imageUpload" style="display: none;" (change)="onImageSelected($event)">
+              </div>   
+
+            <form (ngSubmit)="onUpdateMindmap()">
+                <label for="date">Date:</label>
+                <input type="date" id="mindmapDate" [(ngModel)]="selectedMindmap.date" name="date" [max]="getTodayDate()" required />
+
+                <label for="status">Status:</label>
+                <select id="status" [(ngModel)]="selectedMindmap.status" name="status" required>
+                <option value="Started">Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                </select>
+  
+                <label for="description">Description:</label>
+                <textarea id="description" [(ngModel)]="selectedMindmap.description" name="description" rows="4"></textarea>
+  
+              <div class="button-container">
+                <button class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
+                <button class="btn delete-btn" (click)="deleteMindmap(selectedMindmap)">Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Add Mindmap Modal -->
+      <div *ngIf="isAddMindmapModalOpen" class="modal">
+        <div class="modal-background">
+          <div class="modal-content">
+            <span class="close" (click)="closeAddMindmapModal()">&times;</span>
+
+            <h2>Add New Mindmap</h2>
+            <form [formGroup]="mindmapForm" (ngSubmit)="onSubmitMindmap()">
+
+                <label for="title">Title:</label>
+                <input type="text" id="title" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
+                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                  <div *ngIf="f['title'].errors['required']">Title is required</div>
+                </div>
+
+        
+                <label for="date">Date:</label>
+                <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
+                <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['date'].errors['required']">Date is required</div>
+                </div>
+
+                <label for="status">Status:</label>
+                    <select id="status" formControlName="status" class="form-control">
+                        <option value="Started">Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                </select>
+
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                  <div *ngIf="f['description'].errors['required']">Description is required</div>
+                </div>
+
+                <label for="image">Upload Mindmap Image:</label>
+                <input type="file" id="image" (change)="onFileSelected($event)">
+              <!-- </div> -->
+  
+              <!-- <div class="form-group"> -->
+                <button type="submit" class="btn-submit">Submit</button>
+              <!-- </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievement Popup -->
+<div *ngIf="isAchievementPopupOpen" class="modal">
+  <div class="achievement-wrapper">
+
+    <!-- Sage Image Container (Outside the Popup) -->
+    <div class="sage-image-container">
+      <img src="/assets/narrator.png" alt="Sage" class="sage-image">
+    </div>
+
+        <!-- Achievement Popup -->
+        <div class="achievement-popup">
+          <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
+          <h2>Congratulations!</h2>
+          <p>You've unlocked the "Eye of Horus"</p>
+
+          <!-- Badge Image with animation class -->
+            <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
+
+            <!-- Badge Image -->
+            <img *ngIf="showBadge" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+
+          <button class="btn share-btn" (click)="shareAchievement()">Share</button>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+  

@@ -41,10 +41,27 @@ tips = [
     // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
   },
   {
-    text: `<p>Remember to stay calm and prepared before your exams. <b>You'll do great!</b></p>`,
+    text: `<h3><strong>How to Play the Game</strong></h3>
+<p>Welcome to your learning adventure! Here’s how to make the most out of your experience while revising tutorials, quizzes, and labs:</p>
+<p><strong>Log Your Progress:</strong> As you study, keep track of your journey by logging each tutorial, quiz, or lab you complete. You can enter essential details such as the title, date, progress percentage, and an optional description to reflect on your learning.</p>`,
+images: ["assets/view-tutorials.png"],
+video: null
+  },
+  {
+    text: `<p><strong>Track Partially Completed Work:</strong> Don’t worry if you haven’t finished a tutorial or quiz! You can log partially completed ones, allowing you to update them later once you finish. This flexibility ensures that every step of your learning counts!<b>You'll do great!</b></p>`,
     images: [],
     video: null
-  }
+  },
+  {
+    text: `<p><strong>Earn Badges:</strong> Celebrate your achievements! Once you log <strong>5 tutorials, quizzes, or labs with 100% completion</strong>, you will earn a special badge to recognize your hard work and dedication. It’s a great way to stay motivated and see how far you’ve come!</p>`,
+    images: ["assets/badges/badge01.png"],
+    video: null
+  },
+  {
+    text: `<p>So dive in, enjoy the journey, and let the game enhance your learning experience!</p>`,
+    images: [],
+    video: null
+  },
 ];
 
   // Current index of the tip
