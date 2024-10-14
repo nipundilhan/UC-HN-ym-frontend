@@ -20,6 +20,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UsersComponent } from './admin/users/users.component';
 import { GamesComponent } from './admin/games/games.component';
 import { UserActivityComponent } from './admin/user-activity/user-activity.component';
+import { TestUploadComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/test-upload/test-upload.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'view-tutorials', component: ViewTutorialsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'hometest', component: HometestComponent },
+  { path: 'upload', component: TestUploadComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
   { path: 'share', component: ShareFeedComponent },
