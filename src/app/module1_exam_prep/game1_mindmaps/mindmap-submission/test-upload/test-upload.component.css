@@ -1,0 +1,46 @@
+.file-preview-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Space between items */
+}
+
+.file-preview {
+    flex: 1 1 calc(25% - 10px); /* 4 items per row */
+    box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+.file-preview img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: add rounded corners */
+}
+
+.file-preview p {
+    margin: 5px 0; /* Space between the image and the filename */
+    text-align: center; /* Center the filename */
+}
+
+.file-preview button {
+    display: block; /* Make the button a block element */
+    margin: 5px auto; /* Center the button */
+}
+
+html, body {
+    height: 100%; /* Make sure the body takes full height */
+    margin: 0; /* Remove default margin */
+}
+
+.form-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: #ac6a34; /* Optional: Background color */
+}
+
+form {
+    background: white; /* Optional: Form background */
+    padding: 20px; /* Optional: Form padding */
+    border-radius: 5px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Shadow */
+}

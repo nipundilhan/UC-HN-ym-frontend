@@ -1,0 +1,61 @@
+
+<DIV class="row">
+<diV class="form-container col-6" >
+
+    <div *ngIf="game2Details"  >
+        <h3>Mind Map Details</h3>
+        <p><strong>Title:</strong> {{ game2Details.gameCode }}</p>
+        <h4>Attachments:</h4>
+        <div class="file-preview-container">
+        <div *ngFor="let attachment of game2Details.mindMaps[0].attachments" class="file-preview">
+          
+          <img *ngIf="attachment.contentType.startsWith('image/')"
+            [src]="'data:' + attachment.contentType + ';base64,' + attachment.data" 
+            alt="{{ attachment.filename }}" 
+            style="width: 120px;height: 120px; display: block; margin: 10px 0;" 
+          />
+          <img *ngIf="attachment.contentType === 'application/pdf'" style="width: 120px;height: 120px;" src="assets/pdf-icon.png" alt="PDF Preview" />
+          <p>{{ attachment.filename }}</p>
+        </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!game2Details">
+        <p>No mind map details available for this student.</p>
+      </div>
+
+</diV>
+<diV class="form-container col-6">
+    <form [formGroup]="mindMapForm" (ngSubmit)="submit()">
+    <div>
+        <label for="title">Title:</label>
+        <input id="title" formControlName="title" required />
+    </div>
+    <div>
+        <label for="attachments">Attachments:</label>
+        <input type="file" id="attachments" (change)="onFileChange($event)" multiple />
+    </div>
+
+    <div *ngIf="uploadedFiles.length > 0">
+        <h3>Preview:</h3>
+        <div class="file-preview-container">
+            <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
+                <div>
+                    <img style="width: 120px;height: 120px;" *ngIf="isImage(file); else pdfPreview" [src]="filePreviews[i]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
+                    <p>{{ file.name }}</p>
+                    <ng-template #pdfPreview>
+                    <img style="width: 120px;height: 120px;" src="assets/pdf-icon.png" alt="PDF Preview" />
+                    </ng-template>
+                    <div>
+                    <button type="button" class="btn btn-danger" (click)="removeFile(file)">Remove</button>
+                    <button type="button" class="btn btn-primary" (click)="viewFile(file) ; $event.stopPropagation()">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+</diV>
+</DIV>

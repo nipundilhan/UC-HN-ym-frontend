@@ -33,6 +33,7 @@ import { GamesComponent } from './admin/games/games.component';
 import { UserActivityComponent } from './admin/user-activity/user-activity.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
+import { TestUploadComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/test-upload/test-upload.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.componen
     GamesComponent,
     UserActivityComponent,
     AdminDashboardComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    TestUploadComponent
     ],
   imports: [
     BrowserModule,
