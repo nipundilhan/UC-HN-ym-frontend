@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ApiCallService } from 'src/app/_services/api-call.service';
+import { PointsService } from 'src/app/_services/points.service';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
+import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { StudentTasks } from 'src/app/_shared/resources/StudentTask';
 
 export interface Question {
   lesson: string;
@@ -19,19 +26,57 @@ export class ViewQuestionsComponent implements OnInit {
   questionForm: FormGroup;
   isQuestionOpen = false;
   selectedQuestion: any;
+  studentData: any;
   questions: any[] = [];
-  isSaveEnabled = false;
+  // isSaveEnabled = false;
   isAddQuestionModalOpen = false;
+  isShareModalOpen = false
   submitted = false;
+  originalQuestion: any;
+  originalAnswer: string = '';
+  loading = true;
 
+  editorContent: string = '';  // This will store the editor's content
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '100px',
+    placeholder: 'Enter answer here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['underline'],
+      ['redo'],
+      ['undo'],
+      ['insertImage', 'insertVideo'],
+      ['heading'],
+      ['clearFormatting'],
+      ['Horizontal Line']
+    ],
+    // Adding a custom class to the editor
+  };
   
-  constructor(private fb: FormBuilder) {
+  
+  
+
+  constructor(private fb: FormBuilder,
+    public apiCallService: ApiCallService,
+    private userAuthService: UserAuthService,
+    private cdr: ChangeDetectorRef,
+    private pointsService: PointsService,
+    private router: Router,
+
+
+  ) {
     this.questionForm = this.fb.group({
       lesson: ['', Validators.required],
       question: ['', Validators.required],
-      date: [this.getTodayDate(), Validators.required],
+      // date: [this.getTodayDate(), Validators.required],
       answer: ['', Validators.required],
-      image: [null] // For image uploads
+      // image: [null] // For image uploads
     });
   }
 
@@ -40,37 +85,34 @@ export class ViewQuestionsComponent implements OnInit {
 
   }
 
+  get isSaveEnabled(): boolean {
+    return JSON.stringify(this.selectedQuestion) !== JSON.stringify(this.originalQuestion);
+}
 
-  getQuestions(): void {
-    // Fetch mindmaps from backend or service
-    this.questions = [
-      {
-        lesson: "Java Basics",
-        question: "What are the advantages of Packages in Java?",
-        date: "2024-10-01",
-        answer: "Packages avoid name clashes. The Package provides easier access control. We can also have the hidden classes that are not visible outside and are used by the package. It is easier to locate the related classes.",
-        image: null, // Dummy image URL
-      },
-      {
-        lesson: "Java Basics",
-        question: "What are the different data types in Java?",
-        date: "2024-10-02",
-        answer: "boolean, byte, char, short, int, long, float, double",
-        image: "/assets/placeholder-mindmap.jpg", // Dummy image URL
-      },
-      {
-        lesson: "Java Basics",
-        question: "What are the advantages of Packages in Java?",
-        date: "2024-10-01",
-        answer: "Packages avoid name clashes. The Package provides easier access control. We can also have the hidden classes that are not visible outside and are used by the package. It is easier to locate the related classes.",
-        image: null, // Dummy image URL
-      }
-    ];
+
+  getQuestions(): Promise<void>  {
+
+    return new Promise((resolve, reject) => {
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.QANDA.BASE+ "/" + this.userAuthService.getUserId()).subscribe(
+        (response: any) => {
+          this.studentData = response;
+          this.cdr.detectChanges();
+          this.loading = false;
+          resolve(); // Resolve the promise after the data is successfully fetched
+        },
+        (error: any) => {
+          console.log(error);
+          this.loading = false;
+          reject(error); // Reject the promise in case of an error
+        }
+      );
+    });
   }
 
-  openQuestionModal(): void {
+  openModal(): void{
     this.isAddQuestionModalOpen = true;
   }
+
 
   closeAddQuestionModal(): void {
     this.isAddQuestionModalOpen = false;
@@ -88,27 +130,37 @@ export class ViewQuestionsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  // onSubmit() {
 
-    this.submitted = true;
-    if (this.questionForm.invalid) {
-      return;
-    }
+  //   this.submitted = true;
+  //   if (this.questionForm.invalid) {
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    for (const key in this.questionForm.value) {
-      formData.append(key, this.questionForm.value[key]);
-    }
+  //   const formData = new FormData();
+  //   for (const key in this.questionForm.value) {
+  //     formData.append(key, this.questionForm.value[key]);
+  //   }
 
-    // Call your service to submit the form data
-    // this.apiService.createQuestion(formData).subscribe(response => { ... });
-  }
 
+  // }
+
+  // Method to open question details
   openQuestionDetails(question: any): void {
-    this.selectedQuestion = question;
+    this.selectedQuestion = { ...question };
+    this.originalQuestion = question.question;  // Store the original question
+    this.originalAnswer = question.answer;      // Store the original answer
     this.isQuestionOpen = true;
-    console.log("open");
   }
+
+  // Method to check if the answer has changed
+  hasAnswerChanged(): boolean {
+    return (
+      this.selectedQuestion.question !== this.originalQuestion ||  // Check if the question has changed
+      this.selectedQuestion.answer !== this.originalAnswer         // Check if the answer has changed
+    );
+  }
+
 
   closeQuestionModal(): void {
     this.isQuestionOpen = false;
@@ -132,10 +184,81 @@ export class ViewQuestionsComponent implements OnInit {
     const today = new Date();
     return today.toISOString().split('T')[0];
   }
+  // Method to handle the sharing of the question
+onShareQuestion(question: any): void {
+  if (question.sharedStatus === 'NOT_SHARED') {
+
+    const requestBody = {
+      ownerStudentId: this.userAuthService.getUserId(),
+      QandAId: this.selectedQuestion._id,
+      sharedStatus: "SHARED"
+    };
+
+    this.apiCallService.executePutNoAuth(API_ENDPOINTS.QANDA.SHARE, requestBody).subscribe(
+      (response: any) => {
+        this.openShareModal();
+        setTimeout(() => {
+          this.getQuestions();  //update the points in header and fetches latest tutorial data
+        }, 100);
+
+        // Handle success response
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the question");
+      }
+    );
+
+this.closeQuestionModal();
+    // Update the sharedStatus to 'yes' after sharing
+    // question.sharedStatus = 'SHARED';
+  }
+}
+
+// Method to open the share success popup
+openShareModal(): void {
+  this.isShareModalOpen = true;
+}
+
+// Method to close the share success popup
+closeShareModal(): void {
+  this.isShareModalOpen = false;
+}
+
+ // Method to navigate to the shared questions page
+ viewSharedQuestions(): void {
+  // Navigate to the shared questions page (assuming you have a route for this)
+  this.router.navigate(['share/questions']);
+}
 
   onUpdateQuestion(): void {
-    // Save changes made to mindmap
-    this.isSaveEnabled = false;
+    // Save changes made to question
+
+    const requestBody = {
+      studentId: this.userAuthService.getUserId(),
+      QandAId: this.selectedQuestion._id,
+      lessonTitle: this.selectedQuestion.lessonTitle,
+      question: this.selectedQuestion.question,
+      answer: this.selectedQuestion.answer,
+    };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.QANDA.BASE, requestBody).subscribe(
+      (response: any) => {
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while saving the question");
+      }
+    );
+    setTimeout(() => {
+      this.getQuestions();  //update the points in header and fetches latest tutorial data
+    }, 100);
+
+
+    // this.getQuestions(); 
+    this.questionForm.reset();
+    // this.questionForm.patchValue({ date: this.getTodayDate() });
+    // this.isSaveEnabled = false;
     this.closeQuestionModal();
   }
 
@@ -144,4 +267,60 @@ export class ViewQuestionsComponent implements OnInit {
     this.closeQuestionModal();
   }
 
+  fetchUpdatedStudentPoints(): void {
+
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.studentData = response; // Updated student data, including points
+        console.log(this.studentData);
+        this.pointsService.updateTotalMarks(this.studentData.totalMarks); // Update total points in the header or wherever it's displayed
+        this.cdr.detectChanges(); // Trigger change detection to ensure UI reflects the updated points
+  
+        this.getQuestions(); // Ensure this fetches latest data
+  
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
+  
+    );
+    }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.questionForm.invalid) {
+      return;
+    }
+
+    const requestBody = {
+      studentId: this.userAuthService.getUserId(),
+      lessonTitle: this.questionForm.value.lesson, 
+      question: this.questionForm.value.question,  
+      answer: this.questionForm.value.answer,  
+    };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.QANDA.BASE, requestBody).subscribe(
+      (response: any) => {
+        // this.dataTrnfrSrvc.setData(response);
+        
+          setTimeout(() => {
+            this.fetchUpdatedStudentPoints();  //update the points in header and fetches latest tutorial data
+          }, 100); // Delay to ensure data consistency
+         
+        
+          // this.checkAchievement(); // Check for achievement after data fetch
+          
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while recording the question");
+      }
+    );
+    this.questionForm.reset();
+      this.closeAddQuestionModal(); // Close modal after saving
+  }
+
+  
 }
+
+

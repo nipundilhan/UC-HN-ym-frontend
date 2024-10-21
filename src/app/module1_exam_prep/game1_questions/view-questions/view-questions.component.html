@@ -2,21 +2,22 @@
     <div class="container">
 
         <h1 class="game-title">Question Mastery</h1>
-        <button class="add-button" (click)="openQuestionModal()">✨ Add New Question</button>
+        <button class="add-button" (click)="openModal()">✨ Add New Question</button>
         
-        <div class="question-grid">
-            <div *ngFor="let question of questions" class="question-card" (click)="openQuestionDetails(question)">
-                <h5><b>{{ question.lesson }}</b></h5>
+        <!-- <div class="question-grid"> -->
+          <div class="question-grid"*ngIf="studentData?.data?.QandA?.length > 0">
+            <div *ngFor="let question of studentData.data.QandA" class="question-card" (click)="openQuestionDetails(question)">
+                <h5><b>{{ question.lessonTitle }}</b></h5>
                 <p> {{ question.question }}</p>
                 <!-- <p><strong>Date:</strong> {{ question.date }}</p> -->
                 <!-- <p><strong>Answer:</strong> {{ question.answer }}</p>
                 <img *ngIf="question.imageUrl" [src]="question.imageUrl" alt="Question Image" /> -->
             </div>
         </div>
-
-        <div class="no-mindmaps" *ngIf="questions.length === 0">
+        <!-- </div> -->
+        <div class="no-questions" *ngIf="!studentData?.data?.QandA?.length">
             No Questions Added Yet.
-          </div>
+        </div>
   
 
 
@@ -25,7 +26,7 @@
         <div class="modal-background">
           <div class="modal-content">
             <span class="close" (click)="closeQuestionModal()">&times;</span>
-            <h2>{{ selectedQuestion.lesson }}</h2>
+            <h2>{{ selectedQuestion.lessonTitle }}</h2>
  
 
             <form (ngSubmit)="onUpdateQuestion()">
@@ -33,38 +34,63 @@
                 <input type="text" id="question" [(ngModel)]="selectedQuestion.question" name="question" required />
   
                 
-                <label for="date">Date:</label>
+                <!-- <label for="date">Date:</label>
                 <input type="date" id="questionDate" [(ngModel)]="selectedQuestion.date" name="date" [max]="getTodayDate()" required />
-  
-                <label for="description">Answer:</label>
-                <textarea id="description" [(ngModel)]="selectedQuestion.answer" name="description" rows="4"></textarea>
-                
-            <!-- Display Question Image in the Modal only if image exists -->
-            <div class="image-preview" *ngIf="selectedQuestion.image">
+   -->
+                <label for="answer">Answer:</label>
+                <!-- <textarea id="answer" [(ngModel)]="selectedQuestion.answer" name="description" rows="4"></textarea> -->
+                <angular-editor 
+                  [(ngModel)]="selectedQuestion.answer" 
+                  name="answer" 
+                  [config]="editorConfig"
+                  class="angular-editor-textarea">
+                </angular-editor>
+                    <!-- Display Question Image in the Modal only if image exists -->
+            <!-- <div class="image-preview" *ngIf="selectedQuestion.image">
               <img 
                 [src]="selectedQuestion.image" 
                 class="question-image"
               >
               
-              <!-- Camera icon for changing the image -->
               <span class="camera-icon" (click)="triggerImageUpload()">
-                <i class="fa fa-camera"></i> <!-- Font Awesome camera icon -->
+                <i class="fa fa-camera"></i> 
               </span>
-            
-              <!-- Hidden input for file selection -->
+
               <input type="file" id="imageUpload" style="display: none;" (change)="onImageSelected($event)">
-            </div>
+            </div> -->
 
             
                 
               <div class="button-container">
-                <button class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
+                <button class="btn save-btn" [disabled]="!hasAnswerChanged()">Save Changes</button>
+                <button class="btn share-btn" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button>
                 <button class="btn delete-btn" (click)="deleteQuestion(selectedQuestion)">Delete</button>
               </div>
             </form>
           </div>
         </div>
       </div>
+
+      <!-- Popup Modal for Successful Share -->
+      <div *ngIf="isShareModalOpen" class="modal">
+        <!-- <div class="modal-background"> -->
+          <div class="modal-content-share">
+            <span class="close" (click)="closeShareModal()">&times;</span>
+
+
+            <h2>Great!</h2>
+            <p>Your question has been shared successfully.</p>
+
+             <!-- Success tick icon -->
+             <div class="success-tick">
+              <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+            </div>
+            
+            <button class="btn view-shared-btn" (click)="viewSharedQuestions()">View Shared Questions</button>
+          </div>
+        <!-- </div> -->
+      </div>
+
 
        <!-- Add Question Modal -->
        <div *ngIf="isAddQuestionModalOpen" class="modal">
@@ -81,28 +107,46 @@
                 <input id="lesson" formControlName="lesson" type="text" />
                 </div> -->
 
+
+                <!-- <div class="form-row">
+                  <div class="form-group">
+
+                  <label for="lesson">Lesson Title:</label>
+                  <input type="text" id="lesson" formControlName="lesson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }" />
+                  <div *ngIf="submitted && f['lesson'].errors" class="invalid-feedback">
+                    <div *ngIf="f['lesson'].errors['required']">Lesson is required</div>
+                  </div>
+                  </div>
+           
+                  <div class="form-group">
+
+                  <label for="date">Date:</label>
+                  <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
+                  <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                    <div *ngIf="f['date'].errors['required']">Date is required</div>
+                  </div>
+                  </div>
+              </div> -->
+
                 <label for="lesson">Lesson:</label>
                 <input type="text" id="lesson" formControlName="lesson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }" />
                 <div *ngIf="submitted && f['lesson'].errors" class="invalid-feedback">
                   <div *ngIf="f['lesson'].errors['required']">Lesson is required</div>
                 </div>
             
-                <!-- <div>
-                <label for="question">Question:</label>
-                <textarea id="question" formControlName="question"></textarea>
-                </div> -->
-
+          
+                
                 <label for="question">Question:</label>
                 <input type="text" id="question" formControlName="question" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['question'].errors }" />
                 <div *ngIf="submitted && f['question'].errors" class="invalid-feedback">
                   <div *ngIf="f['question'].errors['required']">Question is required</div>
                 </div>
             
-                <label for="date">Date:</label>
+                <!-- <label for="date">Date:</label>
                 <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
                 <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
                   <div *ngIf="f['date'].errors['required']">Date is required</div>
-                </div>
+                </div> -->
             
                 <!-- <div>
                 <label for="answer">Answer:</label>
@@ -113,19 +157,15 @@
 
                 <label for="answer">Answer:</label>
                 <!-- <textarea id="answer" formControlName="answer" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['answer'].errors }"></textarea> -->
-                <quill-editor
-                id="answer"
-                formControlName="answer"
-                [style]="{ height: '200px' }"
-                [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
-              ></quill-editor>
+                <angular-editor formControlName="answer" class="form-control"  [(ngModel)]="editorContent" [config]="editorConfig" [ngClass]="{ 'is-invalid': submitted && f['answer'].errors }"></angular-editor>
+
                 
                 <div *ngIf="submitted && f['answer'].errors" class="invalid-feedback">
                   <div *ngIf="f['answer'].errors['required']">Answer is required</div>
                 </div>
 
-                <label for="image">Upload Image (optional):</label>
-                <input type="file" id="image" (change)="onFileChange($event)">
+                <!-- <label for="image">Upload Image (optional):</label>
+                <input type="file" id="image" (change)="onFileChange($event)"> -->
                 <!-- <div>
                 <label for="image">Upload Image (optional):</label>
                 <input id="image" type="file" (change)="onFileChange($event)" />

@@ -8,22 +8,28 @@
     height: 100%; 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
   
   
   .home-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 30px;
+    max-width: 80%;
     justify-content: center;
-    gap: 20px;
-    padding: 60px;
+    /* gap: 20px; */
+    padding: 0px 100px;
+    margin-top: 30px;
+    align-content: center;
   }
   
   .game-scroll {
     /* max-width: 300px; */
-    width: 300px; /* Fixed width for consistent block size */
+    /* width: 300px;  */
+    display: flex;
     text-align: center;
+    justify-content: center;
     transition: transform 0.3s ease;
   }
   
@@ -47,20 +53,24 @@
     background-color: rgba(255, 255, 255, 0.75); /* White background */
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column; /* Stack children vertically */
-    height: 280px; /* Fixed height for consistency */
+    height: 250px; /* Fixed height for consistency */
+    width: 220px;
     cursor: pointer;
   }
-  
-  .game-details {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    /* border-radius: 10px; */
-    padding: 45px;
+
+  .special-block {
+    background-color: rgba(255, 224, 175, 0.75); /* Your new color */
   }
+  
+  /* .game-details {
+
+    padding: 45px;
+  } */
 
   .game-title {
     font-family: 'MedievalSharp', sans-serif;
@@ -98,7 +108,7 @@
   } */
   
   .hieroglyph-image {
-    max-width: 100px; /* Adjust the size of the hieroglyph image */
+    max-width: 90px; /* Adjust the size of the hieroglyph image */
     margin-top: 10px;
   }
   
@@ -220,6 +230,12 @@
   }
   
   @media (max-width: 768px) {
+    .home-container{
+      padding: 0px;
+      margin-bottom: 10px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .game-scroll {
       max-width: 45%;
     }
@@ -267,6 +283,11 @@
   }
   
   @media (max-width: 480px) {
+    .home-container{
+      padding: 0px;
+      margin-bottom: 10px;
+      grid-template-columns: repeat(1, 1fr);
+    }
     .game-scroll {
       max-width: 100%;
     }

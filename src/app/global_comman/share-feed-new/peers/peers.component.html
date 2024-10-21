@@ -1,0 +1,13 @@
+<!-- <p>peers works!</p> -->
+<div class="peers-list">
+    <div *ngFor="let peer of peers" class="peer-item">
+      <img [src]="peer.avatarUrl" alt="{{ peer.username }} Avatar" class="peer-avatar">
+      <div class="peer-details">
+        <span class="peer-username">{{ peer.username }}</span>
+        <span class="peer-points">
+          <img src="assets/coin.png" alt="Coin" class="coin-icon"> {{ peer.points }}
+        </span>
+      </div>
+    </div>
+  </div>
+  

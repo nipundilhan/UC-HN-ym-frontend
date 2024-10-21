@@ -1,0 +1,70 @@
+<!-- <p>mindmaps works!</p> -->
+<div class="mindmap-grid">
+    <!-- <div *ngFor="let item of mindmaps" class="mindmap-card" (click)="openMindMap(item)">
+      <div class="user-info">
+        <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+        <div class="user-details">
+          <span class="username">{{ item.username }}</span>
+          <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+        </div>
+      </div>
+      <img [src]="item.imageUrl" alt="Mind Map" class="mindmap-image">
+      <p>{{ item.title }}</p>
+    </div> -->
+
+ <div *ngFor="let item of mindmaps" class="mindmap-card" (click)="openMindMap(item)">
+        <div class="user-info">
+          <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+          <div class="user-details">
+            <span class="username">{{ item.username }}</span>
+            <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+          </div>
+        </div>
+        <img [src]="item.imageUrl" alt="Mind Map" class="mindmap-image">
+        <p>{{ item.title }}</p>
+        <div class="like-container">
+          <button (click)="likeMindMap()" class="like-button">
+            <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
+          </button>
+          <span class="like-count">{{ item.likes }} Likes</span>
+        </div>
+      </div>
+  </div>
+
+    <!-- Mind Map Modal -->
+    <div *ngIf="isMindmapModalOpen" class="modal">
+        <div class="modal-content">
+          <span class="close" (click)="closeModal()">&times;</span>
+          
+          <div class="modal-header">
+            <div class="user-info">
+              <img [src]="getUserAvatar(selectedMindMap.userId)" alt="User Avatar" class="user-avatar">
+              <div class="user-details">
+                <span class="username">{{ selectedMindMap.username }}</span>
+                <span class="shared-date">{{ selectedMindMap.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <p>{{ selectedMindMap.title }}</p>
+          
+          <img [src]="selectedMindMap.imageUrl" alt="Mind Map" class="large-mindmap-image">
+          
+          <div class="like-container">
+            <button (click)="likeMindMap()" class="like-button">
+              <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
+            </button>
+            <span class="like-count">{{ selectedMindMap.likes }} Likes</span>
+            <div class="download-container"> <!-- Wrap in a container -->
+              <button (click)="downloadMindMap()" class="download-button">
+                <i class="fas fa-download"></i> <!-- Font Awesome download icon -->
+              </button>
+              <span class="tooltip">Download</span> <!-- Tooltip text -->
+            </div>
+          </div>      
+        </div>
+      </div>
+    
+  
+
+  

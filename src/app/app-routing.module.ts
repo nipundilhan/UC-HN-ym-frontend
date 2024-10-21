@@ -10,7 +10,7 @@ import { ViewTutorialsComponent } from './module1_exam_prep/game1_tutorials/view
 import { HometestComponent } from './global_comman/hometest/hometest.component';
 import { IntroPageComponent } from './global_comman/intro-page/intro-page.component';
 import { ProfileComponent } from './global_comman/profile/profile.component';
-import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
+// import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
 import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
 import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/learn-tutorials/learn-tutorials.component';
 import { MindmapSubmissionComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/mindmap-submission.component';
@@ -21,25 +21,43 @@ import { UsersComponent } from './admin/users/users.component';
 import { GamesComponent } from './admin/games/games.component';
 import { UserActivityComponent } from './admin/user-activity/user-activity.component';
 import { TestUploadComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/test-upload/test-upload.component';
+import { GameMapComponent } from './global_comman/game-map/game-map.component';
+import { NotificationsComponent } from './global_comman/share-feed-new/notifications/notifications.component';
+import { PeersComponent } from './global_comman/share-feed-new/peers/peers.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { ShareFeedNewComponent } from './global_comman/share-feed-new/share-feed-new/share-feed-new.component';
+import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindmaps.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'test', component: TestComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent,  data: { hideHeader: true }  },
   { path: 'select-avatar', component: SelectavatarComponent },
   { path: 'tutorial-submission', component: TutorialSubmissionComponent },
   { path: 'view-tutorials', component: ViewTutorialsComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent,  data: { hideHeader: true }  },
   { path: 'hometest', component: HometestComponent },
   { path: 'upload', component: TestUploadComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
-  { path: 'share', component: ShareFeedComponent },
+  // { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
   { path: 'learn-tutorials', component: LearnTutorialsComponent },
   { path: 'play-mindmaps', component: MindmapSubmissionComponent },
   { path: 'play-questions', component: ViewQuestionsComponent },
-
+  { path: 'game-map', component: GameMapComponent },
+ 
+ { path: 'share',
+    component: ShareFeedNewComponent,
+    children: [
+      { path: 'notifications', component: NotificationsComponent },
+      { path: 'peers', component: PeersComponent },
+      { path: 'mindmaps', component: MindmapsComponent },
+      { path: 'questions', component: QuestionsComponent },
+      { path: '', redirectTo: 'notifications', pathMatch: 'full' }  // Default to notifications tab
+    ]
+  },
+  { path: '**', redirectTo: '/share/notifications' } ,
 
   {
     path: 'admin',

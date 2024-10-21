@@ -1,0 +1,67 @@
+
+.peers-list {
+    padding: 10px;
+  }
+  
+  .peer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out items */
+    padding: 10px;
+    border: 1px solid #f4d0af; /* Box border */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 10px; /* Space between items */
+    background-color: #f7f3d8; /* Background color */
+    margin-left: 20px;
+    transition: transform 0.2s; /* Animation on hover */
+    cursor: pointer;
+  }
+  
+  .peer-item:hover{
+    transform: scale(1.02);
+  }
+  
+  .peer-avatar {
+    width: 50px; /* Avatar size */
+    height: auto;
+    border-radius: 50%; /* Circular avatar */
+    margin-right: 10px; /* Space between avatar and text */
+  }
+  
+  .peer-details {
+    flex-grow: 1; /* Allow this to take remaining space */
+    display: flex;
+    justify-content: space-between; /* Align items within details */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .peer-username {
+    font-weight: bold; /* Highlight username */
+  }
+  
+  .peer-points {
+    display: flex;
+    align-items: center; /* Center points with coin */
+    margin-left: auto; /* Push points to the right */
+    margin-right: 30px;
+  }
+  
+  .coin-icon {
+    width: 35px; /* Adjust coin icon size */
+    height: auto;
+    margin-right: 5px; /* Space between points and coin */
+  }
+
+
+@media (max-width: 768px) {
+    .peer-points{
+      margin-right: 20px;
+    }
+    .coin-icon{
+      width:20px;
+    }
+    .peer-item{
+      margin-left: 10px;
+    }
+  }
+  

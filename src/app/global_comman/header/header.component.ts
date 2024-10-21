@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   studentData: any = {}; // Initialize as an empty object
 
   public avatarPath: string = ''; // Variable to store the avatar image path
+  userName: string = '';
 
 
   constructor(
@@ -63,9 +64,11 @@ export class HeaderComponent implements OnInit {
     return this.userAuthService.getUserName();
   }
 
-  public getPoints() {
-    return this.userAuthService.getUser();
-  }
+
+  // public getPoints() {
+  //   return this.userAuthService.getUser();
+    
+  // }
 
 
 

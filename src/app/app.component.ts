@@ -36,8 +36,12 @@ export class AppComponent {
   ) {
 
 
+      if (this.userAuthService.getUserName()) {
        this.router.navigate(['/home']);
-       
+      }
+      else{
+        this.router.navigate(['/introduction']);
+      }
 
    }
 

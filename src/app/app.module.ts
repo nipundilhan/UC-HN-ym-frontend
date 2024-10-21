@@ -24,7 +24,7 @@ import { Module1EnterGameComponent } from './module1_exam_prep/common/module1-en
 import { HometestComponent } from './global_comman/hometest/hometest.component';
 import { IntroPageComponent } from './global_comman/intro-page/intro-page.component';
 import { ProfileComponent } from './global_comman/profile/profile.component';
-import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
+// import { ShareFeedComponent } from './global_comman/share-feed/share-feed.component';
 import { GameOptionsComponent } from './global_comman/game-options/game-options.component';
 import { LearnTutorialsComponent } from './module1_exam_prep/game1_tutorials/learn-tutorials/learn-tutorials.component';
 import { ViewQuestionsComponent } from './module1_exam_prep/game1_questions/view-questions/view-questions.component';
@@ -35,6 +35,12 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 import { TestUploadComponent } from './module1_exam_prep/game1_mindmaps/mindmap-submission/test-upload/test-upload.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { GameMapComponent } from './global_comman/game-map/game-map.component';
+import { ShareFeedNewComponent } from './global_comman/share-feed-new/share-feed-new/share-feed-new.component';
+import { NotificationsComponent } from './global_comman/share-feed-new/notifications/notifications.component';
+import { PeersComponent } from './global_comman/share-feed-new/peers/peers.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindmaps.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +60,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     HometestComponent,
     IntroPageComponent,
     ProfileComponent,
-    ShareFeedComponent,
+    // ShareFeedComponent,
     GameOptionsComponent,
     LearnTutorialsComponent,
     ViewQuestionsComponent,
@@ -63,7 +69,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     UserActivityComponent,
     AdminDashboardComponent,
     AdminLayoutComponent,
-    TestUploadComponent
+    TestUploadComponent,
+    GameMapComponent,
+    ShareFeedNewComponent,
+    NotificationsComponent,
+    PeersComponent,
+    QuestionsComponent,
+    MindmapsComponent
     ],
   imports: [
     BrowserModule,

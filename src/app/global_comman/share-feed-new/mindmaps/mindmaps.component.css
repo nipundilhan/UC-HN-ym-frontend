@@ -1,0 +1,223 @@
+
+.user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 1px solid #dcdcdc;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .shared-date {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .mindmap-grid {
+    display: grid;  
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Allow flexible column count */
+    gap: 10px; /* Space between cards */
+  }
+  
+  .mindmap-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: 300px; /* Fixed height for cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between content and footer */
+    align-items: center; /* Center content */
+    transition: transform 0.2s; /* Animation on hover */
+    cursor: pointer;
+
+  }
+
+  .mind-map-card:hover {
+    transform: scale(1.02);
+}
+  
+  .mindmap-card img {
+    max-width: 100%; /* Ensure the image fits within the card */
+    max-height: 200px; /* Set a max height for the mind map image */
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+  
+  .mindmap-card .mindmap-image{
+    height:80px;
+    width: auto;
+  }
+  
+  .mindmap-card p {
+    margin: 10px 0; /* Space between description and likes */
+    text-align: center; /* Center-align description */
+  }
+
+
+.like-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 10px; */
+  }
+  
+  .like-button {
+    background-color: transparent; /* Make background transparent */
+    border: none; /* Remove border */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-icon {
+    width: 20px; /* Size of the heart icon */
+    height: 20px;
+    margin-right: 5px; /* Space between icon and count */
+    transition: transform 0.2s; /* Animation on hover */
+  }
+  
+  .like-button:hover .like-icon {
+    transform: scale(1.1); /* Scale up on hover */
+  }
+  
+  .like-count {
+    margin-right: 70px;
+    font-weight: bold;
+  }
+
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it is above other content */
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    position: relative; /* For close button positioning */
+    width: 60%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Ensures left alignment */
+    margin-bottom: 15px; /* Space between header and content */
+    width: 100%; /* Ensures it takes full width */
+  }
+  
+  .modal-content .user-info{
+    margin-left: 0; /* No margin to ensure it starts from the left */
+    }
+  
+  .modal-content   .user-avatar {
+      width: 40px; /* Adjust size as needed */
+      height: 40px; /* Adjust size as needed */
+      border-radius: 50%; /* Round avatar */
+      margin-right: 10px; /* Space to the right of the avatar */
+    }
+  
+  .modal-content .username{
+      text-align: left; /* Ensure text is left-aligned */
+    }
+  
+  .modal-content p {
+    text-align: left; /* Ensure the description is left-aligned */
+    margin-top: 10px; /* Space from the header */
+    width: 100%; /* Make sure it takes the full width */
+  }
+  
+  .large-mindmap-image {
+    width: 60%;
+    height: auto;
+    max-width: 600px; /* Set a max-width for large images */
+    border-radius: 10px;
+    margin-bottom: 20px; /* Space between image and buttons */
+  }
+  .download-container {
+    position: relative; /* For positioning the tooltip */
+    display: inline-block; /* Aligns with other buttons */
+  }
+  
+  .tooltip {
+    visibility: hidden; /* Hidden by default */
+    width: 100px; /* Set a width for the tooltip */
+    background-color: rgb(205, 205, 200); /* Background color of the tooltip */
+    color: black; /* Text color */
+    text-align: center; /* Centered text */
+    border-radius: 10px; /* Rounded corners */
+    padding: 5px; /* Padding for the text */
+    position: absolute; /* Position relative to the container */
+    z-index: 10; /* Ensure it appears above other elements */
+    bottom: 80%; /* Position above the button */
+    left: 210%; /* Center horizontally */
+    transform: translateX(-50%); /* Center the tooltip */
+    transition: visibility 0s, opacity 0.3s ease; /* Fade-in effect */
+    opacity: 0; /* Initially hidden */
+  }
+  
+  .download-container:hover .tooltip {
+    visibility: visible; /* Show the tooltip on hover */
+    opacity: 1; /* Fade in */
+  }
+  .download-button {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-left: 10px; /* Space between like button and download button */
+    font-size: 20px; /* Adjust icon size */
+  }
+  
+  .download-button:hover .tooltip {
+    visibility: visible; /* Show the tooltip on hover */
+    opacity: 1; /* Fade in */
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+
+@media (max-width: 768px) {
+    .mindmap-image {
+      width: 55%; /* Slightly larger size for mind maps */
+    }
+  
+    .mindmap-card {
+      height: auto; /* Allow height to adjust */
+    }
+    .modal-content {
+        width: 80%; 
+      }
+    }

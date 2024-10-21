@@ -17,8 +17,9 @@
     max-width: 800px;
     margin: 10px auto;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'MedievalSharp', sans-serif;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+    /* font-family: 'MedievalSharp', sans-serif; */
+    font-family: Georgia, serif;
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
@@ -30,7 +31,6 @@
     font-size: 2.5em;
     text-align: center;
     color: #4a4a4a;
-    margin-bottom: 10px;
 }
 
 /* Add button styling */
@@ -55,6 +55,8 @@
     grid-gap: 20px; /* Space between cards */
     /* width: 100%; */
     margin-top: 10px;
+    font-family: "Gill Sans", sans-serif;
+
 }
 /* Mind map card styling */
 .question-card {
@@ -76,6 +78,20 @@
 
 .question-card:hover {
     transform: scale(1.02);
+}
+
+.no-questions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    height: 70%;
+    width: 70%;
+    font-size: 1.5rem;
+    align-self: center;
 }
 
 .question-image {
@@ -144,6 +160,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Georgia, serif;
 }
 
 /* Modal content styling */
@@ -154,6 +171,19 @@
     /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 500px;    */
+}
+
+.modal-content-share{
+    background-color: #e4ffd7;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 5px solid #978681;
 }
 
 .modal-background{
@@ -189,7 +219,7 @@
   }
   
   /* Buttons styles */
-  .save-btn, .cancel-btn, .delete-btn{
+  .save-btn, .share-btn, .delete-btn{
     background-color: #c27d2a; 
     color: white;
     border: none;
@@ -199,14 +229,34 @@
   }
 
 .save-btn:hover,
-.cancel-btn:hover, 
+.share-btn:hover, 
 .delete-btn:hover{
   opacity: 0.8;
 }
 
-.add-button:hover {
-    background-color: #d2a269;
-}
+  .delete-btn{
+    background-color: #c2392a;
+  }
+
+  .share-btn{
+    background-color: #b4b02d;
+  }
+
+  .view-shared-btn {
+    background-color: #e69216;
+  }
+  
+  .view-shared-btn:hover {
+    background-color: #c78421;
+    color: white;
+  }
+
+.success-tick {
+    font-size: 60px;
+    color: #28a745;  /* Green color for success */
+    margin-bottom: 15px;
+  }
+  
 
 /* Form styling */
 form {
@@ -249,6 +299,44 @@ button[type="submit"] {
 button[type="submit"]:hover {
     opacity: 0.8;
 }
+.form-row {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 20px; /* Adds space between the two fields */
+}
+
+.form-group {
+    flex: 1; /* Each field will take up equal space */
+    display: flex;
+    flex-direction: column; /* Keep the label on top of the input */
+}
+
+.form-group label {
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.form-group input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #c99865;
+    width: 100%; /* Full width of the group */
+}
+/* Adjust the height of the Angular editor */
+.angular-editor-textarea {
+    min-height: 150px; /* Reduces the height */
+    max-height: 250px; /* Optional: Restricts max height */
+    overflow-y: auto;  /* Enables scrolling if content overflows */
+    /* border: 1px solid #c99865; */
+    background-color: #ffffff;
+}
+
+
+/* Ensure the Angular editor has a white background */
+.angular-editor {
+    background-color: white !important; /* Force the background to be white */
+    color: black; /* Text color for visibility */
+  }
+
   
 
 /* Responsive Styles */

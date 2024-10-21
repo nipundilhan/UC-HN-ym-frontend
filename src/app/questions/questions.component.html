@@ -1,0 +1,92 @@
+<div class = "question-grid">
+<!-- <div *ngFor="let question of questions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'"> -->
+  <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'">
+
+  <div class="user-info">
+      <img [src]="getUserAvatar(question.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+      <div class="user-details">
+        <span class="username">{{ question.ownerStudentName }}</span>
+        <!-- <span class="shared-date">{{ question.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span> -->
+        <span class="shared-date">{{ formatDate(question.date) }}</span>
+
+      </div>
+    </div>
+    <div class="question-content">
+      <p>{{ question.question | slice: 0: 100 }}{{ question.question.length > 100 ? '...' : '' }}</p>
+    
+      <a *ngIf="question.question.length > 100" class="see-more" (click)="openQuestion(question)">
+        See More
+      </a>
+    </div>
+    
+    
+  
+    <!-- </div> -->
+    <div class="like-container">
+      <!-- <button (click)="likeMindMap()" class="like-button"> -->
+        <!-- <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon"> -->
+         <i class="fas fa-heart heart-like-icon"></i>
+      <!-- </button> -->
+      <span class="like-count">{{ question.likesCount }}</span>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Question  Modal -->
+  <div *ngIf="isQuestionModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      
+      <div class="modal-header">
+        <div class="user-info">
+          <img [src]="getUserAvatar(selectedQuestion.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+          <div class="user-details">
+            <span class="username">{{ selectedQuestion.ownerStudentName }}</span>
+            <span class="shared-date">{{ formatDate(selectedQuestion.date)}}</span>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="lesson-title">{{ selectedQuestion.lessonTitle }}</h3>
+        
+          <div class="form-field">
+              <label>Question:</label>
+              <div class="field-value">{{ selectedQuestion.question }}</div>
+          </div>
+
+          <div class="form-field">
+              <label>Answer:</label>
+              <div class="field-value" [innerHTML]="selectedQuestion.answer"></div>
+          </div>
+
+
+      <div class="like-container">
+        <button (click)="likeQuestion()" *ngIf="selectedQuestion.liked !== 'UNABLED'"   class="like-button"
+        [ngClass]="{
+          'like-button': true, 
+          'not-liked': selectedQuestion.liked === 'NO', 
+          'liked': selectedQuestion.liked !== 'NO'
+        }"
+    >
+    <!-- <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon"> -->
+    <i class="fas fa-heart" 
+    [ngClass]="{
+      'heart-like-icon-disabled': selectedQuestion.liked === 'YES',
+      'heart-like-icon': selectedQuestion.liked === 'NO'
+    }">
+ </i>
+          <span *ngIf="selectedQuestion.liked === 'NO'"> I like this!</span>
+          <span class *ngIf="selectedQuestion.liked !== 'NO'"> Liked</span>
+          <span *ngIf="selectedQuestion.liked === 'UNABLED'"></span>
+        </button>
+        <!-- <span class="like-count">{{ selectedQuestion.likesCount }} Likes</span> -->
+      </div>      
+    </div>
+  </div>
+  
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>

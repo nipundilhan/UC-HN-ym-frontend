@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
+import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { ApiCallService } from 'src/app/_services/api-call.service';
 
 @Component({
   selector: 'app-home',
@@ -36,16 +39,36 @@ games = [
     hieroglyphImage: 'assets/hieroglyph3.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png'
+  },
+  {
+    id: 4,
+    name: 'Whispers of the Sphinx',
+    subtitle: 'Breathing Mastery',
+    hieroglyphImage: 'assets/hieroglyph3.png', 
+    // hieroglyph: '𓎛',
+    scrollImage: 'assets/scroll.png'
+  },
+  {
+    id: 5,
+    name: 'Pharaoh’s Trial',
+    subtitle: 'Question Mastery',
+    hieroglyphImage: 'assets/hieroglyph3.png', 
+    // hieroglyph: '𓎛',
+    scrollImage: 'assets/scroll.png'
   }
 ];
 
 
 
-constructor(private router: Router) { }
+constructor(
+  private router: Router,     
+  private userAuthService: UserAuthService,
+  public apiCallService: ApiCallService,
+) { }
 
 ngOnInit(): void {
   //  this.router.navigate(['/view-tutorials']);
-  localStorage.removeItem('lastMoodDate'); 
+  // localStorage.removeItem('lastMoodDate'); 
 
   const narratorContainer = document.getElementById('narrator-container') as HTMLElement;
   const submitButton = document.getElementById('submit-mood') as HTMLButtonElement;
@@ -57,39 +80,58 @@ ngOnInit(): void {
   const today = new Date().toLocaleDateString();
 
   if (lastAnswered !== today) {
-    if (narratorContainer) {
-      narratorContainer.addEventListener('click', () => {
-        narratorContainer.classList.add('show');
-      });
-    }
-  }
-
-
-  // Handle Submit button click
-  if (submitButton) {
-    submitButton.addEventListener('click', () => {
-      console.log('Submit button clicked');
-      const selectedMood = document.querySelector('input[name="mood"]:checked') as HTMLInputElement;
-      if (selectedMood) {
-        localStorage.setItem('lastMoodDate', today);
-        localStorage.setItem('mood', selectedMood.value);
-        if (narratorContainer) {
-          narratorContainer.style.display = 'none';
-          console.log(selectedMood.value);
-        }
-      }
+    narratorContainer.addEventListener('click', () => {
+      narratorContainer.classList.add('show');
     });
   }
+  else {
+  narratorContainer.style.display = 'none';
+    }
+
+
+  
+
+  // Handle Submit button click
+// Handle Submit button click
+if (submitButton) {
+  submitButton.addEventListener('click', () => {
+    const selectedMood = document.querySelector('input[name="mood"]:checked') as HTMLInputElement;
+    if (selectedMood) {
+      localStorage.setItem('lastMoodDate', today);
+      localStorage.setItem('mood', selectedMood.value);
+
+      const requestBody = {
+        studentId: this.userAuthService.getUserId(),
+        date: this.getCurrentDate(),  // Use today's date
+        mood: selectedMood.value
+      };
+
+      this.apiCallService.executePostNoAuth(API_ENDPOINTS.MOODS.BASE, requestBody).subscribe(
+        (response: any) => {
+          // Handle success response
+        },
+        (httpError: any) => {
+          console.log(httpError);
+          alert("An error occurred while logging the mood");
+        }
+      );
+
+      // Hide the narrator container after submitting mood
+      
+      if (narratorContainer) {
+        narratorContainer.style.display = 'none';
+        console.log(selectedMood.value);
+      }
+    }
+  });
+}
 
   // Handle Later button click
   if (laterButton) {
     laterButton.addEventListener('click', () => {
-      console.log('Later button clicked');
       if (narratorContainer) {
-        // narratorContainer.classList.remove('show');
         narratorContainer.style.bottom = '-230px';
         
-        console.log('Dialog hidden after later');
         this.router.navigate(['/test']);
       }
     });
@@ -100,6 +142,14 @@ ngOnInit(): void {
   //     narratorContainer.style.bottom = '50px';
   //   });
   // }
+}
+
+getCurrentDate(): string {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 navigateToGame(game: any) {

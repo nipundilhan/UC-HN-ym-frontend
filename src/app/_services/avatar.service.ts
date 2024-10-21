@@ -36,6 +36,11 @@ export class AvatarService {
 
       return selectedAvatar ? selectedAvatar.path : 'assets/avatar-img/default-avatar.png'; // Fallback image path
     }
-    return 'assets/default-avatar.png'; // Fallback image if no user is logged in
+    return 'assets/avatar-img/default-avatar.png'; // Fallback image if no user is logged in
+  }
+
+  getAvatarPathByCode(avatarCode: string): string {
+    const selectedAvatar = this.avatars.find(avatar => avatar.code === avatarCode);
+    return selectedAvatar ? selectedAvatar.path : 'assets/avatar-img/default-avatar.png'; // Fallback image path
   }
 }

@@ -133,7 +133,10 @@
             <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
             <!-- Badge Image -->
-            <img *ngIf="showBadge" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+            <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+            <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+
+            <img *ngIf="showBadgeLikes" src="/assets/badges/likesBadge.png" alt="Likes Badge" class="badge-image unlocking-animation">
 
           <button class="btn share-btn" (click)="shareAchievement()">Share</button>
         </div>

@@ -1,7 +1,7 @@
 <div class="background">
     <div class="home-container">
-      <div class="game-scroll" *ngFor="let game of games">
-        <div class="white-block">
+      <div class="game-scroll" *ngFor="let game of games; let i = index">
+        <div class="white-block" [ngClass]="{ 'special-block': game.id === 4 || game.id === 5 }">
           <div class="game-details" (click)="navigateToGame(game)">
             <h3 class="game-title">{{ game.name }}</h3>
             <h4 class="game-subtitle">{{ game.subtitle }}</h4>  

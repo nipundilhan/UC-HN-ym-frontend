@@ -49,7 +49,9 @@ export class MindmapSubmissionComponent implements OnInit {
   studentData: any;
   badgeClass: string = 'badge-grey'; // Initially grey
   // showPadlock: boolean = false;
-  showBadge: Boolean = false;
+  showBadge01: Boolean = false;
+  showBadge02: Boolean = false;
+  showBadgeLikes: Boolean = false;
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
 
   constructor(
@@ -141,6 +143,9 @@ export class MindmapSubmissionComponent implements OnInit {
   closeAddMindmapModal(): void {
     this.isAddMindmapModalOpen = false;
     this.mindmapForm.reset();
+    this.mindmapForm.patchValue({ date: this.getTodayDate() });
+    this.mindmapForm.patchValue({ status: 'Started'});
+
   }
 
   onSubmitMindmap(): void {
@@ -212,26 +217,63 @@ export class MindmapSubmissionComponent implements OnInit {
     }
   }
   checkAchievement(): void {
-
     const gamePoints = this.studentData.module1.game1.gamePoints;
-    console.log(gamePoints);
-
-    if (gamePoints === 4) {
-    this.isAchievementPopupOpen = true; // Show achievement popup
-
-    // Show the padlock initially
-    this.isPadlockVisible = true;
-
-     // Fade out the padlock after 4 seconds (by reducing opacity)
-     setTimeout(() => {
-      this.isPadlockVisible = false; // Set opacity to 0 (invisible)
-    }, 2500);
-
-    this.showBadge = true; //show badge
-    this.badgeClass = 'unlocking-animation'; // Trigger badge color change after padlock disappears
+    const likesCount = this.studentData.module1.game1.likesCount; // Assuming you have a way to fetch likes count
+    console.log('Game Points:', gamePoints);
+    console.log('Likes Count:', likesCount);
   
+    // Reset badges at the beginning
+    this.showBadge01 = false;
+    this.showBadge02 = false;
+    this.showBadgeLikes = false; // New badge for likes
+  
+    // Check for achievements based on game points
+    if (gamePoints === 3) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge01 = true; // Show badge 01
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    } 
+    else if (gamePoints === 5) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge02 = true; // Show badge 02
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    }
+  
+    // Check for likes achievement
+    if (likesCount >= 10) { // Example condition: unlock badge if likes are 10 or more
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadgeLikes = true; // Show likes badge
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
     }
   }
+  
 
   shareAchievement(): void {
     this.isAchievementPopupOpen = false;

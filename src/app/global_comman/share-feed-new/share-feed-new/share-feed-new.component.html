@@ -1,0 +1,32 @@
+<div class="background">
+    <div class="content-wrapper">
+      <!-- Tabs Container -->
+  <!-- Tabs Container -->
+  <div class="tabs-container">
+    <button [routerLink]="['/share/notifications']" routerLinkActive="active">
+      <img src="/assets/icons/icon03.png" alt="Notifications Icon"> Notifications
+    </button>
+    <button [routerLink]="['/share/peers']" routerLinkActive="active">
+      <img src="/assets/icons/icon05.png" alt="My Peers Icon"> My Peers
+    </button>
+    <button [routerLink]="['/share/mindmaps']" routerLinkActive="active">
+      <img src="/assets/icons/icon04.png" alt="Mind Maps Icon"> Mind Maps
+    </button>
+    <button [routerLink]="['/share/questions']" routerLinkActive="active">
+      <img src="/assets/icons/icon01.png" alt="Questions Icon"> Questions
+    </button>
+  </div>
+  
+      <!-- Feed Container - Load separate components for each tab -->
+      <div class="feed-container">
+        <router-outlet></router-outlet>
+        <!-- <app-notifications *ngIf="selectedTab === 'notifications'"></app-notifications>
+        <app-peers *ngIf="selectedTab === 'myPeers'"></app-peers>
+        <app-mindmaps *ngIf="selectedTab === 'mindmaps'"></app-mindmaps>
+        <app-questions *ngIf="selectedTab === 'questions'"></app-questions> -->
+      </div>
+    </div>
+  </div>
+
+
+  

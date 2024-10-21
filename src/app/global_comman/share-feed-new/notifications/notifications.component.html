@@ -1,0 +1,14 @@
+<div *ngFor="let item of notifications" class="feed-item" [style.borderBottom]="'1px solid #e0e0e0'">
+    <div class="user-info">
+      <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+      <div class="user-details">
+        <span class="username">{{ item.username }}</span>
+        <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+      </div>
+    </div>
+    <div class="shared-content">
+      <p>{{ item.description }}</p>
+      <img [src]="item.imageUrl" alt="Badge Image" class="shared-image badge-image">
+    </div>
+  </div>
+  

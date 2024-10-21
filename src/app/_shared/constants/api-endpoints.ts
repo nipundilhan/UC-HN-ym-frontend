@@ -3,6 +3,10 @@ const TOUR_BASE = '/tours';
 const USER_BASE = '/user';
 const TUTE_BASE = '/tutorial';
 const MODULE_BASE = '/modules';
+const MOOD_BASE = '/moods';
+const QANDA_BASE = '/QandA';
+
+
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -33,7 +37,17 @@ export const API_ENDPOINTS = {
   MODULES: {
     BASE: MODULE_BASE,
     GET_BY_STUDENT_ID: `${MODULE_BASE}/findPointsByStudent/`,
-  }
+  },
+  MOODS: {
+    BASE: MOOD_BASE,
+    GET_ALL: `${MOOD_BASE}/all`,
+  },
+  QANDA: {
+    BASE: QANDA_BASE,
+    SHARED_QNA: `${QANDA_BASE}/sharedQandA`,
+    SHARE: `${QANDA_BASE}/share`,
+    RATE:`${QANDA_BASE}/rate`,
+  },
   
 
   /* 
