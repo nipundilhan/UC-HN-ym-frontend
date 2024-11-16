@@ -41,6 +41,9 @@ import { NotificationsComponent } from './global_comman/share-feed-new/notificat
 import { PeersComponent } from './global_comman/share-feed-new/peers/peers.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindmaps.component';
+import { Game1BreathingComponent } from './module2_emotional/game1-breathing/game1-breathing.component';
+import { LearnMindmapsComponent } from './module1_exam_prep/game1_mindmaps/learn-mindmaps/learn-mindmaps/learn-mindmaps.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindm
     NotificationsComponent,
     PeersComponent,
     QuestionsComponent,
-    MindmapsComponent
+    MindmapsComponent,
+    Game1BreathingComponent,
+    LearnMindmapsComponent,
+    MessagesComponent,
     ],
   imports: [
     BrowserModule,

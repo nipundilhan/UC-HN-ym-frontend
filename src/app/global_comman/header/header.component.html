@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">YoungMind</a> 
+      <a class="navbar-brand" routerLink="/home">YM</a> 
       
       <!-- Comment out or remove the navbar-toggler button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,8 +10,95 @@
       <div class="collapse navbar-collapse show"> <!--Ensure .show class is added to keep it visible -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center" routerLink="/admin">Admin</a>
+              <a class="nav-link d-flex align-items-center" routerLink="/admin">admin</a>
             </li>
+           
+            <!-- Dropdown for Messages -->
+    <li class="nav-item dropdown">
+      <a
+        class="nav-link dropdown-toggle d-flex align-items-center"
+        id="messagesDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <!-- Custom Envelope Image -->
+        <img
+          src="assets/message-icon.png"
+          alt="Messages"
+          class="envelope-icon"
+        />
+        <span class="badge bg-danger ms-1">{{ importantMsgCount }}</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="messagesDropdown">
+        <ng-container *ngIf="recentMessages.length > 0; else noMessages">
+          <li *ngFor="let msg of recentMessages">
+            <a class="dropdown-item">
+              <!-- <strong *ngIf="msg.status === 'IMPORTANT'" class="text-danger">Important: </strong> -->
+
+              <span class="fw-bold">{{ msg.title }}</span>
+              
+              
+
+              <div class="message-content" style="display: flex; flex-direction: column; gap: 0;">
+                <div [innerHTML]="msg.message | slice: 0:50"></div>
+                <a href="#" (click)="openMessagePopup(msg, $event)" class="see-more">See more...</a>
+              </div>
+              
+              <!-- <br> -->
+              <!-- <small>{{ msg.date | date: 'short' }}</small> -->
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <a
+              class="dropdown-item text-center fw-bold"
+              (click)="redirectToMessagesPage()"
+            >
+              View All Messages
+            </a>
+          </li>
+        </ng-container>
+        <ng-template #noMessages>
+          <li><a class="dropdown-item">No messages available.</a></li>
+        </ng-template>
+      </ul>
+   
+
+              
+            
+              <!-- Message Popup -->
+              <ng-container *ngIf="selectedMessage">
+                <div class="modal fade show d-block" tabindex="-1" [style.background]="'rgba(0, 0, 0, 0.5)'" id="messagePopup">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">{{ selectedMessage.title }}</h5>
+                      </div>
+                      <div class="modal-body">
+                        <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(selectedMessage.message)"></div>
+                        <small class="text-muted">{{ selectedMessage.relativeDate }}</small>
+                      </div>
+                      
+                      
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          (click)="closeMessagePopup()"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+         
+            
+            
                     <!-- Points Nav Item -->
               <li class="nav-item">
                 <a *ngIf=" isLoggedIn()" class="nav-link d-flex align-items-center">
@@ -35,7 +122,7 @@
                       <li> <a class="dropdown-item" routerLink="/home"><i class="fas fa-home icon-home" style="color: #070707;"></i>  Home</a></li>
                       <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user-circle"></i>  Profile</a></li>
                       <li><a class="dropdown-item"routerLink="/share"><i class="fas fa-users" style="color: #070707;"></i>  Share</a></li>
-                      <li><a class="dropdown-item"routerLink="/upload"><i class="fas fa-users" style="color: #070707;"></i>  Upload</a></li>
+                      <!-- <li><a class="dropdown-item"routerLink="/upload"><i class="fas fa-users" style="color: #070707;"></i>  Upload</a></li> -->
                       <li><a class="dropdown-item" href="/hometest"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-power-off" style="color: #070707;"></i>  Logout</a></li>

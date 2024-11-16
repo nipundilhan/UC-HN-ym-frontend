@@ -27,6 +27,9 @@ import { PeersComponent } from './global_comman/share-feed-new/peers/peers.compo
 import { QuestionsComponent } from './questions/questions.component';
 import { ShareFeedNewComponent } from './global_comman/share-feed-new/share-feed-new/share-feed-new.component';
 import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindmaps.component';
+import { Game1BreathingComponent } from './module2_emotional/game1-breathing/game1-breathing.component'; 
+import { LearnMindmapsComponent } from './module1_exam_prep/game1_mindmaps/learn-mindmaps/learn-mindmaps/learn-mindmaps.component';
+import { MessagesComponent } from './messages/messages.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -43,10 +46,15 @@ const routes: Routes = [
   // { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
   { path: 'learn-tutorials', component: LearnTutorialsComponent },
+  { path: 'learn-mindmaps', component: LearnMindmapsComponent },
+
   { path: 'play-mindmaps', component: MindmapSubmissionComponent },
   { path: 'play-questions', component: ViewQuestionsComponent },
   { path: 'game-map', component: GameMapComponent },
- 
+  { path: 'breathing', component: Game1BreathingComponent },
+
+  { path: 'messages', component: MessagesComponent },
+
  { path: 'share',
     component: ShareFeedNewComponent,
     children: [
@@ -57,7 +65,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'notifications', pathMatch: 'full' }  // Default to notifications tab
     ]
   },
-  { path: '**', redirectTo: '/share/notifications' } ,
+  // { path: '**', redirectTo: '/share/notifications' } ,
 
   {
     path: 'admin',

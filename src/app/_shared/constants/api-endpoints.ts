@@ -5,6 +5,7 @@ const TUTE_BASE = '/tutorial';
 const MODULE_BASE = '/modules';
 const MOOD_BASE = '/moods';
 const QANDA_BASE = '/QandA';
+const NOTIFICATIONS_BASE = '/notifications';
 
 
 
@@ -47,6 +48,10 @@ export const API_ENDPOINTS = {
     SHARED_QNA: `${QANDA_BASE}/sharedQandA`,
     SHARE: `${QANDA_BASE}/share`,
     RATE:`${QANDA_BASE}/rate`,
+  },
+  NOTIFICATIONS: {
+    BASE: NOTIFICATIONS_BASE,
+    MESSAGES: `${NOTIFICATIONS_BASE}/messages`,
   },
   
 

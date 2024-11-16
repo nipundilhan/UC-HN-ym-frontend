@@ -1,0 +1,52 @@
+<div class = "background">
+<div class="container mt-4">
+    <h1 class="text-center mb-4">My Messages</h1>
+  
+    <!-- Messages List -->
+    <div class="messages-list">
+      <div class="message-card" *ngFor="let msg of allMessages">
+        <div class="message-content">
+          <h5 class="message-title">{{ msg.title }}</h5>
+          
+          <div class="message-preview">
+            <!-- {{ msg.message | slice: 0:100 }}<span *ngIf="msg.message.length > 100">...</span> -->
+            <span *ngIf="msg.message.length > 95" [innerHTML]="msg.message.slice(0, 95) + '...'"></span>
+
+            <!-- Display full message without truncation -->
+            <span *ngIf="msg.message.length <= 95" [innerHTML]="msg.message"></span>
+        </div>
+
+        </div>
+        <button class="btn open-btn" (click)="openMessagePopup(msg)">Open</button>
+      </div>
+    </div>
+  
+   <!-- Popup Modal -->
+<div
+class="message-popup"
+*ngIf="selectedMessage"
+[class.show]="isPopupOpen"
+(click)="closePopup($event)"
+>
+<div class="popup-content" (click)="stopPropagation($event)">
+  <!-- Header -->
+  <div class="popup-header">
+    <h3>{{ selectedMessage.title }}</h3>
+  </div>
+
+  <!-- Body -->
+  <div class="popup-body">
+    <div [innerHTML]="selectedMessage.message"></div>
+    <!-- <p>{{ selectedMessage.message }}</p> -->
+  </div>
+
+  <!-- Footer -->
+  <div class="popup-footer">
+    <button class="btn close-btn" (click)="closePopup($event)">Close</button>
+  </div>
+</div>
+</div>
+
+  </div>
+</div>
+  

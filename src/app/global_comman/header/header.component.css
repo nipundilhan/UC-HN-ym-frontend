@@ -79,12 +79,26 @@
   margin-right: 8px; /* Space between icon and text */
 }
 
+.envelope-icon {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2)); /* White shadow around the icon's shape */
+}
+
 /* Points Count styling */
 .points-count {
   color: white;
   font-size: 18px;
   font-weight: bold;
   font-family: 'MedievalSharp', sans-serif;
+}
+
+.bg-danger{
+  /* padding: 2px; */
+  background-color: rgb(134 5 5) !important;
+  border: 1px solid #ffffff;
+  color: #ffffff;
 }
 
 /* Dropdown menu styling */
@@ -98,20 +112,62 @@
 
 .dropdown-item {
   color: rgb(0, 0, 0);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   font-family: 'MedievalSharp', sans-serif;
   padding: 10px 20px;
 }
 
 .dropdown-item:hover {
-  background-color: rgb(205, 65, 18, 0.8);
+  background-color: rgba(236, 119, 81, 0.343);
   border-radius: 15px;
 }
 
 .dropdown-divider {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(67, 63, 63);
 }
+/* Dropdown Messages Styling */
+.message-preview {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+.message-content{
+  font-size: 13px;
+  color:#4d4b4b;
+  margin-bottom: 0; /* Remove any bottom margin */
+  /* padding-bottom: 10px;
+  border-bottom: 1px dashed #b3acac;  */
+}
+
+.see-more {
+  margin-top: 0;
+  font-size: 12px;
+  color: rgb(205, 65, 18);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.view-more {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: rgb(205, 65, 18);
+}
+
+.modal-content {
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'MedievalSharp', sans-serif;
+}
+.modal-header {
+  background-color: #f8f9fa;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 
 /* Responsive styles for mobile view */
 @media (max-width: 600px) {
