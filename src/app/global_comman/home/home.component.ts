@@ -44,15 +44,17 @@ games = [
     id: 4,
     name: 'Whispers of the Sphinx',
     subtitle: 'Breathing Mastery',
-    hieroglyphImage: 'assets/hieroglyph3.png', 
+    hieroglyphImage: 'assets/hieroglyph4.png', 
     // hieroglyph: '𓎛',
-    scrollImage: 'assets/scroll.png'
+    scrollImage: 'assets/scroll.png',
+    route: '/breathing' 
+
   },
   {
     id: 5,
-    name: 'Pharaoh’s Trial',
-    subtitle: 'Question Mastery',
-    hieroglyphImage: 'assets/hieroglyph3.png', 
+    name: 'Calm of the Oasis',
+    subtitle: 'Journalling Mastery',
+    hieroglyphImage: 'assets/hieroglyph5.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png'
   }
