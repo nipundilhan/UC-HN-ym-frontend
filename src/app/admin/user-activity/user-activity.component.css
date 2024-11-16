@@ -1,0 +1,215 @@
+/* General Page Layout */
+.admin-page {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Create Message Button */
+.create-message-btn {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.create-message-btn button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.create-message-btn button:hover {
+    background-color: #45a049;
+}
+
+/* Popup Styles */
+.create-message-popup {
+    display: block; /* Ensure it's set to block when visible */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000;
+    width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Optional: Hide popup by default */
+  .create-message-popup[hidden] {
+    display: none;
+  }
+
+.create-message-popup.show {
+    display: block;
+}
+
+.popup-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+input, select {
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between; /* Add space between the buttons */
+    gap: 10px; /* Optional: Add some space between buttons */
+    margin-top: 15px; /* Add space between the buttons and form fields */
+  }
+  
+  .button-row button {
+    flex: 1; /* Optional: Make both buttons the same width */
+    padding: 10px 15px; /* Consistent padding */
+  }
+
+/* Angular Editor Styling */
+.angular-editor {
+    margin-top: 10px;
+    min-height: 150px; /* Adjust height as needed */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+/* Messages Table */
+.messages-table {
+    margin-top: 40px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.messages-table h3 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #dcdcdc;
+    font-weight: bold;
+}
+
+/* Status tag styles */
+.status-important {
+    background-color: #dc3545;  /* Green */
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+  }
+  
+  .status-none {
+    background-color: #ffc107;  /* Yellow */
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+  }
+  
+  .status-hidden {
+    background-color: #000000;  /* Red */
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+  }
+
+/* td button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #0056b3;
+} */
+
+/* Popup Close Button */
+button[type="button"] {
+    background-color: #f44336;
+    margin-top: 5px;
+}
+
+button[type="button"]:hover {
+    background-color: #e41f26;
+}
+
+.user-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height:20px;
+  }
+
+  .user-actions button:hover{
+    color: rgb(84, 114, 156);
+  }
+  
+  .user-actions .material-icons {
+    cursor: pointer;
+    color: black;
+  }
+

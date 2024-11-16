@@ -1,1 +1,86 @@
-<p>user-activity works!</p>
+<!-- admin-messages.component.html -->
+<div class="admin-page">
+    <h1>Admin Messages</h1>
+
+    <!-- Create New Message Button -->
+    <div class="create-message-btn">
+        <button (click)="openCreateMessagePopup()">Send New Message</button>
+    </div>
+
+    <!-- Create/Edit Message Popup -->
+    <div *ngIf="isPopupOpen" class="create-message-popup">
+        <div class="popup-content">
+            <h3>{{ editingMessage ? 'Edit Message' : 'Create New Message' }}</h3>
+            <form (ngSubmit)="editingMessage ? saveEditedMessage() : createMessage()" #messageForm="ngForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" [(ngModel)]="editingMessage ? editingMessage.title : newMessage.title" name="title" required />
+
+                <label for="message">Message:</label>
+                <!-- Angular Editor for Message -->
+                <angular-editor 
+                    [(ngModel)]="editingMessage ? editingMessage.message : newMessage.message" 
+                    [config]="editorConfig" 
+                    name="message"
+                    required>
+                </angular-editor>
+
+                <label for="status">Status:</label>
+                <select id="status" [(ngModel)]="editingMessage ? editingMessage.status : newMessage.status" name="status" required>
+                    <option value="IMPORTANT">IMPORTANT</option>
+                    <option value="NONE">NONE</option>
+                    <option value="HIDDEN">HIDE</option>
+                </select>
+
+                <!-- Button Row -->
+                <div class="button-row">
+                    <!-- Always enabled Save Changes button -->
+                    <button type="submit" [disabled]="!messageForm.valid">
+                        {{ editingMessage ? 'Save Changes' : 'Submit' }}
+                    </button>
+                    <button type="button" (click)="closePopup()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Messages Table -->
+    <div class="messages-table">
+        <!-- <h3>Existing Messages</h3> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let msg of messages">
+                    <td>{{ msg.title }}</td>
+                    <td>{{ msg.date | date: 'MMM d, y, h:mm a' }}</td> <!-- Format the date inline -->
+                    <!-- <td>{{ msg.status }}</td> -->
+
+                    <td>
+                        <span [ngClass]="{
+                          'status-important': msg.status === 'IMPORTANT',
+                          'status-none': msg.status === 'NONE',
+                          'status-hidden': msg.status === 'HIDDEN'
+                        }">
+                          {{ msg.status }}
+                        </span>
+                      </td>
+
+                    <td class="user-actions">
+                        <button (click)="editMessage(msg)">
+                          <span class="material-icons">edit</span>
+                        </button>
+                        <!-- <button (click)="deleteMessage(msg)">
+                          <span class="material-icons">delete</span>
+                        </button> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
