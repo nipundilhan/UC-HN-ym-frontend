@@ -69,81 +69,99 @@ constructor(
 ) { }
 
 ngOnInit(): void {
-  //  this.router.navigate(['/view-tutorials']);
-  // localStorage.removeItem('lastMoodDate'); 
-
   const narratorContainer = document.getElementById('narrator-container') as HTMLElement;
   const submitButton = document.getElementById('submit-mood') as HTMLButtonElement;
   const laterButton = document.getElementById('later') as HTMLButtonElement;
 
+  const today = new Date().toISOString().split('T')[0]; // Format date as "YYYY-MM-DD"
 
-  // Ensure dialog opens if user hasn't interacted today
-  const lastAnswered = localStorage.getItem('lastMoodDate');
-  const today = new Date().toLocaleDateString();
+  // Fetch moods from the database
+  this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+    (response: any) => {
+      const moods = response.moods; 
+      
+      // Check if today's mood is logged as "missed"
+      const todayMoodMissed = moods.some((mood: any) => mood.date === today && mood.mood === "missed");
 
-  if (lastAnswered !== today) {
-    narratorContainer.addEventListener('click', () => {
-      narratorContainer.classList.add('show');
-    });
-  }
-  else {
-  narratorContainer.style.display = 'none';
+      if (todayMoodMissed) {
+        // Show dialog if today's mood is "missed"
+        if (narratorContainer) {
+          narratorContainer.addEventListener('click', () => {
+            narratorContainer.classList.add('show');
+          });
+        }
+      } else {
+        // Hide narrator if today's mood is not "missed"
+        if (narratorContainer) {
+          narratorContainer.style.display = 'none';
+        }
+      }
+    },
+    (httpError: any) => {
+      console.log(httpError);
+      alert("An error occurred while fetching mood data");
     }
-
-
-  
+  );
 
   // Handle Submit button click
-// Handle Submit button click
-if (submitButton) {
-  submitButton.addEventListener('click', () => {
-    const selectedMood = document.querySelector('input[name="mood"]:checked') as HTMLInputElement;
-    if (selectedMood) {
-      localStorage.setItem('lastMoodDate', today);
-      localStorage.setItem('mood', selectedMood.value);
+  if (submitButton) {
+    submitButton.addEventListener('click', () => {
+      const selectedMood = document.querySelector('input[name="mood"]:checked') as HTMLInputElement;
+      if (selectedMood) {
+        const requestBody = {
+          studentId: this.userAuthService.getUserId(),
+          date: today, // Use today's date
+          mood: selectedMood.value
+        };
 
-      const requestBody = {
-        studentId: this.userAuthService.getUserId(),
-        date: this.getCurrentDate(),  // Use today's date
-        mood: selectedMood.value
-      };
+        this.apiCallService.executePostNoAuth(API_ENDPOINTS.MOODS.BASE, requestBody).subscribe(
+          (response: any) => {
+            // Handle success response
+          },
+          (httpError: any) => {
+            console.log(httpError);
+            alert("An error occurred while logging the mood");
+          }
+        );
 
-      this.apiCallService.executePostNoAuth(API_ENDPOINTS.MOODS.BASE, requestBody).subscribe(
-        (response: any) => {
-          // Handle success response
-        },
-        (httpError: any) => {
-          console.log(httpError);
-          alert("An error occurred while logging the mood");
+        // Hide the narrator container after submitting mood
+        if (narratorContainer) {
+          narratorContainer.style.display = 'none';
+          console.log(selectedMood.value);
         }
-      );
-
-      // Hide the narrator container after submitting mood
-      
-      if (narratorContainer) {
-        narratorContainer.style.display = 'none';
-        console.log(selectedMood.value);
       }
-    }
-  });
-}
+    });
+  }
 
   // Handle Later button click
   if (laterButton) {
     laterButton.addEventListener('click', () => {
       if (narratorContainer) {
         narratorContainer.style.bottom = '-230px';
-        
         this.router.navigate(['/test']);
       }
     });
   }
+
 
   // if (narratorContainer) {
   //   narratorContainer.addEventListener('click', () => {
   //     narratorContainer.style.bottom = '50px';
   //   });
   // }
+}
+
+
+// Function to fetch mood data from API
+fetchMoodData(): void {
+  this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+    (response: any) => {
+
+    },
+    (error) => {
+      console.error('Error fetching mood data:', error);
+    }
+  );
 }
 
 getCurrentDate(): string {
