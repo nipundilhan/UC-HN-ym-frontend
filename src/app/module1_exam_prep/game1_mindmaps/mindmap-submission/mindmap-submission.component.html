@@ -102,8 +102,12 @@
                   <div *ngIf="f['description'].errors['required']">Description is required</div>
                 </div>
 
+                <!-- <label for="image">Upload Mindmap Image:</label>
+                <input type="file" id="image" (change)="onFileSelected($event)"> -->
                 <label for="image">Upload Mindmap Image:</label>
                 <input type="file" id="image" (change)="onFileSelected($event)">
+                <div *ngIf="fileSizeError" class="error-message">File size exceeds the 2MB limit.</div>
+
               <!-- </div> -->
   
               <!-- <div class="form-group"> -->

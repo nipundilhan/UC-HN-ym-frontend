@@ -219,7 +219,7 @@ button[type="button"]:hover {
     margin-top: 20px; /* Space above pagination */
     padding: 10px 0; /* Padding around the controls */
     width: 100%; /* Ensure it spans the full width */
-  
+    align-items: center;
   }
   
   .pagination-controls button {

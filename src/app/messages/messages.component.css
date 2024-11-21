@@ -21,6 +21,13 @@
     margin: 0 auto;
 
   }
+
+  .container h1{
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), /* Outer glow */
+    0 0 20px rgba(255, 255, 255, 0.6), 
+    0 0 30px rgba(255, 255, 255, 0.4);
+}
+  
   
   /* Card styling for messages */
   .messages-list {
@@ -78,13 +85,8 @@
     color: white;
   }
 
-  /* .close-btn:hover  {
-    opacity:0.9;
-  }
-   */
-  
-  /* Popup modal styling */
-/* Popup modal styling */
+
+
 .message-popup {
     position: fixed;
     top: 0;
@@ -159,7 +161,7 @@
   margin-top: 20px; /* Space above pagination */
   padding: 10px 0; /* Padding around the controls */
   width: 100%; /* Ensure it spans the full width */
-
+  align-items: center;
 }
 
 .pagination-controls button {

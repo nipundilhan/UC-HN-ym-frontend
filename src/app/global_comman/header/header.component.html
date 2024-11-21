@@ -30,7 +30,7 @@
         />
         <span class="badge bg-danger ms-1">{{ importantMsgCount }}</span>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="messagesDropdown">
+      <ul class="dropdown-menu" aria-labelledby="messagesDropdown">
         <ng-container *ngIf="recentMessages.length > 0; else noMessages">
           <li *ngFor="let msg of recentMessages">
             <a class="dropdown-item">
@@ -48,9 +48,9 @@
               <!-- <small>{{ msg.date | date: 'short' }}</small> -->
             </a>
           </li>
-          <!-- <li>
+          <li>
             <hr class="dropdown-divider" />
-          </li> -->
+          </li>
           <li>
             <a
               class="dropdown-item text-center fw-bold"

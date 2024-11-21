@@ -53,6 +53,7 @@ export class MindmapSubmissionComponent implements OnInit {
   showBadge02: Boolean = false;
   showBadgeLikes: Boolean = false;
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
+  fileSizeError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -134,9 +135,20 @@ export class MindmapSubmissionComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
+
     if (file) {
-      this.selectedFile = file;
+      const maxSizeInMB = 2;
+      const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+
+      if (file.size > maxSizeInBytes) {
+        this.fileSizeError = true;
+        event.target.value = ''; // Clear the input
+      } else {
+        this.fileSizeError = false;
+        // Process the file if needed
+        console.log('File accepted:', file.name);
+      }
     }
   }
 
@@ -150,7 +162,8 @@ export class MindmapSubmissionComponent implements OnInit {
 
   onSubmitMindmap(): void {
     this.submitted = true;
-    if (this.mindmapForm.invalid) {
+    if (this.mindmapForm.invalid || this.fileSizeError) {
+      this.mindmapForm.markAllAsTouched();
       return;
     }
 
