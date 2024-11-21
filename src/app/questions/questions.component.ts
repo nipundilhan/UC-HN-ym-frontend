@@ -3,6 +3,7 @@ import { ApiCallService } from 'src/app/_services/api-call.service';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { AvatarService } from 'src/app/_services/avatar.service';  // Import the AvatarService
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-questions',
@@ -15,10 +16,12 @@ export class QuestionsComponent implements OnInit {
     public apiCallService: ApiCallService,
     private userAuthService: UserAuthService,
     private cdr: ChangeDetectorRef,
-    private avatarService: AvatarService,) { }
+    private avatarService: AvatarService,
+    private sanitizer: DomSanitizer) { }
 
   selectedQuestion: any;
-  isQuestionModalOpen = false;
+  sanitizedAnswer!: SafeHtml;
+ isQuestionModalOpen = false;
   questions: any[] = [];
   public avatarPath: string = '';
   currentPage: number = 1; // Current page number
@@ -89,7 +92,9 @@ getUserAvatar(ownerAvatarCode: string): string {
 
   openQuestion(question: any): void {
     this.selectedQuestion = question;
-    this.selectedQuestion.answer = this.stripHtmlTags(this.selectedQuestion.answer); // Strip HTML tags from the answer
+    // Sanitize the HTML content before assigning it to the answer
+    // this.selectedQuestion.answer = this.sanitizer.bypassSecurityTrustHtml(this.selectedQuestion.answer);
+    this.sanitizedAnswer = this.sanitizer.bypassSecurityTrustHtml(this.selectedQuestion.answer);
 
     this.isQuestionModalOpen = true;
   }
@@ -99,10 +104,9 @@ getUserAvatar(ownerAvatarCode: string): string {
     }
 
   likeQuestion() {
-  
-
     const requestBody = {
-      ownerStudentId: this.selectedQuestion.ownerStudentId,
+      // ownerStudentId: this.selectedQuestion.ownerStudentId,
+      ownerUserName: this.selectedQuestion.ownerStudentName,
       rateStudentId: this.userAuthService.getUserId(),
       QandAId: this.selectedQuestion._id,  
       // rate: "LIKE"

@@ -80,7 +80,7 @@
     -webkit-box-orient: vertical; /* Webkit browsers */
     -webkit-line-clamp: 3; /* Limit to 3 lines on Webkit browsers */
     line-clamp: 3; /* Non-standard but future-proof */
-    height: auto;
+    height: 50px;
     transition: height 0.3s ease; /* Smooth transition when expanding */
   }
 
@@ -116,15 +116,16 @@
   }
 
   .modal-content  .like-button {
-    background-color: #fceec4; /* Make background transparent */
-    border: 2px solid #f8e096; /* Remove border */
+    background-color: #e8e8f7; /* Make background transparent */
+    border: 1.5px solid #7e82c9; /* Remove border */
+    color: #7e82c9;
     border-radius: 8px;
   }
 
   .modal-content .like-button.liked {
-    background-color: #34aa3f !important; 
-    color: #ffffff !important; 
-    border: 1px solid #ffffff;
+    background-color: #e7fbe9 !important; 
+    color: #34aa3f !important; 
+    border: 1.5px solid #34aa3f;
 }
   
 
@@ -325,4 +326,15 @@
     .question-card {
         width: 100%; /* Make sure the card width is 100% of its container */
     }
+    .question-content p{
+      font-size: 0.8rem;
+    }
+    .user-info .username,
+    .user-info .shared-date{
+      font-size: 0.9rem;
+    }
+    .like-count{
+      font-size: 0.8rem;
+    }
+
 }

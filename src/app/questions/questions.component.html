@@ -56,8 +56,8 @@
           </div>
 
           <div class="form-field">
-              <label>Answer:</label>
-              <div class="field-value" [innerHTML]="selectedQuestion.answer"></div>
+            <label>Answer:</label>
+            <div class="field-value" [innerHTML]="sanitizedAnswer"></div>
           </div>
 
 
@@ -70,14 +70,14 @@
         }"
     >
     <!-- <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon"> -->
-    <i class="fas fa-heart" 
+    <!-- <i class="fa-regular fa-heart" 
     [ngClass]="{
       'heart-like-icon-disabled': selectedQuestion.liked === 'YES',
       'heart-like-icon': selectedQuestion.liked === 'NO'
     }">
- </i>
-          <span *ngIf="selectedQuestion.liked === 'NO'"> I like this!</span>
-          <span class *ngIf="selectedQuestion.liked !== 'NO'"> Liked</span>
+ </i> -->
+          <span *ngIf="selectedQuestion.liked === 'NO'"><i class="fa-regular fa-heart"></i> Like</span>
+          <span class *ngIf="selectedQuestion.liked !== 'NO'"><i class="fa-solid fa-heart"></i> Liked</span>
           <span *ngIf="selectedQuestion.liked === 'UNABLED'"></span>
         </button>
         <!-- <span class="like-count">{{ selectedQuestion.likesCount }} Likes</span> -->
