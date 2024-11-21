@@ -1,0 +1,180 @@
+<div class="background">
+
+  <div class="sidenav">
+    <div class="badge-header">
+      <h4>My Badges</h4>
+    </div>
+    <div class="badge-list">
+      <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
+              'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more breathing sessions needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Eye of Horus</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+
+        <h1 class="game-title">Breathing Mastery</h1>
+        <button class="add-button" (click)="openBreathingPopup()">✨ Start Breathing Exercise ✨</button>
+
+        <div class="records-container" *ngIf="BreathingData.length > 0">
+          <div class="record-card" *ngFor="let breathing of BreathingData">
+            <div class="record-image">
+              <img src="/assets/breathing-icon.png" alt="Egyptian Theme">
+            </div>
+            <div class="record-header">
+              <h5>{{ breathing.techniqueCode }}</h5>
+            </div>
+            <div>
+              <ng-container *ngIf="breathing.cycles; else timeSpentTemplate">
+                <div class= "time-cycle" >{{ breathing.cycles }} cycles</div>
+              </ng-container>
+              <ng-template #timeSpentTemplate>
+                <div class="time-cycle">{{ breathing.time }} minutes</div>
+              </ng-template>
+            </div>
+            <div class="status-tag">
+              <div>{{ breathing.date }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class = "no-breathing-sessions" *ngIf="!BreathingData.length">
+          No Breathing Sessions Added Yet.
+        </div>
+
+        <div *ngIf="isPopupVisible" class="modal">
+          <div class="modal-background">
+            <div class="modal-content">
+              <span class="close-icon" (click)="closeBreathingPopup()">&times;</span>
+        
+              <h2>Breathing Exercise</h2>
+        
+              <form [formGroup]="breathingForm">
+                <!-- Page 1: Select Technique -->
+                <div *ngIf="currentPage === 1">
+                  <div class="form-group">
+                    <label for="technique">Breathing Technique:</label>
+                    <select id="technique" formControlName="technique">
+                      <option value="" disabled selected>Select Technique</option>
+                      <option value="Box-breathing">Box Breathing</option>
+                      <option value="4-7-8">4-7-8 Technique</option>
+                      <option value="Belly Breathing">Belly Breathing</option>
+                      <option value="Alternate Nostril Breathing">Alternate Nostril Breathing</option>
+                    </select>
+                  </div>
+        
+                                  <!-- Practice Options -->
+                <div *ngIf="showPracticeOptions" class="form-group-radio">
+                  <label>Practice Option:</label>
+                  <div class="radio-group">
+                    <div class="radio-item">
+                      <input
+                        type="radio"
+                        formControlName="practiceOption"
+                        value="system"
+                        id="systemOption"
+                      />
+                      <label for="systemOption">Practice within Application</label>
+                    </div>
+                    <div class="radio-item">
+                      <input
+                        type="radio"
+                        formControlName="practiceOption"
+                        value="log"
+                        id="logOption"
+                      />
+                      <label for="logOption">Log Details Only</label>
+                    </div>
+                  </div>
+                </div>
+
+
+                  <!-- Next Button -->
+                <div class="button-group">
+                  <button class="back-next-btn" (click)="goToNextPage()">Next</button>
+                </div>
+                </div>
+        
+                <!-- Page 2: Time or Cycles Input -->
+                <div *ngIf="currentPage === 2">
+                  <!-- For Diaphragmatic or Logging Time -->
+                  <div *ngIf="selectedTechnique === 'Belly Breathing' || selectedTechnique === 'Alternate Nostril Breathing' || breathingForm.value.practiceOption === 'log'">
+                    <label for="timeSpent">Time Spent (minutes):</label>
+                    <input id="timeSpent" type="number" formControlName="timeSpent" />
+                  </div>
+        
+                  <!-- For Practicing Cycles -->
+                  <div *ngIf="breathingForm.value.practiceOption === 'system'">
+                    <label for="cycles">Number of Cycles:</label>
+                    <select id="cycles" formControlName="cycles">
+                      <option *ngFor="let cycle of [2, 5, 10, 15, 20]" [value]="cycle">{{ cycle }} Cycles</option>
+                    </select>
+                  </div>
+                </div>
+        
+                <!-- Navigation Buttons -->
+                <div class="button-group">
+                  <!-- Back Button -->
+                  <button *ngIf="currentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
+        
+                  <!-- Start Session Button -->
+                  <button *ngIf="currentPage === 2 && breathingForm.value.practiceOption === 'system'" 
+                  class="log-start-btn" 
+                  (click)="startBreathingSession()">
+                  Start Session
+                  </button>
+
+                  <!-- Log Details Button -->
+                  <button *ngIf="currentPage === 2 && breathingForm.value.practiceOption === 'log'" 
+                  class="log-start-btn" 
+                  (click)="onSubmit()">
+                  Log Details
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+<!-- Breathing session controls (display after session starts) -->
+<div *ngIf="sessionRunning" class="modal">
+  <div class="breathing-session">
+    <h3>{{ selectedTechnique | titlecase }}</h3>
+
+    <div class="breathing-animation" [ngClass]="{'paused': sessionPaused}">
+      <p>Breathe in... breathe out...</p>
+      <div class="gif animation">
+        <img [src]="gifSource" alt="Breathing Animation" *ngIf="!sessionPaused" />
+      </div>
+    </div>
+
+    <div class="session-controls">
+      <!-- <button (click)="togglePauseResume()">{{ sessionPaused ? 'Resume' : 'Pause' }}</button> -->
+      <button (click)="stopSession()">Stop</button>
+    </div>
+
+    <div *ngIf="sessionPaused">
+      <p>Session Paused. Click Resume to continue.</p>
+    </div>
+  </div>
+</div>
+
+ <!-- Show completion message when session is done -->
+  <div *ngIf="showCompletionMessage" class="modal">
+    <div class="completion-message">
+      <p>Breathing session complete!</p>
+    </div>
+  </div>
+
+
+<!-- </div> -->
+</div>
+</div>

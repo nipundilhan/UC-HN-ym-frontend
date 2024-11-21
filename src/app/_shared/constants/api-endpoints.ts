@@ -6,7 +6,7 @@ const MODULE_BASE = '/modules';
 const MOOD_BASE = '/moods';
 const QANDA_BASE = '/QandA';
 const NOTIFICATIONS_BASE = '/notifications';
-
+const BREATHING_BASE = '/breathing'
 
 
 export const API_ENDPOINTS = {
@@ -52,6 +52,11 @@ export const API_ENDPOINTS = {
   NOTIFICATIONS: {
     BASE: NOTIFICATIONS_BASE,
     MESSAGES: `${NOTIFICATIONS_BASE}/messages`,
+  },
+  BREATHING: {
+    BASE: BREATHING_BASE,
+    GET_BY_STUDENT_ID: `${BREATHING_BASE}/findByStudent/`,
+
   },
   
 
