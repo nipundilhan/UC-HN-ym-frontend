@@ -1,17 +1,52 @@
 <div class="background">
-  <div class="container">
-  
-    <div class="header-container">
-      <h1>Tutorial and Lab Records</h1>
-      <button class="add-button" (click)="openModal()">✨ Add Tutorial or Lab✨</button>
+
+  <div class="sidenav">
+    <div class="badge-header">
+      <h4>My Badges</h4>
     </div>
+    <div class="badge-list">
+      <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
+              'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more tutorial/labs needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Eye of Horus</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+      
+      <div class="badge" 
+        [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
+        }"
+        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more tutorial/labs needed') : ''"
+        (mouseleave)="showTooltip = ''">
+        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
+        <p>Ankh of Power</p>
+        <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+     </div>
+     
+
+
+    </div>
+  </div>
+
+  <div class="container">
+        
+    <h1 class="game-title">Tutorial and Quiz Mastery</h1>
+    <!-- <button class="add-button" (click)="openModal()">✨ Add Tutorial or Lab✨</button> -->
+    <button class="add-button" (click)="openModal()">✨ Add Tutorial or Lab✨</button>
+
     <div class="records-container" *ngIf="studentData?.module1?.game1?.tasks?.length > 0">
-      <div class="record-card" *ngFor="let task of studentData.module1.game1.tasks" (click)="openTaskDetails(task)">
+      <div class="record-card" *ngFor="let task of paginatedQuestions" (click)="openTaskDetails(task)">
         <div class="record-image">
           <img src="/assets/eye-of-horus-icon.png" alt="Egyptian Theme">
         </div>
         <div class="record-header">
-          <h4>{{ task.name }}</h4>
+          <h5>{{ task.name }}</h5>
         </div>
         <!-- <div class="record-body">
           <div class="progress-bar">
@@ -54,7 +89,8 @@
         <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
         <!-- Badge Image -->
-        <img *ngIf="showBadge" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
       <!-- </div> -->
 
       <button class="btn share-btn" (click)="shareAchievement()">Share</button>
@@ -99,7 +135,6 @@
 
           <div class="button-container">
             <button type="submit" class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
-            <button type="button" class="btn cancel-btn" (click)="closeTaskModal()">Cancel</button>
             <button class="btn delete-btn" *ngIf="selectedTask.status === 'Started' || selectedTask.status === 'In Progress'" (click)="deleteTask(selectedTask)">Delete</button>
 
           </div>
@@ -194,5 +229,26 @@
         <!-- <app-tutorial-submission (submitEvent)="closeModal()"></app-tutorial-submission> -->
       </div>
     </div>
+
+
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+
   </div>
+
+       <!-- Side Navigation for Badges -->
+       <!-- <div class="sidenav" [class.open]="isSideNavOpen">
+        <div class="badge" *ngFor="let badge of badges; let i = index">
+          <img [src]="badge.image" [alt]="badge.name" [ngClass]="{ 'achieved-badge': isBadgeAchieved(i), 'not-earned-badge': !isBadgeAchieved(i) }">
+          <p>{{ badge.name }}</p>
+           <p class="badge-subtitle">{{ getBadgeSubtitle(i) }}</p>  
+          <p class="badge-status" [ngClass]="{'achieved': isBadgeAchieved(i)}">
+            {{ isBadgeAchieved(i) ? 'Achieved' : 'Not Achieved' }} 
+          </p>
+        </div>
+      </div> -->
+      
 </div>

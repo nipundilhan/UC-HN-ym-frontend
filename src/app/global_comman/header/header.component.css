@@ -116,6 +116,9 @@
   font-weight: bold;
   font-family: 'MedievalSharp', sans-serif;
   padding: 10px 20px;
+  border-bottom: 1px solid #fef0f0;
+  border-radius: 15px;
+
 }
 
 .dropdown-item:hover {
@@ -136,12 +139,12 @@
   font-size: 13px;
   color:#4d4b4b;
   margin-bottom: 0; /* Remove any bottom margin */
-  /* padding-bottom: 10px;
-  border-bottom: 1px dashed #b3acac;  */
+  /* padding-bottom: 10px; */
+  cursor: pointer;
 }
 
 .see-more {
-  margin-top: 0;
+  margin-top: -5px;
   font-size: 12px;
   color: rgb(205, 65, 18);
   text-decoration: underline;
@@ -182,15 +185,16 @@
 
   .navbar-collapse {
     display: flex;
-    flex-direction: column; /* Stack items vertically on small screens */
+    /* flex-direction: column; Stack items vertically on small screens */
     align-items: stretch; /* Stretch to full width */
     width: 100%; /* Ensure full width */
   }
 
   .navbar-nav {
-    flex-direction: column; /* Stack nav items vertically */
+    flex-direction: row; /* Stack nav items vertically */
     padding: 0; /* Remove padding if needed */
     margin: 0; /* Reset margin */
+    align-items: center;
   }
 
   .nav-link {

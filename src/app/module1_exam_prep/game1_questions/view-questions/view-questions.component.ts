@@ -36,6 +36,27 @@ export class ViewQuestionsComponent implements OnInit {
   originalAnswer: string = '';
   loading = true;
 
+  badgeClass: string = 'badge-grey'; // Initially grey
+  // showPadlock: boolean = false;
+  showBadge01: Boolean = false;
+  showBadge02: Boolean = false;
+  isSideNavOpen: boolean = false;
+
+  gamePoints: number = 0;
+  totalLikesCount: number = 0;
+
+  gameMargins: { margin1: number; margin2: number; LikesMargin: number } | null = null; 
+  completedTasks: number = 0;
+  TotalLikes: number = 0;
+  showTooltip: string = ''; // Variable to hold the tooltip message
+
+  isAchievementPopupOpen = false;
+  isPadlockVisible: boolean = false;  // Declare isPadlockVisible
+
+  currentPage: number = 1; // Current page number
+  QnAPerPage: number = 9; // Number of questions to display per page
+  QnA: any[] = [];
+
   editorContent: string = '';  // This will store the editor's content
 
   editorConfig: AngularEditorConfig = {
@@ -46,7 +67,7 @@ export class ViewQuestionsComponent implements OnInit {
     placeholder: 'Enter answer here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
+    defaultFontName: 'Georgia, serif',
     toolbarHiddenButtons: [
       ['underline'],
       ['redo'],
@@ -54,6 +75,7 @@ export class ViewQuestionsComponent implements OnInit {
       ['insertImage', 'insertVideo'],
       ['heading'],
       ['clearFormatting'],
+      ['fontName'],
       ['Horizontal Line']
     ],
     // Adding a custom class to the editor
@@ -72,7 +94,7 @@ export class ViewQuestionsComponent implements OnInit {
 
   ) {
     this.questionForm = this.fb.group({
-      lesson: ['', Validators.required],
+      lesson: ['', Validators.required, Validators.maxLength(25)],
       question: ['', Validators.required],
       // date: [this.getTodayDate(), Validators.required],
       answer: ['', Validators.required],
@@ -82,8 +104,10 @@ export class ViewQuestionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuestions(); // Fetch existing questions
+    this.fetchBadgeMargin();
 
   }
+
 
   get isSaveEnabled(): boolean {
     return JSON.stringify(this.selectedQuestion) !== JSON.stringify(this.originalQuestion);
@@ -96,6 +120,10 @@ export class ViewQuestionsComponent implements OnInit {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.QANDA.BASE+ "/" + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
           this.studentData = response;
+          this.QnA = this.studentData.data.QandA;
+          // console.log(this.QnA);
+          this.gamePoints = this.studentData.data.gamePoints;
+          this.totalLikesCount = this.studentData.data.totalLikesCount; 
           this.cdr.detectChanges();
           this.loading = false;
           resolve(); // Resolve the promise after the data is successfully fetched
@@ -116,8 +144,15 @@ export class ViewQuestionsComponent implements OnInit {
 
   closeAddQuestionModal(): void {
     this.isAddQuestionModalOpen = false;
-    this.questionForm.reset();
+    // this.questionForm.reset();
+    this.resetFormState();
+
   }
+
+  resetFormState(): void {
+    this.submitted = false; // Reset the validation flag
+    this.questionForm.reset(); // Reset the form fields
+}
 
   get f() {
     return this.questionForm.controls;
@@ -130,20 +165,6 @@ export class ViewQuestionsComponent implements OnInit {
     });
   }
 
-  // onSubmit() {
-
-  //   this.submitted = true;
-  //   if (this.questionForm.invalid) {
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   for (const key in this.questionForm.value) {
-  //     formData.append(key, this.questionForm.value[key]);
-  //   }
-
-
-  // }
 
   // Method to open question details
   openQuestionDetails(question: any): void {
@@ -250,8 +271,10 @@ closeShareModal(): void {
         alert("An error occurred while saving the question");
       }
     );
+    // this.checkAchievement();
     setTimeout(() => {
-      this.getQuestions();  //update the points in header and fetches latest tutorial data
+      this.getQuestions(); 
+      this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
     }, 100);
 
 
@@ -301,14 +324,15 @@ closeShareModal(): void {
 
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.QANDA.BASE, requestBody).subscribe(
       (response: any) => {
-        // this.dataTrnfrSrvc.setData(response);
         
+        // this.checkAchievement();
+
           setTimeout(() => {
-            this.fetchUpdatedStudentPoints();  //update the points in header and fetches latest tutorial data
+            this.fetchUpdatedStudentPoints(); 
+            this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
           }, 100); // Delay to ensure data consistency
-         
-        
-          // this.checkAchievement(); // Check for achievement after data fetch
+
+          this.checkAchievement(); // Check for achievement after data fetch
           
       },
       (httpError: any) => {
@@ -316,11 +340,113 @@ closeShareModal(): void {
         alert("An error occurred while recording the question");
       }
     );
-    this.questionForm.reset();
-      this.closeAddQuestionModal(); // Close modal after saving
+    this.closeAddQuestionModal(); // Close modal after saving
+    // this.questionForm.reset();
+    this.resetFormState();
+
   }
 
+  fetchBadgeMargin(): void {
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.gameMargins = {
+          margin1: response.game3Margin1,
+          margin2: response.game3Margin2,
+          LikesMargin: response.game3LikesMargin,
+        };
+        this.completedTasks = response.game3Marks;
+        this.TotalLikes = response.game3Likes;
+        console.log(this.gameMargins);
+        console.log(this.TotalLikes);
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
   
+    );
+  }
+  hasEarnedBadge(margin: number | null | undefined): boolean {
+    if (margin === null || margin === undefined) {
+        return false; // or handle the case as needed
+    }
+    return this.gamePoints >= margin;
+  }
+
+  hasEarnedLikesBadge(margin: number | null | undefined): boolean {
+    if (margin === null || margin === undefined) {
+      return false; // or handle the case as needed
+  }
+  return this.totalLikesCount >= margin;
+}
+
+  checkAchievement(): void {
+
+    const gamePoints = this.studentData.data.gamePoints;
+    // console.log(gamePoints);
+  
+    // Ensure badges are reset at the beginning
+    this.showBadge01 = false;
+    this.showBadge02 = false;
+  
+    // Show badge based on game points
+    if (gamePoints === 1) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge01 = true; // Show badge 01
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    } 
+    else if (gamePoints === 4) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge02 = true; // Show badge 02
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    }
+  }
+  
+
+  shareAchievement(): void {
+    this.isAchievementPopupOpen = false;
+    this.router.navigate(['/achievements']);
+  }
+  
+
+  get totalPages(): number {
+    // console.log(this.QnA.length);
+    return Math.ceil(this.QnA.length / this.QnAPerPage);
+  }
+
+  get paginatedQuestions(): any[] {
+    const startIndex = (this.currentPage - 1) * this.QnAPerPage;
+    return this.QnA.slice(startIndex, startIndex + this.QnAPerPage);
+  }
+
+  nextPage(): void { 
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+}
 }
 
 

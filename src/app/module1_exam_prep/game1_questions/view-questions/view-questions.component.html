@@ -1,4 +1,52 @@
 <div class="background">
+
+  <div class="sidenav">
+    <div class="badge-header">
+      <h4>My Badges</h4>
+    </div>
+    <div class="badge-list">
+      <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
+              'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more questions needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Eye of Horus</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+      
+      <div class="badge" 
+        [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
+        }"
+        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more questions needed') : ''"
+        (mouseleave)="showTooltip = ''">
+        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
+        <p>Ankh of Power</p>
+        <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+     </div>
+
+     <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedLikesBadge(gameMargins?.LikesMargin), 
+              'not-earned-badge': !hasEarnedLikesBadge(gameMargins?.LikesMargin) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedLikesBadge(gameMargins.LikesMargin) ? 'Badge unlocked' : (gameMargins.LikesMargin - TotalLikes) + ' more likes needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Likes</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+     
+
+
+    </div>
+  </div>
+
+
     <div class="container">
 
         <h1 class="game-title">Question Mastery</h1>
@@ -6,14 +54,17 @@
         
         <!-- <div class="question-grid"> -->
           <div class="question-grid"*ngIf="studentData?.data?.QandA?.length > 0">
-            <div *ngFor="let question of studentData.data.QandA" class="question-card" (click)="openQuestionDetails(question)">
+            <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestionDetails(question)">
                 <h5><b>{{ question.lessonTitle }}</b></h5>
-                <p> {{ question.question }}</p>
-                <!-- <p><strong>Date:</strong> {{ question.date }}</p> -->
-                <!-- <p><strong>Answer:</strong> {{ question.answer }}</p>
-                <img *ngIf="question.imageUrl" [src]="question.imageUrl" alt="Question Image" /> -->
+                <!-- <p> {{ question.question }}</p> -->
+                <p>{{ question.question | slice: 0: 50 }}{{ question.question.length > 50 ? '...' : '' }}
+  
+                <a *ngIf="question.question.length > 100" class="see-more" (click)="openQuestionDetails(question)">
+                  See More
+                </a> </p>
             </div>
         </div>
+
         <!-- </div> -->
         <div class="no-questions" *ngIf="!studentData?.data?.QandA?.length">
             No Questions Added Yet.
@@ -45,25 +96,11 @@
                   [config]="editorConfig"
                   class="angular-editor-textarea">
                 </angular-editor>
-                    <!-- Display Question Image in the Modal only if image exists -->
-            <!-- <div class="image-preview" *ngIf="selectedQuestion.image">
-              <img 
-                [src]="selectedQuestion.image" 
-                class="question-image"
-              >
-              
-              <span class="camera-icon" (click)="triggerImageUpload()">
-                <i class="fa fa-camera"></i> 
-              </span>
-
-              <input type="file" id="imageUpload" style="display: none;" (change)="onImageSelected($event)">
-            </div> -->
-
             
                 
               <div class="button-container">
                 <button class="btn save-btn" [disabled]="!hasAnswerChanged()">Save Changes</button>
-                <button class="btn share-btn" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button>
+                <button class="btn share-popup" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button>
                 <button class="btn delete-btn" (click)="deleteQuestion(selectedQuestion)">Delete</button>
               </div>
             </form>
@@ -73,7 +110,7 @@
 
       <!-- Popup Modal for Successful Share -->
       <div *ngIf="isShareModalOpen" class="modal">
-        <!-- <div class="modal-background"> -->
+        <div class="modal-background">
           <div class="modal-content-share">
             <span class="close" (click)="closeShareModal()">&times;</span>
 
@@ -88,9 +125,39 @@
             
             <button class="btn view-shared-btn" (click)="viewSharedQuestions()">View Shared Questions</button>
           </div>
-        <!-- </div> -->
+        </div>
       </div>
 
+
+<!-- Achievement Popup -->
+<div *ngIf="isAchievementPopupOpen" class="modal">
+  <div class="achievement-wrapper">
+
+    <!-- Sage Image Container (Outside the Popup) -->
+    <div class="sage-image-container">
+      <img src="/assets/narrator.png" alt="Sage" class="sage-image">
+    </div>
+
+    <!-- Achievement Popup -->
+    <div class="achievement-popup">
+      <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
+      <h2>Congratulations!</h2>
+      <p>You've unlocked the "Pharao's Trial"</p>
+
+      <!-- Badge Image with animation class -->
+      <!-- <div class="badge-container"> -->
+        <!-- Padlock GIF -->
+        <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
+
+        <!-- Badge Image -->
+        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+      <!-- </div> -->
+
+      <button class="btn share-btn" (click)="shareAchievement()">Share</button>
+    </div>
+  </div>
+</div>
 
        <!-- Add Question Modal -->
        <div *ngIf="isAddQuestionModalOpen" class="modal">
@@ -102,38 +169,20 @@
             <h2>Add New Question</h2>                
 
             <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
-                <!-- <div>
-                <label for="lesson">Lesson:</label>
-                <input id="lesson" formControlName="lesson" type="text" />
-                </div> -->
 
-
-                <!-- <div class="form-row">
-                  <div class="form-group">
-
-                  <label for="lesson">Lesson Title:</label>
-                  <input type="text" id="lesson" formControlName="lesson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }" />
+                  <label for="lesson">Lesson:</label>
+                  <input 
+                    type="text" 
+                    id="lesson" 
+                    formControlName="lesson" 
+                    maxlength="25" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }"
+                  />
                   <div *ngIf="submitted && f['lesson'].errors" class="invalid-feedback">
                     <div *ngIf="f['lesson'].errors['required']">Lesson is required</div>
+                    <div *ngIf="f['lesson'].errors['maxlength']">Lesson cannot exceed 25 characters</div>
                   </div>
-                  </div>
-           
-                  <div class="form-group">
-
-                  <label for="date">Date:</label>
-                  <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
-                  <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
-                    <div *ngIf="f['date'].errors['required']">Date is required</div>
-                  </div>
-                  </div>
-              </div> -->
-
-                <label for="lesson">Lesson:</label>
-                <input type="text" id="lesson" formControlName="lesson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }" />
-                <div *ngIf="submitted && f['lesson'].errors" class="invalid-feedback">
-                  <div *ngIf="f['lesson'].errors['required']">Lesson is required</div>
-                </div>
-            
           
                 
                 <label for="question">Question:</label>
@@ -142,18 +191,6 @@
                   <div *ngIf="f['question'].errors['required']">Question is required</div>
                 </div>
             
-                <!-- <label for="date">Date:</label>
-                <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
-                <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
-                  <div *ngIf="f['date'].errors['required']">Date is required</div>
-                </div> -->
-            
-                <!-- <div>
-                <label for="answer">Answer:</label>
-                <textarea id="answer" formControlName="answer"></textarea>
-                </div>
-             -->
-
 
                 <label for="answer">Answer:</label>
                 <!-- <textarea id="answer" formControlName="answer" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['answer'].errors }"></textarea> -->
@@ -176,6 +213,14 @@
           </div>
         </div>
     </div>
+
+
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
 
 </div>
 </div>

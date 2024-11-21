@@ -40,10 +40,19 @@ export class ViewTutorialsComponent implements OnInit {
   originalTask: any;
   badgeClass: string = 'badge-grey'; // Initially grey
   // showPadlock: boolean = false;
-  showBadge: Boolean = false;
+  showBadge01: Boolean = false;
+  showBadge02: Boolean = false;
+  isSideNavOpen: boolean = false;
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
 
+  currentPage: number = 1; // Current page number
+  tutorialsPerPage: number = 6; // Number of questions to display per page
+  tutorials: any[] = [];
 
+  gamePoints: number = 0;
+  gameMargins: { margin1: number; margin2: number } | null = null; 
+  completedTasks: number = 0;
+  showTooltip: string = ''; // Variable to hold the tooltip message
 
   private submitEventSubscription!: Subscription;
 
@@ -60,20 +69,48 @@ export class ViewTutorialsComponent implements OnInit {
     this.tutorialForm = this.formBuilder.group({
       description: ['', Validators.required],
       date: [this.getTodayDate(), Validators.required], // Set default date to today
-      // progress: ['', Validators.required],
       status: ['', Validators.required],  // Add status field
       tutorialName: ['', Validators.required]
     });
   }
 
+
+
   ngOnInit(): void {
     this.getStudentData();
+    this.fetchBadgeMargin();
   }
 
   ngOnDestroy(): void {
     if (this.submitEventSubscription) {
       this.submitEventSubscription.unsubscribe();
     }
+  }
+
+  fetchBadgeMargin(): void {
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.gameMargins = {
+          margin1: response.game1Margin1,
+          margin2: response.game1Margin2,
+        };
+        this.completedTasks = response.game1CompletedTasks;
+        console.log(this.gameMargins);
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
+  
+    );
+  }
+
+
+
+  hasEarnedBadge(margin: number | null | undefined): boolean {
+    if (margin === null || margin === undefined) {
+        return false; // or handle the case as needed
+    }
+    return this.gamePoints >= margin;
   }
 
   getTodayDate(): string {
@@ -150,6 +187,12 @@ export class ViewTutorialsComponent implements OnInit {
           this.checkAchievement(); // Check for achievement after data fetch
        }
 
+       setTimeout(() => {
+        this.fetchUpdatedStudentPoints();
+        this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+      }, 100); // Delay to ensure data consistency
+
+
         this.closeTaskModal(); // Close modal after saving
         this.tutorialForm.reset();
         this.tutorialForm.patchValue({ date: this.getTodayDate() });
@@ -175,6 +218,8 @@ export class ViewTutorialsComponent implements OnInit {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.TUTORIALS.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
           this.studentData = response;
+          this.tutorials = this.studentData.module1.game1.tasks;
+          this.gamePoints = this.studentData.module1.game1.gamePoints;
           this.cdr.detectChanges();
           this.loading = false;
           resolve(); // Resolve the promise after the data is successfully fetched
@@ -190,28 +235,41 @@ export class ViewTutorialsComponent implements OnInit {
 
   checkAchievement(): void {
 
-    // let achievementUnlocked = false; // Flag to check if the achievement has already been unlocked
-
-    // const completedTasks = this.studentData.module1.game1.tasks.filter((task: any) => task.completePercentage === 100);  
     const gamePoints = this.studentData.module1.game1.gamePoints;
     console.log(gamePoints);
-    // Check if the game points equal 5
-    if (gamePoints === 4) {
-    this.isAchievementPopupOpen = true; // Show achievement popup
-
-    // achievementUnlocked = true;
-
-    // Show the padlock initially
-    this.isPadlockVisible = true;
-
-     // Fade out the padlock after 4 seconds (by reducing opacity)
-     setTimeout(() => {
-      this.isPadlockVisible = false; // Set opacity to 0 (invisible)
-    }, 2500);
-
-    this.showBadge = true; //show badge
-    this.badgeClass = 'unlocking-animation'; // Trigger badge color change after padlock disappears
   
+    // Ensure badges are reset at the beginning
+    this.showBadge01 = false;
+    this.showBadge02 = false;
+  
+    // Show badge based on game points
+    if (gamePoints === 1) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge01 = true; // Show badge 01
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    } 
+    else if (gamePoints === 4) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge02 = true; // Show badge 02
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
     }
   }
   
@@ -251,7 +309,8 @@ export class ViewTutorialsComponent implements OnInit {
           this.submitEvent.emit();
         
           setTimeout(() => {
-            this.fetchUpdatedStudentPoints();  //update the points in header and fetches latest tutorial data
+            this.fetchUpdatedStudentPoints(); 
+            this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
           }, 100); // Delay to ensure data consistency
          
           if (newTask.status === 'Completed'){
@@ -301,7 +360,7 @@ export class ViewTutorialsComponent implements OnInit {
 
 
   deleteTask(task: any): void {
-    const confirmDelete = confirm(`Are you sure you want to delete the task: ${task.name}?`);
+    const confirmDelete = confirm(`Are you sure you want to delete the tutorial/lab: ${task.name}?`);
     if (confirmDelete) {
       // const taskIndex = this.studentData.module1.game1.tasks.findIndex((t: any) => t._id === task._id);
       // if (taskIndex !== -1) {
@@ -333,4 +392,26 @@ export class ViewTutorialsComponent implements OnInit {
         return 'status-default'; // Fallback class if the status doesn't match any known value
     }
   }
+
+
+  get totalPages(): number {
+    return Math.ceil(this.tutorials.length / this.tutorialsPerPage);
+  }
+
+  get paginatedQuestions(): any[] {
+    const startIndex = (this.currentPage - 1) * this.tutorialsPerPage;
+    return this.tutorials.slice(startIndex, startIndex + this.tutorialsPerPage);
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+}
 }
