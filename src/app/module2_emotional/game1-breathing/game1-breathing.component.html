@@ -25,7 +25,7 @@
         <button class="add-button" (click)="openBreathingPopup()">✨ Start Breathing Exercise ✨</button>
 
         <div class="records-container" *ngIf="BreathingData.length > 0">
-          <div class="record-card" *ngFor="let breathing of BreathingData">
+          <div class="record-card" *ngFor="let breathing of paginatedQuestions">
             <div class="record-image">
               <img src="/assets/breathing-icon.png" alt="Egyptian Theme">
             </div>
@@ -59,7 +59,7 @@
         
               <form [formGroup]="breathingForm">
                 <!-- Page 1: Select Technique -->
-                <div *ngIf="currentPage === 1">
+                <div *ngIf="popupCurrentPage === 1">
                   <div class="form-group">
                     <label for="technique">Breathing Technique:</label>
                     <select id="technique" formControlName="technique">
@@ -74,6 +74,15 @@
                                   <!-- Practice Options -->
                 <div *ngIf="showPracticeOptions" class="form-group-radio">
                   <label>Practice Option:</label>
+
+                  <div class="info-icon-container">
+                    <span class="info-icon">i</span>
+                    <div class="tooltip-i">
+                      <p><strong>Practice within Application:</strong> You can use this option to practice the Box Breathing or 4-7-8 Techniques directly within the application! </p>
+                      <p><strong>Log Details Only:</strong> Choose this option to record your progress when you practice on your own. </p>
+                    </div>
+                  </div>
+
                   <div class="radio-group">
                     <div class="radio-item">
                       <input
@@ -104,7 +113,7 @@
                 </div>
         
                 <!-- Page 2: Time or Cycles Input -->
-                <div *ngIf="currentPage === 2">
+                <div *ngIf="popupCurrentPage === 2">
                   <!-- For Diaphragmatic or Logging Time -->
                   <div *ngIf="selectedTechnique === 'Belly Breathing' || selectedTechnique === 'Alternate Nostril Breathing' || breathingForm.value.practiceOption === 'log'">
                     <label for="timeSpent">Time Spent (minutes):</label>
@@ -123,17 +132,17 @@
                 <!-- Navigation Buttons -->
                 <div class="button-group">
                   <!-- Back Button -->
-                  <button *ngIf="currentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
+                  <button *ngIf="popupCurrentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
         
                   <!-- Start Session Button -->
-                  <button *ngIf="currentPage === 2 && breathingForm.value.practiceOption === 'system'" 
+                  <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'system'" 
                   class="log-start-btn" 
                   (click)="startBreathingSession()">
                   Start Session
                   </button>
 
                   <!-- Log Details Button -->
-                  <button *ngIf="currentPage === 2 && breathingForm.value.practiceOption === 'log'" 
+                  <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'log'" 
                   class="log-start-btn" 
                   (click)="onSubmit()">
                   Log Details
@@ -150,9 +159,9 @@
     <h3>{{ selectedTechnique | titlecase }}</h3>
 
     <div class="breathing-animation" [ngClass]="{'paused': sessionPaused}">
-      <p>Breathe in... breathe out...</p>
-      <div class="gif animation">
-        <img [src]="gifSource" alt="Breathing Animation" *ngIf="!sessionPaused" />
+      <!-- <p>Breathe in... breathe out...</p> -->
+      <div>
+        <img [src]="gifSource" alt="Breathing Animation" class = "gif-animation" *ngIf="!sessionPaused" />
       </div>
     </div>
 
@@ -174,6 +183,41 @@
     </div>
   </div>
 
+  <!-- Achievement Popup -->
+<div *ngIf="isAchievementPopupOpen" class="modal">
+  <div class="achievement-wrapper">
+
+    <!-- Sage Image Container (Outside the Popup) -->
+    <div class="sage-image-container">
+      <img src="/assets/narrator.png" alt="Sage" class="sage-image">
+    </div>
+
+    <!-- Achievement Popup -->
+    <div class="achievement-popup">
+      <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
+      <h2>Congratulations!</h2>
+      <p>You've unlocked the "Pharao's Trial"</p>
+
+      <!-- Badge Image with animation class -->
+      <!-- <div class="badge-container"> -->
+        <!-- Padlock GIF -->
+        <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
+
+        <!-- Badge Image -->
+        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <!-- <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation"> -->
+      <!-- </div> -->
+
+      <button class="btn share-btn" (click)="shareAchievement()">Share</button>
+    </div>
+  </div>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="paginationCurrentPage === 1">Previous</button>
+  <span>Page {{ paginationCurrentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="paginationCurrentPage === totalPages">Next</button>
+</div>
 
 <!-- </div> -->
 </div>

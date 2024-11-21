@@ -519,6 +519,228 @@ button {
   opacity: 1; /* Make opaque on hover */
 }
 
+
+
+.achievement-popup h2, 
+.achievement-popup p
+{
+  position: relative;
+  z-index: 1; /* Ensure these stay on top */
+}
+
+/* Wrapper to hold both the image and popup */
+.achievement-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; /* Flexbox for layout */
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Sage Image Container (outside popup) */
+.sage-image-container {
+  margin-right: 15px; /* Space between the image and the popup */
+  position: relative; /* Allow custom positioning if needed */
+}
+
+.sage-image {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 15px rgb(255, 255, 255)); /* Yellow glow effect */
+}
+
+
+/* Achievement Popup */
+.achievement-popup {
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 500px;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Ensure it's above other elements */
+  text-align: center; /* Center the content */
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  justify-content: center;
+  align-items: center; /* Align items in the center horizontally */
+  transition: width 0.3s ease; /* Optional: smooth width transition */
+}
+
+/* Achievement message text container */
+.achievement-message {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Badge Image */
+.badge-image {
+  width: 150px;
+  height: auto;
+  opacity: 0; /* Initially hidden */
+  transform: scale(0.5); /* Start at a smaller size */
+  z-index: 1;
+  position: absolute;
+}
+
+
+/* Unlocking animation */
+@keyframes unlockBadge {
+  0% {
+    opacity: 0;
+    transform: scale(0.5); /* Start smaller */
+    filter: grayscale(100%); /* Start with grayscale */
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.8); /* Slightly larger midway */
+    filter: grayscale(100%); /* Still in grayscale */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.9); 
+    filter: grayscale(0%); /* Turn to original color */
+  }
+}
+
+
+/* Apply animation */
+.unlocking-animation {
+  animation: unlockBadge 2s ease-out forwards; /* Trigger on appearance */
+}
+
+/* Padlock styles */
+.padlock-gif {
+  width: 90px;
+  height: auto;
+  z-index: 2;
+  opacity: 0; /* Initially invisible */
+  transition: opacity 1s ease-in-out; /* Smooth fade-out effect */
+}
+
+/* When padlock is visible, set opacity to 1 */
+.padlock-visible {
+  opacity: 1;
+}
+
+/* When padlock becomes invisible, opacity transitions to 0 */
+.padlock-gif:not(.padlock-visible) {
+  opacity: 0; /* Fully transparent */
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 2em;
+  cursor: pointer;
+}
+.share-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width : 50%;
+  margin-top: 25px; /* Space above the button */
+  position: relative;
+  z-index: 1; /* Ensure these stay on top */
+}
+
+.share-btn:hover {
+  background-color: #218838;
+}
+
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-around; /* Space between the controls */
+  margin-top: 20px; /* Space above pagination */
+  padding: 10px 0; /* Padding around the controls */
+  width: 100%; /* Ensure it spans the full width */
+
+}
+
+.pagination-controls button {
+  background-color: #007bff; /* Primary color for buttons */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px 16px; /* Padding inside buttons */
+  cursor: pointer; /* Cursor style */
+}
+
+.pagination-controls button[disabled] {
+  background-color: #ccc; /* Disabled button color */
+  cursor: not-allowed; /* Change cursor for disabled */
+  color: #878787;
+}
+
+.info-icon-container {
+  display: inline-block;
+  position: relative;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: #007bff;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.tooltip-i {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 5px;
+  display: none;
+  z-index: 100;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-icon-container:hover .tooltip-i {
+  display: block;
+}
+
+.tooltip-i::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
+
+.gif-animation{
+  width: 400px;
+}
+
+
+
 @media (max-width: 768px) {
   .modal-background{
     width: 80%;
@@ -526,8 +748,8 @@ button {
 
   .records-container{
     justify-content: center;
-    margin: 0;
-  }
+    margin: 10px 0;
+    }
 
   .container {
     max-width: 100%; /* Allow the container to take up the full width */
@@ -554,6 +776,30 @@ button {
   .sidenav .badge img {
     width: 70px;
   }
+
+
+  .sage-image-container {
+    margin-right: 5px; /* Less space on smaller screens */
+  }
+  
+  .sage-image {
+    width: 80px; /* Make the image smaller on mobile */
+  }
+
+  .achievement-popup {
+    width: 280px; /* Adjust for smaller screens */
+    padding: 10px;
+    height: 350px;
+  }
+  .badge-image {
+    width: 80px;
+    position: relative;
+  }
+
+  .padlock-gif {
+    width: 60px;
+    position: absolute;
+  }
 }
 
 @media (max-width: 480px) {
@@ -563,4 +809,10 @@ button {
     justify-content: center;
      /* Allow badges to wrap to the next line */
   }
+
+  .gif-animation{
+    width: 200px;
+  }
+  
+  
 }

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game1-breathing',
@@ -16,6 +17,7 @@ export class Game1BreathingComponent implements OnInit {
   isPopupVisible: boolean = false;
   breathingModalOpen: boolean = false;
   BreathingData: any;
+  AllData: any;
 
   showTooltip: string = ''; // Variable to hold the tooltip message
   gamePoints: number = 0;
@@ -24,11 +26,23 @@ export class Game1BreathingComponent implements OnInit {
   
   showTimeInput: boolean = false; // Show time input condition
 
-  currentPage: number = 1; // Tracks the current page of the popup
+  // currentPage: number = 1; // Tracks the current page of the popup
+
+  popupCurrentPage: number = 1; // Tracks the current page of the popup
+  paginationCurrentPage: number = 1; // Tracks the current page for pagination
+
+
   showPracticeOptions: boolean = false; // Controls radio button visibility
   selectedTechnique: string = '';
   submitButtonText: string = 'Next';
 
+
+  isAchievementPopupOpen = false;
+  isPadlockVisible: boolean = false;  // Declare isPadlockVisible
+  badgeClass: string = 'badge-grey'; // Initially grey
+  showBadge01: Boolean = false;
+
+  BreathingPerPage: number = 6; // Number of questions to display per page
 
   cycleCount: number = 0;  // Holds the number of cycles (e.g., 5)
   currentCycle: number = 0;  // Tracks current cycle
@@ -38,18 +52,11 @@ export class Game1BreathingComponent implements OnInit {
   gifSource: string = '';  // Holds the GIF source URL
   showCompletionMessage: boolean = false;
 
-  dummyData = {
-    sessions: [
-      { technique: '4-4-4 technique', cycle: 5, date: '11-11-2024' },
-      { technique: 'Lion breathing', cycle: 10, date: '11-11-2024' },
-      { technique: 'box breathing', cycle: 15, date: '11-11-2024' },
-      { technique: 'box breathing', cycle: 20, date: '11-11-2024' },
-    ],
-  };
 
   constructor(private fb: FormBuilder,
     public apiCallService: ApiCallService,
     private userAuthService: UserAuthService,
+    private router: Router,
   ) {
     this.breathingForm = this.fb.group({
       technique: ['', Validators.required],
@@ -83,21 +90,21 @@ export class Game1BreathingComponent implements OnInit {
   }
 
   goToNextPage(): void {
-    if (this.currentPage === 1) {
+    if (this.popupCurrentPage === 1) {
       if (this.selectedTechnique === 'belly' || this.selectedTechnique === 'alternate'){
-        this.currentPage = 2; // Move to time input page directly
+        this.popupCurrentPage = 2; // Move to time input page directly
       } else {
         const practiceOption = this.breathingForm.value.practiceOption;
-        if (practiceOption) this.currentPage = 2; // Move to next step based on radio selection
+        if (practiceOption) this.popupCurrentPage = 2; // Move to next step based on radio selection
       }
-    } else if (this.currentPage === 2) {
+    } else if (this.popupCurrentPage === 2) {
       this.onSubmit();
     }
   }
 
   goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+    if (this.popupCurrentPage > 1) {
+      this.popupCurrentPage--;
     }
   }
 
@@ -106,8 +113,10 @@ export class Game1BreathingComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.BREATHING.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
-          this.BreathingData = response.breathingPractises;
-          this.gamePoints = response.gamePoints;
+          this.AllData = response;
+          this.BreathingData = this.AllData.breathingPractises;
+          // this.gamePoints = response.gamePoints;
+          this.gamePoints = this.AllData.gamePoints;
    
           resolve(); // Resolve the promise after the data is successfully fetched
         },
@@ -142,31 +151,6 @@ export class Game1BreathingComponent implements OnInit {
     }
   }
 
-  // onSubmit(): void {
-  //   const formData = this.breathingForm.value;
-
-  //   const requestBody = {
-  //     studentId: this.userAuthService.getUserId(),
-  //     techniqueCode: formData.technique, 
-  //     cycles: formData.cycles,
-  //     time: formData.timeSpent,
-  //   };
-
-  //   this.apiCallService.executePostNoAuth(API_ENDPOINTS.BREATHING.BASE, requestBody).subscribe(
-  //     (response: any) => {
-        
-  //       this.getLoggedSessions();
-  //     },
-  //     (httpError: any) => {
-  //       console.log(httpError);
-  //       alert("An error occurred while recording the question");
-  //     }
-  //   );
-  
-  //   this.isPopupVisible = false;
-  //   this.resetForm();
-  // }
-
   onSubmit(): void {
     const formData = this.breathingForm.value;
   
@@ -186,7 +170,13 @@ export class Game1BreathingComponent implements OnInit {
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.BREATHING.BASE, requestBody).subscribe(
       (response: any) => {
         // Update sessions after successful save
-        this.getLoggedSessions();
+
+        setTimeout(() => {
+          this.getLoggedSessions(); 
+          this.fetchBadgeMargin();  //update the points in header and fetches latest data
+        }, 100); // Delay to ensure data consistency
+
+        this.checkAchievement(); // Check for achievement after data fetch
       },
       (httpError: any) => {
         console.log(httpError);
@@ -201,7 +191,7 @@ export class Game1BreathingComponent implements OnInit {
   
 
   resetForm(): void {
-    this.currentPage = 1;
+    this.popupCurrentPage = 1;
     this.showPracticeOptions = false;
     this.breathingForm.reset({
       technique: '',
@@ -227,24 +217,39 @@ export class Game1BreathingComponent implements OnInit {
     }
   }
 
-    // Method to run the session (with cycling logic)
-    runSession() {
-      this.interval = setInterval(() => {
-        if (!this.sessionPaused) {
-          this.currentCycle++;
-          if (this.currentCycle >= this.cycleCount) {
-            this.endSession();  // End session after completing all cycles
-          }
-        }
-      }, 5000);  // Adjust the interval for each cycle (e.g., 5 seconds per cycle)
+  // Method to run the session (with dynamic cycling logic based on technique)
+runSession() {
+  // Set the interval duration based on the selected technique
+  const intervalDuration = this.selectedTechnique === '4-7-8' ? 18000 : 17000;
+
+  this.interval = setInterval(() => {
+    if (!this.sessionPaused) {
+      this.currentCycle++;
+      if (this.currentCycle >= this.cycleCount) {
+        this.endSession();  // End session after completing all cycles
+      }
     }
+  }, intervalDuration);  // Adjust the interval dynamically based on the technique
+}
+
+    // // Method to run the session (with cycling logic)
+    // runSession() {
+    //   this.interval = setInterval(() => {
+    //     if (!this.sessionPaused) {
+    //       this.currentCycle++;
+    //       if (this.currentCycle >= this.cycleCount) {
+    //         this.endSession();  // End session after completing all cycles
+    //       }
+    //     }
+    //   }, 17000);  // Adjust the interval for each cycle (e.g., 16-17 seconds per cycle)
+    // }
     
 
     updateGifSource(): void {
       if (this.selectedTechnique === 'Box-breathing') {
         this.gifSource = '/assets/gifs/box-breathing.gif'; 
       } else if (this.selectedTechnique === '4-7-8') {
-        this.gifSource = '/assets/gifs/424-breathing.gif';  
+        this.gifSource = '/assets/gifs/4-7-8-breathing.gif';  
       } 
     }
 
@@ -253,6 +258,7 @@ export class Game1BreathingComponent implements OnInit {
     clearInterval(this.interval);
     this.sessionRunning = false;
     this.sessionPaused = false;
+    this.resetForm();
   }
 
   togglePauseResume() {
@@ -314,4 +320,61 @@ export class Game1BreathingComponent implements OnInit {
   
     );
   }
+
+  checkAchievement(): void {
+
+    const gamePoints = this.AllData.gamePoints;
+    console.log(gamePoints);
+  
+    // Ensure badges are reset at the beginning
+    this.showBadge01 = false;
+
+  
+    // Show badge based on game points (giving badge when logging the secon session)
+    if (gamePoints === 4) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge01 = true; // Show badge 01
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    } 
+
+  }
+  
+
+  shareAchievement(): void {
+    this.isAchievementPopupOpen = false;
+    this.router.navigate(['/achievements']);
+  }
+
+
+  get totalPages(): number {
+    // console.log(this.QnA.length);
+    return Math.ceil(this.BreathingData.length / this.BreathingPerPage);
+  }
+
+  get paginatedQuestions(): any[] {
+    const startIndex = (this.paginationCurrentPage - 1) * this.BreathingPerPage;
+    return this.BreathingData.slice(startIndex, startIndex + this.BreathingPerPage);
+  }
+
+  nextPage(): void { 
+    if (this.paginationCurrentPage < this.totalPages) {
+      this.paginationCurrentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.paginationCurrentPage > 1) {
+      this.paginationCurrentPage--;
+    }
+}
+  
 }
