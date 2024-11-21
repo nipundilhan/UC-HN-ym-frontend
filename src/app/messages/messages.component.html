@@ -4,7 +4,7 @@
   
     <!-- Messages List -->
     <div class="messages-list">
-      <div class="message-card" *ngFor="let msg of allMessages">
+      <div class="message-card" *ngFor="let msg of paginatedMessages">
         <div class="message-content">
           <h5 class="message-title">{{ msg.title }}</h5>
           
@@ -45,6 +45,13 @@ class="message-popup"
     <button class="btn close-btn" (click)="closePopup($event)">Close</button>
   </div>
 </div>
+</div>
+
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
 </div>
 
   </div>

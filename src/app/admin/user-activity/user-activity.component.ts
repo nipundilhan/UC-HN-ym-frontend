@@ -12,6 +12,7 @@ export interface Message {
   title: string;
 }
 
+
 @Component({
   selector: 'app-user-activity',
   templateUrl: './user-activity.component.html',
@@ -25,6 +26,9 @@ export class UserActivityComponent implements OnInit {
   isPopupOpen: boolean = false;
   isEditPopupOpen: boolean = false;
   submitted: boolean = false;
+
+  currentPage: number = 1; // Current page number
+  MsgsPerPage: number = 4; // Number of questions to display per page
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -115,6 +119,28 @@ export class UserActivityComponent implements OnInit {
       );
     }
   }
+
+  get totalPages(): number {
+    // console.log(this.QnA.length);
+    return Math.ceil(this.messages.length / this.MsgsPerPage);
+  }
+
+  get paginatedMessages(): any[] {
+    const startIndex = (this.currentPage - 1) * this.MsgsPerPage;
+    return this.messages.slice(startIndex, startIndex + this.MsgsPerPage);
+  }
+
+  nextPage(): void { 
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+}
 
 
 }

@@ -95,7 +95,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let msg of messages">
+                <tr *ngFor="let msg of paginatedMessages">
                     <td>{{ msg.title }}</td>
                     <td>{{ msg.date | date: 'MMM d, y, h:mm a' }}</td> <!-- Format the date inline -->
                     <!-- <td>{{ msg.status }}</td> -->
@@ -122,4 +122,11 @@
             </tbody>
         </table>
     </div>
+
+    <div class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+      
 </div>

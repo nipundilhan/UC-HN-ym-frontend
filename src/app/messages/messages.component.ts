@@ -24,6 +24,10 @@ export class MessagesComponent implements OnInit {
   selectedMessage: any = null; // Selected message for the popup
   isPopupOpen: boolean = false; // Popup visibility state
 
+  currentPage: number = 1; // Current page number
+  MsgsPerPage: number = 4; // Number of questions to display per page
+
+
   constructor(
     private userAuthService: UserAuthService ,
     public apiCallService: ApiCallService,
@@ -58,7 +62,9 @@ export class MessagesComponent implements OnInit {
             ...msg, 
             sanitizedMessage: this.sanitizer.bypassSecurityTrustHtml(msg.message)
           }));
+          // this.Msgs = this.allMessages
       },
+
       (error: any) => {
         console.log(error);
       }
@@ -82,5 +88,27 @@ export class MessagesComponent implements OnInit {
   stopPropagation(event: Event): void {
     event.stopPropagation();
   }
+
+  get totalPages(): number {
+    // console.log(this.QnA.length);
+    return Math.ceil(this.allMessages.length / this.MsgsPerPage);
+  }
+
+  get paginatedMessages(): any[] {
+    const startIndex = (this.currentPage - 1) * this.MsgsPerPage;
+    return this.allMessages.slice(startIndex, startIndex + this.MsgsPerPage);
+  }
+
+  nextPage(): void { 
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+}
 
 }
