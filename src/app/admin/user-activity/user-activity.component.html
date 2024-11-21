@@ -10,22 +10,22 @@
     <!-- Create/Edit Message Popup -->
     <div *ngIf="isPopupOpen" class="create-message-popup">
         <div class="popup-content">
-            <h3>{{ editingMessage ? 'Edit Message' : 'Create New Message' }}</h3>
-            <form (ngSubmit)="editingMessage ? saveEditedMessage() : createMessage()" #messageForm="ngForm">
+            <h3>Create New Message</h3>
+            <form (ngSubmit)="createMessage()" #messageForm="ngForm">
                 <label for="title">Title:</label>
-                <input type="text" id="title" [(ngModel)]="editingMessage ? editingMessage.title : newMessage.title" name="title" required />
+                <input type="text" id="title" [(ngModel)]="newMessage.title" name="title" required />
 
                 <label for="message">Message:</label>
                 <!-- Angular Editor for Message -->
                 <angular-editor 
-                    [(ngModel)]="editingMessage ? editingMessage.message : newMessage.message" 
+                    [(ngModel)]="newMessage.message" 
                     [config]="editorConfig" 
                     name="message"
                     required>
                 </angular-editor>
 
                 <label for="status">Status:</label>
-                <select id="status" [(ngModel)]="editingMessage ? editingMessage.status : newMessage.status" name="status" required>
+                <select id="status" [(ngModel)]="newMessage.status" name="status" required>
                     <option value="IMPORTANT">IMPORTANT</option>
                     <option value="NONE">NONE</option>
                     <option value="HIDDEN">HIDE</option>
@@ -35,13 +35,52 @@
                 <div class="button-row">
                     <!-- Always enabled Save Changes button -->
                     <button type="submit" [disabled]="!messageForm.valid">
-                        {{ editingMessage ? 'Save Changes' : 'Submit' }}
+                        Submit
                     </button>
                     <button type="button" (click)="closePopup()">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
+
+
+    
+    <!-- Create/Edit Message Popup -->
+    <div *ngIf="isEditPopupOpen" class="create-message-popup">
+        <div class="popup-content">
+            <h3>{{ editingMessage ? 'Edit Message' : 'Create New Message' }}</h3>
+            <form (ngSubmit)="saveEditedMessage()" #messageForm="ngForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" [(ngModel)]="editingMessage.title" name="title" required />
+
+                <label for="message">Message:</label>
+                <!-- Angular Editor for Message -->
+                <angular-editor 
+                    [(ngModel)]="editingMessage.message" 
+                    [config]="editorConfig" 
+                    name="message"
+                    required>
+                </angular-editor>
+
+                <label for="status">Status:</label>
+                <select id="status" [(ngModel)]="editingMessage.status" name="status" required>
+                    <option value="IMPORTANT">IMPORTANT</option>
+                    <option value="NONE">NONE</option>
+                    <option value="HIDDEN">HIDE</option>
+                </select>
+
+                <!-- Button Row -->
+                <div class="button-row">
+                    <!-- Always enabled Save Changes button -->
+                    <button type="submit" [disabled]="!messageForm.valid">
+                        Save Changes
+                    </button>
+                    <button type="button" (click)="closeEditPopup()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Messages Table -->
     <div class="messages-table">

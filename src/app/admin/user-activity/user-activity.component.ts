@@ -23,6 +23,7 @@ export class UserActivityComponent implements OnInit {
   editingMessage: any = null;
   originalMessage: any = null;
   isPopupOpen: boolean = false;
+  isEditPopupOpen: boolean = false;
   submitted: boolean = false;
 
   editorConfig: AngularEditorConfig = {
@@ -62,20 +63,26 @@ export class UserActivityComponent implements OnInit {
   openCreateMessagePopup(): void {
     this.isPopupOpen = true;
     this.newMessage = { title: '', message: '', status: '' }; // Reset the form for new message
-    this.editingMessage = null; // Ensure we're not editing
   }
 
   closePopup(): void {
     this.isPopupOpen = false;
   }
 
+  closeEditPopup(): void {
+    this.isEditPopupOpen = false;
+  }
+
+
   createMessage(): void {
     const newMsg = { ...this.newMessage, date: new Date().toISOString() }; 
-    this.apiCallService.executePostNoAuth('API_ENDPOINT/messages', newMsg).subscribe(
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES, newMsg).subscribe(
       (response) => {
-        this.messages.push(response); // Add to messages
+        // this.messages.push(response); // Add to messages
+
         this.newMessage = { title: '', message: '', status: 'active' }; // Reset form
         this.closePopup(); // Close the popup
+        this.loadMessages();
       },
       (error) => {
         console.error('Error creating message:', error);
@@ -86,17 +93,21 @@ export class UserActivityComponent implements OnInit {
   editMessage(msg: any): void {
     this.editingMessage = { ...msg }; // Clone the message for editing
     this.originalMessage = { ...msg }; // Store the original
-    this.isPopupOpen = true; // Open the popup for editing
+    this.isEditPopupOpen = true; // Open the popup for editing
   }
 
   saveEditedMessage(): void {
     if (this.editingMessage) {
-      this.apiCallService.executePutNoAuth(`API_ENDPOINT/messages/${this.editingMessage.id}`, this.editingMessage).subscribe(
+      console.log(this.editingMessage.message);
+          this.apiCallService.executePostNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES, this.editingMessage).subscribe(
+      
         (response) => {
-          const index = this.messages.findIndex(msg => msg.id === this.editingMessage.id);
-          this.messages[index] = response; // Update the message
+          // const index = this.messages.findIndex(msg => msg.id === this.editingMessage.id);
+          // this.messages = response; // Update the message
+
+          this.loadMessages();
           this.editingMessage = null; // Clear editing state
-          this.isPopupOpen = false; // Close popup
+          this.isEditPopupOpen = false; // Close popup
         },
         (error) => {
           console.error('Error saving message:', error);
