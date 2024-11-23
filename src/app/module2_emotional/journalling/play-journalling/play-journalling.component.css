@@ -108,19 +108,24 @@ form {
   flex-direction: column;
 }
 
-label {
+/* label {
   margin-top: 10px;
-}
+} */
 
 input[type="text"],
 input[type="date"],
 input[type="checkbox"],
 select,
 textarea {
-  margin-top: 5px;    
+  /* margin-top: 5px;     */
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #c99865;
+  /* resize: vertical;  */
+}
+
+select{
+  margin-bottom: 5px; 
 }
 
 button[type="submit"] {
@@ -205,11 +210,13 @@ button[type="submit"]:hover {
   flex: 1; /* Each field will take up equal space */
   display: flex;
   flex-direction: column; /* Keep the label on top of the input */
+  /* margin-bottom: 20px;  */
+
 }
 
-.form-group label {
-  margin-bottom: 5px; /* Space between label and input */
-}
+/* .form-group label {
+  margin-bottom: 5px; 
+} */
 
 
 .form-group input {
@@ -219,6 +226,9 @@ button[type="submit"]:hover {
   width: 100%; /* Full width of the group */
 }
 
+.spacer {
+  margin-bottom: 20px; /* Adjust gap as needed */
+}
 
 /* Close Icon */
 .close-icon {
@@ -636,6 +646,12 @@ button {
   border-color: transparent transparent #333 transparent;
 }
 
+.error {
+  color: red;
+  font-size: 0.85rem;
+  /* margin-top: 0.25rem; */
+}
+
 
 .delete-user-popup {
   position: fixed;
@@ -725,5 +741,17 @@ button {
   .add-button {
     width: 60%;
   }
-  
+  .form-row{
+    flex-direction: column;
+    margin-bottom: 0;
+    align-items: revert;
+    gap: 0;
+  }
+  button[type="submit"]{
+    width: 100%;
+  }
+
+  .form-group input {
+  margin-bottom: 10px; 
+}
 }

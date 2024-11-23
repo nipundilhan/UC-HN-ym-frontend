@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { PointsService } from 'src/app/_services/points.service';
@@ -18,7 +18,7 @@ export class PlayJournallingComponent implements OnInit {
   JournallingData: any[] = [];
   AllData: any;
   studentData: any;
-
+  submitted = false;
   isJournalDetailPopupVisible: boolean = false;
   journalDetailForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class PlayJournallingComponent implements OnInit {
 
   // currentPage: number = 1; // Tracks the current page of the popup
 
-  popupCurrentPage: number = 1; // Tracks the current page of the popup
+  // popupCurrentPage: number = 1; // Tracks the current page of the popup
   paginationCurrentPage: number = 1; // Tracks the current page for pagination
 
   isAchievementPopupOpen = false;
@@ -147,8 +147,17 @@ export class PlayJournallingComponent implements OnInit {
 
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.journalForm.controls ;
+  }
+
+  get jd(): { [key: string]: AbstractControl } {
+    return this.journalDetailForm.controls;
+  }
 
   onSubmit(): void {
+
+    this.submitted = true;
 
     if (this.journalForm.invalid) {
       return;
@@ -190,7 +199,8 @@ export class PlayJournallingComponent implements OnInit {
   
 
   resetForm(): void {
-    this.popupCurrentPage = 1;
+    this.submitted = false;
+    // this.popupCurrentPage = 1;
     this.journalForm.reset({
       technique: '',
     });
@@ -318,14 +328,24 @@ onFieldChange(): void {
   
 }
 
+// checkForChanges(): void {
+//   const { answer1, answer2 } = this.journalDetailForm.value;
+//   this.isSaveEnabled =
+//     answer1 !== this.selectedJournal.answer1 ||
+//     answer2 !== this.selectedJournal.answer2;
+// }
+
 checkForChanges(): void {
-  const { answer1, answer2 } = this.journalDetailForm.value;
+  const answer1 = this.journalDetailForm.get('answer1')?.value;
+  const answer2 = this.journalDetailForm.get('answer2')?.value;
+
   this.isSaveEnabled =
-    answer1 !== this.selectedJournal.answer1 ||
-    answer2 !== this.selectedJournal.answer2;
+    answer1 !== this.selectedJournal?.answer1 ||
+    answer2 !== this.selectedJournal?.answer2;
 }
 
 saveChanges(): void {
+
   if (this.isSaveEnabled) {
     this.selectedJournal.answer1 = this.journalDetailForm.value.answer1;
     this.selectedJournal.answer2 = this.journalDetailForm.value.answer2;

@@ -48,60 +48,73 @@
                 <span class="close-icon" (click)="closeCreatePopup()">&times;</span>
           
                 <h2>Journaling Record</h2>
-          
                 <form [formGroup]="journalForm" (ngSubmit)="onSubmit()">
-                  <div class="form-group">
-                    <label for="technique">Journaling Technique:</label>
-                    <select id="technique" formControlName="technique" (change)="onTechniqueChange()">
+                    <!-- Journaling Technique -->
+                    <div class="form-group">
+                      <label for="technique">Journaling Technique:</label>
+                      <select id="technique" formControlName="technique" (change)="onTechniqueChange()">
                         <option value="" disabled selected>Select Technique</option>
-                        <option *ngFor="let technique of techniques" [value]="technique">
-                          {{ technique }}
-                        </option>
+                        <option *ngFor="let technique of techniques" [value]="technique">{{ technique }}</option>
                       </select>
-                  </div>
-          
-                <!-- First Question Dropdown -->
-                <div class="form-group" *ngIf="selectedTechnique">
-                    <!-- <label for="prompt1">First Question:</label> -->
-                    <select id="prompt1" formControlName="prompt1" (change)="onPromptChange(1)">
-                      <option value="" disabled>Select Question/Prompt 01</option>
-                      <option *ngFor="let prompt of availablePrompts(1)" [value]="prompt">
-                        {{ prompt }}
-                    </option>
-                    </select>
-                  </div>
+                      <!-- <div *ngIf="submitted && f['technique'].errors" class="invalid-feedback">
+                        <div *ngIf="f['technique'].errors['required']">Journaling Techniqu is required</div>
+                    </div> -->
+                    </div>
                   
-                <!-- First Answer Field -->
-                <div class="form-group" *ngIf="selectedTechnique">
-                    <!-- <label for="answer1">Answer to First Question:</label> -->
-                    <textarea
-                    id="answer1"
-                    formControlName="answer1"
-                    placeholder="Write your answer to Question 01 here..."
-                    ></textarea>
-                </div>
+                    <div class="spacer"></div>
 
-                  <!-- Second Question Dropdown -->
-                  <div class="form-group" *ngIf="selectedTechnique">
-                    <!-- <label for="prompt2">Second Question:</label> -->
-                    <select id="prompt2" formControlName="prompt2">
-                      <option value="" disabled>Select Question/Prompt 02</option>
-                      <option *ngFor="let prompt of availablePrompts(2)" [value]="prompt">{{ prompt }}</option>
-                    </select>
-                  </div>
+                    <!-- First Question Dropdown -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                      <select id="prompt1" formControlName="prompt1" (change)="onPromptChange(1)">
+                        <option value="" disabled>Select Question 01</option>
+                        <option *ngFor="let prompt of availablePrompts(1)" [value]="prompt">{{ prompt }}</option>
+                      </select>
+                      <div *ngIf="submitted && f['prompt1'].errors" class="error">
+                        <div *ngIf="f['prompt1'].errors['required']">Please select the question</div>
+                    </div>
+                    </div>
                   
-                  <!-- Second Answer Field -->
-                <div class="form-group" *ngIf="selectedTechnique">
-                    <!-- <label for="answer2">Answer to Second Question:</label> -->
-                    <textarea
-                    id="answer2"
-                    formControlName="answer2"
-                    placeholder="Write your answer to Question 02 here..."
-                    ></textarea>
-                </div>
-          
-                  <button type="submit" [disabled]="journalForm.invalid">Log Journal</button>
-                </form>
+                    <!-- First Answer Field -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                      <textarea
+                        id="answer1"
+                        formControlName="answer1"
+                        placeholder="Write your answer to Question 01 here..."
+                      ></textarea>
+                      <div *ngIf="submitted && f['answer1'].errors" class="error">
+                        <div *ngIf="f['answer1'].errors['required']">Answer is required</div>
+                    </div>
+                    </div>
+
+                    <div class="spacer"></div>
+                  
+                    <!-- Second Question Dropdown -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                      <select id="prompt2" formControlName="prompt2">
+                        <option value="" disabled>Select Question 02</option>
+                        <option *ngFor="let prompt of availablePrompts(2)" [value]="prompt">{{ prompt }}</option>
+                      </select>
+                      <div *ngIf="submitted && f['prompt2'].errors" class="error" >
+                        <div *ngIf="f['prompt2'].errors['required']">Please select the question</div>
+                    </div>
+                    </div>
+                  
+                    <!-- Second Answer Field -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                      <textarea
+                        id="answer2"
+                        formControlName="answer2"
+                        placeholder="Write your answer to Question 02 here..."
+                      ></textarea>
+                      <div *ngIf="submitted && f['answer2'].errors" class="error">
+                        <div *ngIf="f['answer2'].errors['required']">Answer 02 is required</div>
+                    </div>
+                    </div>
+                  
+                    <button type="submit" *ngIf="selectedTechnique">Log Journal</button>
+                  </form>
+                  
+                  
               </div>
             </div>
           </div>
@@ -120,41 +133,43 @@
                     <div class="form-group">
                       <label for="date">Date:</label>
                       <input id="date" type="text" class="highlight-input" [value]="selectedJournal?.date" readonly>
-                      <!-- <span id="date">{{ selectedJournal?.date }}</span> -->
                     </div>
                     <div class="form-group">
                       <label for="technique">Journalling Technique:</label>
                       <input id="technique" type="text" class="highlight-input" [value]="selectedJournal?.journalType" readonly>
-                      <!-- <span id="technique">{{ selectedJournal?.technique }}</span> -->
                     </div>
                   </div>
           
                   <!-- Question 1 -->
                   <div class="form-group">
                     <label for="question1" id = "question1">{{ selectedJournal?.question1 }}</label>
-                    <!-- <p id="question1">{{ selectedJournal?.question1 }}</p> -->
                   </div>
                   <div class="form-group">
-                    <!-- <label for="answer1">Answer to First Question:</label> -->
                     <textarea
                       id="answer1"
                       formControlName="answer1"
                       (input)="checkForChanges()"
                     ></textarea>
+                    <div *ngIf="jd['answer1'].touched && jd['answer1'].invalid" class="error">
+                        Answer is required.
+                      </div>
                   </div>
-          
+                  
+                  <div class="spacer"></div>
+
                   <!-- Question 2 -->
                   <div class="form-group">
                     <label for="question2" id="question2">{{ selectedJournal?.question2 }}</label>
-                    <!-- <p id="question2">{{ selectedJournal?.question2 }}</p> -->
                   </div>
                   <div class="form-group">
-                    <!-- <label for="answer2">Answer to Second Question:</label> -->
                     <textarea
                       id="answer2"
                       formControlName="answer2"
                       (input)="checkForChanges()"
                     ></textarea>
+                    <div *ngIf="jd['answer2'].touched && jd['answer2'].invalid" class="error">
+                        Answer is required.
+                      </div>
                   </div>
           
                   <!-- Save Changes and Delete Buttons in One Line -->
