@@ -7,7 +7,7 @@ const MOOD_BASE = '/moods';
 const QANDA_BASE = '/QandA';
 const NOTIFICATIONS_BASE = '/notifications';
 const BREATHING_BASE = '/breathing'
-
+const JOURNAL_BASE = '/journal'
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -56,8 +56,12 @@ export const API_ENDPOINTS = {
   BREATHING: {
     BASE: BREATHING_BASE,
     GET_BY_STUDENT_ID: `${BREATHING_BASE}/findByStudent/`,
-
   },
+  JOURNAL: {
+    BASE: JOURNAL_BASE,
+    GET_BY_STUDENT_ID: `${JOURNAL_BASE}/findByStudent/`,
+
+  }
   
 
   /* 

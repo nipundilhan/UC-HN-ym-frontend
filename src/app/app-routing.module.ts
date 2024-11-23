@@ -30,6 +30,8 @@ import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindm
 import { Game1BreathingComponent } from './module2_emotional/game1-breathing/game1-breathing.component'; 
 import { LearnMindmapsComponent } from './module1_exam_prep/game1_mindmaps/learn-mindmaps/learn-mindmaps/learn-mindmaps.component';
 import { MessagesComponent } from './messages/messages.component';
+import { PlayJournallingComponent } from './module2_emotional/journalling/play-journalling/play-journalling.component';
+import { LearnJournallingComponent } from './module2_emotional/journalling/learn-journalling/learn-journalling.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,7 +39,6 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent,  data: { hideHeader: true }  },
   { path: 'select-avatar', component: SelectavatarComponent },
   { path: 'tutorial-submission', component: TutorialSubmissionComponent },
-  { path: 'view-tutorials', component: ViewTutorialsComponent },
   { path: 'login', component: LoginComponent,  data: { hideHeader: true }  },
   { path: 'hometest', component: HometestComponent },
   { path: 'upload', component: TestUploadComponent },
@@ -45,13 +46,20 @@ const routes: Routes = [
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
   // { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
-  { path: 'learn-tutorials', component: LearnTutorialsComponent },
-  { path: 'learn-mindmaps', component: LearnMindmapsComponent },
 
+  { path: 'learn-tutorials', component: LearnTutorialsComponent },
+  { path: 'view-tutorials', component: ViewTutorialsComponent },
+
+  { path: 'learn-mindmaps', component: LearnMindmapsComponent },
   { path: 'play-mindmaps', component: MindmapSubmissionComponent },
+
   { path: 'play-questions', component: ViewQuestionsComponent },
-  { path: 'game-map', component: GameMapComponent },
+
+  // { path: 'game-map', component: GameMapComponent },
   { path: 'breathing', component: Game1BreathingComponent },
+
+  { path: 'play-journalling', component: PlayJournallingComponent },
+  { path: 'learn-journalling', component: LearnJournallingComponent },
 
   { path: 'messages', component: MessagesComponent },
 
