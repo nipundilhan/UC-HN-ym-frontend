@@ -428,7 +428,9 @@ closeShareModal(): void {
 
   get totalPages(): number {
     // console.log(this.QnA.length);
-    return Math.ceil(this.QnA.length / this.QnAPerPage);
+    // return Math.ceil(this.QnA.length / this.QnAPerPage);
+    return Math.max(1, Math.ceil(this.QnA.length / this.QnAPerPage));
+
   }
 
   get paginatedQuestions(): any[] {

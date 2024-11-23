@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ApiCallService } from 'src/app/_services/api-call.service';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { Router } from '@angular/router';
+import { PointsService } from 'src/app/_services/points.service';
 
 @Component({
   selector: 'app-game1-breathing',
@@ -16,7 +17,7 @@ export class Game1BreathingComponent implements OnInit {
   breathingForm: FormGroup;
   isPopupVisible: boolean = false;
   breathingModalOpen: boolean = false;
-  BreathingData: any;
+  BreathingData: any[] = [];
   AllData: any;
 
   showTooltip: string = ''; // Variable to hold the tooltip message
@@ -52,11 +53,14 @@ export class Game1BreathingComponent implements OnInit {
   gifSource: string = '';  // Holds the GIF source URL
   showCompletionMessage: boolean = false;
 
+  breathingPractises: any[] = [];
 
   constructor(private fb: FormBuilder,
     public apiCallService: ApiCallService,
     private userAuthService: UserAuthService,
+    private pointsService: PointsService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {
     this.breathingForm = this.fb.group({
       technique: ['', Validators.required],
@@ -128,6 +132,24 @@ export class Game1BreathingComponent implements OnInit {
     });
   }
 
+  fetchUpdatedStudentPoints(): void {
+
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.AllData = response; // Updated student data, including points
+        this.pointsService.updateTotalMarks(this.AllData.totalMarks); // Update total points in the header or wherever it's displayed
+        this.cdr.detectChanges(); // Trigger change detection to ensure UI reflects the updated points
+  
+        this.getLoggedSessions(); // Ensure this fetches latest data
+  
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
+  
+    );
+    }
+
   openBreathingPopup() {
     console.log("hi");
     this.isPopupVisible = true;
@@ -172,8 +194,8 @@ export class Game1BreathingComponent implements OnInit {
         // Update sessions after successful save
 
         setTimeout(() => {
-          this.getLoggedSessions(); 
-          this.fetchBadgeMargin();  //update the points in header and fetches latest data
+          this.fetchUpdatedStudentPoints(); 
+          this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
         }, 100); // Delay to ensure data consistency
 
         this.checkAchievement(); // Check for achievement after data fetch
@@ -357,7 +379,9 @@ runSession() {
 
   get totalPages(): number {
     // console.log(this.QnA.length);
-    return Math.ceil(this.BreathingData.length / this.BreathingPerPage);
+    // return Math.ceil(this.BreathingData.length / this.BreathingPerPage);
+    return Math.max(1, Math.ceil(this.BreathingData.length / this.BreathingPerPage));
+
   }
 
   get paginatedQuestions(): any[] {

@@ -24,7 +24,7 @@
         <h1 class="game-title">Breathing Mastery</h1>
         <button class="add-button" (click)="openBreathingPopup()">✨ Start Breathing Exercise ✨</button>
 
-        <div class="records-container" *ngIf="BreathingData.length > 0">
+        <div class="records-container" *ngIf="AllData?.breathingPractises?.length > 0">
           <div class="record-card" *ngFor="let breathing of paginatedQuestions">
             <div class="record-image">
               <img src="/assets/breathing-icon.png" alt="Egyptian Theme">
@@ -46,7 +46,7 @@
           </div>
         </div>
         
-        <div class = "no-breathing-sessions" *ngIf="!BreathingData.length">
+        <div class = "no-breathing-sessions" *ngIf="!AllData?.breathingPractises?.length">
           No Breathing Sessions Added Yet.
         </div>
 
@@ -216,7 +216,9 @@
 <div class="pagination-controls">
   <button (click)="prevPage()" [disabled]="paginationCurrentPage === 1">Previous</button>
   <span>Page {{ paginationCurrentPage }} of {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="paginationCurrentPage === totalPages">Next</button>
+  <!-- <button (click)="nextPage()" [disabled]="paginationCurrentPage === totalPages">Next</button> -->
+  <button (click)="nextPage()" [disabled]="paginationCurrentPage >= totalPages || totalPages === 1">Next</button>
+
 </div>
 
 <!-- </div> -->

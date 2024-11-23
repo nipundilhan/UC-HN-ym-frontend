@@ -135,7 +135,9 @@ getUserAvatar(ownerAvatarCode: string): string {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.questions.length / this.questionsPerPage);
+    // return Math.ceil(this.questions.length / this.questionsPerPage);
+    return Math.max(1, Math.ceil(this.questions.length / this.questionsPerPage));
+
   }
 
   get paginatedQuestions(): any[] {
