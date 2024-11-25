@@ -46,6 +46,21 @@
     gap: 10px; /* Space between cards */
   }
 
+  .no-questions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    height: 200px;
+    /* width: 70%; */
+    font-size: 1.5rem;
+    align-self: center;
+}
+
+
 .question-card {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;

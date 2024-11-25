@@ -1,4 +1,5 @@
-<div class = "question-grid">
+<div class = "question-grid" *ngIf="AllData?.data?.QandA?.length > 0">
+  <!-- <div class="question-grid"*ngIf="AllData?.data?.QandA?.length > 0"> -->
 <!-- <div *ngFor="let question of questions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'"> -->
   <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'">
 
@@ -30,6 +31,11 @@
       <span class="like-count">{{ question.likesCount }}</span>
     </div>
   </div>
+
+<!-- </div> -->
+</div>
+<div class="no-questions" *ngIf="!AllData?.data?.QandA?.length">
+  No Questions Added Yet.
 </div>
 
 

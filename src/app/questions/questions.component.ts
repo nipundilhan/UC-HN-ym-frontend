@@ -23,6 +23,7 @@ export class QuestionsComponent implements OnInit {
   sanitizedAnswer!: SafeHtml;
  isQuestionModalOpen = false;
   questions: any[] = [];
+  AllData: any;
   public avatarPath: string = '';
   currentPage: number = 1; // Current page number
   questionsPerPage: number = 4; // Number of questions to display per page
@@ -36,6 +37,7 @@ export class QuestionsComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.QANDA.SHARED_QNA + "/" + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
+          this.AllData = response;
           this.questions = response.data.QandA;
           console.log(this.questions.length);
           // this.currentPage = 1; // Reset to first page after loading

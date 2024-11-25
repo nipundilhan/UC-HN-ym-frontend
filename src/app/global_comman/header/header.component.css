@@ -159,7 +159,8 @@
 .modal-content {
   border-radius: 8px;
   padding: 20px;
-  font-family: 'MedievalSharp', sans-serif;
+  font-family: Georgia, serif;
+  /* font-family: 'MedievalSharp', sans-serif; */
 }
 .modal-header {
   background-color: #f8f9fa;
