@@ -1,0 +1,170 @@
+<div class = "background">
+
+    <!-- Dialog box that appears on load -->
+    <!-- Intro Dialog Box -->
+    <div *ngIf="showIntroDialog" class="intro-dialog">
+        <div class="sage-dialogue-wrapper">
+            <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+            <div class="dialogue-box">
+                <span class="close-icon" (click)="closeIntro()">&#10005;</span>
+    
+                <!-- Step 1 -->
+                <div *ngIf="introStep === 0">
+                        <h4>Welcome to the <b><i>Whispers of the Sphinx</i></b>, brave adventurer!</h4>
+                        <p>
+                          As exams approach, stress can cloud even the sharpest of minds. But fear not! Here, you'll discover breathing techniques that help to calm your nerves, sharpen your focus, and boost your confidence.
+                        </p>
+                </div>
+    
+                <!-- Step 2 -->
+                <div *ngIf="introStep === 1">
+                    <p>In this quest, you’ll learn four breathing techniques to help you along the way:</p>  
+                        <div class="techniques-container-intro">
+                        <div class="technique-block">
+                        <p><b>4-4-4 (Box Breathing)</b></p>
+                        <!-- <p>Breathe in, hold, and exhale for four counts each. A simple and powerful way to regain focus.</p> -->
+                        </div>
+                        <div class="technique-block">
+                        <p><b>4-7-8 Breathing</b></p>
+                        <!-- <p>Breathe in for four counts, hold for seven, and exhale for eight. Perfect for calming your mind.</p> -->
+                        </div>
+                        <div class="technique-block">
+                        <p><b>Belly Breathing</b></p>
+                        <!-- <p>Engage your diaphragm for deep, relaxing breaths. A great stress reliever!</p> -->
+                        </div>
+                        <div class="technique-block">
+                        <p><b>Alternate Nostril Breathing</b></p>
+                        <!-- <p>Balance your body and mind by alternating your breath through each nostril.</p> -->
+                        </div>
+                                    
+                      <!-- <p>These techniques will guide you on your journey to mastering your thoughts and building your confidence.</p> -->
+                </div>
+                </div>
+                <!-- Step 3 -->
+                <div *ngIf="introStep === 2" class="guidelines">
+                    <h4>How to Get Started</h4>
+
+                    <ul class="animated-list">
+                        <li>
+                        <b>Find a Quiet Place:</b> Choose a comfortable and quiet spot where you won't be disturbed.
+                        </li>
+                        <li>
+                        <b>Sit Comfortably:</b> Sit in a relaxed posture, either on a chair or on the floor. Keep your back straight but not stiff.
+                        </li>
+                        <li>
+                        <b>Practice Regularly:</b> Aim for a few minutes each day to make breathing practices a part of your routine. Use the techniques taught in the application, such as 4-4-4 (Box) and 4-7-8 breathing, to start. For belly breathing and alternate nostril breathing, practice manually and log your progress to track your journey.
+                        </li>
+                    </ul>
+                    </div>
+    
+              
+    
+                <div *ngIf="introStep === 3">
+                    <h4>Earn Points and Unlock Badges!</h4>
+                        <p>
+                            Each breathing session you log will earn you points to show your progress. The more consistent you are, the more points you’ll collect.
+                        </p>
+                        <p>Here are the badges you can unlock:</p>
+                        <ul>
+                            <li><b>🛡️ Badge 1: Start the Habit</b>  
+                            Earned after logging your first session. Congratulations on taking the first step toward calm!
+                            </li>
+                            <li><b>🏅 Badge 2: Keep Practicing</b>  
+                            Unlocked after consistently logging your fifth session. You're building a healthy habit—keep going!
+                            </li>
+                        </ul>
+                    </div>
+                <div *ngIf="introStep === 4">
+                    <h4>Ready to Begin?</h4>
+                    <p>
+                        Explore the "Learn" section to master these breathing techniques. When you're ready, head to the "Play" section to start practicing or log your manual sessions.
+                    </p>
+                    <p>
+                        With every session, you'll feel calmer and more focused for your exams. Unlock badges, earn points, and make stress a thing of the past. Your journey starts now!
+                    </p>
+                    </div>
+    
+                <div class="button-container">                
+                    <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
+                    <button class = "btn-next" *ngIf="introStep < 4" (click)="nextStep()">Next</button>
+                    <button class = "btn-next" *ngIf="introStep == 4" (click)="closeIntro()">Start</button>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="learn-page">
+        <div class="header">
+          <h2>Click on any technique to learn.</h2>
+          <button class="help-btn" (click)="openHelpPopup()">Need Help?</button>
+        </div>
+      
+        <div class="techniques-container">
+          <div
+            class="technique-box"
+            *ngFor="let technique of techniques"
+            (click)="selectTechnique(technique)"
+          >
+            <img [src]="technique.icon" alt="{{ technique.name }}" />
+            <p>{{ technique.name }}</p>
+          </div>
+        </div>
+      
+        <!-- Sage Dialogue Box -->
+        <div class="intro-dialog" *ngIf="selectedTechnique">
+        <div class="sage-dialogue-wrapper">
+            <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+            <div class="dialogue-box">
+              <span class="close-icon" (click)="closeDialogue()">&#10005;</span>
+              <ng-container *ngIf="currentTip">
+                <div class="tip-content">
+                  <div [innerHTML]="getSafeHtml(currentTip.text)"></div>
+                    <div class = "media-content">
+                        <img *ngIf="currentTip.image" [src]="currentTip.image" alt="Tip Image" />
+                        <video *ngIf="currentTip.video" [src]="currentTip.video" controls></video>
+                    </div>
+                </div>
+              </ng-container>
+              <!-- <div class="nav-buttons">
+                <button (click)="previousTip()" [disabled]="currentTipIndex === 0">Back</button>
+                <button (click)="nextTip()" [disabled]="currentTipIndex === selectedTechnique.tips.length - 1">Next</button>
+              </div> -->
+    
+              <div class="bubble-buttons">
+                <img class = "arrow-btn" *ngIf="currentTipIndex > 0" src="/assets/previous-arrow.png" alt="Previous" (click)="previousTip()">
+                <img class = "arrow-btn" *ngIf="currentTipIndex < selectedTechnique.tips.length - 1" src="/assets/next-arrow.png" alt="Next" (click)="nextTip()">
+      
+                <!-- <button *ngIf="currentTipIndex === selectedTechnique.tips.length - 1" class="game-button" (click)="goToGame()">Start Game</button> -->
+              </div>
+            </div>
+          </div>
+          </div>
+    
+          
+          
+          
+      
+        <!-- Help Popup -->
+        <div class="intro-dialog" *ngIf="helpPopupVisible">
+        <div class="help-popup">
+          <div class="popup-content">
+            <span class="close-icon" (click)="closeHelpPopup()">&#10005;</span>
+            <h3>Need Help?</h3>
+            <p>If you feel uncomfortable, here’s what you can do:</p>
+            <ul>
+              <li>Take a break and step away from the game.</li>
+              <li>Talk to Someone: If you’re feeling overwhelmed, talking to a friend or someone you trust can help.</li>
+              <li>Contact us support at .......</li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    
+      <button class="back-button" (click)="goToMainMenu()">Back to Main Menu</button>
+    
+    
+      </div>
+      
