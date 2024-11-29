@@ -2,7 +2,7 @@
     background-image: linear-gradient(
       rgba(255, 255, 255, 0.3), /* Semi-transparent white */
       rgba(255, 255, 255, 0.76)
-    ), url('/assets/background-img/background05.jpg');
+    ), url('/assets/background-img/background09.jpg');
 background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -592,6 +592,7 @@ button {
   background-color: #ccc; /* Disabled button color */
   cursor: not-allowed; /* Change cursor for disabled */
   color: #878787;
+  border: 1.5px solid #afa5a5;
 }
 
 .info-icon-container {

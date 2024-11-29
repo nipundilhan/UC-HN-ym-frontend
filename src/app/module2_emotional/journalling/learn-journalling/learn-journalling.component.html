@@ -1,0 +1,185 @@
+<div class = "background">
+
+<!-- Dialog box that appears on load -->
+<!-- Intro Dialog Box -->
+<div *ngIf="showIntroDialog" class="intro-dialog">
+    <div class="sage-dialogue-wrapper">
+        <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+        <div class="dialogue-box">
+            <span class="close-icon" (click)="closeIntro()">&#10005;</span>
+
+            <!-- Step 1 -->
+            <div *ngIf="introStep === 0">
+                <h4>Welcome to the <b><i>Calm of the Oasis : Journalling Mastery</i></b>, brave adventurer! </h4>
+                <p>As you embark on this journey, I'll share powerful tips to help you master the practice of journaling. 
+                Together, we'll turn your thoughts and reflections into treasures that fuel your confidence and focus during exams. 
+                Click next, and let's uncover the secrets to starting your journaling quest!</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div *ngIf="introStep === 1">
+                <p>In this quest, you’ll learn three powerful journaling techniques to help you along the way:</p>  
+
+                <div class="techniques-container-intro">
+                  <div class="technique-block">
+                    <p><b>Gratitude Journaling</b></p>
+                    <!-- <p>Focus on the positives to find joy and motivation in everyday moments.</p> -->
+                  </div>
+                  <div class="technique-block">
+                    <p><b>Self-Compassion Journaling</b></p>
+                    <!-- <p>Be kind to yourself and turn challenges into stepping stones.</p> -->
+                  </div>
+                  <div class="technique-block">
+                    <p><b>Reflective Journaling</b></p>
+                    <!-- <p>Look back on your day to learn, grow, and prepare for tomorrow.</p> -->
+                  </div>
+                </div>
+                  
+                  <p>These techniques will guide you on your journey to mastering your thoughts and building your confidence.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div *ngIf="introStep === 2" class="guidelines">
+                <h4>How to get started?</h4>
+                <ul class="animated-list">
+                    <li><b>Find Your Moment:</b> Choose a quiet time in your day to journal, whether it’s in the morning, after studying, or before bed.</li>  
+                    <li><b>Use Prompts:</b> Journalling prompts can help guide your thoughts. (Hint: The game will provide you with some!)</li>  
+                    <li><b>Start Small:</b> A few sentences or bullet points are enough—there’s no pressure to write a lot.</li>  
+                  </ul>  
+                </div>
+
+            <!-- Final Step -->
+            <div *ngIf="introStep === 3">
+                <h4>How to get started?</h4>
+                <ul class="animated-list">
+                    <li><b>Be Honest:</b> Write freely and without judgment. This is your space to be yourself.</li>  
+                    <li><b>Stay Consistent:</b> Try to journal regularly, even if it’s just a few times a week.</li>  
+                  </ul>  
+            <p>With these tips in mind, you’re ready to begin your journaling adventure!</p>
+
+            
+            </div>
+            <!-- <div *ngIf="introStep === 4">
+                <p>In the "Learn" section, you’ll discover different journaling techniques to help you boost your mood, reduce stress, and stay focused. Whether it’s gratitude, self-compassion, or reflective journaling, you’ll find powerful methods that will enhance your well-being.</p>
+                <p>Once you’ve mastered the techniques, head over to the "Play" section to start journaling! </p>
+            </div> -->
+            <div *ngIf="introStep === 4">
+                <h4>How to play the game?</h4>
+
+                <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> -->
+                <ul class="animated-list"> 
+                    <li><b>Select Your Journaling Technique</b>
+                Choose from the techniques you’ve learned. You can even add your own personal prompt to make it unique!</li>
+                
+                <li><b>Write Your Journal Entries</b>
+                    Answer the prompts, share your thoughts, and track your progress as you journal through the game!</li>
+                
+                <li><b>Your Privacy Matters</b>
+                      Rest assured, your journal entries are encrypted and stored safely. Only you can view your entries—your thoughts are private and secure.
+                </li>
+                </ul>
+            </div>
+
+            <div *ngIf="introStep === 5">
+                <h4>Earn Points and Unlock Badges!</h4>
+                  <p>Each time you log a journal entry, you earn valuable points that help you level up in the game. The more you write, the more points you collect!</p>
+                <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> --> 
+                   <p>As you journal, you’ll also unlock badges and achievements! Here’s what you’ll get:</p>
+                    <ul class="animated-list">
+                    <li><b>🛡️ Badge 1: Start the Habit</b>
+                    Awarded after logging your second journal entry—this means you’ve officially started your journaling journey. Great job!</li>
+                    
+                    <li><b>🏅 Badge 2: Keep Practicing</b>
+                    Awarded after logging your fifth journal entry—you’re on your way to building a powerful journaling habit. Keep it up!</li>
+                </ul>
+            </div>
+            <div *ngIf="introStep === 6">
+                <h5>Ready to Get Started?</h5>
+                <p>Now that you know how it works, it’s time to begin! Explore the "Learn" section to master your journaling skills, and then jump into "Play" to start earning points and unlocking badges. 🎮</p> 
+                <p>Your adventure awaits, and every journal entry brings you closer to your goals—both in-game and in real life. Let’s go, adventurer!</p>
+                </div>
+
+            <div class="button-container">                
+                <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
+                <button class = "btn-next" *ngIf="introStep < 6" (click)="nextStep()">Next</button>
+                <button class = "btn-next" *ngIf="introStep == 6" (click)="closeIntro()">Start</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="learn-page">
+    <div class="header">
+      <h2>Click on any technique to learn.</h2>
+      <button class="help-btn" (click)="openHelpPopup()">Need Help?</button>
+    </div>
+  
+    <div class="techniques-container">
+      <div
+        class="technique-box"
+        *ngFor="let technique of techniques"
+        (click)="selectTechnique(technique)"
+      >
+        <img [src]="technique.icon" alt="{{ technique.name }}" />
+        <p>{{ technique.name }}</p>
+      </div>
+    </div>
+  
+    <!-- Sage Dialogue Box -->
+    <div class="intro-dialog" *ngIf="selectedTechnique">
+    <div class="sage-dialogue-wrapper">
+        <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+        <div class="dialogue-box">
+          <span class="close-icon" (click)="closeDialogue()">&#10005;</span>
+          <ng-container *ngIf="currentTip">
+            <div class="tip-content">
+              <div [innerHTML]="getSafeHtml(currentTip.text)"></div>
+                <div class = "media-content">
+                    <img *ngIf="currentTip.image" [src]="currentTip.image" alt="Tip Image" />
+                    <video *ngIf="currentTip.video" [src]="currentTip.video" controls></video>
+                </div>
+            </div>
+          </ng-container>
+          <!-- <div class="nav-buttons">
+            <button (click)="previousTip()" [disabled]="currentTipIndex === 0">Back</button>
+            <button (click)="nextTip()" [disabled]="currentTipIndex === selectedTechnique.tips.length - 1">Next</button>
+          </div> -->
+
+          <div class="bubble-buttons">
+            <img class = "arrow-btn" *ngIf="currentTipIndex > 0" src="/assets/previous-arrow.png" alt="Previous" (click)="previousTip()">
+            <img class = "arrow-btn" *ngIf="currentTipIndex < selectedTechnique.tips.length - 1" src="/assets/next-arrow.png" alt="Next" (click)="nextTip()">
+  
+            <!-- <button *ngIf="currentTipIndex === selectedTechnique.tips.length - 1" class="game-button" (click)="goToGame()">Start Game</button> -->
+          </div>
+        </div>
+      </div>
+      </div>
+
+      
+      
+      
+  
+    <!-- Help Popup -->
+    <div class="intro-dialog" *ngIf="helpPopupVisible">
+    <div class="help-popup">
+      <div class="popup-content">
+        <span class="close-icon" (click)="closeHelpPopup()">&#10005;</span>
+        <h3>Need Help?</h3>
+        <p>If you feel uncomfortable, here’s what you can do:</p>
+        <ul>
+          <li>Take a break and step away from the game.</li>
+          <li>Talk to Someone: If you’re feeling overwhelmed, talking to a friend or someone you trust can help.</li>
+          <li>Contact us support at .......</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <button class="back-button" (click)="goToMainMenu()">Back to Main Menu</button>
+
+
+  </div>
+  

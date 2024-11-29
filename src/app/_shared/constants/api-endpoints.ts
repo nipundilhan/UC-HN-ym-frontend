@@ -6,8 +6,9 @@ const MODULE_BASE = '/modules';
 const MOOD_BASE = '/moods';
 const QANDA_BASE = '/QandA';
 const NOTIFICATIONS_BASE = '/notifications';
-const BREATHING_BASE = '/breathing'
-const JOURNAL_BASE = '/journal'
+const BREATHING_BASE = '/breathing';
+const JOURNAL_BASE = '/journal';
+const MINDMAPS_BASE = '/mindMap';
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -49,6 +50,13 @@ export const API_ENDPOINTS = {
     SHARE: `${QANDA_BASE}/share`,
     RATE:`${QANDA_BASE}/rate`,
   },
+  MINDMAPS: {
+    BASE: MINDMAPS_BASE,
+    SHARED_MINDMAPS: `${MINDMAPS_BASE}/sharedMindmap`,
+    SHARE: `${MINDMAPS_BASE}/share`,
+    RATE:`${MINDMAPS_BASE}/rate`,
+  },
+
   NOTIFICATIONS: {
     BASE: NOTIFICATIONS_BASE,
     MESSAGES: `${NOTIFICATIONS_BASE}/messages`,
@@ -60,7 +68,6 @@ export const API_ENDPOINTS = {
   JOURNAL: {
     BASE: JOURNAL_BASE,
     GET_BY_STUDENT_ID: `${JOURNAL_BASE}/findByStudent/`,
-
   }
   
 

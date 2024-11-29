@@ -8,3 +8,69 @@
     margin-top:2%;
     background-color: darkgrey;
 }
+
+/* Container for the journaling tip block */
+.journalling-tip-block {
+    background-color: #f2f1df; /* Soft background color */
+    border: 1px solid #ccc;    /* Light border */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;        /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for scaling and shadow */
+  }
+  
+  /* Hover effect for the entire block */
+  .journalling-tip-block:hover {
+    transform: translateY(-5px);  /* Lifts the block */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+
+  .breathing-step-block {
+    margin: 1rem 0; /* Adds spacing around the block */
+    padding: 1rem; /* Adds internal spacing */
+    background-color: #f9f9f9; /* Soft background to differentiate the section */
+    border-left: 4px solid #007bff; /* Highlighted left border for emphasis */
+    border-radius: 5px; /* Rounds the edges for a smooth look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .breathing-step-block p {
+    margin: 0.5rem 0; /* Adds space between each paragraph */
+    line-height: 1.6; /* Increases readability */
+    color: #333; /* Neutral text color */
+  }
+  
+  .breathing-step-block p b {
+    color: #007bff; /* Emphasize key parts with the same color as the border */
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%; /* Full width of the container */
+    padding-bottom: 56.25%; /* Aspect ratio 16:9 (height/width = 9/16) */
+    height: 0;
+    overflow: hidden;
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Optional: Removes iframe border */
+  }
+  
+  
+  @media screen and (max-width: 480px) {
+    .journalling-tip-block {
+        padding: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .video-container {
+      padding-bottom: 75%; /* Adjust aspect ratio for taller videos if needed */
+    }
+  }

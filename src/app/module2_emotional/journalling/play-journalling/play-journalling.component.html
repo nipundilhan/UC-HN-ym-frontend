@@ -27,7 +27,7 @@
           <div class="records-container" *ngIf="AllData?.journalLogs?.length > 0">
             <div class="record-card" *ngFor="let journal of JournallingData" (click)="openJournalDetailPopup(journal)">
               <div class="record-image">
-                <img src="/assets/Journalling-icon.png" alt="Egyptian Theme">
+                <img src="/assets/journalling/Journalling-icon.png" alt="Egyptian Theme">
               </div>
               <div class="record-header">
                 <h5>{{ journal.journalType }}</h5>
@@ -64,7 +64,7 @@
                     <div class="spacer"></div>
 
                     <!-- First Question Dropdown -->
-                    <div class="form-group" *ngIf="selectedTechnique">
+                    <!-- <div class="form-group" *ngIf="selectedTechnique">
                       <select id="prompt1" formControlName="prompt1" (change)="onPromptChange(1)">
                         <option value="" disabled>Select Question 01</option>
                         <option *ngFor="let prompt of availablePrompts(1)" [value]="prompt">{{ prompt }}</option>
@@ -72,6 +72,24 @@
                       <div *ngIf="submitted && f['prompt1'].errors" class="error">
                         <div *ngIf="f['prompt1'].errors['required']">Please select the question</div>
                     </div>
+                    </div> -->
+
+                    <!-- First Question Dropdown -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                        <select id="prompt1" formControlName="prompt1" (change)="onPromptChange(1)">
+                        <option value="" disabled>Select Question 01</option>
+                        <option *ngFor="let prompt of availablePrompts(1)" [value]="prompt">{{ prompt }}</option>
+                        <option value="custom">Add your own question</option>
+                        </select>
+                        <input
+                        *ngIf="journalForm.get('prompt1')?.value === 'custom'"
+                        type="text"
+                        placeholder="Enter your custom question"
+                        formControlName="customPrompt1"
+                        />
+                        <div *ngIf="submitted && f['prompt1'].errors" class="error">
+                        <div *ngIf="f['prompt1'].errors['required']">Please select the question</div>
+                        </div>
                     </div>
                   
                     <!-- First Answer Field -->
@@ -89,7 +107,7 @@
                     <div class="spacer"></div>
                   
                     <!-- Second Question Dropdown -->
-                    <div class="form-group" *ngIf="selectedTechnique">
+                    <!-- <div class="form-group" *ngIf="selectedTechnique">
                       <select id="prompt2" formControlName="prompt2">
                         <option value="" disabled>Select Question 02</option>
                         <option *ngFor="let prompt of availablePrompts(2)" [value]="prompt">{{ prompt }}</option>
@@ -97,8 +115,25 @@
                       <div *ngIf="submitted && f['prompt2'].errors" class="error" >
                         <div *ngIf="f['prompt2'].errors['required']">Please select the question</div>
                     </div>
+                    </div> -->
+                  <!-- Second Question Dropdown -->
+                    <div class="form-group" *ngIf="selectedTechnique">
+                        <select id="prompt2" formControlName="prompt2" (change)="onPromptChange(2)">
+                        <option value="" disabled>Select Question 02</option>
+                        <option *ngFor="let prompt of availablePrompts(2)" [value]="prompt">{{ prompt }}</option>
+                        <option value="custom">Add your own question</option>
+                        </select>
+                        <input
+                        *ngIf="journalForm.get('prompt2')?.value === 'custom'"
+                        type="text"
+                        placeholder="Enter your custom question"
+                        formControlName="customPrompt2"
+                        />
+                        <div *ngIf="submitted && f['prompt2'].errors" class="error">
+                        <div *ngIf="f['prompt2'].errors['required']">Please select the question</div>
+                        </div>
                     </div>
-                  
+
                     <!-- Second Answer Field -->
                     <div class="form-group" *ngIf="selectedTechnique">
                       <textarea
@@ -154,7 +189,7 @@
                         Answer is required.
                       </div>
                   </div>
-                  
+
                   <div class="spacer"></div>
 
                   <!-- Question 2 -->

@@ -38,11 +38,6 @@ export class PlayJournallingComponent implements OnInit {
   gameMargins: { margin1: number;} | null = null; 
   completedTasks: number = 0;
   
-  // showTimeInput: boolean = false; // Show time input condition
-
-  // currentPage: number = 1; // Tracks the current page of the popup
-
-  // popupCurrentPage: number = 1; // Tracks the current page of the popup
   paginationCurrentPage: number = 1; // Tracks the current page for pagination
 
   isAchievementPopupOpen = false;
@@ -52,13 +47,32 @@ export class PlayJournallingComponent implements OnInit {
 
   JournalsPerPage: number = 6; // Number of questions to display per page
 
-  techniques = ['Gratitude Journalling', 'Self-compassion Journalling', 'Reflective Journalling', 'Expressive Writing'];
+  // techniques = ['Gratitude Journalling', 'Self-compassion Journalling', 'Reflective Journalling', 'Expressive Writing'];
+  techniques = ['Gratitude Journalling', 'Self-compassion Journalling', 'Reflective Journalling'];
+
 
   prompts: { [key: string]: string[] } = {
-    'Gratitude Journalling': ['What are you grateful for today?', 'Who has inspired you recently?'],
-    'Self-compassion Journalling': ['Write a kind note to yourself.', 'What challenges did you overcome?'],
-    'Reflective Journalling': ['What did you learn today?', 'What are your goals for tomorrow?'],
-    'Expressive Writing': ['Describe your current emotions.', 'What’s been on your mind lately?'],
+    'Gratitude Journalling': [
+      'Three positive words to describe today',
+      'Name three beautiful things that you saw today.',
+      'Name something you are proud of today.',
+    'Name something that made you smile today',
+  'Name something that you are looking forward to tomorrow'],
+
+    'Self-compassion Journalling': ['Write a kind note to yourself.', 
+      'List three things you love the most about yourself.',
+      'What has made you proud and excited recently?',
+      'Write about a challenge you faced today and how you handled it',
+      'Write about the most important lesson you’ve learned in the last 3 months'],
+    
+    'Reflective Journalling': ['What makes you feel calm?', 
+      'What are my top three strengths?',
+      'What do you want your life to look like in five years?',
+      'What is one thing you can do today to get closer to my goal?',
+      'I am proud of myself for .......',
+      'What do you appreciate most about your personality?'
+    ],
+    // 'Expressive Writing': ['Describe your current emotions.', 'What’s been on your mind lately?'],
   };
   selectedTechnique = '';
   selectedPrompts: string[] = [];
@@ -76,7 +90,9 @@ export class PlayJournallingComponent implements OnInit {
     this.journalForm = this.fb.group({
       technique: ['', Validators.required],
       prompt1: ['', Validators.required],
+      customPrompt1: [''], // For user-defined question 1
       prompt2: ['', Validators.required],
+      customPrompt2: [''], // For user-defined question 2
       answer1: ['', Validators.required],
       answer2: ['', Validators.required],
     });
@@ -159,18 +175,22 @@ export class PlayJournallingComponent implements OnInit {
 
     this.submitted = true;
 
-    if (this.journalForm.invalid) {
-      return;
-    }
-      const formData = this.journalForm.value;  
-        const requestBody: any = {
-      studentId: this.userAuthService.getUserId(),
-      journalType: formData.technique,
-      question1: formData.prompt1,
-      answer1: formData.answer1,
-      question2: formData.prompt2,
-      answer2: formData.answer2
-    };
+  if (this.journalForm.invalid) {
+    return;
+  }
+
+  const formData = this.journalForm.value;
+
+  const requestBody: any = {
+    studentId: this.userAuthService.getUserId(),
+    journalType: formData.technique,
+    question1:
+      formData.prompt1 === 'custom' ? formData.customPrompt1 : formData.prompt1,
+    answer1: formData.answer1,
+    question2:
+      formData.prompt2 === 'custom' ? formData.customPrompt2 : formData.prompt2,
+    answer2: formData.answer2,
+  };
   
     // Make the API call to save the data
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.JOURNAL.BASE, requestBody).subscribe(

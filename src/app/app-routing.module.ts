@@ -28,6 +28,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { ShareFeedNewComponent } from './global_comman/share-feed-new/share-feed-new/share-feed-new.component';
 import { MindmapsComponent } from './global_comman/share-feed-new/mindmaps/mindmaps.component';
 import { Game1BreathingComponent } from './module2_emotional/game1-breathing/game1-breathing.component'; 
+import { LearnBreathingComponent } from './module2_emotional/game1-breathing/learn-breathing/learn-breathing.component';
 import { LearnMindmapsComponent } from './module1_exam_prep/game1_mindmaps/learn-mindmaps/learn-mindmaps/learn-mindmaps.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PlayJournallingComponent } from './module2_emotional/journalling/play-journalling/play-journalling.component';
@@ -56,7 +57,8 @@ const routes: Routes = [
   { path: 'play-questions', component: ViewQuestionsComponent },
 
   // { path: 'game-map', component: GameMapComponent },
-  { path: 'breathing', component: Game1BreathingComponent },
+  { path: 'play-breathing', component: Game1BreathingComponent },
+  { path: 'learn-breathing', component: LearnBreathingComponent },
 
   { path: 'play-journalling', component: PlayJournallingComponent },
   { path: 'learn-journalling', component: LearnJournallingComponent },
