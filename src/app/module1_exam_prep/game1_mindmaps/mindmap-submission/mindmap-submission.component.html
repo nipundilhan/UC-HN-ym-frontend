@@ -1,4 +1,51 @@
 <div class="background">
+
+  <div class="sidenav">
+    <div class="badge-header">
+      <h4>My Badges</h4>
+    </div>
+    <div class="badge-list">
+      <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
+              'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more questions needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Eye of Horus</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+      
+      <div class="badge" 
+        [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
+        }"
+        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more questions needed') : ''"
+        (mouseleave)="showTooltip = ''">
+        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
+        <p>Ankh of Power</p>
+        <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+     </div>
+
+     <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedLikesBadge(gameMargins?.LikesMargin), 
+              'not-earned-badge': !hasEarnedLikesBadge(gameMargins?.LikesMargin) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedLikesBadge(gameMargins.LikesMargin) ? 'Badge unlocked' : (gameMargins.LikesMargin - TotalLikes) + ' more likes needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
+          <p>Likes</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+     
+
+
+    </div>
+  </div>
+  
     <div class="container">
         <h1 class="game-title">Mind Mapping Mastery</h1>
         <button class="add-button" (click)="openMindmapModal()">✨ Add New Mindmap✨</button>
@@ -7,13 +54,15 @@
            <!-- Mind map grid layout -->
            <div class="mind-map-grid">
             <div *ngFor="let mindmap of mindmaps" class="mind-map-card" (click)="openMindmapDetails(mindmap)">
-              <img [src]="mindmap.image ? mindmap.image : '/assets/placeholder-mindmap.jpg'" alt="{{ mindmap.title }} Image" class="mind-map-image" />
+
+              <img *ngIf="mindmap.attachments[0]"
+              [src]="'data:' + mindmap.attachments[0].contentType + ';base64,' + mindmap.attachments[0].data" 
+              alt="{{ mindmap.attachments[0].filename }}" 
+              class="mind-map-image"
+            />
+              <!-- <img [src]="mindmap.image ? mindmap.image : '/assets/placeholder-mindmap.jpg'" alt="{{ mindmap.title }} Image" class="mind-map-image" /> -->
               <h4>{{ mindmap.title }}</h4>
-          
-              <!-- Status tag at the bottom of the card -->
-              <div class="status-tag" [ngClass]="getStatusClass(mindmap.status)">
-                {{ mindmap.status }}
-              </div>
+        
             </div>
           </div>  
   
@@ -29,37 +78,30 @@
             <h2>{{ selectedMindmap.title }}</h2>
 
             <!-- Display Mindmap Image in the Modal -->
-            <div class="image-preview">
-                <img 
-                  [src]="selectedMindmap.image ? selectedMindmap.image : '/assets/placeholder-mindmap.jpg'" 
-                  alt="{{ selectedMindmap.title }} Image Preview"
-                  class="mind-map-image"
-                >
+            <div *ngFor="let file of uploadedFiles; let i = index" class="image-preview">
+                <img [src]="filePreviews[0]" alt="Preview" class="mind-map-image" (click)="viewFile(file) ; $event.stopPropagation()"/>
+                   
+
                 <!-- Camera icon for changing the image -->
                 <span class="camera-icon" (click)="triggerImageUpload()">
                     <i class="fa fa-camera"></i> <!-- Font Awesome camera icon -->
                 </span>
               
                 <!-- Hidden input for file selection -->
-                <input type="file" id="imageUpload" style="display: none;" (change)="onImageSelected($event)">
+                <input type="file" id="imageUpload" style="display: none;" (change)="onFileSelected($event)">
+                <!-- <button type="button" class="btn btn-primary" (click)="viewFile(file) ; $event.stopPropagation()">View</button> -->
+
               </div>   
 
             <form (ngSubmit)="onUpdateMindmap()">
-                <label for="date">Date:</label>
-                <input type="date" id="mindmapDate" [(ngModel)]="selectedMindmap.date" name="date" [max]="getTodayDate()" required />
-
-                <label for="status">Status:</label>
-                <select id="status" [(ngModel)]="selectedMindmap.status" name="status" required>
-                <option value="Started">Started</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-                </select>
   
                 <label for="description">Description:</label>
                 <textarea id="description" [(ngModel)]="selectedMindmap.description" name="description" rows="4"></textarea>
   
               <div class="button-container">
-                <button class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
+                <button class="btn save-btn">Save Changes</button>
+                <!-- <button class="btn share-popup" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button> -->
+                <button class="btn share-popup" (click)="onShareMindmap(selectedMindmap)">Share</button>
                 <button class="btn delete-btn" (click)="deleteMindmap(selectedMindmap)">Delete</button>
               </div>
             </form>
@@ -82,20 +124,7 @@
                   <div *ngIf="f['title'].errors['required']">Title is required</div>
                 </div>
 
-        
-                <label for="date">Date:</label>
-                <input type="date" id="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['date'].errors }" [max]="getTodayDate()" />
-                <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
-                  <div *ngIf="f['date'].errors['required']">Date is required</div>
-                </div>
-
-                <label for="status">Status:</label>
-                    <select id="status" formControlName="status" class="form-control">
-                        <option value="Started">Started</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                </select>
-
+  
                 <label for="description">Description:</label>
                 <textarea id="description" formControlName="description" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
                 <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
@@ -106,8 +135,15 @@
                 <input type="file" id="image" (change)="onFileSelected($event)"> -->
                 <label for="image">Upload Mindmap Image:</label>
                 <input type="file" id="image" (change)="onFileSelected($event)">
-                <div *ngIf="fileSizeError" class="error-message">File size exceeds the 2MB limit.</div>
+                <div *ngIf="fileSizeError" class="error-message">File size exceeds the 1MB limit.</div>
 
+                <div class="file-preview-container">
+                  <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
+                      <div>
+                          <img style="width: 120px;height: 120px;" [src]="filePreviews[0]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
+                      </div>
+                  </div>
+              </div>
               <!-- </div> -->
   
               <!-- <div class="form-group"> -->
@@ -146,6 +182,26 @@
         </div>
       </div>
     </div>
+
+         <!-- Popup Modal for Successful Share -->
+         <div *ngIf="isShareModalOpen" class="modal">
+          <div class="modal-background">
+            <div class="modal-content-share">
+              <span class="close" (click)="closeShareModal()">&times;</span>
+  
+  
+              <h2>Great!</h2>
+              <p>Your question has been shared successfully.</p>
+  
+               <!-- Success tick icon -->
+               <div class="success-tick">
+                <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+              </div>
+              
+              <button class="btn view-shared-btn" (click)="viewSharedMindmaps()">View Shared Mindmaps</button>
+            </div>
+          </div>
+        </div>
 
 
     </div>

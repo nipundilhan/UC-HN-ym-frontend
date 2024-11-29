@@ -10,6 +10,8 @@ import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { StudentTasks } from 'src/app/_shared/resources/StudentTask';
 import { Tsk } from 'src/app/_shared/resources/Task';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { PointsService } from 'src/app/_services/points.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mindmap-submission',
@@ -19,22 +21,6 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class MindmapSubmissionComponent implements OnInit {
 
 
-  editorContent: string = '';  // This will store the editor's content
-
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '200px',
-    minHeight: '100px',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
-    toolbarHiddenButtons: [
-      ['bold']
-    ]
-  };
-
 
   mindmapForm: FormGroup;
   mindmaps: any[] = [];
@@ -42,6 +28,8 @@ export class MindmapSubmissionComponent implements OnInit {
   isMindmapModalOpen = false;
   isAddMindmapModalOpen = false;
   selectedMindmap: any;
+  originalImage: any;
+  originalDescription: any;
   isSaveEnabled = false;
   selectedFile: File | null = null;
   isAchievementPopupOpen = false;
@@ -55,6 +43,19 @@ export class MindmapSubmissionComponent implements OnInit {
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
   fileSizeError: boolean = false;
 
+  gamePoints: number = 0;
+  totalLikesCount: number = 0;
+  showTooltip: string = ''; // Variable to hold the tooltip message
+  gameMargins: { margin1: number; margin2: number; LikesMargin: number } | null = null; 
+  completedTasks: number = 0;
+  TotalLikes: number = 0;
+  isShareModalOpen = false;
+
+
+
+  uploadedFiles: File[] = [];
+  filePreviews: SafeUrl[] = [];
+  
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -62,6 +63,9 @@ export class MindmapSubmissionComponent implements OnInit {
     private dataTrnfrSrvc: DataTransferService,
     private userAuthService: UserAuthService,
     private cdr: ChangeDetectorRef,
+    private pointsService: PointsService,
+    private sanitizer: DomSanitizer // Inject DomSanitizer
+
 
   ) {
     this.mindmapForm = this.formBuilder.group({
@@ -76,14 +80,64 @@ export class MindmapSubmissionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMindmaps(); // Fetch existing mindmaps
-    this.getStudentData();
+    this.fetchBadgeMargin();
+
   }
 
-  getStudentData(): Promise<void> {
+
+  fetchBadgeMargin(): void {
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.gameMargins = {
+          margin1: response.game3Margin1,
+          margin2: response.game3Margin2,
+          LikesMargin: response.game3LikesMargin,
+        };
+        this.completedTasks = response.game3Marks;
+        this.TotalLikes = response.game3Likes;
+        console.log(this.gameMargins);
+        console.log(this.TotalLikes);
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
+  
+    );
+  }
+
+  fetchUpdatedStudentPoints(): void {
+
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.studentData = response; // Updated student data, including points
+        console.log(this.studentData);
+        this.pointsService.updateTotalMarks(this.studentData.totalMarks); // Update total points in the header or wherever it's displayed
+        this.cdr.detectChanges(); // Trigger change detection to ensure UI reflects the updated points
+  
+        this.getMindmaps(); // Ensure this fetches latest data
+  
+      },
+      (httpError: any) => {
+        console.log(httpError);
+      }
+  
+    );
+    }
+
+  get f() {
+    return this.mindmapForm.controls;
+  }
+  
+  getMindmaps(): Promise<void>  {
+
     return new Promise((resolve, reject) => {
-      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.TUTORIALS.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MINDMAPS.BASE+ "/" + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
           this.studentData = response;
+          this.mindmaps = this.studentData.mindMaps;
+          // console.log(this.QnA);
+          this.gamePoints = this.studentData.gamePoints;
+          this.totalLikesCount = this.studentData.totalLikesCount; 
           this.cdr.detectChanges();
           this.loading = false;
           resolve(); // Resolve the promise after the data is successfully fetched
@@ -97,66 +151,54 @@ export class MindmapSubmissionComponent implements OnInit {
     });
   }
 
-  get f() {
-    return this.mindmapForm.controls;
-  }
-
-  getMindmaps(): void {
-    // Fetch mindmaps from backend or service
-    this.mindmaps = [
-      { title: 'Introduction to the project and Git', 
-        description: 'This tutorial will introduce the concept of version control and show you the basics of working with the code management system known as Git.', 
-        status: 'Completed', 
-        date: '2024-09-30', 
-        image: null  },
-
-      { title: 'Decisions and Loops', 
-        description: 'about calling methods, method parameters, local variables and method overloading. You will also learn how to use if-statements, switch-statements, for-loops, while-loops, arrays and collections. You will get to use these constructs to create solutions to some more complex problems', 
-        status:'In Progress', 
-        date: '2024-09-30', 
-        image: '/assets/mind-map.jpg'  },
-      
-        { title: 'Unit Testing', 
-          description: 'about calling methods, method parameters, local variables and method overloading. You will also learn how to use if-statements, switch-statements, for-loops, while-loops, arrays and collections. You will get to use these constructs to create solutions to some more complex problems', 
-          status:'In Progress', 
-          date: '2024-09-30', 
-          image: '/assets/mind-map.jpg'  },
-
-          { title: 'JUnit Testing', 
-            description: 'about calling methods, method parameters, local variables and method overloading. You will also learn how to use if-statements, switch-statements, for-loops, while-loops, arrays and collections. You will get to use these constructs to create solutions to some more complex problems', 
-            status:'In Progress', 
-            date: '2024-09-30', 
-            image: '/assets/mind-map.jpg'  }
-    ];
-  }
-
   openMindmapModal(): void {
     this.isAddMindmapModalOpen = true;
   }
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+    this.uploadedFiles = [];
+    this.filePreviews=[];
 
-    if (file) {
-      const maxSizeInMB = 2;
-      const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+    const files = event.target.files;
+    const maxFileSize = 1 * 1024 * 1024; // 1 MB
+    const allowedFileTypes = ['image/jpeg', 'image/png'];
+    const maxFilesAllowed = 1; // Maximum allowed files
 
-      if (file.size > maxSizeInBytes) {
-        this.fileSizeError = true;
-        event.target.value = ''; // Clear the input
-      } else {
-        this.fileSizeError = false;
-        // Process the file if needed
-        console.log('File accepted:', file.name);
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+  
+      if (this.uploadedFiles.length >= maxFilesAllowed) {
+        alert(`You can only upload a maximum of ${maxFilesAllowed} files.`);
+        break; // Stop processing further files
       }
+
+      // Check file size
+      if (file.size > maxFileSize) {
+        alert(`File ${file.name} exceeds the maximum size of 1 MB.`);
+        continue; // Skip this file
+      }
+  
+      // Check file type
+      if (!allowedFileTypes.includes(file.type)) {
+        alert(`File type of ${file.name} is not allowed. Only JPG and PNG are allowed.`);
+        continue; // Skip this file
+      }
+
+      this.uploadedFiles.push(file); // Add each valid file to the array
+      const filePreview = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+      this.filePreviews.push(filePreview); 
     }
+    this.cdr.detectChanges(); // Trigger change detection
   }
 
   closeAddMindmapModal(): void {
     this.isAddMindmapModalOpen = false;
     this.mindmapForm.reset();
-    this.mindmapForm.patchValue({ date: this.getTodayDate() });
-    this.mindmapForm.patchValue({ status: 'Started'});
+    this.uploadedFiles=[];
+    this.filePreviews=[];
+    // this.mindmapForm.patchValue({ date: this.getTodayDate() });
+    // this.mindmapForm.patchValue({ status: 'Started'});
 
   }
 
@@ -167,32 +209,133 @@ export class MindmapSubmissionComponent implements OnInit {
       return;
     }
 
-    const newMindmap = {
-      title: this.mindmapForm.value.title,
-      date: this.mindmapForm.value.date,
-      description: this.mindmapForm.value.description,
-      status: this.mindmapForm.value.status,
-      image: this.selectedFile ? URL.createObjectURL(this.selectedFile) : '/assets/default-mindmap.png'
-    };
+    // const newMindmap = {
+    //   title: this.mindmapForm.value.title,
+    //   description: this.mindmapForm.value.description,
+    //   image: this.selectedFile ? URL.createObjectURL(this.selectedFile) : '/assets/default-mindmap.png'
+    // };
 
-    this.mindmaps.push(newMindmap); // Add new mindmap to the list
+    const formData = new FormData();
+    formData.append('studentId', this.userAuthService.getUserId());
+    formData.append('title', this.mindmapForm.get('title')!.value);
+    formData.append('description', this.mindmapForm.get('description')!.value);
+
+    this.uploadedFiles.forEach(file => {
+      formData.append('attachments', file); // Append each file to the FormData
+    });
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MINDMAPS.BASE, formData).subscribe(
+      (response: any) => {
+        
+        // this.checkAchievement();
+        this.uploadedFiles = [];
+          setTimeout(() => {
+            this.fetchUpdatedStudentPoints(); 
+            this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+          }, 100); // Delay to ensure data consistency
+
+          this.checkAchievement(); // Check for achievement after data fetch
+          
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while recording the question");
+      }
+    );
+    this.mindmapForm.reset();
+    this.submitted = false;
     this.closeAddMindmapModal(); // Close modal after submission
   }
 
-  openMindmapDetails(mindmap: any): void {
-    this.selectedMindmap = mindmap;
-    this.isMindmapModalOpen = true;
-  }
+  // openMindmapDetails(mindmap: any): void {
+  //   this.selectedMindmap = mindmap;
+  //   this.isMindmapModalOpen = true;
+  // }
+
+
+
+    // Method to open mindmap details
+    openMindmapDetails(mindmap: any): void {
+      this.selectedMindmap = { ...mindmap };
+      this.uploadedFiles=[];
+      this.filePreviews=[];
+      const attachments = this.selectedMindmap.attachments;
+
+      attachments.forEach((attachment: any) => {
+        // Convert the base64 string back to a Blob and create a File object
+        const byteString = atob(attachment.data);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+          uint8Array[i] = byteString.charCodeAt(i);
+        }
+        
+        const blob = new Blob([uint8Array], { type: attachment.contentType });
+        const file = new File([blob], attachment.filename, { type: attachment.contentType });
+
+        // Push the file to uploadedFiles array
+        this.uploadedFiles.push(file);
+
+        // Create a preview URL for each file and store it in the filePreviews array
+        const filePreview = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+        this.filePreviews.push(filePreview);
+      });
+
+
+
+      // this.originalImage = mindmap.image;  // Store the original mindmap image
+      this.originalDescription= mindmap.description;      // Store the original mindmap description
+      this.isMindmapModalOpen = true;
+    }
+    viewFile(file: File) {
+      const fileUrl = URL.createObjectURL(file); // Create a blob URL for the file
+      window.open(fileUrl, '_blank');  // Open the file in a new tab
+    }
+    
+    // Method to check if the answer has changed
+    hasAnswerChanged(): boolean {
+      return (
+        // this.selectedMindmap.image !== this.originalImage ||  // Check if the question has changed
+        this.selectedMindmap.description !== this.originalDescription         // Check if the answer has changed
+      );
+    }
 
   closeMindmapModal(): void {
     this.isMindmapModalOpen = false;
   }
 
   onUpdateMindmap(): void {
-    // Save changes made to mindmap
-    this.isSaveEnabled = false;
-    this.closeMindmapModal();
+  
+    const formData = new FormData();
+
+    formData.append('mindMapId', this.selectedMindmap._id);
+    formData.append('studentId', this.userAuthService.getUserId());
+    formData.append('title', this.selectedMindmap.title);
+    formData.append('description', this.selectedMindmap.description);
+
+    this.uploadedFiles.forEach(file => {
+      formData.append('attachments', file); // Append each file to the FormData
+    });
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MINDMAPS.BASE, formData).subscribe(
+      (response: any) => {
+        
+        // this.checkAchievement();
+        this.uploadedFiles = [];
+
+        this.closeMindmapModal();
+        this.getMindmaps(); 
+          
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while saving the mindmap");
+      }
+    );
+
   }
+
+  
 
   deleteMindmap(mindmap: any): void {
     this.mindmaps = this.mindmaps.filter(m => m !== mindmap);
@@ -216,6 +359,8 @@ export class MindmapSubmissionComponent implements OnInit {
       // Process the selected image file (e.g., upload it or display a preview)
       this.selectedMindmap.image = URL.createObjectURL(file); // Temporary preview
     }
+
+
   }
   getStatusClass(status: string): string {
     switch (status) {
@@ -229,19 +374,32 @@ export class MindmapSubmissionComponent implements OnInit {
         return 'status-default'; // Fallback class if the status doesn't match any known value
     }
   }
+
+  hasEarnedBadge(margin: number | null | undefined): boolean {
+    if (margin === null || margin === undefined) {
+        return false; // or handle the case as needed
+    }
+    return this.gamePoints >= margin;
+  }
+
+  hasEarnedLikesBadge(margin: number | null | undefined): boolean {
+    if (margin === null || margin === undefined) {
+      return false; // or handle the case as needed
+  }
+  return this.totalLikesCount >= margin;
+}
+
   checkAchievement(): void {
-    const gamePoints = this.studentData.module1.game1.gamePoints;
-    const likesCount = this.studentData.module1.game1.likesCount; // Assuming you have a way to fetch likes count
-    console.log('Game Points:', gamePoints);
-    console.log('Likes Count:', likesCount);
+
+    const gamePoints = this.studentData.gamePoints;
+    // console.log(gamePoints);
   
-    // Reset badges at the beginning
+    // Ensure badges are reset at the beginning
     this.showBadge01 = false;
     this.showBadge02 = false;
-    this.showBadgeLikes = false; // New badge for likes
   
-    // Check for achievements based on game points
-    if (gamePoints === 3) {
+    // Show badge based on game points
+    if (gamePoints === 1) {
       this.isAchievementPopupOpen = true; // Show achievement popup
   
       // Show the padlock initially
@@ -255,7 +413,7 @@ export class MindmapSubmissionComponent implements OnInit {
       this.showBadge01 = true; // Show badge 01
       this.badgeClass = 'unlocking-animation'; // Trigger badge animation
     } 
-    else if (gamePoints === 5) {
+    else if (gamePoints === 4) {
       this.isAchievementPopupOpen = true; // Show achievement popup
   
       // Show the padlock initially
@@ -269,22 +427,6 @@ export class MindmapSubmissionComponent implements OnInit {
       this.showBadge02 = true; // Show badge 02
       this.badgeClass = 'unlocking-animation'; // Trigger badge animation
     }
-  
-    // Check for likes achievement
-    if (likesCount >= 10) { // Example condition: unlock badge if likes are 10 or more
-      this.isAchievementPopupOpen = true; // Show achievement popup
-  
-      // Show the padlock initially
-      this.isPadlockVisible = true;
-  
-      // Fade out the padlock after 2.5 seconds
-      setTimeout(() => {
-        this.isPadlockVisible = false; // Hide padlock
-      }, 2500);
-  
-      this.showBadgeLikes = true; // Show likes badge
-      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
-    }
   }
   
 
@@ -292,6 +434,51 @@ export class MindmapSubmissionComponent implements OnInit {
     this.isAchievementPopupOpen = false;
     this.router.navigate(['/achievements']);
   }
+
+  onShareMindmap(mindmap: any): void {
+    if (mindmap.sharedStatus === 'NOT_SHARED') {
   
+      const requestBody = {
+        ownerStudentId: this.userAuthService.getUserId(),
+        QandAId: this.selectedMindmap._id,
+        sharedStatus: "SHARED"
+      };
+  
+      this.apiCallService.executePutNoAuth(API_ENDPOINTS.QANDA.SHARE, requestBody).subscribe(
+        (response: any) => {
+          this.openShareModal();
+          setTimeout(() => {
+            this.getMindmaps();  //update the points in header and fetches latest tutorial data
+          }, 100);
+  
+          // Handle success response
+        },
+        (httpError: any) => {
+          console.log(httpError);
+          alert("An error occurred while sharing the question");
+        }
+      );
+  
+  this.closeMindmapModal();
+      // Update the sharedStatus to 'yes' after sharing
+      // question.sharedStatus = 'SHARED';
+    }
+  }
+
+  // Method to open the share success popup
+openShareModal(): void {
+  this.isShareModalOpen = true;
+}
+
+// Method to close the share success popup
+closeShareModal(): void {
+  this.isShareModalOpen = false;
+}
+
+viewSharedMindmaps(): void {
+  // Navigate to the shared questions page (assuming you have a route for this)
+  this.router.navigate(['share/questions']);
+}
+
   
 }

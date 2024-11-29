@@ -10,11 +10,12 @@
     width: 100%;
     height: 100%; 
     display: flex;
+    flex-direction: column;
     /* justify-content: flex-start; /* Align items at the top */
     /* align-items: stretch;  */
   }
 
-.container {
+/* .container {
     max-width: 800px;
     margin: 10px auto;
     border-radius: 8px;
@@ -24,7 +25,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
+
+.container{
+    max-width: calc(100% - 250px); /* Adjusting the width to account for the sidenav */
+    padding: 10px;
+    font-family: 'MedievalSharp', sans-serif;
+    position: absolute;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
 
 /* Title styling */
@@ -50,6 +62,22 @@
     transition: background-color 0.3s;
 }
 
+.no-mindmaps{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  height: 70%;
+  width: 70%;
+  font-size: 1.5rem;
+  align-self: center;
+  margin-top: 10px;
+  text-align: center;
+}
+
 /* Container for buttons */
 .button-container {
     display: flex;
@@ -59,7 +87,7 @@
   }
   
   /* Buttons styles */
-  .save-btn, .cancel-btn, .delete-btn{
+  .save-btn, .share-popup .delete-btn{
     background-color: #c27d2a; 
     color: white;
     border: none;
@@ -68,8 +96,19 @@
     cursor: pointer;
   }
 
+  .delete-btn{
+    background-color: #c2392a;
+    color: white;
+  }
+
+ 
+  .share-popup{
+    background-color: #28a745;
+    color: white;
+  }
+
 .save-btn:hover,
-.cancel-btn:hover, 
+.share-popup:hover, 
 .delete-btn:hover{
   opacity: 0.8;
 }
@@ -99,7 +138,7 @@
     justify-content: centre;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 220px;
-    min-height: 280px; /* Min height for smaller screens */
+    height: 250px; /* Min height for smaller screens */
     cursor: pointer;
     justify-content: flex-start; /* Ensure items stay at the top */
     text-align: center;
@@ -119,41 +158,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid #ecebea;
-
+    cursor: pointer;
 }
 .mind-map-card h4{
 margin: auto;
 }
-/* Base style for the status tag */
-.status-tag {
-    text-align: center;
-    width: 50%;
-    border-radius: 5px;
-    color: white;
-    font-size: 0.8em;
-    font-weight: bold;
-    align-self: center;
-}
-  
-  /* Status colors */
-  .status-started {
-    background-color: #607cf1;
-  }
-  
-  .status-in-progress {
-    background-color: #e2bf33; 
-  }
-  
-  .status-completed {
-    background-color: #45c442; 
-  }
-  
-  /* Optional default class in case the status is missing or invalid */
-  .status-default {
-    background-color: #cccccc; /* Gray as a fallback */
-  }
-  
-
 /* Container for the preview image in the modal */
 .image-preview {
     text-align: center;
@@ -224,7 +233,7 @@ margin: auto;
 .modal-background{
     border-radius: 15px;
     padding: 10px;
-    width: 60%;
+    width: 50%;
     max-width: 1000px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -236,6 +245,18 @@ margin: auto;
     justify-content: space-between;
     margin-top: 20px;
   }
+  .modal-content-share{
+    background-color: #e4ffd7;
+    padding: 20px;
+    border-radius: 8px;
+    /* width: 50%; */
+    max-width: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #978681;
+}
 
 /* Close button styling */
 .close {
@@ -293,6 +314,257 @@ button[type="submit"]:hover {
     opacity: 0.8;
 }
 
+.sidenav {
+    position: absolute; /* Fixes the navigation to the side */
+    right: 0; /* Place it on the right side */
+    width: 250px; /* Adjust width as per your design */
+    height: 100%; /* Full height */
+    background-color: rgb(248 248 248 / 78%); /* Background color */
+    padding-top: 20px;
+    z-index: 3; /* Ensure it's above other content */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    transition: 0.3s; /* Optional: Add smooth transition */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.41);
+    font-family: 'MedievalSharp', sans-serif;
+
+  }
+  
+  
+  .badge-header{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .badge-list{  
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .sidenav .badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 20px; */
+  }
+  
+  .sidenav .badge img {
+    width: 80px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .sidenav .badge p {
+    font-size: 1.2em;
+    color: #4a4a4a;
+    margin-bottom: 0;
+  }
+  
+  /* 
+  .earned {
+    border: 2px solid gold;
+    background-color: #fffae6;
+  } */
+  
+  /* Style for achieved badges */
+  .achieved-badge {
+    filter: none; /* No filter for achieved badges */
+  }
+  
+  /* Style for not earned badges */
+  .not-earned-badge {
+    filter: grayscale(100%); /* Makes the badge appear grey */
+  }
+  
+  .tooltip {
+    position: absolute; /* Ensure this is set to absolute */
+    background: rgba(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.462);
+    z-index: 100;
+    display: inline-block; /* Use inline-block to avoid full width */
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially transparent */
+    transition: opacity 0.2s; /* Fade in effect */
+    font-family: 'MedievalSharp', sans-serif;
+  }
+  
+  .badge:hover .tooltip {
+    visibility: visible; /* Make visible on hover */
+    opacity: 1; /* Make opaque on hover */
+  }
+
+  .view-shared-btn {
+    background-color: #e69216;
+  }
+  
+  .view-shared-btn:hover {
+    background-color: #c78421;
+    color: white;
+  }
+
+
+.success-tick {
+    font-size: 60px;
+    color: #28a745;  /* Green color for success */
+    margin-bottom: 15px;
+  }
+
+  .achievement-popup h2, 
+  .achievement-popup p
+  {
+    position: relative;
+    z-index: 1; /* Ensure these stay on top */
+  }
+  
+  /* Wrapper to hold both the image and popup */
+  .achievement-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; /* Flexbox for layout */
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Sage Image Container (outside popup) */
+  .sage-image-container {
+    margin-right: 15px; /* Space between the image and the popup */
+    position: relative; /* Allow custom positioning if needed */
+  }
+  
+  .sage-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 15px rgb(255, 255, 255)); /* Yellow glow effect */
+  }
+  
+  
+  /* Achievement Popup */
+  .achievement-popup {
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    padding: 20px;
+    width: 500px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001; /* Ensure it's above other elements */
+    text-align: center; /* Center the content */
+    display: flex;
+    flex-direction: column; /* Stack the elements vertically */
+    justify-content: center;
+    align-items: center; /* Align items in the center horizontally */
+    transition: width 0.3s ease; /* Optional: smooth width transition */
+  }
+  
+  /* Achievement message text container */
+  .achievement-message {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Badge Image */
+.badge-image {
+    width: 150px;
+    height: auto;
+    opacity: 0; /* Initially hidden */
+    transform: scale(0.5); /* Start at a smaller size */
+    z-index: 1;
+    position: absolute;
+  }
+  
+
+/* Unlocking animation */
+@keyframes unlockBadge {
+    0% {
+      opacity: 0;
+      transform: scale(0.5); /* Start smaller */
+      filter: grayscale(100%); /* Start with grayscale */
+    }
+    50% {
+      opacity: 1;
+      transform: scale(0.8); /* Slightly larger midway */
+      filter: grayscale(100%); /* Still in grayscale */
+    }
+    100% {
+      opacity: 1;
+      transform: scale(0.9); 
+      filter: grayscale(0%); /* Turn to original color */
+    }
+  }
+  
+
+  /* Apply animation */
+.unlocking-animation {
+    animation: unlockBadge 2s ease-out forwards; /* Trigger on appearance */
+  }
+  
+  /* Padlock styles */
+  .padlock-gif {
+    width: 90px;
+    height: auto;
+    z-index: 2;
+    opacity: 0; /* Initially invisible */
+    transition: opacity 1s ease-in-out; /* Smooth fade-out effect */
+  }
+  
+  /* When padlock is visible, set opacity to 1 */
+  .padlock-visible {
+    opacity: 1;
+  }
+  
+  /* When padlock becomes invisible, opacity transitions to 0 */
+  .padlock-gif:not(.padlock-visible) {
+    opacity: 0; /* Fully transparent */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+  .file-preview-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Space between items */
+}
+
+.file-preview {
+    flex: 1 1 calc(25% - 10px); /* 4 items per row */
+    box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+.file-preview img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: add rounded corners */
+}
+
+.file-preview p {
+    margin: 5px 0; /* Space between the image and the filename */
+    text-align: center; /* Center the filename */
+}
+
+.file-preview button {
+    display: block; /* Make the button a block element */
+    margin: 5px auto; /* Center the button */
+}
+
+
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .mind-map-grid {
@@ -305,14 +577,43 @@ button[type="submit"]:hover {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .game-title {
-        font-size: 2em;
-    }
 
-    .add-button {
-        font-size: 1em;
-        padding: 8px 15px;
-    }
+    .container {
+        max-width: 100%; /* Allow the container to take up the full width */
+        padding-top: 10px; /* Remove the extra padding on small screens */
+        position: relative;
+      }
+      /* SideNav becomes a row on top for mobile */
+      .sidenav {
+        width: 100%;
+        padding-top:0;
+        position: relative; /* Make it relative for smaller screens */
+        height: 25%;
+      }
+      .badge-list{  
+        flex-direction: row;
+      }
+    
+      .sidenav .badge {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+      }
+    
+      .sidenav .badge img {
+        width: 70px;
+        margin-top: 0;
+      }
+    
+        .game-title {
+            font-size: 2em;
+        }
+    
+        .add-button {
+            font-size: 1em;
+            padding: 8px 15px;
+            width: 60%;
+        }
 
     .mind-map-card {
         padding: 10px;
@@ -374,7 +675,7 @@ button[type="submit"]:hover {
         min-height: 240px; /* Reduce height for smaller screens */
     }
     .button-container {
-        flex-direction: column;
+        flex-direction: row;
     }
     .camera-icon{
         left: 50px;
