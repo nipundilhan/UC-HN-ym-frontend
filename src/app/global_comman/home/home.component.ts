@@ -52,7 +52,7 @@ games = [
   },
   {
     id: 5,
-    name: 'Calm of the Oasis',
+    name: 'Calm of the Scarab',
     subtitle: 'Journalling Mastery',
     hieroglyphImage: 'assets/hieroglyph5.png', 
     // hieroglyph: '𓎛',
