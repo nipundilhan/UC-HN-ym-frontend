@@ -59,6 +59,38 @@ export class ProfileComponent implements OnInit {
     minDate: string = ''; // Class property to hold the min date
     examDate: string = '2024-09-30'; // Default exam date
 
+    showTooltip: string = ''; // Variable to hold the tooltip message
+
+
+    gamePoints: number = 0;
+    gameMargins: { 
+      game1margin1: number; 
+      game1margin2: number;
+      game1marks: number;
+
+      game2margin1: number;
+      game2margin2: number;
+      game2likes: number;
+      game2likesMargin: number;
+      game2marks: number;
+
+      game3margin1: number;
+      game3margin2: number;
+      game3likes: number;
+      game3likesMargin: number;
+      game3marks: number;
+
+      game4margin1: number;
+      game4margin2: number;
+      game4marks: number;
+
+      game5margin1: number;
+      game5margin2: number;
+      game5marks: number;
+
+    }
+      | null = null; 
+
     avatars: Avatar[] = [
       { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
       { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
@@ -220,6 +252,10 @@ onChangePasswordSubmit() {
       return `assets/moods/${mood}.jpg`;
     }
 
+  
+
+   
+
     // getMoodIcon(mood: string): string {
     //   switch (mood) {
     //     case 'happy': return 'assets/happy.jpg';
@@ -243,11 +279,58 @@ fetchMoodData(): void {
     (response: any) => {
       this.userMoodHistory = response.moods;
       this.loadInitialMoods(); // Load initial moods after data is fetched
+
+      this.gamePoints= response.totalMarks
+          this.gameMargins = {
+            game1margin1: response.game1Margin1,
+            game1margin2: response.game1Margin2,
+            game1marks: response.game1Marks,
+         
+            game2margin1: response.game2Margin2,
+            game2margin2: response.game2Margin2,
+            game2marks: response.game2Marks,
+            game2likesMargin: response.game2LikesMargin,
+            game2likes: response.game2Likes,
+      
+            game3margin1: response.game3Margin1,
+            game3margin2: response.game3Margin2,
+            game3marks: response.game3Marks,
+            game3likesMargin: response.game3LikesMargin,
+            game3likes: response.game3Likes,
+      
+            game4margin1: response.game2Margin2,
+            game4margin2: response.game2Margin2,
+            game4marks: response.game4Marks,
+            
+            game5margin1: response.game2Margin2,
+            game5margin2: response.game2Margin2,
+            game5marks: response.game5Marks,
+
+          };
+          console.log(this.gameMargins.game1margin1);
+          console.log(this.gameMargins.game1margin2);
+          console.log(this.gameMargins.game1marks);
+
+
     },
     (error) => {
-      console.error('Error fetching mood data:', error);
+      console.error('Error fetching data:', error);
     }
   );
+}
+
+// hasEarnedBadge(margin: number | null | undefined, points: number | null | undefined): boolean {
+//   if (margin === null || margin === undefined) {
+//       return false; // or handle the case as needed
+//   }
+//   return points >= margin;
+// }
+
+hasEarnedBadge(margin: number | null | undefined, points: number | null | undefined): boolean {
+  if (margin === null || margin === undefined || points === null || points === undefined) {
+    return false; // Handle null or undefined values for both parameters
+  }
+  return points >= margin; // Perform the comparison safely
 }
 
 getTodayDate(): string {

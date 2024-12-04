@@ -16,9 +16,10 @@
   </div>
   <div class="profile-info">
     <h2>{{userName}}</h2>
-    <p><strong>Email:</strong> {{userEmail}}</p>
-    <p><strong>Birthday:</strong> {{userBirthday}}</p>
-    <p><strong>Gender:</strong> {{userGender}}</p>
+    <p><i>{{userEmail}}</i></p>
+    <!-- <p><strong>Email:</strong> {{userEmail}}</p> -->
+    <!-- <p><strong>Birthday:</strong> {{userBirthday}}</p>
+    <p><strong>Gender:</strong> {{userGender}}</p> -->
     <div class="profile-buttons">
       <button class="btn-edit" (click)="openEditDetailsModal()">Edit Details</button>
       <button class="btn-password" (click)="openChangePasswordModal()">Change Password</button>
@@ -286,10 +287,155 @@
       <!-- My Badges Tab Content -->
       <div class="tab-pane fade" id="badges" role="tabpanel">
         <div class="badge-list">
-          <div *ngFor="let badge of userBadges">
+          <!-- <div *ngFor="let badge of userBadges">
             <img [src]="badge.image" alt="{{badge.name}}" [class.locked]="!badge.earned" class="badge-img">
             <p>{{badge.name}}</p>
-          </div>
+          </div> -->
+
+          <!-- Game 1: Eye of Horus -->
+    <div class="game-section">
+      <h3 class="game-title">Eye of Horus</h3>
+      <div class="badges-container" >
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game1margin1, gameMargins?.game1marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game1margin1, gameMargins?.game1marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game1margin1, gameMargins.game1marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01_a.png" alt="Beginner Badge" class="badge-icon">
+          <p class="badge-name">Beginner</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game1margin2, gameMargins?.game1marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game1margin2, gameMargins?.game1marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game1margin2, gameMargins.game1marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge01_b.png" alt="Master Badge" class="badge-icon">
+          <p class="badge-name">Master</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game 2: Ankh’s Chronicle -->
+    <div class="game-section">
+      <h3 class="game-title">Ankh’s Chronicle</h3>
+      <div class="badges-container">
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game2margin1, gameMargins?.game2marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game2margin1, gameMargins?.game2marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game2margin1, gameMargins.game2marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge02_a.png" alt="Beginner Badge" class="badge-icon">
+          <p class="badge-name">Beginner</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game2margin2, gameMargins?.game2marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game2margin2, gameMargins?.game2marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game2margin2, gameMargins.game2marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge02_b.png" alt="Master Badge" class="badge-icon">
+          <p class="badge-name">Master</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game2likesMargin, gameMargins?.game2likes), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game2likesMargin, gameMargins?.game2likes) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game2likesMargin, gameMargins.game2likes) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge02_c.png" alt="Rising Star  Badge" class="badge-icon">
+          <p class="badge-name">Rising Star</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game 3: Sphinx’s Riddle -->
+    <div class="game-section">
+      <h3 class="game-title">Pharaoh`s Trial</h3>
+      <div class="badges-container">
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game3margin1, gameMargins?.game3marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game3margin1, gameMargins?.game3marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game3margin1, gameMargins.game3marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge03_a.png" alt="Beginner Badge" class="badge-icon">
+          <p class="badge-name">Beginner</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game3margin2, gameMargins?.game3marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game3margin2, gameMargins?.game3marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game3margin2, gameMargins.game3marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge03_b.png" alt="Master Badge" class="badge-icon">
+          <p class="badge-name">Master</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game3likesMargin, gameMargins?.game3likes), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game3likesMargin, gameMargins?.game3likes) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game3likesMargin, gameMargins.game3likes) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge03_c.png" alt="Rising Star Badge" class="badge-icon">
+          <p class="badge-name">Rising Star</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game 4-->
+    <div class="game-section">
+      <h3 class="game-title">Whispers of the Sphinx</h3>
+      <div class="badges-container">
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game3marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game3marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge04_a.png" alt="Beginner Badge" class="badge-icon">
+          <p class="badge-name">Beginner</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game3marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game3marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge04_b.png" alt="Master Badge" class="badge-icon">
+          <p class="badge-name">Master</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game 5-->
+    <div class="game-section">
+      <h3 class="game-title">Calm of the Scarab</h3>
+      <div class="badges-container">
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game5margin1, gameMargins?.game5marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game5margin1, gameMargins?.game5marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game5margin1, gameMargins.game5marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge05_a.png" alt="Beginner Badge" class="badge-icon">
+          <p class="badge-name">Beginner</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+
+        <div class="badge" [ngClass]="{ 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game5margin2, gameMargins?.game5marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game5margin2, gameMargins?.game5marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game5margin2, gameMargins.game5marks) ? 'Unlocked' :  'Locked') : ''"
+        (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge05_b.png" alt="Master Badge" class="badge-icon">
+          <p class="badge-name">Master</p>
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        </div>
+      </div>
+    </div>
         </div>
       </div>
 

@@ -412,21 +412,78 @@
 }
 
 
-.badge-list {
+/* .badge-list {
     display: flex;
     flex-wrap: wrap;
     gap: 35px;
+} */
+
+.badge-list {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px; /* Space between game sections */
+  flex-wrap: wrap;
 }
 
-.badge-list div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* Game Section */
+.game-section {
+  background-color: #f5f5f5;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.28);
+  padding: 10px;
+  border-radius: 10px;
 }
 
-img.locked {
-    filter: grayscale(100%);
-    opacity: 0.6;
+.game-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center; /* Center-align game title */
+}
+
+/* Badges Container */
+.badges-container {
+  display: flex;
+  flex-wrap: wrap; /* Wrap badges onto new lines if needed */
+  justify-content: center; /* Center-align badges within the container */
+}
+
+/* Individual Badge Style */
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.badge:hover {
+  transform: translateY(-5px); /* Slight hover lift effect */
+}
+
+/* Badge Icon */
+.badge-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.achieved-badge {
+  filter: none; /* No filter for achieved badges */
+}
+
+/* Style for not earned badges */
+.not-earned-badge {
+  filter: grayscale(100%); /* Makes the badge appear grey */
+}
+
+/* Badge Name */
+.badge-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin: 0;
 }
 
 .tab-section {
@@ -442,6 +499,26 @@ img.locked {
 
 .tab-pane {
     padding: 15px;
+}
+
+.tooltip {
+  position: absolute; /* Ensure this is set to absolute */
+  background: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.462);
+  z-index: 100;
+  display: inline-block; /* Use inline-block to avoid full width */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.2s; /* Fade in effect */
+  font-family: 'MedievalSharp', sans-serif;
+}
+
+.badge:hover .tooltip {
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; /* Make opaque on hover */
 }
 
 /* Optional: Customize the scroll bar (for Webkit browsers) */
@@ -665,9 +742,9 @@ img.locked {
     margin: 5px; /* Reduce margin for better spacing */
     max-width: 100px; /* Limit size on smaller screens */
   }
-  .tab-section {
-    height: 300px; /* Further adjust height for mobile screens */
-}
+  /* .tab-section {
+    height: 300px; 
+} */
 
     .avatar {
         width: 100px;
@@ -692,5 +769,10 @@ img.locked {
     
       .days-left p {
         font-size: 0.9rem; /* Make the text smaller on very small screens */
+      }
+
+      .game-section{
+        width: 100%;
+        margin-bottom: 10px;
       }
 }
