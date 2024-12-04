@@ -121,7 +121,7 @@
   
   .back-button {
     position: absolute;
-    top: 20px;
+    bottom: 80px;
     right: 20px;
     padding: 10px 15px;
     background-color: #000000; /* Egyptian theme color */
@@ -198,7 +198,7 @@
     }
   
     .back-button {
-      bottom: 15px;
+      bottom: 0px;
       right: 15px;
       padding: 8px 12px;
       font-size: 0.9rem;

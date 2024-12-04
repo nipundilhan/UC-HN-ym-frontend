@@ -39,6 +39,7 @@ export const API_ENDPOINTS = {
   MODULES: {
     BASE: MODULE_BASE,
     GET_BY_STUDENT_ID: `${MODULE_BASE}/findPointsByStudent/`,
+    SHARE_BADGE: `${MODULE_BASE}/shareBadge`
   },
   MOODS: {
     BASE: MOOD_BASE,
@@ -52,7 +53,7 @@ export const API_ENDPOINTS = {
   },
   MINDMAPS: {
     BASE: MINDMAPS_BASE,
-    SHARED_MINDMAPS: `${MINDMAPS_BASE}/sharedMindmap`,
+    SHARED_MINDMAPS: `${MINDMAPS_BASE}/sharedMindMaps`,
     SHARE: `${MINDMAPS_BASE}/share`,
     RATE:`${MINDMAPS_BASE}/rate`,
   },

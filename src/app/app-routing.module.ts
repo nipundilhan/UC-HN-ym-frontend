@@ -33,6 +33,7 @@ import { LearnMindmapsComponent } from './module1_exam_prep/game1_mindmaps/learn
 import { MessagesComponent } from './messages/messages.component';
 import { PlayJournallingComponent } from './module2_emotional/journalling/play-journalling/play-journalling.component';
 import { LearnJournallingComponent } from './module2_emotional/journalling/learn-journalling/learn-journalling.component';
+import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'play-mindmaps', component: MindmapSubmissionComponent },
 
   { path: 'play-questions', component: ViewQuestionsComponent },
+  { path: 'learn-questions', component: LearnQuestionsComponent },
 
   // { path: 'game-map', component: GameMapComponent },
   { path: 'play-breathing', component: Game1BreathingComponent },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./learn-mindmaps.component.css']
 })
 export class LearnMindmapsComponent implements OnInit {
+  videoUrl: SafeResourceUrl = ''; // Initialize with an empty string or a default safe URL.
 
   // Tips array which can include text, images, and even videos
 tips = [
@@ -21,130 +22,106 @@ tips = [
     video: null
   },
   {
-    text: `<h4>What is Mind Mapping?</h4><p>Mind maps are a visual way of taking notes, brainstorming ideas or planning. They can help you organise and connect information and ideas. They are also easy to remember and quick to review</p>`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
     text: `<h4>Why Mind Mapping?</h4>
-    <p>The process of mind mapping allows us to;</p>
-    <ul style="text-align: left !important;">
-    <li>Visualize ideas and concepts</li>
-    <li>Brainstorm effectively</li>
-    <li>Improve note taking and knowledge management</li>
-    <li>Develop critical thinking skills</li>
-    </ul>
-`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
-    text: `<ol>
-    <li>
-      <strong>Start with a Central Idea:</strong>
-      <p>Begin your mind map with a central idea or question. This could be a concept you're studying or a problem you're trying to solve. For instance, if you're preparing for a programming test, the central idea could be "Algorithms" or "Data Structures."</p>
-    </li>
-
-    <li>
-      <strong>Branch Out with Key Concepts:</strong>
-      <p>From the central idea, create branches for key topics or sub-questions. For example, if your central idea is "Algorithms," you might have branches like "Sorting Algorithms," "Search Algorithms," or "Graph Algorithms." This helps break down the topic into manageable chunks.</p>
-    </li>
-
-    <li>
-      <strong>Use Keywords to Keep it Simple:</strong>
-      <p>Mind maps are most effective when they’re simple and to the point. Use keywords, short phrases, or single terms on each branch to summarize important concepts or ideas. This keeps your mind map clean and easy to follow.</p>
-    </li>
-    <ol>`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
-    text: `<ol>
-    <li>
-      <strong>Organize Information Hierarchically:</strong>
-      <p>Mind maps allow you to visually organize information in a hierarchical structure. Start with broad topics at the center, and branch out to more specific details or examples. This will help you visualize how concepts relate to one another and how smaller ideas fit into the larger picture.</p>
-    </li>
-
-    <li>
-      <strong>Add Visual Elements to Enhance Understanding:</strong>
-      <p>You can make your mind map more engaging by adding icons, shapes, or small visuals next to the branches. For example, use arrows to show relationships between different ideas or use color-coding to highlight different types of information (e.g., facts in blue, examples in green, or questions in red).</p>
-    </li>
-
-    <li>
-      <strong>Connect Ideas Across Different Branches:</strong>
-      <p>A powerful feature of mind maps is showing how different ideas are interconnected. Draw lines or arrows to connect branches that relate to one another, showing the flow of thoughts or logical connections between concepts. This helps you understand the material in a more integrated way.</p>
-    </li>
-    <ol>`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
-    text: `<ol>
-    <li>
-      <strong>Focus on Understanding, Not Just Memorizing:</strong>
-      <p>Mind mapping is more about understanding the connections between ideas than memorizing details. As you create your map, think about how each piece of information relates to the others and how you can apply that knowledge to solve problems or answer test questions.</p>
-    </li>
-
-    <li>
-      <strong>Keep It Focused and Manageable:</strong>
-      <p>Don’t overcrowd your mind map with too many details. If a branch becomes too complex, break it into smaller sub-branches. This will keep the map easy to navigate and help you focus on the most important concepts.</p>
-    </li>
-
-    <li>
-      <strong>Review and Revise Your Map Regularly:</strong>
-      <p>Mind maps are dynamic tools that can change as your understanding deepens. As you learn more or uncover new insights, update your map. Regularly reviewing and revising your map will reinforce what you’ve learned and help solidify the connections between concepts.</p>
-    </li>
-
-    <li>
-      <strong>Use Mind Mapping for Problem Solving and Planning:</strong>
-      <p>Mind mapping isn’t just for studying; it can also be used to solve problems. If you're facing a complex issue (like a coding problem or project plan), use a mind map to break it down into smaller, more manageable parts. This allows you to identify potential solutions or steps in an organized way.</p>
-    </li>
-  </ol>`,
-// images: ["assets/view-tutorials.png"],
-images: [],
-
-video: null
-  },
-  {
-    text: `<h3>How to Play the Game</strong></h3><p>Welcome to your creative learning adventure! Here’s how to make the most out of your experience while logging your mind maps:</p> <p><strong>Log Your Mind Maps:</strong> As you work on your mind maps, keep track of your progress by logging each one you complete. You can enter essential details such as the lesson title and an optional description to reflect on your thought process and learning.</p> <p><strong>
-    Option to Add Images:</strong> You can enhance your log by uploading an image of your mind map or simply log the details without an image. Either way, you’ll have a record of your creative journey to look back on.</p> <p><strong>Review Your Progress:</strong> Keep track of how your mind mapping skills improve over time by reviewing your logged maps. With each new map, you can visualize how your understanding of topics deepens and how your mind mapping technique evolves.</p>`,
-images: ["assets/view-tutorials.png"],
-video: null
-  },
-  {
-    text: `<p><strong>Track Partially Completed Mind Maps:</strong> Don’t worry if you haven’t finished a mind map! You can log partially completed ones and come back to update them later when you finish. You can also add or change the image. <b> You'll do great!</b></p>`,
+           <div class="journalling-tip-block">🌟 <b>Boosts Creativity:</b> Visualizing ideas in a structured way helps unlock creative problem-solving skills.</div>
+           <div class="journalling-tip-block">✨ <b>Improves Memory:</b> Using colors, images, and keywords enhances retention and recall.</div>
+           <div class="journalling-tip-block">🛡️ <b>Simplifies Complexity:</b> Breaking down topics into manageable parts makes studying less overwhelming.</div>`,
     images: [],
     video: null
   },
   {
-    text: `<h3>Share Your Mind Map</h3>
-  <p>Sharing your creativity is simple and rewarding! Follow these steps to share your mind map with others:</p>
-  <ol>
-    <li><strong>Log Your Mind Map:</strong> Ensure your mind map is fully logged with all essential details, including an image. The share feature is only available for records with images.</li>
-    <li><strong>Click the Share Button:</strong> After logging your mind map, look for the <b>"Share"</b> button at the bottom. Click on it to share your mind map with your friends.</li>
-    <li><strong>Showcase Your Work:</strong> Once shared, your mind map will become visible to other users, allowing them to view and appreciate your work.</li>
-    <li><strong>Earn Likes:</strong> Your shared mind map can receive likes from others. The more likes you get, the closer you’ll be to earning the <b>Pharaoh’s Crown Badge</b>!</li>
-  </ol>
-  <p>Share your mind maps to inspire others, celebrate your creativity, and engage with the community!</p>`,
+    text: `<h4>How to get Started?</h4>
+           <h6>Follow these steps to master mind mapping:</h6>
+           <div class="breathing-step-block">
+  <p><b>Step 1:</b> Choose a Central Topic: Select a lesson or concept you want to explore.</p>
+  <img src="/assets/mindmapping/mindmap-step1.png" alt="Step 1 Image" class="mindmap-step-image">
+
+  <p><b>Step 2:</b> Add Main Branches: Write key ideas or categories related to the topic as branches extending from the center.</p>
+  <img src="/assets/mindmapping/mindmap-step2.png" alt="Step 2 Image" class="mindmap-step-image">
+</div>`,
     images: [],
     video: null
   },
   {
-    text: `<p><strong>Earn Badges:</strong> Celebrate your creativity and engagement with three distinct badges:</p> <ul> <div class="tip-block"> <li><b>Silver Ankh Badge:</b> Log <strong>5 mind maps with images</strong> to earn this badge, recognizing your effort in visualizing and organizing ideas.</li> 
-    </div> <p></p> <div class="tip-block"> <li><b>Gold Ankh Badge:</b> Reach <strong>10 mind maps with images</strong> to unlock this prestigious badge, showcasing your advanced mind mapping skills and commitment.</li> </div> <p></p> <div class="tip-block"> <li><b>Pharaoh’s Crown Badge:</b> 
-    Collect <strong>50 likes</strong> across your shared mind maps to achieve this coveted badge, awarded for inspiring and engaging with others in the community.</li> </div> </ul> <p>Share your mind maps, track your achievements, and see how your skills grow with every step!</p>`,
-    images: ["assets/badges/badge01.png"],
-    video: null
-  },
-  {
-    text: `<p>So dive in, enjoy the journey, and let the game enhance your learning experience!</p>`,
+    text: `<h4>How to get Started?</h4>
+           <h6>Follow these steps to master mind mapping:</h6>
+           <div class="breathing-step-block">
+            <p><b>Step 3:</b> Expand Sub-Branches: For each main branch, add details or subtopics to deepen your understanding.</p>
+            <img src="/assets/mindmapping/mindmap-step3.png" alt="Step 3 Image" class="mindmap-step-image">
+
+            <p><b>Step 4:</b> Use Visual Elements: Add colors, symbols, or images to make your map engaging and memorable.</p>
+            <img src="/assets/mindmapping/mindmap-step4.png" alt="Step 4 Image" class="mindmap-step-image">
+
+            <p><b>Step 5:</b> Review and Refine: Check for clarity and ensure all important points are included.</p>
+          </div>`,
     images: [],
     video: null
   },
+
+  {
+    text: `<h3>Online Tools for Mind Mapping</h3>
+           <p>Don’t worry if you’re not sure how to get started with creating mind maps. Here’s a list of free and user-friendly online tools that can help you design and organize your mind maps:</p>
+           <ul>
+             <li><a href="https://www.mindmeister.com/" target="_blank"><b>MindMeister</b></a>: A popular tool with an intuitive interface for creating collaborative mind maps.</li>
+             <li><a href="https://coggle.it/" target="_blank"><b>Coggle</b></a>: Perfect for brainstorming and visualizing complex ideas.</li>
+             <li><a href="https://www.canva.com/mind-maps/templates/" target="_blank"><b>Canva</b></a>: Offers customizable templates and vibrant design elements for creative mind mapping.</li>
+             <li><a href="https://miro.com/mind-map/" target="_blank"><b>Miro</b></a>: Ideal for creating detailed, interactive mind maps as part of team collaboration.</li>
+             <li><a href="https://www.lucidchart.com/pages/examples/mind_mapping_software" target="_blank"><b>Lucidchart</b></a>: A versatile tool for creating structured diagrams and mind maps.</li>
+           </ul>`,
+    images: [],
+    video: null
+  },
+  {
+    text: `<p>🌟 <b>Watch this helpful video to learn the basics and start creating your own maps with confidence!</p>
+           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`, 
+    images: [],
+    video: null
+  },
+  {
+    text: `<h3>How to Play the Game</h3>
+           Here’s how to make the most out of your experience while creating mind maps:</p> 
+           <p><strong>Log Your Mind Maps:</strong> As you create mind maps based on your lessons, log the details to track your progress. 
+           Enter the lesson title and add an optional description to reflect on your thought process and learning.</p> 
+           <p><strong>Review Your Progress:</strong> Keep track of how your mind mapping skills evolve over time by revisiting your logged maps. 
+           Use this record as a visual tool to monitor your growth and deepen your understanding of topics.</p>`,
+    images: ["assets/mind-mapping/view-mindmaps.png"],
+    video: null
+  },
+  {
+    text: `<h3>Share Your Mind Maps</h3>
+           <p>Sharing your creative work is both easy and rewarding! Here’s how you can inspire others and showcase your skills:</p>
+           <ol>
+             <li><strong>Log Your Mind Map:</strong> Ensure your mind map is logged with all essential details, including an image.</li>
+             <li><strong>Click the Share Button:</strong> Look for the <b>"Share"</b> button at the bottom of your logged mind map. Click it to share with your friends.</li>
+             <li><strong>Engage and Collaborate:</strong> Once shared, your mind map will be visible to others, allowing them to view and appreciate your work.</li>
+             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your mind maps. The more likes you collect, the closer you’ll be to earning the <b>Pharaoh’s Crown Badge</b>!</li>
+           </ol>
+           <p>Sharing your mind maps not only helps others but also fosters collaborative learning and feedback!</p>`,
+    images: [],
+    video: null
+  },
+  {
+    text: `<p><strong>Earn Badges:</strong> Showcase your creativity and engagement with three exclusive badges:</p>
+           <ul>
+             <div class="tip-block">
+               <li><b>Silver Ankh Badge:</b> Log <strong>2 mind maps</strong> to earn this badge, marking the beginning of your journey to mastering mind mapping.</li>
+             </div>
+             <div class="tip-block">
+               <li><b>Gold Ankh Badge:</b> Log <strong>5 mind maps</strong> to achieve this badge, highlighting your growing expertise in organizing ideas visually.</li>
+             </div>
+             <div class="tip-block">
+               <li><b>Pharaoh’s Crown Badge:</b> Collect <strong>10 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
+             </div>
+           </ul>
+           <p>Track your achievements, share your work, and celebrate your progress as you create more mind maps!</p>`,
+    images: ["assets/badges/mindmap-badge.png"],
+    video: null
+  },
+  {
+    text: `<p>So dive in, start mapping, and let this game transform the way you learn and remember!</p>`,
+    images: [],
+    video: null
+  }
 ];
 
   // Current index of the tip
@@ -161,6 +138,9 @@ video: null
   ngOnInit(): void {
     // Initially display the first tip
     this.displayTip();
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/7Ep5mKuRmAA?si=w6E5xZg98z7SUTiw');
+
+
   }
 
   // Method to go to the next tip
@@ -177,6 +157,10 @@ video: null
       this.currentTipIndex--;
       this.displayTip();
     }
+  }
+
+  getSafeHtml(content: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   goToGame(): void {
