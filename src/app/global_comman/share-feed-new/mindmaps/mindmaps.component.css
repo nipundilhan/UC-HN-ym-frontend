@@ -5,11 +5,12 @@
   }
   
   .user-avatar {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 15px;
     border: 1px solid #dcdcdc;
+    padding: 2px;
   }
   
   .user-details {
@@ -38,11 +39,11 @@
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    height: 300px; /* Fixed height for cards */
+    height: 250px; /* Fixed height for cards */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Space between content and footer */
-    align-items: center; /* Center content */
+    /* align-items: center;  */
     transition: transform 0.2s; /* Animation on hover */
     cursor: pointer;
 
@@ -61,19 +62,37 @@
   .mindmap-card .mindmap-image{
     height:80px;
     width: auto;
+    object-fit: contain;
   }
+
+
   
   .mindmap-card p {
-    margin: 10px 0; /* Space between description and likes */
+    margin: 10px 0; 
     text-align: center; /* Center-align description */
   }
+
+  .no-mindmaps{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    height: 200px;
+    /* width: 70%; */
+    font-size: 1.5rem;
+    align-self: center;
+}
 
 
 .like-container {
     display: flex;
-    justify-content: center;
+    /* justify-content: flex-end; */
     align-items: center;
     /* margin-top: 10px; */
+    align-self: flex-end;
   }
   
   .like-button {
@@ -83,7 +102,7 @@
     display: flex;
     align-items: center;
   }
-  
+ 
   .like-icon {
     width: 20px; /* Size of the heart icon */
     height: 20px;
@@ -94,12 +113,46 @@
   .like-button:hover .like-icon {
     transform: scale(1.1); /* Scale up on hover */
   }
+
+  .heart-like-icon-disabled {
+    color: #ffffff; /* Grey color for not liked */
+    margin-right: 5px;
+
+  }
+  
+  /* When the heart is liked */
+.heart-like-icon {
+    color: #f7a542; /* Red color for liked */
+    margin-right: 5px;
+  }
+
+  .heart-like-icon:hover {
+    transform: scale(1.1); /* Scale up on hover */
+  }
+
   
   .like-count {
-    margin-right: 70px;
+    /* margin-right: 70px; */
     font-weight: bold;
   }
 
+
+  .modal-content  .like-button {
+    background-color: #e8e8f7; /* Make background transparent */
+    border: 1.5px solid #7e82c9; /* Remove border */
+    color: #7e82c9;
+    border-radius: 8px;
+  }
+
+  .modal-content .like-button.liked {
+    background-color: #e7fbe9 !important; 
+    color: #34aa3f !important; 
+    border: 1.5px solid #34aa3f;
+}
+.modal-content h5{
+  align-self: flex-start;
+  margin-bottom: 0;
+}
 
   .modal {
     position: fixed;
@@ -142,6 +195,7 @@
       height: 40px; /* Adjust size as needed */
       border-radius: 50%; /* Round avatar */
       margin-right: 10px; /* Space to the right of the avatar */
+      
     }
   
   .modal-content .username{
@@ -207,6 +261,49 @@
     cursor: pointer;
     font-size: 24px;
   }
+
+  .form-field {
+    margin-bottom: 15px; /* Space between fields */
+}
+
+.form-field label {
+    font-weight: bold; /* Make the label bold */
+    display: block; /* Make label occupy full width */
+    margin-bottom: 5px; /* Space between label and value */
+}
+
+.field-value {
+    background-color: #fcf7ec; /* Light gray background for non-editable feel */
+    border: 1px solid #fbe6b9; /* Border to resemble an input */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding inside the "input" */
+    min-height: 40px; /* Minimum height for better appearance */
+    color: #333; /* Dark text color for readability */
+    font-size: 1em; /* Font size */
+    word-wrap: break-word; /* Ensure long words break to fit */
+}
+  
+.pagination-controls {
+  display: flex;
+  justify-content: space-between; /* Space between the controls */
+  margin-top: 20px; /* Space above pagination */
+  padding: 10px 0; /* Padding around the controls */
+}
+
+.pagination-controls button {
+  background-color: #007bff; /* Primary color for buttons */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px 16px; /* Padding inside buttons */
+  cursor: pointer; /* Cursor style */
+}
+
+.pagination-controls button[disabled] {
+  background-color: #ccc; /* Disabled button color */
+  cursor: not-allowed; /* Change cursor for disabled */
+}
+
   
 
 @media (max-width: 768px) {

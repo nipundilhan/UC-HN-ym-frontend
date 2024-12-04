@@ -1,5 +1,5 @@
 <!-- <p>mindmaps works!</p> -->
-<div class="mindmap-grid">
+<div class="mindmap-grid" *ngIf="AllData?.data?.mindMaps?.length > 0">
     <!-- <div *ngFor="let item of mindmaps" class="mindmap-card" (click)="openMindMap(item)">
       <div class="user-info">
         <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
@@ -12,23 +12,31 @@
       <p>{{ item.title }}</p>
     </div> -->
 
- <div *ngFor="let item of mindmaps" class="mindmap-card" (click)="openMindMap(item)">
+ <div *ngFor="let item of paginatedMindmaps" class="mindmap-card" (click)="openMindMap(item)">
         <div class="user-info">
-          <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+          <img [src]="getUserAvatar(item.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
           <div class="user-details">
-            <span class="username">{{ item.username }}</span>
-            <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+            <span class="username">{{ item.ownerStudentName }}</span>
+            <span class="shared-date">{{ item.date | date:'dd MMMM \'at\' HH:mm a' }}</span>
           </div>
         </div>
-        <img [src]="item.imageUrl" alt="Mind Map" class="mindmap-image">
+        <!-- <img [src]="item.imageUrl" alt="Mind Map" class="mindmap-image"> -->
+        <img [src]="'data:' + item.attachments[0].contentType + ';base64,' + item.attachments[0].data" 
+        alt="{{ item.attachments[0].filename }}" 
+        class="mindmap-image"
+      />
         <p>{{ item.title }}</p>
         <div class="like-container">
-          <button (click)="likeMindMap()" class="like-button">
-            <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
-          </button>
-          <span class="like-count">{{ item.likes }} Likes</span>
+             <i class="fas fa-heart heart-like-icon"></i>
+          <span class="like-count">{{ item.likesCount }}</span>
         </div>
+
+        
       </div>
+  </div>
+
+  <div class="no-mindmaps" *ngIf="!AllData?.data?.mindMaps?.length">
+    No Mindmaps Shared Yet.
   </div>
 
     <!-- Mind Map Modal -->
@@ -38,23 +46,52 @@
           
           <div class="modal-header">
             <div class="user-info">
-              <img [src]="getUserAvatar(selectedMindMap.userId)" alt="User Avatar" class="user-avatar">
+              <img [src]="getUserAvatar(selectedMindMap.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
               <div class="user-details">
-                <span class="username">{{ selectedMindMap.username }}</span>
-                <span class="shared-date">{{ selectedMindMap.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+                <span class="username">{{ selectedMindMap.ownerStudentName }}</span>
+                <span class="shared-date">{{ selectedMindMap.date | date:'dd MMMM \'at\' HH:mm a' }}</span>
               </div>
             </div>
           </div>
           
-          <p>{{ selectedMindMap.title }}</p>
+          <!-- <div class="form-field">
+            <label>Title:</label>
+            <div class="field-value">{{ selectedMindMap.title }}</div>
+        </div>
+        <div class="form-field">
+          <label>Description:</label>
+          <div class="field-value">{{ selectedMindMap.description }}</div>
+      </div> -->
+
+          <h5>{{ selectedMindMap.title }}</h5>
+          <p>{{ selectedMindMap.description }}</p>
           
-          <img [src]="selectedMindMap.imageUrl" alt="Mind Map" class="large-mindmap-image">
-          
+          <!-- <img [src]="selectedMindMap.imageUrl" alt="Mind Map" class="large-mindmap-image"> -->
+          <img [src]="'data:' + selectedMindMap.attachments[0].contentType + ';base64,' + selectedMindMap.attachments[0].data" 
+        alt="{{ selectedMindMap.attachments[0].filename }}" 
+        class="large-mindmap-image">
+
           <div class="like-container">
-            <button (click)="likeMindMap()" class="like-button">
+            <!-- <button (click)="likeMindMap()" class="like-button">
               <img src="/assets/icons/heart-icon.png" alt="Like" class="like-icon">
-            </button>
-            <span class="like-count">{{ selectedMindMap.likes }} Likes</span>
+            </button> -->
+            <!-- <span class="like-count">{{ selectedMindMap.likes }} </span> -->
+
+
+            <div class="like-container">
+              <button (click)="likeMindMap()" *ngIf="selectedMindMap.liked !== 'UNABLED'"   class="like-button"
+              [ngClass]="{
+                'like-button': true, 
+                'not-liked': selectedMindMap.liked === 'NO', 
+                'liked': selectedMindMap.liked !== 'NO'
+              }">
+          
+                <span *ngIf="selectedMindMap.liked === 'NO'"><i class="fa-regular fa-heart"></i> Like</span>
+                <span class *ngIf="selectedMindMap.liked !== 'NO'"><i class="fa-solid fa-heart"></i> Liked</span>
+                <span *ngIf="selectedMindMap.liked === 'UNABLED'"></span>
+              </button>
+            </div>    
+
             <div class="download-container"> <!-- Wrap in a container -->
               <button (click)="downloadMindMap()" class="download-button">
                 <i class="fas fa-download"></i> <!-- Font Awesome download icon -->
@@ -64,7 +101,14 @@
           </div>      
         </div>
       </div>
+
+      <div class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+        <button (click)="nextPage()" [disabled]="currentPage >= totalPages || totalPages === 1">Next</button>
     
+    </div>
   
 
   
