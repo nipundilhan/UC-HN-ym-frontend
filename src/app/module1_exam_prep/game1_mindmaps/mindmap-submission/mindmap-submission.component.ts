@@ -50,6 +50,7 @@ export class MindmapSubmissionComponent implements OnInit {
   completedTasks: number = 0;
   TotalLikes: number = 0;
   isShareModalOpen = false;
+  isShareModalBadgeOpen = false;
 
   currentPage: number = 1; // Current page number
   mindmapsPerPage: number = 8;
@@ -444,7 +445,37 @@ export class MindmapSubmissionComponent implements OnInit {
 
   shareAchievement(): void {
     this.isAchievementPopupOpen = false;
-    this.router.navigate(['/achievements']);
+
+    let badge = '';
+    let ref = '';
+
+    if (this.showBadge01 == true){
+      badge = 'badge2_a';
+      ref = 'Ankh`s Chronicle : Beginner'
+    }
+    else if (this.showBadge02 == true){
+      badge = 'badge2_b';
+      ref = 'Ankh`s Chronicle : Master'
+    }
+ 
+    const requestBody = 
+      {
+        studentId : this.userAuthService.getUserId(),
+        gameCode : "game2",
+        badgeCode : badge,
+        reference : ref
+      };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MODULES.SHARE_BADGE, requestBody).subscribe(
+      async (response: any) => {
+        this.openShareBadgeModal();
+
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the badge");
+      }
+    );
   }
 
   onShareMindmap(mindmap: any): void {
@@ -486,6 +517,20 @@ openShareModal(): void {
 closeShareModal(): void {
   this.isShareModalOpen = false;
 }
+
+  // Method to open the share badge popup
+  openShareBadgeModal(): void {
+    this.isShareModalBadgeOpen = true;
+  }
+  
+  // Method to close the share badge  popup
+  closeShareBadgeModal(): void {
+    this.isShareModalBadgeOpen = false;
+  }
+
+  viewSharedBadge(): void {
+    this.router.navigate(['share/notifications']);
+  }
 
 viewSharedMindmaps(): void {
   // Navigate to the shared questions page (assuming you have a route for this)

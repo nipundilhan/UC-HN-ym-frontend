@@ -13,7 +13,21 @@
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more breathing sessions needed') : ''"
           (mouseleave)="showTooltip = ''">
           <img src="/assets/badges/badge04_a.png" alt="Eye of Horus">
-          <p>Whispers of the Sphinx</p>
+          <p class="badge-title">Whispers of the Sphinx</p>
+        <p class="badge-subtitle">Beginner</p> 
+          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+      </div>
+
+      <div class="badge" 
+            [ngClass]="{ 
+              'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
+              'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
+            }"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more breathing sessions needed') : ''"
+          (mouseleave)="showTooltip = ''">
+          <img src="/assets/badges/badge04_b.png" alt="Eye of Horus">
+          <p class="badge-title">Whispers of the Sphinx</p>
+          <p class="badge-subtitle">Master</p>           
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
     </div>
@@ -196,7 +210,7 @@
     <div class="achievement-popup">
       <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
       <h2>Congratulations!</h2>
-      <p>You've unlocked the "Pharao's Trial"</p>
+      <p>You've unlocked a badge</p>
 
       <!-- Badge Image with animation class -->
       <!-- <div class="badge-container"> -->
@@ -205,10 +219,30 @@
 
         <!-- Badge Image -->
         <img *ngIf="showBadge01" src="/assets/badges/badge04_a.png" alt="Achievement Badge" class="badge-image unlocking-animation">
-        <!-- <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation"> -->
+        <img *ngIf="showBadge02" src="/assets/badges/badge04_b.png" alt="Achievement Badge" class="badge-image unlocking-animation">
       <!-- </div> -->
 
       <button class="btn share-btn" (click)="shareAchievement()">Share</button>
+    </div>
+  </div>
+</div>
+
+ <!-- Popup Modal for Successful Share -->
+ <div *ngIf="isShareModalOpen" class="modal">
+  <div class="modal-background">
+    <div class="modal-content-share">
+      <span class="close-share" (click)="closeShareModal()">&times;</span>
+
+
+      <h2>Great!</h2>
+      <p>Your achievement has been shared successfully.</p>
+
+       <!-- Success tick icon -->
+       <div class="success-tick">
+        <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+      </div>
+      
+      <button class="btn view-shared-btn" (click)="viewSharedBadge()">Go to Notifications</button>
     </div>
   </div>
 </div>

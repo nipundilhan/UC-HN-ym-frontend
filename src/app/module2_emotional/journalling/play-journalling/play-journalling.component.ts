@@ -35,7 +35,7 @@ export class PlayJournallingComponent implements OnInit {
 
   showTooltip: string = ''; // Variable to hold the tooltip message
   gamePoints: number = 0;
-  gameMargins: { margin1: number;} | null = null; 
+  gameMargins: { margin1: number; margin2: number;} | null = null; 
   completedTasks: number = 0;
   
   paginationCurrentPage: number = 1; // Tracks the current page for pagination
@@ -44,7 +44,10 @@ export class PlayJournallingComponent implements OnInit {
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
   badgeClass: string = 'badge-grey'; // Initially grey
   showBadge01: Boolean = false;
+  showBadge02: Boolean = false;
 
+  isShareModalOpen: Boolean = false;
+  
   JournalsPerPage: number = 6; // Number of questions to display per page
 
   // techniques = ['Gratitude Journalling', 'Self-compassion Journalling', 'Reflective Journalling', 'Expressive Writing'];
@@ -255,9 +258,10 @@ export class PlayJournallingComponent implements OnInit {
     this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
       (response: any) => {
         this.gameMargins = {
-          margin1: response.game4Margin1
+          margin1: response.game5Margin1,
+          margin2: response.game5Margin2,
         };
-        this.completedTasks = response.game4Marks;
+        this.completedTasks = response.game5Marks;
       },
       (httpError: any) => {
         console.log(httpError);
@@ -273,10 +277,9 @@ export class PlayJournallingComponent implements OnInit {
   
     // Ensure badges are reset at the beginning
     this.showBadge01 = false;
+    this.showBadge02 = false;
 
-  
-    // Show badge based on game points (giving badge when logging the secon session)
-    if (gamePoints === 4) {
+    if (gamePoints === 1) {
       this.isAchievementPopupOpen = true; // Show achievement popup
   
       // Show the padlock initially
@@ -290,13 +293,59 @@ export class PlayJournallingComponent implements OnInit {
       this.showBadge01 = true; // Show badge 01
       this.badgeClass = 'unlocking-animation'; // Trigger badge animation
     } 
+    // Show badge based on game points (giving badge when logging the secon session)
+    if (gamePoints === 4) {
+      this.isAchievementPopupOpen = true; // Show achievement popup
+  
+      // Show the padlock initially
+      this.isPadlockVisible = true;
+  
+      // Fade out the padlock after 2.5 seconds
+      setTimeout(() => {
+        this.isPadlockVisible = false; // Hide padlock
+      }, 2500);
+  
+      this.showBadge02 = true; // Show badge 01
+      this.badgeClass = 'unlocking-animation'; // Trigger badge animation
+    } 
 
   }
   
 
   shareAchievement(): void {
     this.isAchievementPopupOpen = false;
-    this.router.navigate(['/achievements']);
+    let badge = '';
+    let ref = '';
+
+    if (this.showBadge01 == true){
+      badge = 'badge5_a';
+      ref = 'Calm of the Scarab: Beginner'
+    }
+    else if (this.showBadge02 == true){
+      badge = 'badge5_b';
+      ref = 'Calm of the Scarab: Master'
+    }
+ 
+    const requestBody = 
+
+      {
+        studentId : this.userAuthService.getUserId(),
+        gameCode : "game5",
+        badgeCode : badge,
+        reference : ref
+      };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MODULES.SHARE_BADGE, requestBody).subscribe(
+      async (response: any) => {
+        this.openShareModal();
+
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the badge");
+      }
+    );
+
   }
 
 
@@ -421,5 +470,20 @@ onDelete(selectedJournal: any): void {
 cancelDelete(): void {
   this.showDeleteConfirmationPopup = false; // Hide confirmation popup
 }
+
+  // Method to open the share badge popup
+  openShareModal(): void {
+    this.isShareModalOpen = true;
+  }
+  
+  // Method to close the share badge  popup
+  closeShareModal(): void {
+    this.isShareModalOpen = false;
+  }
+  
+  viewSharedBadge(): void {
+    // Navigate to the shared questions page (assuming you have a route for this)
+    this.router.navigate(['share/notifications']);
+  }
 
 }

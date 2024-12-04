@@ -262,7 +262,7 @@
     margin-top: 20px;
   }
   .modal-content-share{
-    background-color: #e4ffd7;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     /* width: 50%; */
@@ -284,8 +284,18 @@
     right: 20px;
 }
 
-.close:hover {
-    color: #000;
+.close-share {
+  top: -10px;
+  font-size: 1.5em;
+  color: #aaa;
+  cursor: pointer;
+  position: relative;
+  right: 180px;
+}
+
+.close:hover,
+.close-share:hover {
+  color: #000;
 }
 
 /* Form styling */

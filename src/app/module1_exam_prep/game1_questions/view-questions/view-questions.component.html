@@ -145,7 +145,7 @@
     <div class="achievement-popup">
       <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
       <h2>Congratulations!</h2>
-      <p>You've unlocked the "Pharao's Trial"</p>
+      <p>You've unlocked a badge</p>
 
       <!-- Badge Image with animation class -->
       <!-- <div class="badge-container"> -->
@@ -215,6 +215,26 @@
             </form>
           </div>
         </div>
+    </div>
+
+    <!-- Popup Modal for Successful Share of badges -->
+    <div *ngIf="isShareModalBadgeOpen" class="modal">
+      <div class="modal-background">
+        <div class="modal-content-share">
+          <span class="close-share" (click)="closeShareBadgeModal()">&times;</span>
+
+
+          <h2>Great!</h2>
+          <p>Your achievement has been shared successfully.</p>
+
+           <!-- Success tick icon -->
+           <div class="success-tick">
+            <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+          </div>
+          
+          <button class="btn view-shared-btn" (click)="viewSharedBadge()">Go to Notifications</button>
+        </div>
+      </div>
     </div>
 
 

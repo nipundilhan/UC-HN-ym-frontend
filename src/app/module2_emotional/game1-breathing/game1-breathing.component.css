@@ -101,6 +101,42 @@ background-size: cover;
   background-image: url('/assets/background-img/brick_background.jpg'); 
 }
 
+.modal-content-share{
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  /* width: 50%; */
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #978681;
+}
+
+.close-share {
+  top: 10px;
+  font-size: 1.5em;
+  color: #aaa;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}
+
+.success-tick {
+  font-size: 60px;
+  color: #28a745;  /* Green color for success */
+  margin-bottom: 15px;
+}
+
+.view-shared-btn {
+  background-color: #e69216;
+}
+
+.view-shared-btn:hover {
+  background-color: #c78421;
+  color: white;
+}
 
 /* Form styling */
 form {
@@ -246,9 +282,12 @@ button[type="submit"]:hover {
   transition: opacity 0.3s;
 }
 
-.close-icon:hover {
+.close-icon:hover,
+.close-share:hover
+ {
   opacity: 0.7;
 }
+
 
   .breathing-session {
     background-color: #ffffff;
@@ -483,6 +522,18 @@ button {
   color: #4a4a4a;
 }
 
+.sidenav .badge .badge-title {
+  font-size: 1.1em;
+  color: #4a4a4a;
+  margin-bottom: 5px; /* space between title and subtitle */
+}
+
+.sidenav .badge .badge-subtitle {
+  font-size: 1em;
+  color: #7a7a7a;  /* subtler color for subtitle */
+  font-style: italic;  /* optional for distinguishing */
+  margin-bottom: 0px;
+}
 /* 
 .earned {
   border: 2px solid gold;

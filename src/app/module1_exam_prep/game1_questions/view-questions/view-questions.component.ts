@@ -52,6 +52,7 @@ export class ViewQuestionsComponent implements OnInit {
 
   isAchievementPopupOpen = false;
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
+  isShareModalBadgeOpen = false;
 
   currentPage: number = 1; // Current page number
   QnAPerPage: number = 9; // Number of questions to display per page
@@ -252,6 +253,21 @@ closeShareModal(): void {
   this.router.navigate(['share/questions']);
 }
 
+  // Method to open the share badge popup
+  openShareBadgeModal(): void {
+    this.isShareModalBadgeOpen = true;
+  }
+  
+  // Method to close the share badge  popup
+  closeShareBadgeModal(): void {
+    this.isShareModalBadgeOpen = false;
+  }
+
+  viewSharedBadge(): void {
+    this.router.navigate(['share/notifications']);
+  }
+
+
   onUpdateQuestion(): void {
     // Save changes made to question
 
@@ -422,7 +438,37 @@ closeShareModal(): void {
 
   shareAchievement(): void {
     this.isAchievementPopupOpen = false;
-    this.router.navigate(['/achievements']);
+
+    let badge = '';
+    let ref = '';
+
+    if (this.showBadge01 == true){
+      badge = 'badge3_a';
+      ref = 'Pharaoh’s Trial: Beginner'
+    }
+    else if (this.showBadge02 == true){
+      badge = 'badge3_b';
+      ref = 'Pharaoh’s Trial: Master'
+    }
+ 
+    const requestBody = 
+      {
+        studentId : this.userAuthService.getUserId(),
+        gameCode : "game3",
+        badgeCode : badge,
+        reference : ref
+      };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MODULES.SHARE_BADGE, requestBody).subscribe(
+      async (response: any) => {
+        this.openShareBadgeModal();
+
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the badge");
+      }
+    );
   }
   
 

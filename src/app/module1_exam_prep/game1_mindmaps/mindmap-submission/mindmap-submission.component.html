@@ -177,7 +177,7 @@
         <div class="achievement-popup">
           <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
           <h2>Congratulations!</h2>
-          <p>You've unlocked the "Eye of Horus"</p>
+          <p>You've unlocked a badge</p>
 
           <!-- Badge Image with animation class -->
             <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
@@ -201,7 +201,7 @@
   
   
               <h2>Great!</h2>
-              <p>Your question has been shared successfully.</p>
+              <p>Your mindmap has been shared successfully.</p>
   
                <!-- Success tick icon -->
                <div class="success-tick">
@@ -212,6 +212,26 @@
             </div>
           </div>
         </div>
+
+                  <!-- Popup Modal for Successful Share of badges -->
+                  <div *ngIf="isShareModalBadgeOpen" class="modal">
+                    <div class="modal-background">
+                      <div class="modal-content-share">
+                        <span class="close-share" (click)="closeShareBadgeModal()">&times;</span>
+            
+            
+                        <h2>Great!</h2>
+                        <p>Your achievement has been shared successfully.</p>
+            
+                         <!-- Success tick icon -->
+                         <div class="success-tick">
+                          <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+                        </div>
+                        
+                        <button class="btn view-shared-btn" (click)="viewSharedBadge()">Go to Notifications</button>
+                      </div>
+                    </div>
+                  </div>
 
         <div class="pagination-controls">
           <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
