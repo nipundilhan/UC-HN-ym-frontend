@@ -290,6 +290,21 @@
         position: fixed;
         align-self: center;
     }
+
+    .achievement-popup {
+      width: 280px; /* Adjust for smaller screens */
+      padding: 10px;
+      height: 350px;
+    }
+    .badge-image {
+      width: 80px;
+      position: relative;
+    }
+  
+    .padlock-gif {
+      width: 60px;
+      position: absolute;
+    }
   }
 
   .button-container {

@@ -55,7 +55,6 @@ export class PlayJournallingComponent implements OnInit {
     'Gratitude Journalling': [
       'Three positive words to describe today',
       'Name three beautiful things that you saw today.',
-      'Name something you are proud of today.',
     'Name something that made you smile today',
   'Name something that you are looking forward to tomorrow'],
 
@@ -69,7 +68,6 @@ export class PlayJournallingComponent implements OnInit {
       'What are my top three strengths?',
       'What do you want your life to look like in five years?',
       'What is one thing you can do today to get closer to my goal?',
-      'I am proud of myself for .......',
       'What do you appreciate most about your personality?'
     ],
     // 'Expressive Writing': ['Describe your current emotions.', 'What’s been on your mind lately?'],
