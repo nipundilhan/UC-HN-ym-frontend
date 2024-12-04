@@ -51,7 +51,8 @@ export class MindmapSubmissionComponent implements OnInit {
   TotalLikes: number = 0;
   isShareModalOpen = false;
 
-
+  currentPage: number = 1; // Current page number
+  mindmapsPerPage: number = 8;
 
   uploadedFiles: File[] = [];
   filePreviews: SafeUrl[] = [];
@@ -69,12 +70,9 @@ export class MindmapSubmissionComponent implements OnInit {
 
   ) {
     this.mindmapForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      date: [this.getTodayDate(), Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(30)]], // Use array for multiple validators
       description: ['', Validators.required],
-      status: ['Started', Validators.required], 
-      image: [null] // Image placeholder
- 
+      image: [null, Validators.required] // Ensure image is required
     });
   }
 
@@ -89,14 +87,14 @@ export class MindmapSubmissionComponent implements OnInit {
     this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
       (response: any) => {
         this.gameMargins = {
-          margin1: response.game3Margin1,
-          margin2: response.game3Margin2,
+          margin1: response.game2Margin1,
+          margin2: response.game2Margin2,
           LikesMargin: response.game3LikesMargin,
         };
-        this.completedTasks = response.game3Marks;
-        this.TotalLikes = response.game3Likes;
-        console.log(this.gameMargins);
-        console.log(this.TotalLikes);
+        this.completedTasks = response.game2Marks;
+        this.TotalLikes = response.game2Likes;
+        // console.log(this.gameMargins);
+        // console.log(this.TotalLikes);
       },
       (httpError: any) => {
         console.log(httpError);
@@ -152,19 +150,21 @@ export class MindmapSubmissionComponent implements OnInit {
   }
 
   openMindmapModal(): void {
+    this.uploadedFiles = [];
+    this.filePreviews=[];
     this.isAddMindmapModalOpen = true;
   }
 
   onFileSelected(event: any): void {
     this.uploadedFiles = [];
-    this.filePreviews=[];
-
+    this.filePreviews = [];
+    this.fileSizeError = false; // Reset file size error
     const files = event.target.files;
+  
     const maxFileSize = 1 * 1024 * 1024; // 1 MB
     const allowedFileTypes = ['image/jpeg', 'image/png'];
     const maxFilesAllowed = 1; // Maximum allowed files
-
-    
+  
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
   
@@ -172,25 +172,39 @@ export class MindmapSubmissionComponent implements OnInit {
         alert(`You can only upload a maximum of ${maxFilesAllowed} files.`);
         break; // Stop processing further files
       }
-
+  
       // Check file size
       if (file.size > maxFileSize) {
-        alert(`File ${file.name} exceeds the maximum size of 1 MB.`);
+        this.fileSizeError = true;
+        this.mindmapForm.get('image')?.setErrors({ size: true }); // Mark control as invalid
+        alert(`File exceeds the maximum size of 1 MB.`);
         continue; // Skip this file
       }
   
       // Check file type
       if (!allowedFileTypes.includes(file.type)) {
+        this.mindmapForm.get('image')?.setErrors({ type: true }); // Mark control as invalid
         alert(`File type of ${file.name} is not allowed. Only JPG and PNG are allowed.`);
         continue; // Skip this file
       }
-
-      this.uploadedFiles.push(file); // Add each valid file to the array
+  
+      this.fileSizeError = false; // No file size error
+      this.uploadedFiles.push(file); // Add valid file
       const filePreview = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
-      this.filePreviews.push(filePreview); 
+      this.filePreviews.push(filePreview);
+  
+      this.mindmapForm.get('image')?.setValue(file); // Set valid file to the form control
     }
+  
+    if (this.uploadedFiles.length === 0) {
+      // If no valid files are selected, invalidate the form control
+      this.mindmapForm.get('image')?.setErrors({ required: true });
+    }
+  
     this.cdr.detectChanges(); // Trigger change detection
   }
+  
+  
 
   closeAddMindmapModal(): void {
     this.isAddMindmapModalOpen = false;
@@ -204,16 +218,14 @@ export class MindmapSubmissionComponent implements OnInit {
 
   onSubmitMindmap(): void {
     this.submitted = true;
-    if (this.mindmapForm.invalid || this.fileSizeError) {
-      this.mindmapForm.markAllAsTouched();
-      return;
-    }
 
-    // const newMindmap = {
-    //   title: this.mindmapForm.value.title,
-    //   description: this.mindmapForm.value.description,
-    //   image: this.selectedFile ? URL.createObjectURL(this.selectedFile) : '/assets/default-mindmap.png'
-    // };
+    // Mark all controls as touched to show validation messages
+    this.mindmapForm.markAllAsTouched();
+  
+    if (this.mindmapForm.invalid || this.fileSizeError) {
+      return; // Stop submission if the form is invalid
+    }
+  
 
     const formData = new FormData();
     formData.append('studentId', this.userAuthService.getUserId());
@@ -239,7 +251,7 @@ export class MindmapSubmissionComponent implements OnInit {
       },
       (httpError: any) => {
         console.log(httpError);
-        alert("An error occurred while recording the question");
+        alert("An error occurred while recording the mindmap");
       }
     );
     this.mindmapForm.reset();
@@ -440,11 +452,11 @@ export class MindmapSubmissionComponent implements OnInit {
   
       const requestBody = {
         ownerStudentId: this.userAuthService.getUserId(),
-        QandAId: this.selectedMindmap._id,
+        mindMapId: this.selectedMindmap._id,
         sharedStatus: "SHARED"
       };
   
-      this.apiCallService.executePutNoAuth(API_ENDPOINTS.QANDA.SHARE, requestBody).subscribe(
+      this.apiCallService.executePutNoAuth(API_ENDPOINTS.MINDMAPS.SHARE, requestBody).subscribe(
         (response: any) => {
           this.openShareModal();
           setTimeout(() => {
@@ -455,7 +467,7 @@ export class MindmapSubmissionComponent implements OnInit {
         },
         (httpError: any) => {
           console.log(httpError);
-          alert("An error occurred while sharing the question");
+          alert("An error occurred while sharing the mindmap");
         }
       );
   
@@ -477,8 +489,33 @@ closeShareModal(): void {
 
 viewSharedMindmaps(): void {
   // Navigate to the shared questions page (assuming you have a route for this)
-  this.router.navigate(['share/questions']);
+  this.router.navigate(['share/mindmaps']);
 }
 
+get totalPages(): number {
+  // console.log(this.QnA.length);
+  // return Math.ceil(this.QnA.length / this.QnAPerPage);
+  return Math.max(1, Math.ceil(this.mindmaps.length / this.mindmapsPerPage));
+
+}
+
+get paginatedMindmaps(): any[] {
+  const startIndex = (this.currentPage - 1) * this.mindmapsPerPage;
+  return this.mindmaps.slice(startIndex, startIndex + this.mindmapsPerPage);
+}
+
+nextPage(): void { 
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+  }
+}
+
+prevPage(): void {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+
   
+}
+
 }

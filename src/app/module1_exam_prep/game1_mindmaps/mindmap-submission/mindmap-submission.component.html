@@ -12,8 +12,12 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more questions needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Eye of Horus</p>
+          <img src="/assets/badges/badge02_a.png" alt="Ankh's Chronicle">
+           <!-- Badge Title -->
+            <p class="badge-title">Ankh's Chronicle</p>
+  
+            <!-- Subtitle -->
+            <p class="badge-subtitle">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
       
@@ -24,8 +28,9 @@
         }"
         (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more questions needed') : ''"
         (mouseleave)="showTooltip = ''">
-        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
-        <p>Ankh of Power</p>
+        <img src="/assets/badges/badge02_b.png" alt="Ankh's Chronicle">
+        <p class="badge-title">Ankh's Chronicle</p>
+        <p class="badge-subtitle">Master</p>        
         <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
      </div>
 
@@ -36,8 +41,9 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedLikesBadge(gameMargins.LikesMargin) ? 'Badge unlocked' : (gameMargins.LikesMargin - TotalLikes) + ' more likes needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Likes</p>
+          <img src="/assets/badges/badge02_c.png" alt="Ankh's Chronicle">
+          <p class="badge-title">Ankh's Chronicle</p>
+        <p class="badge-subtitle">Rising Star</p> 
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
      
@@ -52,8 +58,8 @@
   
        
            <!-- Mind map grid layout -->
-           <div class="mind-map-grid">
-            <div *ngFor="let mindmap of mindmaps" class="mind-map-card" (click)="openMindmapDetails(mindmap)">
+           <div class="mind-map-grid" *ngIf="studentData?.mindMaps?.length > 0">
+            <div *ngFor="let mindmap of paginatedMindmaps" class="mind-map-card" (click)="openMindmapDetails(mindmap)">
 
               <img *ngIf="mindmap.attachments[0]"
               [src]="'data:' + mindmap.attachments[0].contentType + ';base64,' + mindmap.attachments[0].data" 
@@ -61,12 +67,13 @@
               class="mind-map-image"
             />
               <!-- <img [src]="mindmap.image ? mindmap.image : '/assets/placeholder-mindmap.jpg'" alt="{{ mindmap.title }} Image" class="mind-map-image" /> -->
-              <h4>{{ mindmap.title }}</h4>
+              <!-- <h5>{{ mindmap.title | slice: 0:20}}</h5> -->
+              <h5>{{ mindmap.title }}</h5>
         
             </div>
           </div>  
   
-      <div class="no-mindmaps" *ngIf="mindmaps.length === 0">
+      <div class="no-mindmaps" *ngIf="!studentData?.mindMaps?.length">
         No Mindmaps Added Yet.
       </div>
   
@@ -94,14 +101,16 @@
               </div>   
 
             <form (ngSubmit)="onUpdateMindmap()">
-  
+  <!-- <label for="date">Date:</label>
+                <input type="date" id="questionDate" [(ngModel)]="selectedQuestion.date" name="date" [max]="getTodayDate()" required />
+   -->
                 <label for="description">Description:</label>
                 <textarea id="description" [(ngModel)]="selectedMindmap.description" name="description" rows="4"></textarea>
   
               <div class="button-container">
                 <button class="btn save-btn">Save Changes</button>
                 <!-- <button class="btn share-popup" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button> -->
-                <button class="btn share-popup" (click)="onShareMindmap(selectedMindmap)">Share</button>
+                <button class="btn share-popup" *ngIf="selectedMindmap.sharedStatus === 'NOT_SHARED'" (click)="onShareMindmap(selectedMindmap)">Share</button>
                 <button class="btn delete-btn" (click)="deleteMindmap(selectedMindmap)">Delete</button>
               </div>
             </form>
@@ -118,12 +127,12 @@
             <h2>Add New Mindmap</h2>
             <form [formGroup]="mindmapForm" (ngSubmit)="onSubmitMindmap()">
 
-                <label for="title">Title:</label>
-                <input type="text" id="title" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
-                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
-                  <div *ngIf="f['title'].errors['required']">Title is required</div>
-                </div>
-
+              <label for="title">Title:</label>
+              <input type="text" id="title" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
+              <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                <div *ngIf="f['title'].errors['required']">Title is required</div>
+                <div *ngIf="f['title'].errors['maxlength']">Title cannot exceed 30 characters</div>
+              </div>
   
                 <label for="description">Description:</label>
                 <textarea id="description" formControlName="description" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
@@ -131,11 +140,12 @@
                   <div *ngIf="f['description'].errors['required']">Description is required</div>
                 </div>
 
-                <!-- <label for="image">Upload Mindmap Image:</label>
-                <input type="file" id="image" (change)="onFileSelected($event)"> -->
                 <label for="image">Upload Mindmap Image:</label>
-                <input type="file" id="image" (change)="onFileSelected($event)">
-                <div *ngIf="fileSizeError" class="error-message">File size exceeds the 1MB limit.</div>
+                <input type="file" id="image" (change)="onFileSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
+                <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                  <div *ngIf="f['image'].errors?.['required']">Mindmap Image is required</div>
+                  <div *ngIf="fileSizeError">File size exceeds the 1MB limit.</div>
+                </div>
 
                 <div class="file-preview-container">
                   <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
@@ -173,8 +183,8 @@
             <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
             <!-- Badge Image -->
-            <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
-            <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+            <img *ngIf="showBadge01" src="/assets/badges/badge02_a.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+            <img *ngIf="showBadge02" src="/assets/badges/badge02_b.png" alt="Achievement Badge" class="badge-image unlocking-animation">
 
             <img *ngIf="showBadgeLikes" src="/assets/badges/likesBadge.png" alt="Likes Badge" class="badge-image unlocking-animation">
 
@@ -203,7 +213,15 @@
           </div>
         </div>
 
-
+        <div class="pagination-controls">
+          <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+          <button (click)="nextPage()" [disabled]="currentPage >= totalPages || totalPages === 1">Next</button>
+    
+      </div>
     </div>
+
+   
   </div>
   

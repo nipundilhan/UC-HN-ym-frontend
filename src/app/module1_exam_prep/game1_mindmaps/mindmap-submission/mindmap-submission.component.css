@@ -41,17 +41,17 @@
 
 /* Title styling */
 .game-title {
-    font-size: 2.5em;
+    /* font-size: 2.5em; */
     text-align: center;
     color: #4a4a4a;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 /* Add button styling */
 .add-button {
     display: block;
     justify-content: center;
-    width: 80%;
+    width: 60%;
     padding: 10px;
     /* margin: 10px 0; */
     background-color: #c27d2a;
@@ -96,6 +96,23 @@
     cursor: pointer;
   }
 
+  .share-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width : 50%;
+    margin-top: 25px; /* Space above the button */
+    position: relative;
+    z-index: 1; /* Ensure these stay on top */
+  }
+  
+  .share-btn:hover {
+    background-color: #218838;
+  }
+
   .delete-btn{
     background-color: #c2392a;
     color: white;
@@ -109,6 +126,7 @@
 
 .save-btn:hover,
 .share-popup:hover, 
+.share-btn:hover,
 .delete-btn:hover{
   opacity: 0.8;
 }
@@ -121,7 +139,7 @@
 .mind-map-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Four cards per row */
-    grid-gap: 20px; /* Space between cards */
+    grid-gap: 10px; /* Space between cards */
     /* width: 100%; */
     margin-top: 10px;
 }
@@ -137,8 +155,8 @@
     flex-direction: column;
     justify-content: centre;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 220px;
-    height: 250px; /* Min height for smaller screens */
+    width: 200px;
+    height: 200px; /* Min height for smaller screens */
     cursor: pointer;
     justify-content: flex-start; /* Ensure items stay at the top */
     text-align: center;
@@ -152,7 +170,7 @@
 
 /* Mind map image styling */
 .mind-map-image {
-    height: 130px;
+    height: 120px;
     object-fit: contain; /* Ensures the image covers the area while maintaining its aspect ratio */
     border-radius: 4px;
     margin-top: 10px;
@@ -160,9 +178,7 @@
     border: 1px solid #ecebea;
     cursor: pointer;
 }
-.mind-map-card h4{
-margin: auto;
-}
+
 /* Container for the preview image in the modal */
 .image-preview {
     text-align: center;
@@ -358,10 +374,23 @@ button[type="submit"]:hover {
     margin-top: 10px;
   }
   
-  .sidenav .badge p {
+  /* .sidenav .badge p {
     font-size: 1.2em;
     color: #4a4a4a;
     margin-bottom: 0;
+  } */
+
+  .sidenav .badge .badge-title {
+    font-size: 1.1em;
+    color: #4a4a4a;
+    margin-bottom: 5px; /* space between title and subtitle */
+  }
+  
+  .sidenav .badge .badge-subtitle {
+    font-size: 1em;
+    color: #7a7a7a;  /* subtler color for subtitle */
+    font-style: italic;  /* optional for distinguishing */
+    margin-bottom: 0px;
   }
   
   /* 
@@ -565,6 +594,32 @@ button[type="submit"]:hover {
 }
 
 
+.pagination-controls {
+  display: flex;
+  justify-content: space-around; /* Space between the controls */
+  margin-top: 20px; /* Space above pagination */
+  padding: 10px 0; /* Padding around the controls */
+  width: 100%; /* Ensure it spans the full width */
+
+}
+
+.pagination-controls button {
+  background-color: #007bff; /* Primary color for buttons */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px 16px; /* Padding inside buttons */
+  cursor: pointer; /* Cursor style */
+}
+
+.pagination-controls button[disabled] {
+  background-color: #ccc; /* Disabled button color */
+  cursor: not-allowed; /* Change cursor for disabled */
+  color: #878787;
+}
+
+
+
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .mind-map-grid {
@@ -627,6 +682,21 @@ button[type="submit"]:hover {
     .camera-icon{
     left: 150px;
     }
+
+    .achievement-popup {
+      width: 280px; /* Adjust for smaller screens */
+      padding: 10px;
+      height: 350px;
+    }
+    .badge-image {
+      width: 80px;
+      position: relative;
+    }
+  
+    .padlock-gif {
+      width: 60px;
+      position: absolute;
+    }
 }
 @media (max-width: 900px) {
     .mind-map-grid {
@@ -659,7 +729,7 @@ button[type="submit"]:hover {
         padding: 7px 12px;
     }
 
-    .mind-map-card h4 {
+    .mind-map-card h5 {
         font-size: 1.5em;
     }
 
