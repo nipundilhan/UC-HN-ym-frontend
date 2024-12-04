@@ -318,12 +318,12 @@ export class PlayJournallingComponent implements OnInit {
     let ref = '';
 
     if (this.showBadge01 == true){
-      badge = 'badge5_a';
-      ref = 'Calm of the Scarab: Beginner'
+      badge = 'badge1';
+      ref = 'Game5Badge1'
     }
     else if (this.showBadge02 == true){
-      badge = 'badge5_b';
-      ref = 'Calm of the Scarab: Master'
+      badge = 'badge2';
+      ref = 'Game5Badge2'
     }
  
     const requestBody = 

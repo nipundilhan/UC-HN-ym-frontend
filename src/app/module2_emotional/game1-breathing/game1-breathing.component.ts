@@ -398,12 +398,12 @@ runSession() {
     let ref = '';
 
     if (this.showBadge01 == true){
-      badge = 'badge4_a';
-      ref = 'Whispers of the Sphinx: Beginner'
+      badge = 'badge1';
+      ref = 'Game4Badge1'
     }
     else if (this.showBadge02 == true){
-      badge = 'badge4_b';
-      ref = 'Whispers of the Sphinx: Master'
+      badge = 'badge2';
+      ref = 'Game4Badge2'
     }
  
     const requestBody = 

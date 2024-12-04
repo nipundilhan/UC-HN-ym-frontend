@@ -1,14 +1,27 @@
-<div *ngFor="let item of notifications" class="feed-item" [style.borderBottom]="'1px solid #e0e0e0'">
+<div class="notification-grid" *ngIf="AllData?.length > 0">
+
+<div *ngFor="let item of paginatedNotifications" class="feed-item">
+  <!-- <div *ngFor="let item of paginatedNotifications" class="feed-item" [style.borderBottom]="'1px solid #e0e0e0'"> -->
+
     <div class="user-info">
-      <img [src]="getUserAvatar(item.userId)" alt="User Avatar" class="user-avatar">
+      <img [src]="getUserAvatar(item.avatarCode)" alt="User Avatar" class="user-avatar">
       <div class="user-details">
-        <span class="username">{{ item.username }}</span>
-        <span class="shared-date">{{ item.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span>
+        <span class="username">{{ item.userName }}</span>
+        <span class="shared-date">{{ item.date | date:'dd MMMM \'at\' HH:mm a' }}</span>
       </div>
     </div>
     <div class="shared-content">
-      <p>{{ item.description }}</p>
-      <img [src]="item.imageUrl" alt="Badge Image" class="shared-image badge-image">
+      <p>Unlocked the <b>{{ getBadgeName(item.reference) }}</b> in {{ getGameName(item.reference) }} </p>
+      <img [src]="getBadgeImage(item.reference)" alt="Badge Image" class="shared-image badge-image">
     </div>
-  </div>
+  </div> 
+</div>
+
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+    <button (click)="nextPage()" [disabled]="currentPage >= totalPages || totalPages === 1">Next</button>
+
+</div>
   

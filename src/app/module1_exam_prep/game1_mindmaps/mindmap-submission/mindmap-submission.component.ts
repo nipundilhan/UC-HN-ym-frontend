@@ -450,12 +450,12 @@ export class MindmapSubmissionComponent implements OnInit {
     let ref = '';
 
     if (this.showBadge01 == true){
-      badge = 'badge2_a';
-      ref = 'Ankh`s Chronicle : Beginner'
+      badge = 'badge1';
+      ref = 'Game3Badge1'
     }
     else if (this.showBadge02 == true){
-      badge = 'badge2_b';
-      ref = 'Ankh`s Chronicle : Master'
+      badge = 'badge2';
+      ref = 'Game3Badge2'
     }
  
     const requestBody = 

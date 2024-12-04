@@ -443,12 +443,12 @@ closeShareModal(): void {
     let ref = '';
 
     if (this.showBadge01 == true){
-      badge = 'badge3_a';
-      ref = 'Pharaoh’s Trial: Beginner'
+      badge = 'badge1';
+      ref = 'Game1Badge1'
     }
     else if (this.showBadge02 == true){
-      badge = 'badge3_b';
-      ref = 'Pharaoh’s Trial: Master'
+      badge = 'badge2';
+      ref = 'Game1Badge2'
     }
  
     const requestBody = 

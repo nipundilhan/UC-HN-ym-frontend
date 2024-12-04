@@ -1,21 +1,42 @@
+.notification-grid {
+  display: grid;  
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Allow flexible column count */
+  gap: 10px; /* Space between cards */
+}
 
-.feed-item {
-    margin-bottom: 30px;
-    padding-bottom: 15px;
+  .feed-item{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between content and footer */
+    /* align-items: center;  */
+    transition: transform 0.2s; /* Animation on hover */
+    cursor: pointer;
   }
+
+  .feed-item:hover {
+    transform: scale(1.02);
+}
 
 
 .user-info {
     display: flex;
     align-items: center;
+    background-color: #eeeded;
+    border-radius: 5px;
+    padding: 5px;
   }
   
   .user-avatar {
-    width: 50px;
+    width: 30px;
     /* height: 50px; */
     border-radius: 50%;
     margin-right: 15px;
     border: 1px solid #dcdcdc;
+    background-color:#ffffff ;
   }
   
   .user-details {
@@ -25,16 +46,19 @@
   
   .username {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
   
   .shared-date {
     color: #999;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   
   .shared-content {
     margin-top: 15px;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
   }
   
   .shared-image {
@@ -43,17 +67,43 @@
     height: auto;
     border-radius: 10px;
     object-fit: cover;
+
   }
   .badge-image {
     width: 80px; /* Smaller size for badges */
+    align-self: center;
   }
 
 
+  .pagination-controls {
+    display: flex;
+    justify-content: space-around; /* Space between the controls */
+    margin-top: 20px; /* Space above pagination */
+    padding: 10px 0; /* Padding around the controls */
+    width: 100%; /* Ensure it spans the full width */
+    align-items: center;
+  }
+  
+  .pagination-controls button {
+    background-color: #007bff; /* Primary color for buttons */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px 16px; /* Padding inside buttons */
+    cursor: pointer; /* Cursor style */
+  }
+  
+  .pagination-controls button[disabled] {
+    background-color: #ccc; /* Disabled button color */
+    cursor: not-allowed; /* Change cursor for disabled */
+    color: #878787;
+  }
+  
 
   @media (max-width: 768px) {
-    .feed-item{
+    /* .feed-item{
       margin-left:20px;
-    }
+    } */
   }
   @media (max-width: 480px) {
     .badge-image {
