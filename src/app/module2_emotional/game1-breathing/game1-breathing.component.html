@@ -12,8 +12,8 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more breathing sessions needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Eye of Horus</p>
+          <img src="/assets/badges/badge04_a.png" alt="Eye of Horus">
+          <p>Whispers of the Sphinx</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
     </div>
@@ -204,7 +204,7 @@
         <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
         <!-- Badge Image -->
-        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge01" src="/assets/badges/badge04_a.png" alt="Achievement Badge" class="badge-image unlocking-animation">
         <!-- <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation"> -->
       <!-- </div> -->
 

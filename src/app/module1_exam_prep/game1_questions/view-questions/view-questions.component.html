@@ -12,8 +12,9 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more questions needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Eye of Horus</p>
+          <img src="/assets/badges/badge03_a.png" alt="Pharaoh’s Trial">
+          <p class="badge-title">Pharaoh’s Trial</p>
+        <p class="badge-subtitle">Beginner</p>     
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
       
@@ -24,9 +25,10 @@
         }"
         (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more questions needed') : ''"
         (mouseleave)="showTooltip = ''">
-        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
-        <p>Ankh of Power</p>
-        <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        <img src="/assets/badges/badge03_b.png" alt="Pharaoh’s Trial">
+        <p class="badge-title">Pharaoh’s Trial</p>
+        <p class="badge-subtitle">Master</p>  
+       <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
      </div>
 
      <div class="badge" 
@@ -36,9 +38,10 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedLikesBadge(gameMargins.LikesMargin) ? 'Badge unlocked' : (gameMargins.LikesMargin - TotalLikes) + ' more likes needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Likes</p>
-          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <img src="/assets/badges/badge03_c.png" alt="Pharaoh’s Trial">
+          <p class="badge-title">Pharaoh’s Trial</p>
+          <p class="badge-subtitle">Rising Star</p>
+      <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
      
 
@@ -150,8 +153,8 @@
         <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
         <!-- Badge Image -->
-        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
-        <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge01" src="/assets/badges/badge03_a.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge02" src="/assets/badges/badge03_b.png" alt="Achievement Badge" class="badge-image unlocking-animation">
       <!-- </div> -->
 
       <button class="btn share-btn" (click)="shareAchievement()">Share</button>

@@ -89,6 +89,20 @@
     justify-content: center;
     flex-direction: column;
   }
+
+  .sidenav .badge .badge-title {
+    font-size: 1.1em;
+    color: #4a4a4a;
+    margin-bottom: 5px; /* space between title and subtitle */
+  }
+  
+  .sidenav .badge .badge-subtitle {
+    font-size: 1em;
+    color: #7a7a7a;  /* subtler color for subtitle */
+    font-style: italic;  /* optional for distinguishing */
+    margin-bottom: 0px;
+  }
+
   
   .sidenav .badge {
     display: flex;
@@ -666,6 +680,7 @@ button[type="submit"]:hover {
     margin-top: 0;
   }
 
+
     .game-title {
         font-size: 2em;
     }
@@ -732,6 +747,14 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 480px) {
+    .sidenav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 0;
+       /* Allow badges to wrap to the next line */
+    }
+  
     .game-title {
         font-size: 1.8em;
     }
