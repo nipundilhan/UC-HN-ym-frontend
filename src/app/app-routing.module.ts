@@ -34,6 +34,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { PlayJournallingComponent } from './module2_emotional/journalling/play-journalling/play-journalling.component';
 import { LearnJournallingComponent } from './module2_emotional/journalling/learn-journalling/learn-journalling.component';
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
+import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'upload', component: TestUploadComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
+  { path: 'welcome', component: WelcomeComponent },
   // { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
 

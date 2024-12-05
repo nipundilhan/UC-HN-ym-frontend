@@ -48,6 +48,7 @@ import { PlayJournallingComponent } from './module2_emotional/journalling/play-j
 import { LearnJournallingComponent } from './module2_emotional/journalling/learn-journalling/learn-journalling.component';
 import { LearnBreathingComponent } from './module2_emotional/game1-breathing/learn-breathing/learn-breathing.component';
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
+import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/lea
     LearnJournallingComponent,
     LearnBreathingComponent,
     LearnQuestionsComponent,
+    WelcomeComponent,
     
     ],
   imports: [

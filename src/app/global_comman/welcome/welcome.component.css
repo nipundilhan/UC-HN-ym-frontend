@@ -1,0 +1,129 @@
+/* Welcome Page Styles */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: url('/assets/background-img/background10.jpg') no-repeat center center; */
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.3), /* Semi-transparent white */
+        rgba(255, 255, 255, 0.76)
+      ), url('/assets/background-img/background10.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 0 1em;
+    font-family: 'MedievalSharp', sans-serif;
+}
+
+/* Define the animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply animation to the narrator */
+.narrator-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 20px; /* Add space between the narrator and dialog */
+    animation: slideInLeft 1s ease-out forwards;
+    visibility: visible;
+}
+
+/* Narrator Image */
+.narrator-image {
+    width: 150px;
+    object-fit: cover;
+}
+
+/* Dialog Box Styles */
+.dialog-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease-out forwards;
+    visibility: visible;
+    opacity: 0; /* Initially hidden */
+}
+
+/* Message Styles */
+.message {
+    font-size: 1.0rem;
+    color: #333;
+    margin-bottom: 10px;
+    opacity: 1; /* Make messages fully visible */
+    transform: translateY(0); /* No movement needed */
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Start Button Styles */
+.start-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-out forwards;
+    animation-delay: 2s; /* Start after the dialog box fades in */
+    opacity: 0;
+}
+
+.start-btn {
+    background-color: #d96e10;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-family: 'MedievalSharp', sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.start-btn:hover {
+    background-color: #b66b09;
+}
+
+.start-btn:focus {
+    outline: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .welcome-container {
+        flex-direction: column;
+    }
+    .narrator-image {
+        width: 100px;
+    }
+
+    .message {
+        font-size: 1rem;
+    }
+
+    .start-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
