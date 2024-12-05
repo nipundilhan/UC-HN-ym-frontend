@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AvatarService } from 'src/app/_services/avatar.service';  // Import the AvatarService
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { BadgeService } from 'src/app/_services/badge.service';
 
 
 interface Avatar {
@@ -12,6 +13,45 @@ interface Avatar {
   path: string;
   selected: boolean;
 }
+
+interface GameMargins {
+  game1margin1: number; 
+  game1margin2: number;
+  game1marks: number;
+  game1badge1Shared: string;
+  game1badge2Shared: string;
+
+  game2margin1: number;
+  game2margin2: number;
+  game2likes: number;
+  game2likesMargin: number;
+  game2marks: number;
+  game2badge1Shared: string;
+  game2badge2Shared: string;
+  game2badge3Shared: string;
+
+  game3margin1: number;
+  game3margin2: number;
+  game3likes: number;
+  game3likesMargin: number;
+  game3marks: number;
+  game3badge1Shared: string;
+  game3badge2Shared: string;
+  game3badge3Shared: string;
+
+  game4margin1: number;
+  game4margin2: number;
+  game4marks: number;
+  game4badge1Shared: string;
+  game4badge2Shared: string;
+  
+  game5margin1: number;
+  game5margin2: number;
+  game5marks: number;
+  game5badge1Shared: string;
+  game5badge2Shared: string;
+}
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -25,7 +65,8 @@ export class ProfileComponent implements OnInit {
     private router: Router, 
     private fb: FormBuilder,
     private avatarService: AvatarService,
-    public apiCallService: ApiCallService,) { }
+    public apiCallService: ApiCallService,
+    public badgeService: BadgeService) { }
 
     displayedMoods: any[] = [];
     userMoodHistory: any[] = [];
@@ -61,35 +102,21 @@ export class ProfileComponent implements OnInit {
 
     showTooltip: string = ''; // Variable to hold the tooltip message
 
+    // selectedBadge: any = null;
+    selectedBadge: {
+      gameCode: string;
+      gameName: string;
+      badgeCode: string;
+      badgeName: string;
+      ref: string;
+      path: string;
+    } | null = null;
+    showSharePopup = false; // State for the confirmation popup
+    showSuccessPopup = false; // State for the success popup
+    
 
     gamePoints: number = 0;
-    gameMargins: { 
-      game1margin1: number; 
-      game1margin2: number;
-      game1marks: number;
-
-      game2margin1: number;
-      game2margin2: number;
-      game2likes: number;
-      game2likesMargin: number;
-      game2marks: number;
-
-      game3margin1: number;
-      game3margin2: number;
-      game3likes: number;
-      game3likesMargin: number;
-      game3marks: number;
-
-      game4margin1: number;
-      game4margin2: number;
-      game4marks: number;
-
-      game5margin1: number;
-      game5margin2: number;
-      game5marks: number;
-
-    }
-      | null = null; 
+    gameMargins: GameMargins | null = null;
 
     avatars: Avatar[] = [
       { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
@@ -252,29 +279,17 @@ onChangePasswordSubmit() {
       return `assets/moods/${mood}.jpg`;
     }
 
-  
-
-   
-
-    // getMoodIcon(mood: string): string {
-    //   switch (mood) {
-    //     case 'happy': return 'assets/happy.jpg';
-    //     case 'sad': return 'assets/sad.jpg';
-    //     case 'angry': return 'assets/angry.jpg';
-    //     default: return 'assets/neutral.jpg';
-    //   }
-    // }
 
   ngOnInit(): void {
     this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
     // this.loadInitialMoods();
-    this.fetchMoodData();
+    this.fetchAllData();
     this.calculateDaysLeft();
     this.minDate = this.getTodayDate();
 
     }
-// Function to fetch mood data from API
-fetchMoodData(): void {
+// Function to fetch data from API
+fetchAllData(): void {
   this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
     (response: any) => {
       this.userMoodHistory = response.moods;
@@ -285,31 +300,40 @@ fetchMoodData(): void {
             game1margin1: response.game1Margin1,
             game1margin2: response.game1Margin2,
             game1marks: response.game1Marks,
-         
+            game1badge1Shared: response.game1Badge1Shared,
+            game1badge2Shared: response.game1Badge2Shared,
+
             game2margin1: response.game2Margin2,
             game2margin2: response.game2Margin2,
             game2marks: response.game2Marks,
             game2likesMargin: response.game2LikesMargin,
             game2likes: response.game2Likes,
-      
+            game2badge1Shared: response.game2Badge1Shared,
+            game2badge2Shared: response.game2Badge2Shared,
+            game2badge3Shared: response.game2Badge3Shared,
+
             game3margin1: response.game3Margin1,
             game3margin2: response.game3Margin2,
             game3marks: response.game3Marks,
             game3likesMargin: response.game3LikesMargin,
             game3likes: response.game3Likes,
-      
+            game3badge1Shared: response.game3Badge1Shared,
+            game3badge2Shared: response.game3Badge2Shared,
+            game3badge3Shared: response.game3Badge3Shared,
+
             game4margin1: response.game2Margin2,
             game4margin2: response.game2Margin2,
             game4marks: response.game4Marks,
-            
+            game4badge1Shared: response.game4Badge1Shared,
+            game4badge2Shared: response.game4Badge2Shared,
+
             game5margin1: response.game2Margin2,
             game5margin2: response.game2Margin2,
             game5marks: response.game5Marks,
-
+            game5badge1Shared: response.game5badge1Shared,
+            game5badge2Shared: response.game5badge2Shared,
           };
-          console.log(this.gameMargins.game1margin1);
-          console.log(this.gameMargins.game1margin2);
-          console.log(this.gameMargins.game1marks);
+
 
 
     },
@@ -319,12 +343,35 @@ fetchMoodData(): void {
   );
 }
 
-// hasEarnedBadge(margin: number | null | undefined, points: number | null | undefined): boolean {
-//   if (margin === null || margin === undefined) {
-//       return false; // or handle the case as needed
-//   }
-//   return points >= margin;
-// }
+isBadgeShared(sharedKey: keyof GameMargins): boolean {
+  return this.gameMargins?.[sharedKey] === 'YES';
+}
+
+shareBadge(badgeCode: string): void {
+ const badgeDetails = this.badgeService.getByRef(badgeCode);
+
+ const requestBody = 
+      {
+        studentId : this.userAuthService.getUserId(),
+        gameCode : badgeDetails.gameCode,
+        badgeCode : badgeDetails.badgeCode,
+        reference : badgeDetails.ref
+      };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MODULES.SHARE_BADGE, requestBody).subscribe(
+      async (response: any) => {
+        this.fetchAllData();
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the badge");
+      }
+    );
+  // console.log(`Badge ${badgeCode} shared`);
+}
+
+
+
 
 hasEarnedBadge(margin: number | null | undefined, points: number | null | undefined): boolean {
   if (margin === null || margin === undefined || points === null || points === undefined) {
@@ -368,6 +415,40 @@ getTodayDate(): string {
 
 
 
+  openSharePopup(badgeRef: string): void {
+    try {
+      this.selectedBadge = this.badgeService.getByRef(badgeRef); // Fetch the badge details
+      this.showSharePopup = true;
+    } catch (error) {
+      console.error(error);
+      alert('Badge details could not be retrieved.');
+    }
+  }
+  
+  closeSharePopup(): void {
+    this.selectedBadge = null;
+    this.showSharePopup = false;
+  }
+  
+  confirmShare(): void {
+    if (this.selectedBadge) {
+      // Call the shareBadge API
+      this.shareBadge(this.selectedBadge.ref);
+  
+      // Close the confirmation popup and open the success popup
+      this.showSharePopup = false;
+      this.showSuccessPopup = true;
+    }
+  }
+  
+  closeSuccessPopup(): void {
+    this.selectedBadge = null;
+    this.showSuccessPopup = false;
+  }
+
+  goToNotifications(): void {
+      this.router.navigate(['/share/notifications']); // Redirect to notifications
+  }
 
 }
 

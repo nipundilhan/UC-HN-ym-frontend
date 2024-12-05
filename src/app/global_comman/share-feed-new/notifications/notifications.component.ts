@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
   AllData: any;
   notifications: any[] = [];
   currentPage: number = 1; // Current page number
-  NotificationsPerPage: number = 4; // Number of questions to display per page
+  NotificationsPerPage: number = 6; // Number of questions to display per page
 
   constructor(
     public apiCallService: ApiCallService,

@@ -304,6 +304,18 @@
           <img src="/assets/badges/badge01_a.png" alt="Beginner Badge" class="badge-icon">
           <p class="badge-name">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game1margin1, gameMargins.game1marks) && isBadgeShared('game1badge1Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game1margin1, gameMargins.game1marks) && !isBadgeShared('game1badge1Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game1Badge1')">
+              Share
+            </button>
+          </div>
         </div>
         <div class="badge" [ngClass]="{ 
           'achieved-badge': hasEarnedBadge(gameMargins?.game1margin2, gameMargins?.game1marks), 
@@ -313,6 +325,18 @@
           <img src="/assets/badges/badge01_b.png" alt="Master Badge" class="badge-icon">
           <p class="badge-name">Master</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game1margin2, gameMargins.game1marks) && isBadgeShared('game1badge2Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game1margin2, gameMargins.game1marks) && !isBadgeShared('game1badge2Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game1Badge2')">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -329,6 +353,18 @@
           <img src="/assets/badges/badge02_a.png" alt="Beginner Badge" class="badge-icon">
           <p class="badge-name">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2margin1, gameMargins.game2marks) && isBadgeShared('game2badge1Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2margin1, gameMargins.game2marks) && !isBadgeShared('game2badge1Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game2Badge1')">
+              Share
+            </button>
+          </div>
         </div>
         <div class="badge" [ngClass]="{ 
           'achieved-badge': hasEarnedBadge(gameMargins?.game2margin2, gameMargins?.game2marks), 
@@ -338,6 +374,18 @@
           <img src="/assets/badges/badge02_b.png" alt="Master Badge" class="badge-icon">
           <p class="badge-name">Master</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2margin2, gameMargins.game2marks) && isBadgeShared('game2badge2Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2margin2, gameMargins.game2marks) && !isBadgeShared('game2badge2Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game2Badge2')">
+              Share
+            </button>
+          </div>
         </div>
         <div class="badge" [ngClass]="{ 
           'achieved-badge': hasEarnedBadge(gameMargins?.game2likesMargin, gameMargins?.game2likes), 
@@ -347,6 +395,18 @@
           <img src="/assets/badges/badge02_c.png" alt="Rising Star  Badge" class="badge-icon">
           <p class="badge-name">Rising Star</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2likesMargin, gameMargins.game2likes) && isBadgeShared('game2badge3Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game2likesMargin, gameMargins.game2likes) && !isBadgeShared('game2badge3Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game2Badge3')">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -363,6 +423,18 @@
           <img src="/assets/badges/badge03_a.png" alt="Beginner Badge" class="badge-icon">
           <p class="badge-name">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3margin1, gameMargins.game3marks) && isBadgeShared('game3badge1Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3margin1, gameMargins.game3marks) && !isBadgeShared('game3badge1Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game3Badge1')">
+              Share
+            </button>
+          </div>
         </div>
         <div class="badge" [ngClass]="{ 
           'achieved-badge': hasEarnedBadge(gameMargins?.game3margin2, gameMargins?.game3marks), 
@@ -372,6 +444,18 @@
           <img src="/assets/badges/badge03_b.png" alt="Master Badge" class="badge-icon">
           <p class="badge-name">Master</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3margin2, gameMargins.game3marks) && isBadgeShared('game3badge2Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3margin2, gameMargins.game3marks) && !isBadgeShared('game3badge2Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game3Badge2')">
+              Share
+            </button>
+          </div>
         </div>
         <div class="badge" [ngClass]="{ 
           'achieved-badge': hasEarnedBadge(gameMargins?.game3likesMargin, gameMargins?.game3likes), 
@@ -381,6 +465,19 @@
           <img src="/assets/badges/badge03_c.png" alt="Rising Star Badge" class="badge-icon">
           <p class="badge-name">Rising Star</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3likesMargin, gameMargins.game3likes) && isBadgeShared('game3badge3Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game3likesMargin, gameMargins.game3likes) && !isBadgeShared('game3badge3Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game3Badge3')">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -390,23 +487,49 @@
       <h3 class="game-title">Whispers of the Sphinx</h3>
       <div class="badges-container">
         <div class="badge" [ngClass]="{ 
-          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game3marks), 
-          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game3marks) 
-        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) ? 'Unlocked' :  'Locked') : ''"
+          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game4marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin1, gameMargins?.game4marks) 
+        }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game4margin1, gameMargins.game4marks) ? 'Unlocked' :  'Locked') : ''"
         (mouseleave)="showTooltip = ''">
           <img src="/assets/badges/badge04_a.png" alt="Beginner Badge" class="badge-icon">
           <p class="badge-name">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game4margin1, gameMargins.game4marks) && isBadgeShared('game4badge1Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game4margin1, gameMargins.game4marks) && !isBadgeShared('game4badge1Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game4Badge1')">
+              Share
+            </button>
+          </div>
         </div>
 
         <div class="badge" [ngClass]="{ 
-          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game3marks), 
-          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game3marks) 
+          'achieved-badge': hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game4marks), 
+          'not-earned-badge': !hasEarnedBadge(gameMargins?.game4margin2, gameMargins?.game4marks) 
         }" (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) ? 'Unlocked' :  'Locked') : ''"
         (mouseleave)="showTooltip = ''">
           <img src="/assets/badges/badge04_b.png" alt="Master Badge" class="badge-icon">
           <p class="badge-name">Master</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) && isBadgeShared('game4badge2Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game4margin2, gameMargins.game4marks) && !isBadgeShared('game4badge2Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game4Badge2')">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -423,6 +546,19 @@
           <img src="/assets/badges/badge05_a.png" alt="Beginner Badge" class="badge-icon">
           <p class="badge-name">Beginner</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game5margin1, gameMargins.game5marks) && isBadgeShared('game5badge1Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game5margin1, gameMargins.game5marks) && !isBadgeShared('game5badge1Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game5Badge1')">
+              Share
+            </button>
+          </div>
         </div>
 
         <div class="badge" [ngClass]="{ 
@@ -433,19 +569,56 @@
           <img src="/assets/badges/badge05_b.png" alt="Master Badge" class="badge-icon">
           <p class="badge-name">Master</p>
           <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+
+          <div class="badge-status">
+            <!-- Only show share status or button if the badge is achieved -->
+            <span *ngIf="gameMargins && hasEarnedBadge(gameMargins.game5margin2, gameMargins.game5marks) && isBadgeShared('game5badge2Shared')" 
+                  class="shared-tag">
+              Shared
+            </span>
+            <button *ngIf="gameMargins && hasEarnedBadge(gameMargins.game5margin2, gameMargins.game5marks) && !isBadgeShared('game5badge2Shared')" 
+                    class="share-btn" 
+                    (click)="openSharePopup('Game5Badge2')">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </div>
         </div>
       </div>
 
-      <!-- Other Tab Content -->
-      <!-- <div class="tab-pane fade" id="other" role="tabpanel">
-        <h3>Other Tab</h3>
-        <p>Content for another tab goes here.</p>
-      </div> -->
+      
     </div>
   </div>
 
 </div>
+</div>
+
+<div class="popup-overlay" *ngIf="showSharePopup">
+  <div class="popup">
+    <h3>Do you want to share this badge?</h3>
+    <img [src]="selectedBadge?.path" [alt]="selectedBadge?.badgeName" class="popup-badge-image" />
+    <p>{{ selectedBadge?.badgeName }} in {{ selectedBadge?.gameName }}</p>
+    <div class="popup-actions">
+      <button class="btn-confirm" (click)="confirmShare()">Yes</button>
+      <button class="btn-cancel" (click)="closeSharePopup()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="showSuccessPopup">
+  <div class="popup">
+    <button class="popup-close-btn" (click)="closeSuccessPopup()">×</button>
+
+    <h3>Shared successfully!</h3>
+    <img [src]="selectedBadge?.path" [alt]="selectedBadge?.badgeName" class="popup-badge-image" />
+    <p>{{ selectedBadge?.badgeName }} in {{ selectedBadge?.gameName }}</p>
+    <div class="popup-actions">
+      <button class="btn-notifications" (click)="goToNotifications()">Go to Notifications</button>
+    </div>
+  </div>
+</div>
+
+
 </div>

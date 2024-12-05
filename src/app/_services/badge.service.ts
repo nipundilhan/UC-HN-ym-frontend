@@ -24,7 +24,7 @@ export class BadgeService {
 
     { gameCode: 'game3', gameName: 'Pharaoh`s Trial: Question Mastery', badgeCode: 'badge1',badgeName: 'Beginner Badge',ref: 'Game3Badge1', path: 'assets/badges/badge03_a.png' },
     { gameCode: 'game3', gameName: 'Pharaoh`s Trial: Question Mastery', badgeCode: 'badge2',badgeName: 'Master Badge',ref: 'Game3Badge2', path: 'assets/badges/badge03_b.png' },
-    { gameCode: 'game3', gameName: 'Pharaoh`s Trial: Question Mastery', badgeCode: 'badge2',badgeName: 'Rising Star Badge',ref: 'Game3Badge3', path: 'assets/badges/badge03_c.png' },
+    { gameCode: 'game3', gameName: 'Pharaoh`s Trial: Question Mastery', badgeCode: 'badge3',badgeName: 'Rising Star Badge',ref: 'Game3Badge3', path: 'assets/badges/badge03_c.png' },
 
     { gameCode: 'game4', gameName: 'Whispers of the Sphinx: Breathing Mastery', badgeCode: 'badge1',badgeName: 'Beginner Badge',ref: 'Game4Badge1', path: 'assets/badges/badge04_a.png' },
     { gameCode: 'game4', gameName: 'Whispers of the Sphinx: Breathing Mastery', badgeCode: 'badge2',badgeName: 'Master Badge',ref: 'Game4Badge2', path: 'assets/badges/badge04_b.png' },
