@@ -118,17 +118,17 @@ export class ProfileComponent implements OnInit {
     gamePoints: number = 0;
     gameMargins: GameMargins | null = null;
 
-    avatars: Avatar[] = [
-      { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
-      { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
-      { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false},
-      { code: 'AVTR04', path: 'assets/avatar-img/ava04.png', selected: false },
-      { code: 'AVTR05', path: 'assets/avatar-img/ava05.png', selected: false },
-      { code: 'AVTR06', path: 'assets/avatar-img/ava06.png', selected: false },
-      { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
-      { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
-    ];
-    
+    // avatars: Avatar[] = [
+    //   { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
+    //   { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
+    //   { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false},
+    //   { code: 'AVTR04', path: 'assets/avatar-img/ava04.png', selected: false },
+    //   { code: 'AVTR05', path: 'assets/avatar-img/ava05.png', selected: false },
+    //   { code: 'AVTR06', path: 'assets/avatar-img/ava06.png', selected: false },
+    //   { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
+    //   { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
+    // ];
+    avatars: { code: string, path: string, selected: boolean }[] = [];
     isAvatarSelectionModalVisible: boolean = false;
 
     initializeAvatarSelection() {
@@ -138,20 +138,20 @@ export class ProfileComponent implements OnInit {
     }
     
     openAvatarSelectionModal() {
-      this.initializeAvatarSelection(); // Ensure the current avatar is selected
+      this.initializeAvatarSelection();  // Initialize avatar selection
       this.isAvatarSelectionModalVisible = true;
     }
+  
   
     closeAvatarSelectionModal() {
       this.isAvatarSelectionModalVisible = false;
     }
-  
-    selectImage(avatar: Avatar) {
-      // Deselect other avatars
-      this.avatars.forEach(av => av.selected = av.code === avatar.code);
-      // Update selected avatar path
-      this.selectedAvatarPath = avatar.path;
+
+    selectImage(avatar: { code: string, path: string, selected: boolean }) {
+      this.avatars.forEach(av => av.selected = av.code === avatar.code);  // Deselect other avatars
+      this.selectedAvatarPath = avatar.path;  // Update selected avatar path
     }
+  
   
     confirmAvatarSelection() {
       // Save the selected avatar or perform necessary actions
@@ -281,6 +281,15 @@ onChangePasswordSubmit() {
 
 
   ngOnInit(): void {
+    this.avatars = this.avatarService['avatars']
+    .filter(avatar => avatar.code !== 'default')  // Exclude default avatar
+    .map(avatar => ({
+      ...avatar, 
+      selected: avatar.path === this.selectedAvatarPath // Add selected property
+    }));
+    
+    // Initialize selected avatar path
+    this.selectedAvatarPath = this.avatarService.getAvatarPath();
     this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
     // this.loadInitialMoods();
     this.fetchAllData();

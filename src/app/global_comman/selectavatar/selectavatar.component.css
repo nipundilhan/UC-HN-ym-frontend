@@ -1,8 +1,8 @@
 
-  .disabled {
+  /* .disabled {
     filter: grayscale(50%);
     opacity: 0.5;
-  }
+  } */
 
   :host ::ng-deep .background {
     background-image: url('/assets/background-img/background02.png');
@@ -45,23 +45,15 @@
 .avatar-selection-box img {
   width: 100%; /* Image takes up full width of its container */
   height: auto; /* Maintain aspect ratio */
-  /* max-height: 150px; */
   max-width: 160px; /* Prevents the image from being too large */
   object-fit: cover; /* Ensures the image covers the container */
-  /* margin-bottom: 5px; */
   justify-content: center; /* Center the avatars within the box */
   align-items: center; /* Center the content vertically */
-  /* margin:5px; */
   display: block; /* Ensure the image behaves as a block-level element */
-
-  /* padding: 20%; */
-  
-/* Add Bootstrap-like styles */
-border: 2px solid #dc970c; /* Equivalent to Bootstrap's border class */
+/* border: 2px solid #dc970c;  */
 border-radius: 8rem; /* Equivalent to Bootstrap's rounded class */
 box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075); /* Equivalent to Bootstrap's shadow class */
 background-color: white; /* Equivalent to Bootstrap's bg-white class */
-/* margin-bottom: 0.25rem; /* Equivalent to Bootstrap's mb-1 class */
 }
 
 .avatar-selection-box .btn-submit,
@@ -100,3 +92,56 @@ h2 {
   width: 100%; /* Ensure h1 takes full width */
 }
 
+.avatar-selection-box img.selected {
+  border: 2px solid #4CAF50; /* Highlight selected avatar */
+}
+
+
+.tooltip {
+  position: absolute; /* Ensure this is set to absolute */
+  background: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.462);
+  z-index: 100;
+  display: inline-block; /* Use inline-block to avoid full width */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.2s; /* Fade in effect */
+  font-family: 'MedievalSharp', sans-serif;
+  bottom: 30px;
+}
+
+.avatar-container:hover .tooltip {
+  visibility: visible; /* Show the tooltip on hover */
+  opacity: 1; /* Make it fully visible */
+}
+
+.avatar-container {
+  position: relative; /* Ensure the tooltip is positioned relative to the avatar container */
+}
+
+.tooltip-skip {
+  visibility: hidden; /* Hide tooltip by default */
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for the tooltip */
+  color: #fff; /* White text for readability */
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  top: 30%; /* Position it above the button */
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: 1;
+  width: 250px; /* Adjust width to fit the content */
+  font-size: 0.9rem;
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s; /* Smooth fade-in effect */
+  pointer-events: none;
+}
+
+.btn-skip:hover + .tooltip-skip {
+  visibility: visible; /* Show the tooltip on hover */
+  opacity: 1; /* Make it fully visible */
+}

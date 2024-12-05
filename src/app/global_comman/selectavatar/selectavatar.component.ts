@@ -9,6 +9,8 @@ interface Avatar {
   code: string;
   path: string;
   selected: boolean;
+  name: string;
+  description: string;
 }
 
 
@@ -36,14 +38,14 @@ export class SelectavatarComponent implements OnInit {
 
   public  avatars: Avatar[] = [
     // { code: 'default', path: 'assets/avatar-img/default-avatar.png', selected: false }, // Default avatar
-    { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
-    { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
-    { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false},
-    { code: 'AVTR04', path: 'assets/avatar-img/ava04.png', selected: false },
-    { code: 'AVTR05', path: 'assets/avatar-img/ava05.png', selected: false },
-    { code: 'AVTR06', path: 'assets/avatar-img/ava06.png', selected: false },
-    { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
-    { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
+    { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false, name: 'Isis', description: 'The benevolent goddess of magic and healing.'},
+    { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false, name: 'Amun', description: 'The hidden one, a god of creation and kingship.' },
+    { code: 'AVTR03', path: 'assets/avatar-img/ava03.png', selected: false, name: 'Anubis', description: 'The guardian of the dead, known for his wisdom and calm judgment.' },
+    { code: 'AVTR04', path: 'assets/avatar-img/ava04.png', selected: false, name: 'Thoth', description: 'The god of wisdom, writing, and the moon.'},
+    { code: 'AVTR05', path: 'assets/avatar-img/ava05.png', selected: false, name: 'Ra', description: 'The sun god, bringer of light and life.' },
+    { code: 'AVTR06', path: 'assets/avatar-img/ava06.png', selected: false, name: 'Osiris', description: 'The ruler of the underworld and symbol of renewal.' },
+    { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false, name: 'Horus', description: 'The falcon-headed god of the sky and protector of Egypt.' },
+    { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false, name: 'Bastet', description: 'The feline goddess of home and protection, revered for her playful yet fierce nature.'  }
   ];
 
 
@@ -96,8 +98,8 @@ export class SelectavatarComponent implements OnInit {
       (response: any) => {
 
 
-        alert("you have successfully registered");
-        this.router.navigate(['/login']);
+        // alert("you have successfully registered");
+        this.router.navigate(['/welcome']);
         
 
 
