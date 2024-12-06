@@ -58,6 +58,11 @@ export class Game1BreathingComponent implements OnInit {
 
   breathingPractises: any[] = [];
 
+
+  relaxationMusicEnabled = false; // Check if the user wants music
+isMusicPlaying = false;         // Music state
+music: HTMLAudioElement | null = null;
+
   constructor(private fb: FormBuilder,
     public apiCallService: ApiCallService,
     private userAuthService: UserAuthService,
@@ -71,6 +76,7 @@ export class Game1BreathingComponent implements OnInit {
        // Only shown for Box or 4-7-8
       cycles: [2], // For practicing within the system
       timeSpent: [''], // For logging details
+      relaxationMusic: [false] 
     });
   }
 
@@ -231,6 +237,15 @@ export class Game1BreathingComponent implements OnInit {
     this.isPopupVisible = false;
     this.selectedTechnique = this.breathingForm.value.technique;
     this.cycleCount = this.breathingForm.value.cycles;
+    this.relaxationMusicEnabled = this.breathingForm.value.relaxationMusic;
+
+    if (this.relaxationMusicEnabled) {
+      this.music = new Audio('/assets/relaxation-music.mp3');
+      this.music.loop = true; // Ensure the music plays continuously
+      this.music.volume = 0.5; // Set default volume
+      this.music.play();
+      this.isMusicPlaying = true;
+    }
 
     if (this.selectedTechnique && this.cycleCount > 0) {
       this.sessionRunning = true;
@@ -239,6 +254,17 @@ export class Game1BreathingComponent implements OnInit {
       this.updateGifSource(); // Set the relevant GIF based on the technique
   
       this.runSession(); // Start the session
+    }
+  }
+
+  toggleMusic(): void {
+    if (this.music) {
+      if (this.isMusicPlaying) {
+        this.music.pause();
+      } else {
+        this.music.play();
+      }
+      this.isMusicPlaying = !this.isMusicPlaying;
     }
   }
 
@@ -257,19 +283,6 @@ runSession() {
   }, intervalDuration);  // Adjust the interval dynamically based on the technique
 }
 
-    // // Method to run the session (with cycling logic)
-    // runSession() {
-    //   this.interval = setInterval(() => {
-    //     if (!this.sessionPaused) {
-    //       this.currentCycle++;
-    //       if (this.currentCycle >= this.cycleCount) {
-    //         this.endSession();  // End session after completing all cycles
-    //       }
-    //     }
-    //   }, 17000);  // Adjust the interval for each cycle (e.g., 16-17 seconds per cycle)
-    // }
-    
-
     updateGifSource(): void {
       if (this.selectedTechnique === 'Box-breathing') {
         this.gifSource = '/assets/gifs/box-breathing.gif'; 
@@ -283,6 +296,15 @@ runSession() {
     clearInterval(this.interval);
     this.sessionRunning = false;
     this.sessionPaused = false;
+
+     // Stop music
+  if (this.music) {
+    this.music.pause();
+    this.music.currentTime = 0; // Reset playback
+    this.music = null;
+    this.isMusicPlaying = false;
+  }
+
     this.resetForm();
   }
 
@@ -311,7 +333,13 @@ runSession() {
     console.log("finished");
     clearInterval(this.interval);  // Clear the interval when session ends
     this.sessionRunning = false;
-  
+    
+    if (this.music) {
+      this.music.pause();
+      this.music.currentTime = 0; // Reset playback
+      this.music = null;
+      this.isMusicPlaying = false;
+    }    
     this.onSubmit();
 
   

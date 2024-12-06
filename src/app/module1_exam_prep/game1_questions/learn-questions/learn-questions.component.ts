@@ -33,21 +33,50 @@ tips = [
     text: `<h4>Steps to Craft Questions and Answers</h4>
          <h6>Follow these steps to master this study skill:</h6>
          <div class="breathing-step-block">
-           <p><b>Step 1:</b> Identify Key Topics: Go through your programming syllabus or notes and pick out essential topics or concepts.</p>
-           <p><b>Step 2:</b> Create Questions: Write a mix of theoretical and practical questions. For example:</p>
-           <ul>
-             <li>Theoretical: "What is the purpose of a loop in programming?"</li>
-             <li>Practical: "Write a Python function to reverse a string."</li>
-           </ul>
-           <p><b>Step 3:</b> Write Model Answers: Answer your questions with clear explanations and code examples if applicable.</p>
-           <p><b>Step 4:</b> Refine: Review your questions for clarity, and ensure your answers are accurate and easy to understand.</p>
-           <p><b>Step 5:</b> Test Yourself: Later, try answering your crafted questions without referring to the answers.</p>
+           <p><b>Step 1: Identify Key Topics </b>: Go through your programming lecture notes, tutorials or other relevant materials and pick out essential topics or concepts.  Look for core topics or challenging concepts that are essential for understanding the subject. Highlight keywords, patterns, and recurring themes to focus your questions effectively.</p>
+         </div>`,
+    images: [],
+    video: null
+    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
+  },
+  {
+   
+    text: `<h4>Steps to Craft Questions and Answers</h4>
+<h6>Follow these steps to master this study skill:</h6>
+<div class="breathing-step-block">
+  <p><b>Step 2: Create Questions</b>: Write a mix of theoretical and practical questions. A good question not only tests knowledge but also encourages critical thinking and application of concepts. Here's how to create balanced questions:</p>
+  <ul>
+    <li>
+      <p><b>Theoretical Questions:</b> These assess your understanding of concepts and definitions. Aim for clarity and depth. For example:</p>
+      <p style="margin: 0;"><i>- What is the purpose of a loop in programming?</i></p>
+      <p style="margin: 0;"><i>- Explain the differences between a 'for' loop and a 'while' loop with examples.</i></p>
+    </li>
+    <li>
+      <p style="color: black !important;"><b>Practical Questions:</b> These test your ability to apply theoretical knowledge to solve problems. Ensure they are realistic and relevant to what you're learning. For example:</p>
+      <p style="margin: 0;"><i>- Write a Python function to reverse a string.</i></p>
+      <p style="margin: 0;"><i>- Design an algorithm to find the second-largest number in a list.</i></p>
+    </li>
+  </ul>
+</div>
+`,
+    images: [],
+    video: null
+    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
+  },
+  {
+   
+    text: `<h4>Steps to Craft Questions and Answers</h4>
+         <h6>Follow these steps to master this study skill:</h6>
+         <div class="breathing-step-block">
+           <p><b>Step 3: Write Model Answers </b>: Craft detailed answers to your questions. Include clear explanations and relevant examples, such as code snippets or diagrams. Use comments in code to explain key parts and ensure answers can be understood by someone new to the topic.</p>
+           <p><b>Step 4: Refine </b>: Review your questions for clarity, and ensure your answers are accurate and easy to understand.</p>
+           <p><b>Step 5: Test Yourself </b>: Later, try answering your crafted questions without referring to the answers.</p>
          </div>
          <p>🌟 <b>Bonus:</b> Share your questions with friends or classmates for collaborative learning!</p>`,
     images: [],
     video: null
     // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
+    },
   {
     text: `<h3>How to Play the Game</h3>
            <p>Welcome to your creative study adventure! Here’s how to maximize your experience by logging your crafted questions:</p> 
@@ -75,13 +104,13 @@ tips = [
     text: `<p><strong>Earn Badges:</strong> Showcase your creativity and engagement with three exclusive badges:</p>
            <ul>
              <div class="tip-block">
-               <li><b>Bronze Sphinx Badge:</b> Log <strong>5 questions</strong> to earn this badge, marking the beginning of your question-crafting journey.</li>
+               <li><b>Beginner Badge:</b> Log <strong>5 questions</strong> to earn this badge, marking the beginning of your question-crafting journey.</li>
              </div>
              <div class="tip-block">
-             <li><b>Silver Sphinx Badge:</b> Log <strong>10 questions</strong> to achieve this badge, celebrating your growing skills and dedication to crafting meaningful questions.</li>
+             <li><b>Master Badge:</b> Log <strong>10 questions</strong> to achieve this badge, celebrating your growing skills and dedication to crafting meaningful questions.</li>
              </div>
              <div class="tip-block">
-               <li><b>Sphinx’s Wisdom Badge:</b> Collect <strong>50 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
+               <li><b>Rising Star Badge:</b> Collect <strong>50 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
              </div>
            </ul>
            <p>Track your achievements, share your work, and watch your skills soar as you craft more questions!</p>`,

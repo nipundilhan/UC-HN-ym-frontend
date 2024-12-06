@@ -36,7 +36,7 @@
     <div class="container">
 
         <h1 class="game-title">Breathing Mastery</h1>
-        <button class="add-button" (click)="openBreathingPopup()">✨ Start Breathing Exercise ✨</button>
+        <button class="add-button" (click)="openBreathingPopup()">✨ Click here to practice or log a breathing session ✨</button>
 
         <div class="records-container" *ngIf="AllData?.breathingPractises?.length > 0">
           <div class="record-card" *ngFor="let breathing of paginatedQuestions">
@@ -121,55 +121,75 @@
 
 
                   <!-- Next Button -->
-                <div class="button-group">
-                  <button class="back-next-btn" (click)="goToNextPage()">Next</button>
-                </div>
-                </div>
-        
-                <!-- Page 2: Time or Cycles Input -->
-                <div *ngIf="popupCurrentPage === 2">
-                  <!-- For Diaphragmatic or Logging Time -->
-                  <div *ngIf="selectedTechnique === 'Belly Breathing' || selectedTechnique === 'Alternate Nostril Breathing' || breathingForm.value.practiceOption === 'log'">
-                    <label for="timeSpent">Time Spent (minutes):</label>
-                    <input id="timeSpent" type="number" formControlName="timeSpent" />
+                  <div class="button-group">
+                    <button class="back-next-btn" (click)="goToNextPage()">Next</button>
                   </div>
-        
-                  <!-- For Practicing Cycles -->
-                  <div *ngIf="breathingForm.value.practiceOption === 'system'">
-                    <label for="cycles">Number of Cycles:</label>
-                    <select id="cycles" formControlName="cycles">
-                      <option *ngFor="let cycle of [2, 5, 10, 15, 20]" [value]="cycle">{{ cycle }} Cycles</option>
-                    </select>
                   </div>
-                </div>
-        
-                <!-- Navigation Buttons -->
-                <div class="button-group">
-                  <!-- Back Button -->
-                  <button *ngIf="popupCurrentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
-        
-                  <!-- Start Session Button -->
-                  <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'system'" 
-                  class="log-start-btn" 
-                  (click)="startBreathingSession()">
-                  Start Session
-                  </button>
+          
+                  <!-- Page 2: Time or Cycles Input -->
+                  <div *ngIf="popupCurrentPage === 2">
+                    <!-- For Diaphragmatic or Logging Time -->
+                    <div *ngIf="selectedTechnique === 'Belly Breathing' || selectedTechnique === 'Alternate Nostril Breathing' || breathingForm.value.practiceOption === 'log'">
+                      <label for="timeSpent">Time Spent (minutes):</label>
+                      <input id="timeSpent" type="number" formControlName="timeSpent" />
+                    </div>
+          
+                    <!-- For Practicing Cycles -->
+                    <div *ngIf="breathingForm.value.practiceOption === 'system'">
+                      <label for="cycles">Number of Cycles:</label>
+                      <select id="cycles" formControlName="cycles">
+                        <option *ngFor="let cycle of [2, 5, 10, 15, 20]" [value]="cycle">{{ cycle }} Cycles</option>
+                      </select>
+                    </div>
+                  
 
-                  <!-- Log Details Button -->
-                  <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'log'" 
-                  class="log-start-btn" 
-                  (click)="onSubmit()">
-                  Log Details
-                  </button>
+                  <!-- Option for Relaxation Music -->
+                <div *ngIf="breathingForm.value.practiceOption === 'system'" >
+                  <label>
+                    <input
+                      type="checkbox"
+                      formControlName="relaxationMusic"
+                    />
+                    Practice with Relaxation Music
+                  </label>
                 </div>
-              </form>
+              </div>
+                  <!-- Navigation Buttons -->
+                  <div class="button-group">
+                    <!-- Back Button -->
+                    <button *ngIf="popupCurrentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
+          
+                    <!-- Start Session Button -->
+                    <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'system'" 
+                    class="log-start-btn" 
+                    (click)="startBreathingSession()">
+                    Start Session
+                    </button>
+  
+                    <!-- Log Details Button -->
+                    <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'log'" 
+                    class="log-start-btn" 
+                    (click)="onSubmit()">
+                    Log Details
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </div>
+          </div>  
         
 <!-- Breathing session controls (display after session starts) -->
 <div *ngIf="sessionRunning" class="modal">
   <div class="breathing-session">
+    <div *ngIf="relaxationMusicEnabled" class="music-control">
+      <span
+        class="material-icons music-icon"
+        (click)="toggleMusic()"
+      >
+        {{ isMusicPlaying ? 'volume_up' : 'volume_off' }}
+      </span>
+    </div>
+
     <h3>{{ selectedTechnique | titlecase }}</h3>
 
     <div class="breathing-animation" [ngClass]="{'paused': sessionPaused}">

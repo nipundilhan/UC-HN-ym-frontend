@@ -50,7 +50,7 @@ background-size: cover;
 .add-button {
   display: block;
   justify-content: center;
-  width: 80%;
+  width: 50%;
   padding: 10px;
   /* margin: 10px 0; */
   background-color: #c27d2a;
@@ -296,6 +296,8 @@ button[type="submit"]:hover {
     text-align: center;
     margin-top: 20px;
     padding: 40px;
+    position: relative; /* Add this line to create a containing block for the music icon */
+
   }
   
   /* .breathing-animation .star  {
@@ -312,6 +314,23 @@ button[type="submit"]:hover {
   .breathing-animation.paused .star {
     animation-play-state: paused;
 } */
+
+.music-control {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.music-icon {
+  font-size: 36px; /* Adjust size as needed */
+  color: #555; /* Default icon color */
+}
+
+.music-icon:hover {
+  color: #000; /* Change color on hover */
+}
+
 
   @keyframes breathing {
     0% { transform: scale(1); }

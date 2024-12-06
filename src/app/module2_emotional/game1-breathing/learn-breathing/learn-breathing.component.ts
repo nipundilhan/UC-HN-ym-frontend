@@ -168,7 +168,7 @@ export class LearnBreathingComponent implements OnInit {
         {
           "text": `<h4>Ready to See How It's Done?</h4>
            <p>Follow along with the video to master the technique!</p>
-           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/7Ep5mKuRmAA?si=w6E5xZg98z7SUTiw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`, 
+           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/OXjlR4mXxSk?si=gVEGEtC_h9m_UmTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`, 
           "image": null, 
           "video": null 
         },
@@ -196,9 +196,9 @@ export class LearnBreathingComponent implements OnInit {
         },
         { 
           "text": `<h4>Why Practice Alternate Nostril Breathing?</h4>
-                   <div class="breathing-tip-block">🌟 <b>Enhances Relaxation:</b> Balances your nervous system for a soothing effect.</div>
-                   <div class="breathing-tip-block">✨ <b>Improves Focus:</b> Sharpens your mind, helping you tackle tasks with clarity.</div>
-                   <div class="breathing-tip-block">🛡️ <b>Boosts Energy Flow:</b> Promotes harmony in the body’s energy pathways.</div>`, 
+                   <div class="journalling-tip-block">🌟 <b>Enhances Relaxation:</b> Balances your nervous system for a soothing effect.</div>
+                   <div class="journalling-tip-block">✨ <b>Improves Focus:</b> Sharpens your mind, helping you tackle tasks with clarity.</div>
+                   <div class="journalling-tip-block">🛡️ <b>Boosts Energy Flow:</b> Promotes harmony in the body’s energy pathways.</div>`, 
           "image": null, 
           "video": null 
         },
@@ -218,7 +218,7 @@ export class LearnBreathingComponent implements OnInit {
         {
           "text": `<h4>Ready to See How It's Done?</h4>
            <p>Follow along with the video to master the technique!</p>
-           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/G8xIEzX40bA?si=mow2dyiyiDhmpfgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/a7re4bKxB3A?si=Gnm0siaE_GEFOUPr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>`, 
           "image": null, 
           "video": null 
