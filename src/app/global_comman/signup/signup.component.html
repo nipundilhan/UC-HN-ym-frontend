@@ -82,12 +82,32 @@
 
         <div class="row formRaw">
             <div class="form-group col-md-4 col-s-12">
+                <label class="inputLable d-flex justify-content-start align-items-center" >Editor</label>
+            </div>
+            <div class="form-group col-md-8 col-s-12 d-flex justify-content-end">
+                <!-- 1 -> npm install @kolkov/angular-editor 2-> import AngularEditorModule  in app.module.ts 
+                 3-> insall fontawesom -> npm install --save @fortawesome/fontawesome-free and add in styles angular.json
+                 "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                 -->
+                <angular-editor [(ngModel)]="editorContent" [config]="editorConfig"></angular-editor>
+                <div>
+                  <h3>Preview</h3>
+                  <div [innerHTML]="editorContent"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row formRaw">
+            <div class="form-group col-md-4 col-s-12">
                 
             </div>
             <div class="form-group col-md-8 col-s-12 d-flex justify-content-end">
                 <button type="submit"   [disabled]="!form.valid" class="btn btn-success btn-sm">Sign Up</button>
             </div>
         </div>
+
+
         </form>
     </div>
 </div>

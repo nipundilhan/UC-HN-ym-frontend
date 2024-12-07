@@ -18,3 +18,115 @@ p {
     width: 200%;
     height:100%;
 } 
+
+.carousel-item img {
+    height: 600px;
+    object-fit: cover;
+}
+
+/*css for top part of the screen */
+
+.responsive-section {
+    background: url('/assets/photos/slBis/slBis112.jpg') no-repeat center center;
+    background-size: cover;
+    height: 75vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+  }
+  
+  /* Text Content */
+  .text-content {
+    text-align: left;
+  }
+  
+  .text-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .text-content p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.6;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    .responsive-section {
+      background-position: left;
+      height: 50vh;
+      justify-content: center;
+    }
+  
+    .text-content {
+      text-align: center;
+    }
+  
+    .text-content h1 {
+      font-size: 2rem;
+    }
+  
+    .text-content p {
+      font-size: 1rem;
+    }
+  }
+
+
+  /* for the cards */
+
+  /* General Styles for Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #f9f9f9;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    height: 100px;
+    width: 100px;
+    margin: 20px auto 10px;
+    object-fit: contain;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  /* Spacing between cards */
+  .g-4 {
+    gap: 20px;
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 768px) {
+    .card {
+      margin-bottom: 10px;
+      
+    }
+  
+    .card-title {
+      font-size: 1rem;
+    }
+  
+    .card-text {
+      font-size: 0.8rem;
+    }
+  }

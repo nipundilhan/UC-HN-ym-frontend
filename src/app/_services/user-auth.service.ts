@@ -58,6 +58,14 @@ export class UserAuthService {
     return localStorage.getItem('toHome')! ;
   }
 
+  public setLanguage(language: string) {
+    localStorage.setItem('language', language);
+  }
+
+  public getLanguage(): string {
+    return localStorage.getItem('language')! ;
+  }
+
   
 
   

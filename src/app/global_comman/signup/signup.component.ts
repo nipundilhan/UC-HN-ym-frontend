@@ -5,6 +5,7 @@ import { DataTransferService } from 'src/app/_secondary_services/data-transfer.s
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { UserSignup } from 'src/app/_shared/resources/UserSignup';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-signup',
@@ -12,6 +13,24 @@ import { UserSignup } from 'src/app/_shared/resources/UserSignup';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
+  editorContent: string = '';  // This will store the editor's content
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '100px',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['italic'],  // Hide italic button
+      ['underline'] ,// Hide underline button
+      ['insertImage', 'insertVideo']
+    ]
+  };
 
   form = new FormGroup({
 

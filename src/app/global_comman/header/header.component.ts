@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
-import '@popperjs/core';
-import 'bootstrap';
+//import '@popperjs/core';
+//import 'bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +12,20 @@ import 'bootstrap';
 export class HeaderComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService ,
-    private router: Router,) { }
+    private router: Router) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+
+    }
+
+
+    selectedLanguage: string = 'ja'; // Default language
+
+    // Method to change the language
+    switchLanguage(language: string): void {
+      this.selectedLanguage = language;
+      this.setLanguage(language);
+    }
 
   public logout() {
     //this.usrNm = "";
@@ -29,7 +39,15 @@ export class HeaderComponent implements OnInit {
 
   public getUserName() {
     return this.userAuthService.getUserName();
+  }
 
+
+  public getLanguage(){
+    return this.userAuthService.getLanguage();
+  }
+
+  public setLanguage(language: string){
+     this.userAuthService.setLanguage(language);
   }
 
 

@@ -1,27 +1,30 @@
-<div class="container mt-5">
-    <div class="card" style="padding: 20px;">
+<div class="bg-image">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="card p-5 shadow-lg">
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <input type="text"
-            ngModel
-            name="username"
-            id="username"
-            placeholder="Enter your username"
-            class="form-control mb-3"
-            >
-
-            <input type="password"
-            ngModel
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            class="form-control mb-3"
-            >
-
-            <input type="submit"
-            value="Login"
-            class="btn btn-outline-primary form-control rounded-0">
+          <h2 class="text-center mb-4">Login</h2>
+          <input 
+            type="text" 
+            ngModel 
+            name="username" 
+            id="username" 
+            placeholder="Enter your username" 
+            class="form-control mb-4" 
+          >
+          <input 
+            type="password" 
+            ngModel 
+            name="password" 
+            id="password" 
+            placeholder="Enter your password" 
+            class="form-control mb-4" 
+          >
+          <input 
+            type="submit" 
+            value="Login" 
+            class="btn btn-primary form-control rounded-0" 
+          >
         </form>
-        
+      </div>
     </div>
-</div>
-
+  </div>

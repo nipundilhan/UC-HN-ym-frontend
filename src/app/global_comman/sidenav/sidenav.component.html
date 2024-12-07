@@ -5,7 +5,7 @@
     
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 
-                <li class="nav-item itm col-12  align-self-end" >
+                <li class="nav-item mainNavItem col-12  align-self-end" >
                     
                     <a routerLink="/home" class="lnk nav-link  px-0 text-truncate"  >
                         
@@ -15,13 +15,14 @@
                     </a>
                     
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/test" class="lnk nav-link  px-0 text-truncate">
                         
-                        <span class="ittxt">TEST  PAGE</span>
+                        <span *ngIf="getLanguage() === 'en'" class="ittxt">TEST  </span>
+                        <span *ngIf="getLanguage() === 'ja'"class="ittxt">テスト  </span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/view-tutorials" class="lnk nav-link  px-0 text-truncate">
                         
                         <span class="ittxt" >Tutorials</span>
@@ -56,174 +57,49 @@
 
     
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu3">
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/view-products-non-log" class="nav-link  px-0 text-truncate">
                         
                         
                         <span class="ittxt">HELP</span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/settings" class="nav-link px-0 text-truncate">
                         
                         
                         <span class="ittxt"></span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/forbidden" class="nav-link  px-0">
                         <i class="fs-4 bi-house"></i>
                         
                         <span class="ittxt"></span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a routerLink="/yellow-page" class="nav-link  px-0">
                         <i class="fs-4 bi-house"></i>
                         
                         <span class="ittxt"></span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a class="nav-link  px-0">
                         <i class="fs-4 bi-house"></i>
                         
                         <span class="ittxt"></span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
+                <li class="nav-item mainNavItem col-12 align-self-end">
                     <a class="nav-link  px-0">
                         <i class="fs-4 bi-house"></i>
                         
                         <span class="ittxt"></span>
                     </a>
                 </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li>
-                <li class="nav-item itm col-12 align-self-end">
-                    <a class="nav-link  px-0">
-                        <i class="fs-4 bi-house"></i>
-                        
-                        <span class="ittxt"></span>
-                    </a>
-                </li> 
+
     
     
     

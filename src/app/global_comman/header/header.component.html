@@ -1,29 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">YM</a>
+      <a class="navbar-brand" routerLink="/home">SLBis</a>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li style="margin-top:4px;margin-right:40px;">
-            <a class="uN  disabled" *ngIf=" isLoggedIn()"  >Hi! {{getUserName()}}</a>
+          <li class="nav-item dropdownLanguage">
+            <select id="language" [(ngModel)]="selectedLanguage" (change)="switchLanguage(selectedLanguage)" >
+              <option value="ja">日本語 </option>
+              <option value="en">English</option>             
+            </select>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/home">Home</a>
+            <a class="nav-link d-none d-md-block" routerLink="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/signup">Test</a>
+            <a *ngIf="getLanguage() === 'ja'" class="nav-link" routerLink="/signup">テスト</a>
+            <a *ngIf="getLanguage() === 'en'" class="nav-link" routerLink="/signup">Test</a>
+            
           </li>
-          <li class="nav-item dropdown">
-            <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <!--<img [src]="avatarPath" alt="" class="profile-pic me-2">-->
-                {{getUserName()}}
-            </a>
-            <!--
+          
+
+                      <!--
                   command - npm install popper.js
-                  angular.json add to script -    "node_modules/@popperjs/core/dist/umd/popper.min.js",
+                  angular.json add to script -    "node_modules/@popperjs/core/dist/umd/popper.min.js", this is different for bootstrap 4
                   in header.ts file import
                             import '@popperjs/core';
                             import 'bootstrap';
@@ -31,19 +33,34 @@
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
                   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
             -->
-            <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                <li> <a class="dropdown-item" routerLink="/home"><i class="fas fa-home icon-home" style="color: #070707;"></i>  Home</a></li>
+
+
+
+
+          <li class="nav-item dropdown ">
+            <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!--<img [src]="avatarPath" alt="" class="profile-pic me-2">-->
+                {{getUserName()}}
+            </a>
+
+          <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end " aria-labelledby="profileDropdown">
+                
                 <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user-circle"></i>  Profile</a></li>
+                <li (click)="logout()" class="dropdown-item">
+                  <i class="fas fa-sign-out-alt icon-logout" style="color: #070707;"></i> Logout
+              </li>
 
             </ul>
         </li>
+
           <li class="nav-item">
             <a class="nav-link" routerLink="/login" *ngIf=" !isLoggedIn()">Login</a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <button  type="button" class="btn btn-danger" (click)="logout()" *ngIf=" isLoggedIn()" >LOGOUT</button> 
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
   </nav>
+

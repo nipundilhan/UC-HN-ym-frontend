@@ -13,7 +13,7 @@
 }
 
 .navbar {
-    background-color: midnightblue;
+    background-color: navy;
     
     .navbar-brand {
       color: white;
@@ -32,7 +32,18 @@
       }
     }
 
-
+    .nav-item.dropdownLanguage {
+      display: flex; /* Enable Flexbox for the list item */
+      align-items: center; /* Align the dropdown vertically in the center */
+      height: 100%; /* Ensure it fills the parent container's height */
+    }
+    
+    .nav-item.dropdownLanguage select {
+      font-size: 14px; /* Adjust font size */
+      padding: 5px 10px; /* Add padding for better appearance */
+      border-radius: 4px; /* Optional: Rounded corners */
+      border: 1px solid #ccc; /* Optional: Subtle border for better visibility */
+    }
   
     .navbar-toggler {
       border-color: rgba(255, 255, 255, 0.1);
