@@ -35,6 +35,7 @@ import { PlayJournallingComponent } from './module2_emotional/journalling/play-j
 import { LearnJournallingComponent } from './module2_emotional/journalling/learn-journalling/learn-journalling.component';
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
 import { WelcomeComponent } from './global_comman/welcome/welcome.component';
+import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -88,7 +89,9 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent }, // Default to dashboard
       { path: 'users', component: UsersComponent },
       { path: 'games', component: GamesComponent },
-      { path: 'user-activity', component: UserActivityComponent },
+      { path: 'user-activity', component: UserActivityComponent },      
+      { path: 'messages', component: AdminMsgsComponent },
+
     ]
   },
   { path: '', redirectTo: '/admin', pathMatch: 'full' }, // Redirect root to /admin

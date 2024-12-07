@@ -37,7 +37,11 @@ export class AppComponent {
 
 
       if (this.userAuthService.getUserName()) {
-       this.router.navigate(['/home']);
+        if(this.userAuthService.getRole() === "ADMIN"){
+          this.router.navigate(['/admin']);
+        }else{
+          this.router.navigate(['/home']);
+        }
       }
       else{
         this.router.navigate(['/introduction']);

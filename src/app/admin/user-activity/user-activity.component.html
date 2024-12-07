@@ -1,132 +1,186 @@
-<!-- admin-messages.component.html -->
-<div class="admin-page">
-    <h1>Admin Messages</h1>
-
-    <!-- Create New Message Button -->
-    <div class="create-message-btn">
-        <button (click)="openCreateMessagePopup()">Send New Message</button>
+<div class="admin-dashboard">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button 
+        (click)="setActiveTab('mindmaps')" 
+        [class.active]="activeTab === 'mindmaps'"
+      >
+        Mindmaps
+      </button>
+      <button 
+        (click)="setActiveTab('questions')" 
+        [class.active]="activeTab === 'questions'"
+      >
+        Questions
+      </button>
     </div>
-
-    <!-- Create/Edit Message Popup -->
-    <div *ngIf="isPopupOpen" class="create-message-popup">
-        <div class="popup-content">
-            <h3>Create New Message</h3>
-            <form (ngSubmit)="createMessage()" #messageForm="ngForm">
-                <label for="title">Title:</label>
-                <input type="text" id="title" [(ngModel)]="newMessage.title" name="title" required />
-
-                <label for="message">Message:</label>
-                <!-- Angular Editor for Message -->
-                <angular-editor 
-                    [(ngModel)]="newMessage.message" 
-                    [config]="editorConfig" 
-                    name="message"
-                    required>
-                </angular-editor>
-
-                <label for="status">Status:</label>
-                <select id="status" [(ngModel)]="newMessage.status" name="status" required>
-                    <option value="IMPORTANT">IMPORTANT</option>
-                    <option value="NONE">NONE</option>
-                    <option value="HIDDEN">HIDE</option>
-                </select>
-
-                <!-- Button Row -->
-                <div class="button-row">
-                    <!-- Always enabled Save Changes button -->
-                    <button type="submit" [disabled]="!messageForm.valid">
-                        Submit
-                    </button>
-                    <button type="button" (click)="closePopup()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    
-    <!-- Create/Edit Message Popup -->
-    <div *ngIf="isEditPopupOpen" class="create-message-popup">
-        <div class="popup-content">
-            <h3>{{ editingMessage ? 'Edit Message' : 'Create New Message' }}</h3>
-            <form (ngSubmit)="saveEditedMessage()" #messageForm="ngForm">
-                <label for="title">Title:</label>
-                <input type="text" id="title" [(ngModel)]="editingMessage.title" name="title" required />
-
-                <label for="message">Message:</label>
-                <!-- Angular Editor for Message -->
-                <angular-editor 
-                    [(ngModel)]="editingMessage.message" 
-                    [config]="editorConfig" 
-                    name="message"
-                    required>
-                </angular-editor>
-
-                <label for="status">Status:</label>
-                <select id="status" [(ngModel)]="editingMessage.status" name="status" required>
-                    <option value="IMPORTANT">IMPORTANT</option>
-                    <option value="NONE">NONE</option>
-                    <option value="HIDDEN">HIDE</option>
-                </select>
-
-                <!-- Button Row -->
-                <div class="button-row">
-                    <!-- Always enabled Save Changes button -->
-                    <button type="submit" [disabled]="!messageForm.valid">
-                        Save Changes
-                    </button>
-                    <button type="button" (click)="closeEditPopup()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- Messages Table -->
-    <div class="messages-table">
-        <!-- <h3>Existing Messages</h3> -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let msg of paginatedMessages">
-                    <td>{{ msg.title }}</td>
-                    <td>{{ msg.date | date: 'MMM d, y, h:mm a' }}</td> <!-- Format the date inline -->
-                    <!-- <td>{{ msg.status }}</td> -->
-
-                    <td>
-                        <span [ngClass]="{
-                          'status-important': msg.status === 'IMPORTANT',
-                          'status-none': msg.status === 'NONE',
-                          'status-hidden': msg.status === 'HIDDEN'
-                        }">
-                          {{ msg.status }}
-                        </span>
-                      </td>
-
-                    <td class="user-actions">
-                        <button (click)="editMessage(msg)">
-                          <span class="material-icons">edit</span>
-                        </button>
-                        <!-- <button (click)="deleteMessage(msg)">
-                          <span class="material-icons">delete</span>
-                        </button> -->
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="pagination-controls">
-        <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
-      </div>
+  
+    <!-- Content Sections -->
+    <div class="content-section" *ngIf="activeTab === 'mindmaps'">
+      <!-- <h2 class="section-title">Mindmaps</h2> -->
+      <div class="user-type-cards">
+        <div *ngFor="let mindmap of mindmaps" class="card" (click)="openMindmapPopup(mindmap)">
+          <!-- <img [src]="mindmap.image" alt="Mindmap Image"> -->
+          <div class="card-title">
+            <div class="status-tag" *ngIf="mindmap.sharedStatus=='HIDE'">
+                HIDDEN
+              </div>  
+              {{ mindmap.title }}
+            </div>
+          
+          <p>{{ mindmap.description.length > 60 ? mindmap.description.substring(0, 60) + '...' : mindmap.description  }}</p>
+          <div class="user-info">
+            <img [src]="getUserAvatar(mindmap.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+            <div class="user-details">
+              <span class="username">{{ mindmap.ownerStudentName }}</span>
+              <!-- <span class="shared-date">{{ question.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span> -->
+              <span class="shared-date">{{ mindmap.date }}</span>
       
+            </div>
+          </div>
+          <!-- <button (click)="openMindmapPopup(mindmap)">View Details</button> -->
+        </div>
+      </div>
+    </div>
+  
+    <div class="content-section" *ngIf="activeTab === 'questions'">
+      <!-- <h2 class="section-title">Questions</h2> -->
+      <div class="user-type-cards">
+        <div *ngFor="let question of questions" class="card" (click)="openQuestionPopup(question)">
+          <div class="card-title">  
+            <div class="status-tag" *ngIf="question.sharedStatus=='HIDE'">
+                HIDDEN
+              </div>      
+            {{ question.question.length > 50 ? question.question.substring(0, 50) + '...' : question.question }}
+          </div>
+          <p>{{ question.lessonName }}</p>
+          
+          <div class="user-info">
+            <img [src]="getUserAvatar(question.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+            <div class="user-details">
+              <span class="username">{{ question.ownerStudentName }}</span>
+              <!-- <span class="shared-date">{{ question.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span> -->
+              <span class="shared-date">{{ question.date }}</span>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mindmap Details Popup -->
+<div *ngIf="showMindmapPopup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-button" (click)="closeMindmapPopup()">&times;</span>
+      <h2 class="popup-title">Mindmap Details</h2>
+  
+      <form>
+        <div class="form-field inline-fields">
+          <div class="inline-field">
+            <label><strong>Uploaded by:</strong></label>
+            <input type="text" [value]="selectedMindmap.ownerStudentName" readonly />
+          </div>
+          <div class="inline-field">
+            <label><strong>Date:</strong></label>
+            <input type="text" [value]="selectedMindmap.date" readonly />
+          </div>
+        </div>
+        <div class="form-field">
+          <label><strong>Title:</strong></label>
+          <input type="text" [value]="selectedMindmap?.title" readonly />
+        </div>
+        <div class="form-field">
+          <label><strong>Description:</strong></label>
+          <textarea [value]="selectedMindmap?.description" readonly></textarea>
+        </div>
+        <div class="form-field">
+            <label><strong>Mindmap Image:</strong></label>
+        <img [src]="'data:' + selectedMindmap.attachments[0].contentType + ';base64,' + selectedMindmap.attachments[0].data" 
+        alt="{{ selectedMindmap.attachments[0].filename }}" 
+        class="popup-image">
+        </div>
+      
+        <!-- Dropdown for Status (Editable) -->
+        <div class="form-field">
+          <label for="mindmapStatus"><strong>Status:</strong></label>
+          <select id="status" [(ngModel)]="selectedMindmap.sharedStatus" name="mindmapStatus">
+            <option value="SHARED">Shared</option>
+            <option value="HIDE">Hide</option>
+          </select>
+        </div>
+      
+        <!-- Save Button -->
+        <div class="popup-buttons">
+          <button class="save-button" (click)="saveMindmapChanges()">Save Changes</button>
+        </div>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  
+    <!-- Question Details Popup -->
+    <div *ngIf="showQuestionPopup" class="popup-overlay">
+        <div class="popup-content">
+          <span class="close-button" (click)="closeQuestionPopup()">&times;</span>
+          <h2 class="popup-title">Question Details</h2>
+      
+          <!-- Form-like Structure -->
+          <form>
+            <div class="form-field inline-fields">
+                <div class="inline-field">
+                  <label><strong>Uploaded by:</strong></label>
+                  <input type="text" [value]="selectedQuestion.ownerStudentName" readonly />
+                </div>
+                <div class="inline-field">
+                  <label><strong>Date:</strong></label>
+                  <input type="text" [value]="selectedQuestion.date" readonly />
+                </div>
+              </div>
+            <div class="form-field">
+              <label><strong>Lesson Name:</strong></label>
+              <input type="text" [value]="selectedQuestion?.lessonTitle" readonly />
+            </div>
+            <div class="form-field">
+              <label><strong>Question:</strong></label>
+              <textarea [value]="selectedQuestion?.question" readonly></textarea>
+            </div>
+            <div class="form-field">
+              <label><strong>Answer:</strong></label>
+              <div class = "field-value" [innerHTML]="sanitizedAnswer" readonly></div>
+            </div>
+      
+            <!-- Dropdown for Status (Editable) -->
+            <div class="form-field">
+              <label for="questionStatus"><strong>Status:</strong></label>
+              <select id="questionStatus" [(ngModel)]="selectedQuestion.sharedStatus" name="questionStatus">
+                <option value="SHARED">Shared</option>
+                <option value="HIDE">Hide</option>
+              </select>
+            </div>
+      
+            <!-- Save Button -->
+            <div class="popup-buttons">
+              <button class="save-button" (click)="saveQuestionChanges()">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+  
+  <div class="pagination-controls" *ngIf="activeTab === 'questions'">
+    <button (click)="prevPageQuestions()" [disabled]="currentPageQuestions === 1">Previous</button>
+    <span>Page {{ currentPageQuestions }} of {{ totalPagesQuestions }}</span>
+    <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+    <button (click)="nextPageQuestions()" [disabled]="currentPageQuestions >= totalPagesQuestions || totalPagesQuestions === 1">Next</button>
+
+</div>
+
+<div class="pagination-controls" *ngIf="activeTab === 'mindmaps'">
+    <button (click)="prevPageMindmaps()" [disabled]="currentPageMindmaps === 1">Previous</button>
+    <span>Page {{ currentPageMindmaps }} of {{ totalPagesMindmaps }}</span>
+    <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+    <button (click)="nextPageMindmaps()" [disabled]="currentPageMindmaps >= totalPagesMindmaps || totalPagesMindmaps === 1">Next</button>
+
 </div>

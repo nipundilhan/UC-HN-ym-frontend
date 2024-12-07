@@ -1,17 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ApiCallService } from 'src/app/_services/api-call.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { AvatarService } from 'src/app/_services/avatar.service';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-
-export interface Message {
-  message: string; // the raw message content
-  sanitizedMessage?: any; // sanitized HTML message (to be set later)
-  status: string; // example: 'IMPORTANT' or other status
-  date: string; // example: message date
-  title: string;
-}
-
 
 @Component({
   selector: 'app-user-activity',
@@ -19,128 +12,217 @@ export interface Message {
   styleUrls: ['./user-activity.component.css']
 })
 export class UserActivityComponent implements OnInit {
-  messages: any[] = [];
-  newMessage: { title: string, message: string, status: string } = { title: '', message: '', status: 'active' };
-  editingMessage: any = null;
-  originalMessage: any = null;
-  isPopupOpen: boolean = false;
-  isEditPopupOpen: boolean = false;
-  submitted: boolean = false;
+  activeTab: string = 'mindmaps'; // Default active tab
+  AllDataMindmaps: any;
+  AllDataQuestions: any;
+  mindmaps: any[] = [];
+  questions: any [] = [];
 
-  currentPage: number = 1; // Current page number
-  MsgsPerPage: number = 4; // Number of questions to display per page
+  // Selected Item
+  selectedMindmap: any;
+  selectedQuestion: any;
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '200px',
-    minHeight: '100px',
-    placeholder: 'Enter your message here...',
-    translate: 'no',
-    toolbarHiddenButtons: [
-      ['bold', 'italic', 'underline'],
-      ['strikeThrough', 'subscript', 'superscript'],
-      ['fontSize', 'backgroundColor', 'customClasses']
-    ]
-  };
+  // Popups
+  showMindmapPopup: boolean = false;
+  showQuestionPopup: boolean = false;
+  
+  sanitizedAnswer!: SafeHtml;
+ 
+  currentPageQuestions: number = 1; 
+  questionsPerPage: number = 6; 
+  currentPageMindmaps: number = 1; 
+  mindmapsPerPage: number = 6; 
 
-  constructor(private apiCallService: ApiCallService
-  ) {}
+  constructor(private http: HttpClient,
+    public apiCallService: ApiCallService,
+    private userAuthService: UserAuthService,
+    private avatarService: AvatarService,
+    private sanitizer: DomSanitizer) { }
+
+
 
   ngOnInit(): void {
-    this.loadMessages();
+    this.fetchMindmaps();
+    this.fetchQuestions();
+  }
+  setActiveTab(tab: string): void {
+    this.activeTab = tab;
   }
 
-  loadMessages(): void {
-    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES).subscribe(
-      (response: any[]) => {
-        this.messages = response;
-      },
-      (error) => {
-        console.error('Error loading messages:', error);
-      }
-    );
-  }
-
-
-
-  openCreateMessagePopup(): void {
-    this.isPopupOpen = true;
-    this.newMessage = { title: '', message: '', status: '' }; // Reset the form for new message
-  }
-
-  closePopup(): void {
-    this.isPopupOpen = false;
-  }
-
-  closeEditPopup(): void {
-    this.isEditPopupOpen = false;
-  }
-
-
-  createMessage(): void {
-    const newMsg = { ...this.newMessage, date: new Date().toISOString() }; 
-    this.apiCallService.executePostNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES, newMsg).subscribe(
-      (response) => {
-        // this.messages.push(response); // Add to messages
-
-        this.newMessage = { title: '', message: '', status: 'active' }; // Reset form
-        this.closePopup(); // Close the popup
-        this.loadMessages();
-      },
-      (error) => {
-        console.error('Error creating message:', error);
-      }
-    );
-  }
-
-  editMessage(msg: any): void {
-    this.editingMessage = { ...msg }; // Clone the message for editing
-    this.originalMessage = { ...msg }; // Store the original
-    this.isEditPopupOpen = true; // Open the popup for editing
-  }
-
-  saveEditedMessage(): void {
-    if (this.editingMessage) {
-      console.log(this.editingMessage.message);
-          this.apiCallService.executePostNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES, this.editingMessage).subscribe(
-      
-        (response) => {
-          // const index = this.messages.findIndex(msg => msg.id === this.editingMessage.id);
-          // this.messages = response; // Update the message
-
-          this.loadMessages();
-          this.editingMessage = null; // Clear editing state
-          this.isEditPopupOpen = false; // Close popup
+  // Fetch Mindmaps
+  fetchMindmaps(): Promise<void>  {
+    return new Promise((resolve, reject) => {
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MINDMAPS.SHARED_FOR_ADMIN).subscribe(
+        (response: any) => {
+          this.AllDataMindmaps = response;
+          this.mindmaps = response.data.mindMaps;
+          // this.currentPage = 1; // Reset to first page after loading
+          resolve(); // Resolve the promise after the data is successfully fetched
         },
-        (error) => {
-          console.error('Error saving message:', error);
+        (error: any) => {
+          console.log(error);
+          reject(error); // Reject the promise in case of an error
         }
       );
-    }
+    });
   }
 
-  get totalPages(): number {
-    // console.log(this.QnA.length);
-    return Math.ceil(this.messages.length / this.MsgsPerPage);
+
+  // Fetch Questions
+  fetchQuestions(): Promise<void>  {
+
+    return new Promise((resolve, reject) => {
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.QANDA.SHARED_FOR_ADMIN).subscribe(
+        (response: any) => {
+          this.AllDataQuestions = response;
+          this.questions = response.data.QandA;
+
+          resolve(); // Resolve the promise after the data is successfully fetched
+        },
+        (error: any) => {
+          console.log(error);
+          reject(error); // Reject the promise in case of an error
+        }
+      );
+    });
+   
   }
 
-  get paginatedMessages(): any[] {
-    const startIndex = (this.currentPage - 1) * this.MsgsPerPage;
-    return this.messages.slice(startIndex, startIndex + this.MsgsPerPage);
+  // Open Popup for Mindmap
+  openMindmapPopup(mindmap: any): void {
+    this.selectedMindmap = { ...mindmap };
+    this.showMindmapPopup = true;
   }
 
-  nextPage(): void { 
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
+  // Open Popup for Question
+  openQuestionPopup(question: any): void {
+    // this.selectedQuestion = { ...question };
+    this.selectedQuestion = question;
+
+    this.sanitizedAnswer = this.sanitizer.bypassSecurityTrustHtml(this.selectedQuestion.answer);
+    this.showQuestionPopup = true;
   }
 
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
+  // Close Popups
+  closeMindmapPopup(): void {
+    this.showMindmapPopup = false;
+    this.selectedMindmap = null;
+  }
+
+  closeQuestionPopup(): void {
+    this.showQuestionPopup = false;
+    this.selectedQuestion = null;
+  }
+
+  // Save Changes (Update Status)
+  saveMindmapChanges(): void {
+    const requestBody = {
+      ownerStudentId: this.selectedMindmap.ownerStudentId,
+      mindMapId: this.selectedMindmap._id,
+      sharedStatus: this.selectedMindmap.sharedStatus,
+    };
+
+    this.apiCallService.executePutNoAuth(API_ENDPOINTS.MINDMAPS.SHARE, requestBody).subscribe(
+      (response: any) => {
+     
+         // this.getQuestions(); //Fetch fresh data again
+         const savedPage = this.currentPageMindmaps; // Save the current page before refreshing data
+
+         this.fetchMindmaps().then(() => {
+           this.currentPageMindmaps = savedPage; // Restore the saved page after fetching fresh data
+         });
+
+         this.closeMindmapPopup();
+         // Handle success response
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while saving the changes");
+      }
+    );
+  }
+
+  saveQuestionChanges(): void {
+    const requestBody = {
+      ownerStudentId: this.selectedQuestion.ownerStudentId,
+      QandAId: this.selectedQuestion._id,
+      sharedStatus: this.selectedQuestion.sharedStatus,
+    };
+
+    this.apiCallService.executePutNoAuth(API_ENDPOINTS.QANDA.SHARE, requestBody).subscribe(
+      (response: any) => {
+     
+         // this.getQuestions(); //Fetch fresh data again
+         const savedPage = this.currentPageQuestions; // Save the current page before refreshing data
+
+         this.fetchQuestions().then(() => {
+           this.currentPageQuestions = savedPage; // Restore the saved page after fetching fresh data
+         });
+
+        this.closeQuestionPopup();
+        // Handle success response
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while saving the changes");
+      }
+    );
+    
+  }
+
+  getUserAvatar(ownerAvatarCode: string): string {
+    // Use the AvatarService to get the avatar path based on the avatar code
+    return this.avatarService.getAvatarPathByCode(ownerAvatarCode); // Existing method from your service
+  }
+
+
+
+
+get totalPagesQuestions(): number {
+  // return Math.ceil(this.questions.length / this.questionsPerPage);
+  return Math.max(1, Math.ceil(this.questions.length / this.questionsPerPage));
+
 }
 
+get paginatedQuestions(): any[] {
+  const startIndex = (this.currentPageQuestions - 1) * this.questionsPerPage;
+  return this.questions.slice(startIndex, startIndex + this.questionsPerPage);
+}
+
+nextPageQuestions(): void {
+  if (this.currentPageQuestions < this.totalPagesQuestions) {
+    this.currentPageQuestions++;
+  }
+}
+
+prevPageQuestions(): void {
+  if (this.currentPageQuestions > 1) {
+    this.currentPageQuestions--;
+  }
+}
+
+
+get totalPagesMindmaps(): number {
+  // return Math.ceil(this.questions.length / this.questionsPerPage);
+  return Math.max(1, Math.ceil(this.mindmaps.length / this.mindmapsPerPage));
+
+}
+
+get paginatedMindmaps(): any[] {
+  const startIndex = (this.currentPageMindmaps - 1) * this.mindmapsPerPage;
+  return this.mindmaps.slice(startIndex, startIndex + this.mindmapsPerPage);
+}
+
+nextPageMindmaps(): void {
+  if (this.currentPageMindmaps < this.totalPagesMindmaps) {
+    this.currentPageMindmaps++;
+  }
+}
+
+prevPageMindmaps(): void {
+  if (this.currentPageMindmaps > 1) {
+    this.currentPageMindmaps--;
+  }
+}
 
 }

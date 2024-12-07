@@ -49,6 +49,7 @@ import { LearnJournallingComponent } from './module2_emotional/journalling/learn
 import { LearnBreathingComponent } from './module2_emotional/game1-breathing/learn-breathing/learn-breathing.component';
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
 import { WelcomeComponent } from './global_comman/welcome/welcome.component';
+import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { WelcomeComponent } from './global_comman/welcome/welcome.component';
     LearnBreathingComponent,
     LearnQuestionsComponent,
     WelcomeComponent,
+    AdminMsgsComponent,
     
     ],
   imports: [

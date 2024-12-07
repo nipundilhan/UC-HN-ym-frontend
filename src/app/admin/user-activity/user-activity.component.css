@@ -1,239 +1,285 @@
-/* General Page Layout */
-.admin-page {
-    padding: 20px;
-}
+/* General Layout */
+/* .admin-dashboard {
+    margin: 20px;
+  } */
+  
 
-h1 {
-    font-size: 2rem;
+  .tabs {
+    display: flex;
+    justify-content: flex-start;
     margin-bottom: 20px;
-}
-
-/* Create Message Button */
-.create-message-btn {
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.create-message-btn button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.create-message-btn button:hover {
-    background-color: #45a049;
-}
-
-/* Popup Styles */
-.create-message-popup {
-    display: block; /* Ensure it's set to block when visible */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    z-index: 1000;
-    width: 500px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
-  /* Optional: Hide popup by default */
-  .create-message-popup[hidden] {
-    display: none;
+  .tabs button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
   }
-
-.create-message-popup.show {
-    display: block;
-}
-
-.popup-content h3 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-/* Form Styles */
-form {
+  
+  .tabs button.active {
+    background-color: #fff;
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+  }
+  
+  /* Content Section */
+  .content-section {
     display: flex;
     flex-direction: column;
-}
-
-label {
-    margin-top: 10px;
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-input, select {
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-input[type="text"]:focus, select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.button-row {
-    display: flex;
-    justify-content: space-between; /* Add space between the buttons */
-    gap: 10px; /* Optional: Add some space between buttons */
-    margin-top: 15px; /* Add space between the buttons and form fields */
+    /* padding: 20px; */
   }
   
-  .button-row button {
-    flex: 1; /* Optional: Make both buttons the same width */
-    padding: 10px 15px; /* Consistent padding */
+  .user-type-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    /* text-align: center; */
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-/* Angular Editor Styling */
-.angular-editor {
-    margin-top: 10px;
-    min-height: 150px; /* Adjust height as needed */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    padding: 10px;
-}
-
-/* Messages Table */
-.messages-table {
-    margin-top: 40px;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.messages-table h3 {
-    font-size: 1.25rem;
+  .card-title {
     margin-bottom: 20px;
-}
-
-table {
-    width: 100%;
-    border-spacing: 0;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #dcdcdc;
-    font-weight: bold;
-}
-
-/* Status tag styles */
-.status-important {
-    background-color: #dc3545;  /* Green */
-    color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 5px;
+    font-size: 20px;
+    color: #333;
+    height: 35%;
   }
   
-  .status-none {
-    background-color: #ffc107;  /* Yellow */
-    color: white;
-    padding: 0.2rem 0.5rem;
+  .card img {
+    width: 180px;
+    margin-bottom: 10px;
     border-radius: 5px;
-  }
-  
-  .status-hidden {
-    background-color: #000000;  /* Red */
-    color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 5px;
+    align-self: center;
   }
 
-/* td button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-td button:hover {
-    background-color: #0056b3;
-} */
-
-/* Popup Close Button */
-button[type="button"] {
-    background-color: #f44336;
-    margin-top: 5px;
-}
-
-button[type="button"]:hover {
-    background-color: #e41f26;
-}
-
-.user-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    height:20px;
+  .card .user-avatar {
+    width: 40px; /* Adjust size as needed */
+    /* height: 40px;  */
+    border-radius: 50%; /* Round avatar */
+    margin-right: 10px; /* Space to the right of the avatar */
+    background-color: #ececec;
   }
 
-  .user-actions button:hover{
-    color: rgb(84, 114, 156);
-  }
-  
-  .user-actions .material-icons {
-    cursor: pointer;
-    color: black;
-  }
 
-  .pagination-controls {
+  .card .user-info {
     display: flex;
-    justify-content: space-around; /* Space between the controls */
-    margin-top: 20px; /* Space above pagination */
-    padding: 10px 0; /* Padding around the controls */
-    width: 100%; /* Ensure it spans the full width */
+    align-items: center;
+  }
+
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .username {
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  
+  .shared-date {
+    color: #999;
+    font-size: 0.8rem;
+    align-self: flex-start;
+  }
+  
+  /* Popup Overlay */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
   
-  .pagination-controls button {
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .close-button {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .popup-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .popup-image {
+    width: 250px;
+    border-radius: 5px;
+  }
+
+/* General form styling */
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Styling for individual form fields */
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styling for readonly fields */
+  .form-field input[readonly],
+  .form-field textarea[readonly],
+  .form-field select  {
+    background-color: #f0f0f0;
+  }
+  
+  /* Ensure inline fields stay on one line */
+  .inline-fields {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+  }
+  
+  .inline-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .inline-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .inline-field input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+  }
+  
+  .field-value {
+    background-color:  #f0f0f0;; /* Light gray background for non-editable feel */
+    border: 1px solid #ccc; /* Border to resemble an input */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px; /* Padding inside the "input" */
+    min-height: 40px; /* Minimum height for better appearance */
+    font-size: 14px; /* Font size */
+    word-wrap: break-word; /* Ensure long words break to fit */
+}
+  
+
+  /* Popup button styling */
+  .popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+
+  .status-tag {
+    text-align: center;
+    width: 60px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 0.7em;
+    font-weight: bold;
+    background-color: #ed2405; 
+    margin: 5px 0px
+;  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: space-between; /* Space between the controls */
+    margin-top: 20px; /* Space above pagination */
+    padding: 10px 0; /* Padding around the controls */
+}
+
+.pagination-controls button {
     background-color: #007bff; /* Primary color for buttons */
     color: white; /* Text color */
     border: none; /* Remove default border */
     border-radius: 4px; /* Rounded corners */
     padding: 8px 16px; /* Padding inside buttons */
     cursor: pointer; /* Cursor style */
-  }
-  
-  .pagination-controls button[disabled] {
+}
+
+.pagination-controls button[disabled] {
     background-color: #ccc; /* Disabled button color */
     cursor: not-allowed; /* Change cursor for disabled */
-    color: #878787;
-  }
+}
+
   
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .tabs button {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  
+    .card {
+      width: 100%; /* Stack cards on smaller screens */
+      margin: 0 10px;
+    }
+  
+    .popup-content {
+      width: 90%; /* Adjust popup width for smaller screens */
+    }
+  }

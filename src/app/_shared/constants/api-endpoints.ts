@@ -50,12 +50,14 @@ export const API_ENDPOINTS = {
     SHARED_QNA: `${QANDA_BASE}/sharedQandA`,
     SHARE: `${QANDA_BASE}/share`,
     RATE:`${QANDA_BASE}/rate`,
+    SHARED_FOR_ADMIN: `${QANDA_BASE}/sharedQandAForAdmin`,
   },
   MINDMAPS: {
     BASE: MINDMAPS_BASE,
     SHARED_MINDMAPS: `${MINDMAPS_BASE}/sharedMindMaps`,
     SHARE: `${MINDMAPS_BASE}/share`,
     RATE:`${MINDMAPS_BASE}/rate`,
+    SHARED_FOR_ADMIN:`${MINDMAPS_BASE}/sharedMindMapsForAdmin`,
   },
 
   NOTIFICATIONS: {

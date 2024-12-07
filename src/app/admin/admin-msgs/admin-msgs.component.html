@@ -1,0 +1,132 @@
+<!-- admin-messages.component.html -->
+<div class="admin-page">
+    <h1>Admin Messages</h1>
+
+    <!-- Create New Message Button -->
+    <div class="create-message-btn">
+        <button (click)="openCreateMessagePopup()">Send New Message</button>
+    </div>
+
+    <!-- Create/Edit Message Popup -->
+    <div *ngIf="isPopupOpen" class="create-message-popup">
+        <div class="popup-content">
+            <h3>Create New Message</h3>
+            <form (ngSubmit)="createMessage()" #messageForm="ngForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" [(ngModel)]="newMessage.title" name="title" required />
+
+                <label for="message">Message:</label>
+                <!-- Angular Editor for Message -->
+                <angular-editor 
+                    [(ngModel)]="newMessage.message" 
+                    [config]="editorConfig" 
+                    name="message"
+                    required>
+                </angular-editor>
+
+                <label for="status">Status:</label>
+                <select id="status" [(ngModel)]="newMessage.status" name="status" required>
+                    <option value="IMPORTANT">IMPORTANT</option>
+                    <option value="NONE">NONE</option>
+                    <option value="HIDDEN">HIDE</option>
+                </select>
+
+                <!-- Button Row -->
+                <div class="button-row">
+                    <!-- Always enabled Save Changes button -->
+                    <button type="submit" [disabled]="!messageForm.valid">
+                        Submit
+                    </button>
+                    <button type="button" (click)="closePopup()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    
+    <!-- Create/Edit Message Popup -->
+    <div *ngIf="isEditPopupOpen" class="create-message-popup">
+        <div class="popup-content">
+            <h3>{{ editingMessage ? 'Edit Message' : 'Create New Message' }}</h3>
+            <form (ngSubmit)="saveEditedMessage()" #messageForm="ngForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" [(ngModel)]="editingMessage.title" name="title" required />
+
+                <label for="message">Message:</label>
+                <!-- Angular Editor for Message -->
+                <angular-editor 
+                    [(ngModel)]="editingMessage.message" 
+                    [config]="editorConfig" 
+                    name="message"
+                    required>
+                </angular-editor>
+
+                <label for="status">Status:</label>
+                <select id="status" [(ngModel)]="editingMessage.status" name="status" required>
+                    <option value="IMPORTANT">IMPORTANT</option>
+                    <option value="NONE">NONE</option>
+                    <option value="HIDDEN">HIDE</option>
+                </select>
+
+                <!-- Button Row -->
+                <div class="button-row">
+                    <!-- Always enabled Save Changes button -->
+                    <button type="submit" [disabled]="!messageForm.valid">
+                        Save Changes
+                    </button>
+                    <button type="button" (click)="closeEditPopup()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Messages Table -->
+    <div class="messages-table">
+        <!-- <h3>Existing Messages</h3> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let msg of paginatedMessages">
+                    <td>{{ msg.title }}</td>
+                    <td>{{ msg.date | date: 'MMM d, y, h:mm a' }}</td> <!-- Format the date inline -->
+                    <!-- <td>{{ msg.status }}</td> -->
+
+                    <td>
+                        <span [ngClass]="{
+                          'status-important': msg.status === 'IMPORTANT',
+                          'status-none': msg.status === 'NONE',
+                          'status-hidden': msg.status === 'HIDDEN'
+                        }">
+                          {{ msg.status }}
+                        </span>
+                      </td>
+
+                    <td class="user-actions">
+                        <button (click)="editMessage(msg)">
+                          <span class="material-icons">edit</span>
+                        </button>
+                        <!-- <button (click)="deleteMessage(msg)">
+                          <span class="material-icons">delete</span>
+                        </button> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+      
+</div>

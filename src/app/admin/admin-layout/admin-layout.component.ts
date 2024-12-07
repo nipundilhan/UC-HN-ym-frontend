@@ -14,6 +14,13 @@ export class AdminLayoutComponent implements OnInit {
     private router: Router,) { }
 
   ngOnInit(): void {
+    
+      if(this.userAuthService.getRole() !== "ADMIN"){
+        this.userAuthService.clear();
+        this.router.navigate(['/login']);
+      }
+
+
   }
   public logout() {
     // Clear user data and navigate
