@@ -30,11 +30,15 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     BASE: USER_BASE,
-    SIGNUP: `${USER_BASE}/signup`,   
+    SIGNUP: `${USER_BASE}/signup`,
+    SIGNUP_INSTRUCTOR: `${USER_BASE}/signup-instructor`, 
     SEARCH: (params: { [key: string]: any }) => {
       const queryParams = new URLSearchParams(params).toString();
       return `${USER_BASE}/search?${queryParams}`; // Param map example
-    }
+    },
+    GET_INSTRUCTORS: `${USER_BASE}/find-By-role/ADMIN`,
+    GET_STUDENTS: `${USER_BASE}/find-By-role/STUDENT`
+
   },
   MODULES: {
     BASE: MODULE_BASE,

@@ -5,7 +5,7 @@
 
 .header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
   
@@ -19,11 +19,14 @@
   .card {
     width: 180px;
     padding: 10px;
-    text-align: center;
     border: 1px solid #ccc;
     border-radius: 8px;
     cursor: pointer;
     transition: box-shadow 0.3s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
   }
   
   .card:hover {
@@ -31,7 +34,6 @@
   }
   .card img{
     align-self: center;
-    margin-bottom: 5px;
   }
 
   .active-card {
@@ -50,8 +52,9 @@
   }
   
   .card-icon {
-    width: 50px; 
-    height: 50px;
+    width: 20px; 
+    height: 20px;
+    margin-right: 5px;
   }
   
   /* .user-list {
@@ -79,6 +82,7 @@
   .user-actions .material-icons {
     cursor: pointer;
     color: black;
+    font-size: 20px;
   }
 
   
@@ -191,8 +195,7 @@
     margin-top: 5px;
   }
 
-  button {
-    /* margin-top: 20px; */
+  .add-button {
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -208,4 +211,72 @@
   button:hover {
     background-color: #45a049;
   }
+
+
+  .pagination-controls {
+    display: flex;
+    justify-content: space-around; /* Space between the controls */
+    margin-top: 20px; /* Space above pagination */
+    padding: 10px 0; /* Padding around the controls */
+    width: 100%; /* Ensure it spans the full width */
+    align-items: center;
+  }
   
+  .pagination-controls button {
+    background-color: #007bff; /* Primary color for buttons */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px 16px; /* Padding inside buttons */
+    cursor: pointer; /* Cursor style */
+  }
+  
+  .pagination-controls button[disabled] {
+    background-color: #ccc; /* Disabled button color */
+    cursor: not-allowed; /* Change cursor for disabled */
+    color: #878787;
+  }
+
+  
+  .user-count {
+    font-size: 14px;
+    color: #555;
+    background-color: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+
+  .tabs {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .tabs button {
+    background-color: #f1f1f1;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .tabs button.active {
+    background-color: #fff;
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+  }
+
+  .add-user-btn{
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+  }

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataTransferService } from 'src/app/_secondary_services/data-transfer.service';
+import { ApiCallService } from 'src/app/_services/api-call.service';
+import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { UserSignup } from 'src/app/_shared/resources/UserSignup';
 
 @Component({
   selector: 'app-users',
@@ -6,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  userType: 'students' | 'instructors' = 'students'; // Default to 'students'
+  userType: 'STUDENT' | 'INSTRUCTOR' = 'STUDENT'; // Default to 'students'
   users: any[] = []; // Replace `any` with your user model
   showAddUserPopup: boolean = false;
   showEditUserPopup: boolean = false; // For edit user popup
@@ -14,54 +20,79 @@ export class UsersComponent implements OnInit {
   selectedUser: any = null; // Store user details for editing
   userToDelete: any = null;  // Store user to delete
 
+  studentCount: number = 0;
+  instructorCount: number = 0;
+
   newUser: any = {
     role: '',
     username: '',
-    name: '',
-    dob: '',
+    password: '',
     email: '',
+    dob: '',
     gender: '',
-    password: ''
+    avatarCode: ''
   };
 
-  constructor() { }
+  currentPage: number = 1; // Current page number
+  UsersPerPage: number = 10; // Number of questions to display per page
 
-  ngOnInit(): void {
-    this.loadUsers(this.userType); // Load users on initialization
-  }
+  constructor(
+    public apiCallService: ApiCallService, 
+    private router: Router, 
+    private dataTrnfrSrvc: DataTransferService, 
+    private formBuilder: FormBuilder) { }
 
-  loadUsers(type: 'students' | 'instructors'): void {
-    this.userType = type; // Update user type
-    if (type === 'students') {
-      this.users = this.getStudents(); // Fetch students
-    } else if (type === 'instructors') {
-      this.users = this.getInstructors(); // Fetch instructors
+    ngOnInit(): void {
+      this.getStudents();    // Fetch student count
+      this.getInstructors(); 
+      this.loadUsers(this.userType); // Load users on initialization
     }
-  }
+  
+    loadUsers(type: 'STUDENT' | 'INSTRUCTOR'): void {
+      this.userType = type; // Update user type
+      if (type === 'STUDENT') {
+        this.users = this.getStudents(); // Fetch students
+      } else if (type === 'INSTRUCTOR') {
+        this.users = this.getInstructors(); // Fetch instructors
+      }
+    }
 
-  getStudents(): any[] {
-    return [
-      { id: 1, name: "Hirasha Pooliyadda", email: "tmp80@uclive.ac.nz" },
-      { id: 2, name: "Anne Hathway", email: "abc96@uclive.ac.nz" },
-      { id: 3, name: "John Doe", email: "def89@uclive.ac.nz" },
-    ];
-  }
+    getStudents(): any[] {
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.GET_STUDENTS).subscribe(
+        (response: any) => {
+          this.users = response.users;
+           this.studentCount = response.totalCount;
+        },
+        (error) => {
+          console.error('Error loading users:', error);
+        }
+      );
 
-  getInstructors(): any[] {
-    return [
-      { id: 1, name: "Dr. Miguel Morales", email: "miguel.morales@canterbury.ac.nz" },
-      { id: 2, name: "Dr Valerie Sotardi ", email: "valerie.sotardi@canterbury.ac.nz" },
-      // { id: 3, name: "Dr. Sarah Connor", email: "sarah.connor@example.com" },
-      // { id: 4, name: "Mr. John Doe", email: "john.doe@example.com" }
-    ];
-  }
+      return this.users;
+    }
+
+    getInstructors(): any[]  {
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.GET_INSTRUCTORS).subscribe(
+        (response: any) => {
+          this.users = response.users;
+          this.instructorCount = response.totalCount;
+
+        },
+        (error) => {
+          console.error('Error loading users:', error);
+        }
+      );
+
+      return this.users;
+    }
+  
 
   switchToStudents(): void {
-    this.loadUsers('students'); // Load students
+    this.loadUsers('STUDENT'); // Load students
   }
 
   switchToInstructors(): void {
-    this.loadUsers('instructors'); // Load instructors
+    this.loadUsers('INSTRUCTOR'); // Load instructors
   }
 
   openAddUserPopup(): void {
@@ -74,17 +105,42 @@ export class UsersComponent implements OnInit {
   }
 
   addUser() {
+    let userData: any;
+    let path: any;
+
     if (this.newUser.role === 'student') {
-      // Handle student-specific submission
-      console.log("Student Data:", this.newUser);
+      path = API_ENDPOINTS.USERS.SIGNUP;
+      userData = {
+        role: 'student',
+        username: this.newUser.username,
+        password: this.newUser.password,
+        email: this.newUser.email,
+        dob: this.newUser.dob,
+        gender: this.newUser.gender,
+        avatarCode: 'default'
+      };
     } else if (this.newUser.role === 'instructor') {
-      // Handle instructor-specific submission
-      console.log("Instructor Data:", this.newUser);
+      path = API_ENDPOINTS.USERS.SIGNUP_INSTRUCTOR;
+      userData = {
+        role: 'instructor',
+        username: this.newUser.username,
+        password: this.newUser.password,
+        email: this.newUser.email,
+        gender: this.newUser.gender,
+        avatarCode: 'default'
+      };
     }
 
-    // Clear form after submission
-    this.clearFormFields();
-    this.closeAddUserPopup();
+    this.apiCallService.executePostNoAuth(path, userData).subscribe(
+      (response: any) => {
+       
+        this.clearFormFields();
+        this.closeAddUserPopup();
+      },
+      (error) => {
+        console.error('Error adding user:', error);
+      }
+    );
   }
 
   onRoleChange() {
@@ -137,5 +193,29 @@ export class UsersComponent implements OnInit {
     this.showDeleteConfirmationPopup = false; // Hide confirmation popup
     this.userToDelete = null; // Reset user to delete
   }
+
+
+  get totalPages(): number {
+    // console.log(this.QnA.length);
+    return Math.ceil(this.users.length / this.UsersPerPage);
+  }
+
+  get paginatedUsers(): any[] {
+    const startIndex = (this.currentPage - 1) * this.UsersPerPage;
+    return this.users.slice(startIndex, startIndex + this.UsersPerPage);
+  }
+
+  nextPage(): void { 
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+}
+
 
 }

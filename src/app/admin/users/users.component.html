@@ -1,27 +1,51 @@
 <div class="users-container">
     <!-- Add User Button -->
     <div class="header">
-      <button class="add-user-btn" (click)="openAddUserPopup()">Add New User</button>
-    </div>
+    
   
-    <!-- User Type Cards -->
-    <div class="user-type-cards">
+    <div class="tabs">
+      <button 
+      (click)="switchToStudents()"
+      [class.active]="userType === 'STUDENT'">
+      <img src="/assets/admin/students.png" alt="Students" class="card-icon" />
+        Students
+        <span class="user-count">{{ studentCount || 0 }}</span>
+      </button>
+      <button 
+      (click)="switchToInstructors()"  
+      [class.active]="userType === 'INSTRUCTOR'">
+      <img src="/assets/admin/instructor.png" alt="Instructors" class="card-icon" />
+
+        Instructors
+        <span class="user-count">{{ instructorCount || 0 }}</span>
+      </button>
+    </div>
+
+    <button class="add-user-btn" (click)="openAddUserPopup()">Add New User</button>
+
+  
+  </div>
+    <!-- <div class="user-type-cards">
       <div 
         class="card" 
         (click)="switchToStudents()" 
-        [ngClass]="{ 'active-card': userType === 'students' }">
+        [ngClass]="{ 'active-card': userType === 'STUDENT' }">
         <img src="/assets/admin/students.png" alt="Students" class="card-icon" />
-        <h3>Students</h3>
+        <h4>Students</h4>
+        <span class="user-count">{{ studentCount || 0 }}</span>
+
       </div>
       <div 
         class="card" 
         (click)="switchToInstructors()" 
-        [ngClass]="{ 'active-card': userType === 'instructors' }">
+        [ngClass]="{ 'active-card': userType === 'INSTRUCTOR' }">
         <img src="/assets/admin/instructor.png" alt="Instructors" class="card-icon" />
-        <h3>Instructors</h3>
+        <h4>Instructors</h4>
+        <span class="user-count">{{ instructorCount || 0 }}</span> 
+
       </div>
     </div>
-  
+   -->
     <!-- User List -->
     <div class="user-list">
       <table>
@@ -29,13 +53,15 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Gender</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{ user.name }}</td>
+          <tr *ngFor="let user of paginatedUsers">
+            <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
+            <td>{{ user.gender }}</td>
             <td class="user-actions">
               <button (click)="openEditUserPopup(user)">
                 <span class="material-icons">edit</span>
@@ -56,20 +82,20 @@
     
     <h2>Edit User</h2>
     <form>
-      <label for="name">Name</label>
-      <input id="name" type="text" [(ngModel)]="selectedUser.name">
+      <label for="username">Name</label>
+      <input id="username" type="text" [(ngModel)]="selectedUser.username" name = "username">
   
       <label for="email">Email</label>
-      <input id="email" type="email" [(ngModel)]="selectedUser.email">
+      <input id="email" type="email" [(ngModel)]="selectedUser.email" name = "email">
       
       <label for="gender">Gender</label>
-      <select id="gender" [(ngModel)]="selectedUser.gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
+      <select id="gender" [(ngModel)]="selectedUser.gender" name = "gender">
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+        <option value="OTHER">Other</option>
       </select>
   
-      <button type="button" (click)="updateUser()">Submit</button>
+      <button class="add-button " (click)="updateUser()">Save changes</button>
     </form>
   </div>
   
@@ -115,9 +141,9 @@
         <label for="gender">Gender</label>
         <select id="gender" [(ngModel)]="newUser.gender" name="gender">
           <option value="" disabled>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
         </select>
 
         <label for="password">Password</label>
@@ -128,8 +154,8 @@
   
       <!-- Fields for Instructors -->
       <div *ngIf="newUser.role === 'instructor'">
-        <label for="name">Name</label>
-        <input id="name" type="text" [(ngModel)]="newUser.name" name="name" placeholder="Enter full name">
+        <label for="username">Name</label>
+        <input id="username" type="text" [(ngModel)]="newUser.username" name="username" placeholder="Enter full name">
   
         <label for="gender">Gender</label>
         <select id="gender" [(ngModel)]="newUser.gender" name="gender">
@@ -147,10 +173,15 @@
         
       </div>
   
-      <button type="button" (click)="addUser()">Submit</button>
+      <button class="add-button " (click)="addUser()">Submit</button>
     </form>
   </div>
   
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
   
   
   
