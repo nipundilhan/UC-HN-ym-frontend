@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'upload', component: TestUploadComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'introduction', component: IntroPageComponent , data: { hideHeader: true } },
-  { path: 'welcome', component: WelcomeComponent },
+  { path: 'welcome', component: WelcomeComponent, data: { hideHeader: true } },
   // { path: 'share', component: ShareFeedComponent },
   { path: 'game-options/:id', component: GameOptionsComponent },
 

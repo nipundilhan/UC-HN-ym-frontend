@@ -37,7 +37,9 @@ export const API_ENDPOINTS = {
       return `${USER_BASE}/search?${queryParams}`; // Param map example
     },
     GET_INSTRUCTORS: `${USER_BASE}/find-By-role/ADMIN`,
-    GET_STUDENTS: `${USER_BASE}/find-By-role/STUDENT`
+    GET_STUDENTS: `${USER_BASE}/find-By-role/STUDENT`,
+    DELETE_USER: `${USER_BASE}/delete-user`,
+    TIME_TRACKING: `${USER_BASE}/update-time-tracking`
 
   },
   MODULES: {

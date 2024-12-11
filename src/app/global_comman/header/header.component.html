@@ -16,6 +16,7 @@
             <!-- Dropdown for Messages -->
     <li class="nav-item dropdown">
       <a
+        *ngIf=" isLoggedIn()"
         class="nav-link dropdown-toggle d-flex align-items-center"
         id="messagesDropdown"
         role="button"

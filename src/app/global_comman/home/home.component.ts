@@ -143,12 +143,16 @@ ngOnInit(): void {
     });
   }
 
+  this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+    .subscribe(
+      response => {
 
-  // if (narratorContainer) {
-  //   narratorContainer.addEventListener('click', () => {
-  //     narratorContainer.style.bottom = '50px';
-  //   });
-  // }
+      },
+      error => {
+        // console.error("Error deleting the user:", error);
+      }
+    );
+
 }
 
 

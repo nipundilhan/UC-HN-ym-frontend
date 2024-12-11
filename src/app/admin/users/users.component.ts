@@ -185,7 +185,19 @@ export class UsersComponent implements OnInit {
 
   confirmDelete(): void {
     // Logic to delete the user
-    this.users = this.users.filter(u => u.id !== this.userToDelete.id);
+
+    this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.USERS.DELETE_USER + '/' + this.userToDelete._id)
+    .subscribe(
+      response => {
+        this.cancelDelete();
+        this.loadUsers(this.userType);
+      },
+      error => {
+        console.error("Error deleting the user:", error);
+      }
+    );
+
+    
     this.cancelDelete(); // Close confirmation popup after deleting
   }
 
