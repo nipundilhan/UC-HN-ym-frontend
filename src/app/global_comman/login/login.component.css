@@ -1,6 +1,4 @@
-/* src/app/login/login.component.css */
 
-/* Ensure the background image covers the entire viewport */
 :host ::ng-deep .background {
     background-image: url('/assets/background-img/background01.jpg');
     background-size: cover;
@@ -48,13 +46,13 @@
     margin-bottom: 5px;
     color: #333;
     font-family: 'MedievalSharp', sans-serif; 
-    font-size: 1.3rem; /* Font size for buttons */
+    font-size: 1.1rem; /* Font size for buttons */
   }
   
   .login-box .input-group input {
     width: 100%;
     padding: 8px;
-    border: 2px solid #c99865;
+    border: 1px solid #c99865;
     border-radius: 5px;
     box-sizing: border-box; 
   }
@@ -66,9 +64,9 @@
     margin: 5px auto;
     padding: 0px;
     background-color: #d96e10; /* Dark button color */
-    color: #000000; /* White text */
+    color: #ffffff; /* White text */
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 1.5rem; /* Font size for buttons */
     text-align: center;
@@ -79,9 +77,22 @@
   .login-box .btn-submit:hover {
     background-color: #ffeb09; /* Slightly lighter on hover */
   }
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    text-align: center; /* Center the text inside the error message container */
+    margin-top: 10px;
+  }
   
-
-
+  .center-error {
+    margin-bottom: -10px;/* Add space between error message and login button */
+  }
+  
+  /* Optional: Style the error message container for better visibility */
+  .error-message small {
+    display: block;
+    margin: 5px 0;
+  }
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {

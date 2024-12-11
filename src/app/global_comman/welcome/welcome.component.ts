@@ -17,6 +17,6 @@ export class WelcomeComponent implements OnInit {
   startJourney() {
     // Navigate to another page or start the game
     // For example, you can navigate to the main game page after the user clicks the start button
-    this.router.navigate(['/home']); // Adjust route as necessary
+    this.router.navigate(['/login']);
   }
 }

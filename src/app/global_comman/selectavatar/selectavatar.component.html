@@ -1,28 +1,36 @@
+<div class="background">
+    <div class="avatar-selection-box">
+      <h2> Select Avatar</h2>
+  
+      <div class="col-xl-3 col-lg-3 col-6 avatar-container" *ngFor="let a of avatars">
+        <img [src]="a.path" [class.selected]="a.selected" (click)="selectImage(a)" alt="Responsive image">
+        <span class="tooltip">
+          <strong>{{ a.name }}</strong><br>{{ a.description }}
+        </span>
+      </div>
+  
+      <div class="col-xl-4 col-lg-4 justify-content-center" style="padding: 1em;">
+        <button (click)="goBack()" class="btn-back">Back</button>
+      </div>
+      <div class="col-xl-4 col-lg-4 justify-content-center" style="padding: 1em;">
+        <button (click)="submit()" class="btn-submit">Complete</button>
+      </div>
+    
+      <div class="col-xl-4 col-lg-4 justify-content-center" style="padding: 1em; position: relative;">
+        <button (click)="skipAvatar()" class="btn-skip">Skip</button>
+        <span class="tooltip-skip">
+          You can select the avatar or just skip for now and update it later in your profile.
+        </span>
+      </div>
 
-<!-- <div style="background-color: rgb(248, 216, 192);height: 50px;" class="d-flex justify-content-center"> 
-    <h1> Select Avatar</h1>
-</div> -->
+      <div *ngIf="errorMessage" class="error-message center-error">
+        <p>{{ errorMessage }}</p>
+      </div>
 
-<div class="background ">
-    <div class="avatar-selection-box"> 
-        <h2> Select Avatar</h2>   
-            <div class="col-xl-3 col-lg-3 col-6 avatar-container" *ngFor="let a of avatars">
-                    <img [src]="a.path" [class.selected]="a.selected" (click)="selectImage(a)" alt="Responsive image">
-                    <span class="tooltip">
-                        <strong>{{ a.name }}</strong><br>{{ a.description }}
-                    </span>
-                </div>
-
-            <div class="col-xl-3 col-lg-3 justify-content-center" style ="padding: 1em;">
-                    <button (click)="submit()"  class="btn-submit">Complete</button>      
-            </div>
-
-            <div class="col-xl-3 col-lg-3 justify-content-center" style="padding: 1em; position: relative;">
-                <button (click)="skipAvatar()" class="btn-skip">Skip</button>
-                <span class="tooltip-skip">
-                    You can select the avatar or just skip for now and update it later in your profile.
-                  </span>
-              </div>
-    </div> 
-</div>
-
+        <!-- Error Message shown only when submit is clicked without selecting avatar -->
+        <div *ngIf="showErrorMessage" class="error-message center-error">
+            <p>Please select an avatar or skip to proceed.</p>
+          </div>
+    </div>
+  </div>
+  

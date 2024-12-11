@@ -1,80 +1,57 @@
-<!-- <div class="background"> -->
-    <!-- <div class="card" style="padding: 20px;"> -->
-    <!-- <div class="login-box">
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <input type="text"
+<div class="background">
+    <div class="login-box">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+  
+        <div class="input-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
             ngModel
             name="username"
             id="username"
-            placeholder="Enter your username"
             class="form-control mb-3"
-            >
-
-            <input type="password"
+            required
+            #username="ngModel"
+          />
+          <!-- Username Error Message -->
+          <div *ngIf="username.invalid && username.touched" class="error-message">
+            <small *ngIf="username.errors?.['required']">Username is required.</small>
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
             ngModel
-            name="password"
-            id="password"
-            placeholder="Enter your password"
+            name="pw"
+            id="pw"
             class="form-control mb-3"
-            >
-
-            <input type="submit"
+            required
+            #password="ngModel"
+          />
+          <!-- Password Error Message -->
+          <div *ngIf="password.invalid && password.touched" class="error-message">
+            <small *ngIf="password.errors?.['required']">Password is required.</small>
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="error-message center-error">
+            <p>{{ errorMessage }}</p>
+          </div>
+  
+          
+        <div>
+          <input
+            type="submit"
             value="Login"
-            class="btn btn-outline-primary form-control rounded-0">
-        </form>
-        
+            class="btn btn-submit"
+            [disabled]="loginForm.invalid"
+          />
+        </div>
+
+  
+      </form>
     </div>
-</div> -->
-
-
-<!-- <div class="background">
-    <div class="login-box">
-      <h2>Login</h2>
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-
-            <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" ngModel name="username" id="username" class="form-control mb-3" required>
-            </div>
-
-            <div class="input-group">
-                <label for="username">Password:</label>
-                <input type="password" ngModel name="password" id="password" class="form-control mb-3" required>
-            </div>
-            <div class="input-group">
-                <button type="submit" value="Login"></button>
-            </div>
-        
-        </form>
-        
-    </div>
-</div> -->
-
-
-<div class="background">
-    <!-- <div class="card" style="padding: 20px;"> -->
-    <div class="login-box">
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" ngModel name="username" id="username" class="form-control mb-3">
-            </div>
-
-            <div class="input-group">
-                <label for="username">Password:</label>
-                <input type="password" ngModel name="password" id="password" class="form-control mb-3">
-            </div>
-
-            <div>
-                <input type="submit" value="Login" class="btn btn-submit">
-                <!-- <h6>OR</h6> -->
-                <!-- <input type="submit" value="Sign Up" class="btn btn-submit" (click)="signup()"> -->
-            </div>
-
-            <!-- <input type="submit"
-            value="Login"
-            class="btn btn-outline-primary form-control rounded-0"> -->
-        </form>
-        
-    </div>
-</div>
+  </div>
+  

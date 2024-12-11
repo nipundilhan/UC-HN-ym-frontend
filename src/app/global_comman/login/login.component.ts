@@ -10,47 +10,55 @@ import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
 
-  constructor(    private userAuthService: UserAuthService ,  public apiCallService: ApiCallService ,
+  errorMessage: string = ''; // To store error message for incorrect login
+
+
+  constructor(    
+    private userAuthService: UserAuthService ,  
+    public apiCallService: ApiCallService ,
     private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login(loginForm : NgForm) {
+  login(loginForm: NgForm) {
+    this.errorMessage = ''; // Reset error message on each submit attempt
 
-    console.log("login form values - "+loginForm.value);
-
-    this.apiCallService.executePostNoAuth(API_ENDPOINTS.AUTH.AUTHENTICATE,loginForm.value).subscribe(
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.AUTH.AUTHENTICATE, loginForm.value).subscribe(
       (response: any) => {
-
+        // On successful login, store token and role
         this.userAuthService.setRole(response.user.role);
         this.userAuthService.setUser(response.user);
-
         this.userAuthService.setToken(response.jwtToken);
         this.userAuthService.setUserName(response.user.username);
         this.userAuthService.setUserId(response.user.userId);
-        
-        const role = response.user.role;
 
+        // Navigate based on user role
+        const role = response.user.role;
         if (role === 'ADMIN') {
           this.router.navigate(['/admin']);
         } else if (role === 'STUDENT') {
           this.router.navigate(['/home']);
         } else {
           this.router.navigate(['/home']);
-        } 
-
+        }
       },
       (httpError: any) => {
-        console.log(httpError);
-        alert("incorrect username or password")
-        
-      }   
+        // Check for specific backend errors
+        if (httpError.status === 401) {
+          this.errorMessage = 'Incorrect username or password. Please try again.';
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+      }
     );
+  }
 
-    }
+
     signup(){
       this.router.navigate(['/signup']);
     }

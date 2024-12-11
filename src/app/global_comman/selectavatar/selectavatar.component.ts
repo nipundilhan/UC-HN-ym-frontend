@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTransferService } from 'src/app/_secondary_services/data-transfer.service';
 import { ApiCallService } from 'src/app/_services/api-call.service';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 import { UserSignup } from 'src/app/_shared/resources/UserSignup';
 
@@ -22,10 +23,13 @@ interface Avatar {
 })
 export class SelectavatarComponent implements OnInit {
 
+  isSkipped = false;
+  showErrorMessage = false;
+  errorMessage: string = ''; // To store error message for incorrect login
   isDisabled = true;
   avatarCode : string ="";
   
-  constructor(public apiCallService: ApiCallService, private router: Router ,  private dataTrnfrSrvc: DataTransferService  ) { }
+  constructor(public apiCallService: ApiCallService, private router: Router ,     private userAuthService: UserAuthService ,  private dataTrnfrSrvc: DataTransferService  ) { }
 
   usrSngUp : UserSignup = {
     username : "",
@@ -64,31 +68,29 @@ export class SelectavatarComponent implements OnInit {
     //alert(this.usrSngUp.username);
   }
 
-  selectImage(avtr:any){
-
+  selectImage(avtr: any) {
     for (let j = 0; j < this.avatars.length; j++) {
-      //console.log("Allowed Role - "+ allowedRoles.length+ " + "+ allowedRoles[j]);
       if (this.avatars[j].code !== avtr.code) {
-      // alert("came")
         this.avatars[j].selected = false;
       }
     }
     this.avatarCode = avtr.code;
     avtr.selected = true;
+    this.showErrorMessage = false; // Hide error message when an avatar is selected
   }
 
 
   // Skip method to assign the default avatar code only
   skipAvatar() {
     this.avatarCode = this.defaultAvatar.code; // Assign the "default" code
-
-    // Proceed to submit with the default avatar code
-    this.submit();
+    this.isSkipped = true;
+    this.showErrorMessage = false; // Hide error message when skipped
+    this.submit();  // Proceed to submit
   }
 
   submit(){
     if (!this.avatarCode) {
-      alert('Please select an avatar or skip to proceed');
+      this.showErrorMessage = true;  // Show error message if no avatar is selected
       return;
     }
 
@@ -105,10 +107,17 @@ export class SelectavatarComponent implements OnInit {
 
       },
       (httpError: any) => {
-        console.log(httpError);
-        alert("An error occurred during registration");        
-      }   
+        if (httpError.status === 400) {
+          this.errorMessage = httpError.error.message;
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+      }
     );
+  }
+  
+  goBack(){
+    this.router.navigate(['/signup']);
   }
 
 }

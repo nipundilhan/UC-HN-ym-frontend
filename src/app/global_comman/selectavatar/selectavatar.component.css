@@ -57,7 +57,8 @@ background-color: white; /* Equivalent to Bootstrap's bg-white class */
 }
 
 .avatar-selection-box .btn-submit,
-.avatar-selection-box .btn-skip{
+.avatar-selection-box .btn-skip,
+.avatar-selection-box .btn-back{
   display: block; /* Make the button a block-level element */
   width: 100%;
   margin: 0 auto;
@@ -78,8 +79,15 @@ background-color: white; /* Equivalent to Bootstrap's bg-white class */
   background-color: #bdb9b6; /* Dark button color */
 }
 
-.avatar-selection-box .btn-skip:hover {
-  background-color: #d7d3cf; /* Dark button color */
+.avatar-selection-box .btn-back {
+  background-color: #92908e; /* Dark button color */
+}
+
+.avatar-selection-box .btn-skip:hover,
+.avatar-selection-box .btn-submit:hover,
+.avatar-selection-box .btn-back:hover
+ {
+  opacity:0.7; /* Dark button color */
 }
 
 h2 {
@@ -144,4 +152,35 @@ h2 {
 .btn-skip:hover + .tooltip-skip {
   visibility: visible; /* Show the tooltip on hover */
   opacity: 1; /* Make it fully visible */
+}
+
+/* .error-message {
+  color: red;
+  font-size: 1em;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.error-message small {
+  font-weight: bold;
+} */
+
+
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  text-align: center; /* Center the text inside the error message container */
+  margin-top: 10px;
+  font-family: 'MedievalSharp', sans-serif; 
+}
+
+.center-error {
+  margin-bottom: -10px;/* Add space between error message and login button */
+}
+
+/* Optional: Style the error message container for better visibility */
+.error-message small {
+  display: block;
+  margin: 5px 0;
 }
