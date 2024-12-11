@@ -36,8 +36,11 @@
       <div class="container">
   
           <h1 class="game-title">Journalling Mastery</h1>
+          <div class="header">
           <button class="add-button" (click)="openCreatePopup()">✨ Start Journalling ✨</button>
-  
+          <button class="help-btn" (click)="openHelpPopup()">Need Help?</button>
+          </div>
+
           <div class="records-container" *ngIf="AllData?.journalLogs?.length > 0">
             <div class="record-card" *ngFor="let journal of JournallingData" (click)="openJournalDetailPopup(journal)">
               <div class="record-image">
@@ -297,6 +300,30 @@
     </div>
   </div>
 </div>
+
+ <!-- Help Popup -->
+ <div class="intro-dialog" *ngIf="helpPopupVisible">
+  <div class="help-popup">
+    <div class="popup-content">
+      <span class="close-icon" (click)="closeHelpPopup()">&#10005;</span>
+      <h5>Need Help?</h5>
+      <p>If you feel uncomfortable, here’s what you can do:</p>
+      <ul>
+        <li><b>Take a Break</b>: Step away from the game and give yourself time to reset.</li>
+        <li><b>Talk to Someone</b>: Sharing your feelings with a trusted friend, family member, or confidant can be helpful.</li>
+        <li><b>Reach Out to Us</b>: You can contact me anytime at <a href= "mailto:hirasha.pooliyadda@pg.canterbury.ac.nz">hirasha.pooliyadda@pg.canterbury.ac.nz</a></li>
+      </ul>
+      <p>If you decide to stop participating, you can do so at any time. No explanation is needed. Just send me an email at <a href= "mailto:hirasha.pooliyadda@pg.canterbury.ac.nz">hirasha.pooliyadda@pg.canterbury.ac.nz</a>.</p>
+      <h5>Need Additional Support?</h5>
+      <p>If you feel like you need further assistance, you can also contact the support agency below.</p>
+      <p><i><b>Youthline</b></i></p>
+      <ul>
+        <li>Free 24/7 text 234</li>
+        <li>Free 24/7 call 0800 37 66 33</li>
+        <li>Email: <a href= "mailto:talk@youthline.co.nz">talk@youthline.co.nz</a></li></ul>
+    </div>
+  </div>
+  </div>
 
   <div class="pagination-controls">
     <button (click)="prevPage()" [disabled]="paginationCurrentPage === 1">Previous</button>

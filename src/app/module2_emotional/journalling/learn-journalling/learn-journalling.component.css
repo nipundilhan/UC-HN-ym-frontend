@@ -159,7 +159,7 @@
     border-radius: 8px;
     padding: 16px;
     z-index: 2000;
-  }
+    font-family: Georgia, serif;  }
   
   .tip-block{
     background-color: #000000;

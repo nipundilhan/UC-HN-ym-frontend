@@ -81,6 +81,8 @@ export class PlayJournallingComponent implements OnInit {
   // JournallingData: any[] = [];
   isSaveEnabled = false;
 
+  helpPopupVisible = false;
+
   constructor(private fb: FormBuilder,
     public apiCallService: ApiCallService,
     private userAuthService: UserAuthService,
@@ -485,5 +487,14 @@ cancelDelete(): void {
     // Navigate to the shared questions page (assuming you have a route for this)
     this.router.navigate(['share/notifications']);
   }
+
+  openHelpPopup() {
+    this.helpPopupVisible = true;
+  }
+
+  closeHelpPopup() {
+    this.helpPopupVisible = false;
+  }
+
 
 }

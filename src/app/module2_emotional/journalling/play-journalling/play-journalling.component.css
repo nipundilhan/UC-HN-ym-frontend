@@ -50,7 +50,7 @@ background-size: cover;
 .add-button {
   display: block;
   justify-content: center;
-  width: 50%;
+  width: 40%;
   padding: 10px;
   margin-bottom: 5px;
   background-color: #c27d2a;
@@ -216,7 +216,16 @@ button[type="submit"]:hover {
     padding: 8px 15px;
     cursor: pointer;
   }
-  
+  .help-btn {
+    background-color: #148710;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
   .cancel-btn{
     background-color: #7c7b7b;
   }
@@ -226,7 +235,8 @@ button[type="submit"]:hover {
   
   .save-btn:hover,
   .cancel-btn:hover,
-  .delete-btn:hover{
+  .delete-btn:hover,
+  .help-btn:hover{
     opacity: 0.8;
   }
 
@@ -278,6 +288,14 @@ button[type="submit"]:hover {
   color: #c27d2a; /* Match your button theme */
   transition: opacity 0.3s;
 }
+
+/* .close-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+} */
 
 .close-icon:hover,
 .close-share:hover
@@ -552,6 +570,11 @@ button {
   position: absolute;
 }
 
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 /* Unlocking animation */
 @keyframes unlockBadge {
@@ -808,3 +831,35 @@ button {
   margin-bottom: 10px; 
 }
 }
+
+.intro-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.help-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 2000;
+  font-family: Georgia, serif;  }
+
+  .popup-content ul {
+    padding-left: 16px;
+  }
