@@ -67,9 +67,17 @@
     width: 250px;
     margin-bottom: 10px; /* Adds space below the image */
   }
+
+  .badge-image{
+    width: 80px;
+    margin-bottom: 10px; /* Adds space below the image */
+  }
   @media screen and (max-width: 480px) {
     .journalling-tip-block {
         padding: 10px;
+    }
+    .badge-image{
+      width: 50px;
     }
   }
 

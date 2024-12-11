@@ -11,102 +11,91 @@ export class LearnTutorialsComponent implements OnInit {
 
   // Tips array which can include text, images, and even videos
 tips = [
-
-  {
-    text: `<p>Welcome to the <b><i>Eye of Horus : Mastery of labs and tutorials</i></b>, brave adventurer!  As you progress, I'll provide you with helpful tips to guide your revisions, helping you prepare for your lab test with confidence and less stress. Click the next arrow to begin learning more....</p>`,
-    images: ["/assets/practice-labs.png"],
-    video: null
-  },
-  //{
-//     text: `<p><b>Revisit Completed Labs:</b> Go back to your completed lab exercises. Try solving them without peeking at your old solutions. It's a great way to reinforce your skills!.</p>
-//     <p><b>Reflect on Mistakes:</b> Review any errors or challenges you faced during tutorials and labs. Understanding what went wrong helps prevent future mistakes.<p>
-//     <p><b>Practice Problems: </b> Look for additional problems related to your past tutorials. Websites like LeetCode and HackerRank can provide relevant challenges to test your skills.
-//     </p><p><b>Use Additional Resources:</b> If you struggle with a topic in a tutorial, seek additional resources such as online articles or videos that explain the same concept in a different way.</p>
-//     <p><b>Use the Documentation:</b> Revisit official documentation (like MDN for web technologies) while going through past tutorials. It’s a great way to deepen your understanding of the tools you used.</p>
-// `,
-  {
-    text: `<div class="tip-block">
+    {
+      text: `<p>Welcome to <b><i>Eye of Horus: Tutorial and Labs Mastery</i></b>, brave adventurer!</p>
+             <p>In this challenge, I’ll guide you through tips to sharpen your revision skills and help you master programming tutorials, labs, and quizzes.</p>
+             <p>By applying these techniques, you’ll reinforce your knowledge, identify gaps, and improve your exam performance—all while staying focused and motivated.</p>
+             <p>Click the <b>next arrow</b> to uncover the secrets of effective revision...</p>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<h4>Why Revise Tutorials and Labs?</h4>
+             <div class="journalling-tip-block">🌟 <b>Strengthen Your Understanding:</b> Regular revision solidifies programming concepts, ensuring you can apply them confidently.</div>
+             <div class="journalling-tip-block">✨ <b>Reduce Forgetting:</b> Revisiting tutorials and labs combats the "forgetting curve" by reinforcing key ideas over time.</div>
+             <div class="journalling-tip-block">🛡️ <b>Boost Performance:</b> Effective revision enhances problem-solving skills, making you exam-ready and reducing last-minute stress.</div>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<h4>Tips to Master Revision: How to Get Started</h4>
+             <h6>Follow these tips to make your revision efficient and effective:</h6>
+             <div class="breathing-step-block">
+               <p><b>Revisit Completed Labs:</b> Go back to your completed lab exercises. Try solving them again without looking at your old solutions. It’s a great way to reinforce your skills!</p>
+               <p><b>Plan Your Revision:</b> Break down your past tutorials, labs, and quizzes into smaller topics. Allocate time to revise each section, prioritizing difficult or key areas.</p>
+             </div>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<h4>Tips to Master Revision: How to Revise</h4>
+             <div class="breathing-step-block">
+               <p><b>Break Down the Lab Tasks:</b> Split lab or tutorial tasks into smaller steps. Focus on solving one problem at a time—this methodical approach mirrors effective test preparation.</p>
+               <p><b>Read Instructions Carefully:</b> Review the instructions in labs or tutorials in detail before attempting exercises again. Understanding exactly what is asked helps you avoid mistakes.</p>
+               <p><b>Review Code and Comments:</b> After completing a lab, review your code and comments. Ensure your code is clear, well-documented, and easy to understand. Being able to explain your code is an important skill for practical exams.</p>
+               <p><b>Reflect on Mistakes:</b> Review any errors or challenges you faced during tutorials and labs. Understanding what went wrong helps you avoid similar mistakes in the future.</p>
+             </div>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<h4>Tips to Master Revision: Stay Organized</h4>
+             <div class="breathing-step-block">
+               <p><b>Summarize Key Concepts:</b> After each tutorial, write a brief summary of the key points. This creates a handy reference for future study sessions!</p>
+               <p><b>Track Your Progress:</b> Keep a checklist of tutorials and labs you've completed. Each time you finish one, check it off! Watching your progress grow can be a powerful motivator.</p>
+             </div>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<h3>How to Play the Game</h3>
+             <p>Welcome to your learning adventure! This game helps you log tutorials and labs and keep track of your progress. Here’s how to make the most of your experience while revising tutorials, quizzes, and labs:</p> 
+             <p><strong>Log Your Tutorials:</strong> As you revise programming tutorials, labs, or quizzes, log the details to monitor your learning. Include the tutorial/lab name, date, description, and select a progress status from the dropdown (Started, In Progress, or Completed).</p>`,
+      images: ["assets/tutorials/log-new-tutorial.png"],
+      video: null
+    },
+    {
+      text: `<h3>How to Play the Game</h3>
+             <p><strong>Track Improvements:</strong> Review your logged revisions to identify improvements or areas needing more practice.</p> 
+             <p><strong>Track Partially Completed Work:</strong> Don’t worry if you haven’t finished a tutorial or quiz! Log partially completed ones and update them later once you finish. This flexibility ensures every step of your learning journey counts. <b>You’ve got this!</b></p>
+             <p>Stay consistent and watch your programming skills grow!</p>`,
+      images: ["assets/tutorials/tutorial-records.png"],
+      video: null
+    },
+    {
+      text: `<h3>Earn Badges</h3>
              <ul>
-               <li><b>Revisit Lab Instructions Carefully</b>: Review your lab instructions in detail before attempting the exercises again. Understanding exactly what is being asked in the lab can help you approach the tasks methodically and avoid mistakes in your revision.</li>
+               <div class="tip-block">
+                 <li><b>Beginner Badge:</b> Log revisions for <strong>2 tutorials or labs</strong> to earn this badge and showcase your commitment to mastering programming concepts.</li>
+                 <img src="/assets/badges/badge01_a.png" class="badge-image">
+               </div>
+               <div class="tip-block">
+                 <li><b>Master Badge:</b> Log revisions for <strong>5 tutorials or labs</strong> to earn this badge, celebrating your dedication to continuous improvement!</li>
+                 <img src="/assets/badges/badge01_b.png" class="badge-image">
+               </div>
              </ul>
-           </div>
-           <div class="tip-block">
-             <ul>
-               <li><b>Break Down the Lab Tasks</b>: Labs often require you to complete multiple tasks. Break each task into smaller steps. This will help you manage your time and focus on one problem at a time, just like when preparing for a test.</li>
-             </ul>
-           </div>
-           <div class="tip-block">
-             <ul>
-               <li><b>Replicate the Lab Work Without Looking at Your Solution</b>: If you’ve completed a lab before, challenge yourself by doing it again without looking at your previous solution. This forces you to think critically and reinforces your problem-solving abilities.</li>
-             </ul>
-           </div>`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
-    text: `<div class="tip-block">
-             <ul>
-               <li><b>Focus on Common Patterns</b>: Many labs test common programming concepts like loops, functions, or arrays. Identify recurring patterns or types of problems as you review your past labs. Understanding these patterns will help you tackle similar questions during a test.</li>
-             </ul>
-           </div>
-           <div class="tip-block">
-             <ul>
-               <li><b>Use the Debugging Process to Learn</b>: If your lab work isn’t working, take the time to debug your code. Don’t just fix the issue and move on. Try to understand why it failed and how you can prevent it from happening again. Debugging helps you think logically and systematically, which is key to performing well in exams.</li>
-             </ul>
-           </div>
-           <div class="tip-block">
-             <ul>
-               <li><b>Review Your Code and Comments</b>: After completing a lab, review your code and comments. Ensure your code is clear and well-documented. Being able to explain your code is an important skill for practical exams.</li>
-             </ul>
-           </div>
-           <div class="tip-block">
-             <ul>
-               <li><b>Practice Time Management</b>: Many labs are timed. Set a timer when revising a lab to simulate exam conditions. This will help you get used to managing your time effectively during the actual test.</li>
-             </ul>
-           </div>`,
-    images: [],
-    video: null
-    // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-  },
-  {
-  text: `<p><b>Summarize Key Concepts:</b> After each tutorial, write a brief summary of the key points. This creates a handy reference for future study sessions!</p>
-  <p><b>Track Your Progress:</b> Keep a checklist of tutorials and labs you've completed. Each time you finish one, check it off! Watching your progress grow can be a powerful motivator.</p>`,
-  images: [],
-  video: null
-  // video: "https://www.youtube.com/embed/MI2MIyiGAeQ?si=ARo64DVeOzUkYHEI"
-},
-
-  {
-    text: `<h3><strong>How to Play the Game</strong></h3>
-<p>Welcome to your learning adventure! Here’s how to make the most out of your experience while revising tutorials, quizzes, and labs:</p>
-<p><strong>Log Your Progress:</strong> As you study, keep track of your journey by logging each tutorial, quiz, or lab you complete. You can enter essential details such as the title, date, progress percentage, and an optional description to reflect on your learning.</p>`,
-images: ["assets/view-tutorials.png"],
-video: null
-  },
-  {
-    text: `<p><strong>Track Partially Completed Work:</strong> Don’t worry if you haven’t finished a tutorial or quiz! You can log partially completed ones, allowing you to update them later once you finish. This flexibility ensures that every step of your learning counts!<b> You'll do great!</b></p>`,
-    images: [],
-    video: null
-  },
-  {
-    text: `<p><strong>Earn Badges:</strong> Celebrate your progress with two unique badges:</p>
-<ul><div class="tip-block">
-    <li><b>Eye of Horus Silver Badge:</b> Log <strong>5 tutorials, quizzes, or labs with 100% completion</strong> to earn this badge as a mark of your dedication.</li></div><p></p>
-    <div class="tip-block"><li><b>Eye of Horus Gold Badge:</b> Reach <strong>10 activities with 100% completion</strong> to unlock this prestigious reward, showing your mastery and commitment.</li></div>
-</ul>
-<p>Track your achievements, stay motivated, and see how far you’ve come!</p>
-`,
-    images: ["assets/badges/badge01.png"],
-    video: null
-  },
-  {
-    text: `<p>So dive in, enjoy the journey, and let the game enhance your learning experience!</p>`,
-    images: [],
-    video: null
-  },
-];
-
+             <p>Track your achievements and become a revision master as you progress!</p>`,
+      images: [],
+      video: null
+    },
+    {
+      text: `<p>Take the challenge, sharpen your skills, and let this game transform the way you revise programming tutorials and labs!</p>`,
+      images: [],
+      video: null
+    }
+  ];
+  
+  
   // Current index of the tip
   currentTipIndex: number = 0;
   safeVideoUrl: SafeResourceUrl | null = null;

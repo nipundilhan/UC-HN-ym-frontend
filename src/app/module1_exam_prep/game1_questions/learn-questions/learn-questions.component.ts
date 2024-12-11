@@ -94,23 +94,29 @@ tips = [
              <li><strong>Log Your Questions:</strong> Ensure each question is logged with its answer and all essential details. </li>
              <li><strong>Click the Share Button:</strong> Look for the <b>"Share"</b> button at the bottom of your logged question record. Click it to share your work with others.</li>
              <li><strong>Engage and Collaborate:</strong> Once shared, your question will be visible to your friends, allowing them to like.</li>
-             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your questions. The more likes you get, the closer you’ll be to earning the <b>Sphinx’s Wisdom Badge</b>!</li>
+             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your questions. The more likes you get, the closer you’ll be to earning the <b>Rising Star Badge</b>!</li>
            </ol>
            <p>Sharing your crafted questions not only helps others but also allows you to learn through collaboration and feedback!</p>`,
     images: [],
     video: null
   },
   {
-    text: `<p><strong>Earn Badges:</strong> Showcase your creativity and engagement with three exclusive badges:</p>
+    text: `<h3>Earn Badges</h3>
            <ul>
              <div class="tip-block">
-               <li><b>Beginner Badge:</b> Log <strong>5 questions</strong> to earn this badge, marking the beginning of your question-crafting journey.</li>
+               <li><b>Beginner Badge:</b> Log <strong>2 questions</strong> to earn this badge, marking the beginning of your question-crafting journey.</li>
+              <img src = "/assets/badges/badge03_a.png" class="badge-image">
+
              </div>
              <div class="tip-block">
-             <li><b>Master Badge:</b> Log <strong>10 questions</strong> to achieve this badge, celebrating your growing skills and dedication to crafting meaningful questions.</li>
+             <li><b>Master Badge:</b> Log <strong>5 questions</strong> to achieve this badge, celebrating your growing skills and dedication to crafting meaningful questions.</li>
+            <img src = "/assets/badges/badge03_b.png" class="badge-image">
+
              </div>
              <div class="tip-block">
-               <li><b>Rising Star Badge:</b> Collect <strong>50 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
+               <li><b>Rising Star Badge:</b> Collect <strong>10 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
+               <img src = "/assets/badges/badge03_c.png" class="badge-image">
+
              </div>
            </ul>
            <p>Track your achievements, share your work, and watch your skills soar as you craft more questions!</p>`,

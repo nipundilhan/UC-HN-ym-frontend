@@ -14,7 +14,7 @@
   background-size: cover;
   padding: 20px;
   position: relative;
-  text-align: center;
+  /* text-align: center; */
   /* font-family: 'MedievalSharp', sans-serif; */
 }
 
@@ -40,7 +40,7 @@
   margin-bottom: 150px;
   position: relative;
   animation: fadeIn 1s ease-in-out; /* Speech bubble animation */
-  text-align: center;
+  /* text-align: center; */
   overflow: auto; /* Allow scrolling if content is too large */
   max-height: 80vh; /* Ensures bubble doesn't get too large */
   width: 100%; /* Ensure it doesn't overflow on mobile */
@@ -64,9 +64,8 @@
 /* Image and Video Styling */
 .tip-image {
   max-width: 90%;
-  margin-top: 20px;
   border-radius: 10px;
-  max-height: 300px;
+  max-height: 240px;
 }
 
 .video-container {
