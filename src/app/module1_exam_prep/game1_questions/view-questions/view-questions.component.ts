@@ -53,7 +53,7 @@ export class ViewQuestionsComponent implements OnInit {
   isAchievementPopupOpen = false;
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
   isShareModalBadgeOpen = false;
-
+  showDeleteConfirmationPopup: boolean = false;
   currentPage: number = 1; // Current page number
   QnAPerPage: number = 9; // Number of questions to display per page
   QnA: any[] = [];
@@ -301,10 +301,38 @@ closeShareModal(): void {
     this.closeQuestionModal();
   }
 
-  deleteQuestion(question: any): void {
-    this.questions = this.questions.filter(m => m !== question);
-    this.closeQuestionModal();
+
+  openDeleteConfirmationPopup(selectedMindmap: any): void {
+    this.showDeleteConfirmationPopup = true; // Show confirmation popup
   }
+
+  cancelDelete(): void {
+    this.showDeleteConfirmationPopup = false; // Hide confirmation popup
+  }
+  
+
+  deleteQuestion(question: any): void {
+    const studentId =  this.userAuthService.getUserId();
+    this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.QANDA.BASE + '/' + studentId + '/' + question._id)
+      .subscribe(
+        response => {
+          // Close the modal after the deletion is successful
+          this.closeQuestionModal(); 
+          this.cancelDelete();
+          
+          // Wait for points update before getting the mindmaps
+          setTimeout(() => {
+            this.fetchUpdatedStudentPoints();
+            this.fetchBadgeMargin();  // update the points in header and fetches latest tutorial data
+          }, 100);
+  
+        },
+        error => {
+          console.error("Error deleting the question:", error);
+        }
+      );
+  }
+ 
 
   fetchUpdatedStudentPoints(): void {
 

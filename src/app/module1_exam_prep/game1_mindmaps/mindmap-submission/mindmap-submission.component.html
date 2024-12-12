@@ -81,7 +81,9 @@
       <div *ngIf="isMindmapModalOpen" class="modal">
         <div class="modal-background">
           <div class="modal-content">
-            <span class="close" (click)="closeMindmapModal()">&times;</span>
+            <span class="close-icon" (click)="closeMindmapModal()">&times;</span>
+
+            
             <h2>{{ selectedMindmap.title }}</h2>
 
             <!-- Display Mindmap Image in the Modal -->
@@ -109,14 +111,25 @@
   
               <div class="button-container">
                 <button class="btn save-btn">Save Changes</button>
-                <!-- <button class="btn share-popup" *ngIf="selectedQuestion.sharedStatus === 'NOT_SHARED'" (click)="onShareQuestion(selectedQuestion)">Share</button> -->
                 <button class="btn share-popup" *ngIf="selectedMindmap.sharedStatus === 'NOT_SHARED'" (click)="onShareMindmap(selectedMindmap)">Share</button>
-                <button class="btn delete-btn" (click)="deleteMindmap(selectedMindmap)">Delete</button>
+                <button class="btn delete-btn" (click)="openDeleteConfirmationPopup(selectedMindmap); $event.stopPropagation()">
+                  Delete
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
+
+       <!-- Delete Confirmation Popup -->
+  <div *ngIf="showDeleteConfirmationPopup" class="delete-user-popup">
+    
+    <p>Do you want to delete this journal record?</p>
+    <div class="button-container">
+        <button class = "delete-btn" (click)="deleteMindmap(selectedMindmap)">Yes</button>
+        <button class = "cancel-btn" (click)="cancelDelete()">No</button>
+    </div>
+  </div>
   
       <!-- Add Mindmap Modal -->
       <div *ngIf="isAddMindmapModalOpen" class="modal">

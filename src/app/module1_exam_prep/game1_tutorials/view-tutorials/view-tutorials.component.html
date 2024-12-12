@@ -12,9 +12,10 @@
             }"
           (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more tutorial/labs needed') : ''"
           (mouseleave)="showTooltip = ''">
-          <img src="/assets/badges/badge01.png" alt="Eye of Horus">
-          <p>Eye of Horus</p>
-          <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+          <img src="/assets/badges/badge01_a.png" alt="Eye of Horus">
+          <p class="badge-title">Eye of Horus</p>
+          <p class="badge-subtitle">Beginner</p>  
+       <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
       </div>
       
       <div class="badge" 
@@ -24,9 +25,10 @@
         }"
         (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more tutorial/labs needed') : ''"
         (mouseleave)="showTooltip = ''">
-        <img src="/assets/badges/badge02.png" alt="Eye of Horus">
-        <p>Ankh of Power</p>
-        <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
+        <img src="/assets/badges/badge01_b.png" alt="Eye of Horus">
+        <p class="badge-title">Eye of Horus</p>
+        <p class="badge-subtitle">Master</p> 
+      <div class="tooltip" *ngIf="showTooltip">{{ showTooltip }}</div>
      </div>
      
 
@@ -81,7 +83,7 @@
     <div class="achievement-popup">
       <span class="close-btn" (click)="isAchievementPopupOpen = false">&times;</span>
       <h2>Congratulations!</h2>
-      <p>You've unlocked the "Eye of Horus"</p>
+      <p>You've unlocked a badge</p>
 
       <!-- Badge Image with animation class -->
       <!-- <div class="badge-container"> -->
@@ -89,8 +91,8 @@
         <img src="/assets/padlock.gif" alt="Unlocking Padlock" [class.padlock-visible]="isPadlockVisible" class="padlock-gif">
 
         <!-- Badge Image -->
-        <img *ngIf="showBadge01" src="/assets/badges/badge01.png" alt="Achievement Badge" class="badge-image unlocking-animation">
-        <img *ngIf="showBadge02" src="/assets/badges/badge02.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge01" src="/assets/badges/badge01_a.png" alt="Achievement Badge" class="badge-image unlocking-animation">
+        <img *ngIf="showBadge02" src="/assets/badges/badge01_b.png" alt="Achievement Badge" class="badge-image unlocking-animation">
       <!-- </div> -->
 
       <button class="btn share-btn" (click)="shareAchievement()">Share</button>
@@ -111,12 +113,6 @@
             <input type="date" id="taskDate" [(ngModel)]="selectedTask.date" name="date" [disabled]="false" [max]="getTodayDate()" required />
           </div>
 
-          <!-- <div class="form-group">
-            <label for="taskProgress">Progress:</label>
-            <select id="taskProgress" [(ngModel)]="selectedTask.completePercentage" name="completePercentage" [disabled]="!isProgressEditable">
-              <option *ngFor="let option of progressOptions" [value]="option">{{ option }}%</option>
-            </select>
-          </div> -->
           <div class="form-group">
             <label for="taskStatus">Status:</label>
             <select id="taskStatus" name="taskStatus" [(ngModel)]="selectedTask.status" [disabled]="!isStatusEditable" required>
@@ -135,7 +131,7 @@
 
           <div class="button-container">
             <button type="submit" class="btn save-btn" [disabled]="!isSaveEnabled">Save Changes</button>
-            <button class="btn delete-btn" *ngIf="selectedTask.status === 'Started' || selectedTask.status === 'In Progress'" (click)="deleteTask(selectedTask)">Delete</button>
+            <button class="btn delete-btn" *ngIf="selectedTask.status === 'Started' || selectedTask.status === 'In Progress'" (click)="openDeleteConfirmationPopup()">Delete</button>
 
           </div>
         </form>
@@ -150,10 +146,10 @@
         <div class="tutorial-box">
         <span class="close-btn" (click)="closeModal()">&times;</span>
 
-        <h2>Log New Tutorial</h2>
+        <h2>Log New Tutorial or Lab</h2>
       <form [formGroup]="tutorialForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-              <label for="tutorialName">Tutorial Name:</label>
+              <label for="tutorialName">Tutorial/Lab Name:</label>
               <input
                   type="text"
                   id="tutorialName"
@@ -180,22 +176,6 @@
                   <div *ngIf="f['date'].errors['required']">Date is required</div>
               </div>
           </div>
-
-          <!-- <div class="form-group input-group">
-            <label for="progress">Progress</label>
-            <select
-              id = "progress"
-              formControlName="progress"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f['progress'].errors }"
-            >
-              <option value="" disabled>Select progress</option>
-              <option *ngFor="let option of progressOptions" [value]="option">{{ option }}%</option>
-            </select>
-            <div *ngIf="submitted && f['progress'].errors" class="invalid-feedback">
-              <div *ngIf="f['progress'].errors['required']">Progress is required</div>
-            </div>
-          </div> -->
           <div class="form-group">
             <label for="status">Status:</label>
             <select id="status" formControlName="status" class="form-control">
@@ -230,11 +210,43 @@
       </div>
     </div>
 
+ <!-- Delete Confirmation Popup -->
+    <div *ngIf="showDeleteConfirmationPopup" class="delete-confirmation-popup">
+        
+      <p>Do you want to delete this record?</p>
+      <div class="button-container">
+          <button class = "delete-btn" (click)="deleteTask(selectedTask)">Yes</button>
+          <button class = "cancel-btn" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+
+          <!-- Popup Modal for Successful Share -->
+          <div *ngIf="isShareModalOpen" class="modal">
+            <div class="modal-background">
+              <div class="modal-content-share">
+                <span class="close-share" (click)="closeShareModal()">&times;</span>
+    
+    
+                <h2>Great!</h2>
+                <p>Your achievement has been shared successfully.</p>
+    
+                 <!-- Success tick icon -->
+                 <div class="success-tick">
+                  <i class="fa fa-check-circle"></i> <!-- Font Awesome tick icon -->
+                </div>
+                
+                <button class="btn view-shared-btn" (click)="viewSharedBadge()">Go to Notifications</button>
+              </div>
+            </div>
+          </div>
+
 
     <div class="pagination-controls">
       <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      <!-- <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button> -->
+      <button (click)="nextPage()" [disabled]="currentPage >= totalPages || totalPages === 1">Next</button>
+
     </div>
 
   </div>

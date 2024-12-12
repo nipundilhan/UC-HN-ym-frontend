@@ -87,7 +87,7 @@
   }
   
   /* Buttons styles */
-  .save-btn, .share-popup .delete-btn{
+  .save-btn, .cancel-btn, .share-popup, .delete-btn{
     background-color: #c27d2a; 
     color: white;
     border: none;
@@ -115,7 +115,6 @@
 
   .delete-btn{
     background-color: #c2392a;
-    color: white;
   }
 
  
@@ -127,7 +126,8 @@
 .save-btn:hover,
 .share-popup:hover, 
 .share-btn:hover,
-.delete-btn:hover{
+.delete-btn:hover,
+.cancel-btn:hover{
   opacity: 0.8;
 }
 
@@ -222,39 +222,59 @@
   .camera-icon i {
     pointer-events: none; /* Prevent icon from intercepting click events */
   }
+
+
 /* Modal styling */
 .modal {
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, serif;
 }
 
 /* Modal content styling */
 .modal-content {
-    background-color: #f6f0e5;
-    padding: 20px;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;    */
+  background-color: #f6f0e5;
+  padding: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;    */
 }
 
 .modal-background{
-    border-radius: 15px;
-    padding: 10px;
-    width: 50%;
-    max-width: 1000px;
+  border-radius: 15px;
+  padding: 10px;
+  width: 50%;
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  background-image: url('/assets/background-img/brick_background.jpg'); 
+}
+
+  .delete-user-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-    background-image: url('/assets/background-img/brick_background.jpg'); 
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Adjust the width as necessary */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
   }
+  
 
   .modal-actions {
     display: flex;
@@ -282,6 +302,17 @@
     cursor: pointer;
     position: absolute;
     right: 20px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #c27d2a; /* Match your button theme */
+  transition: opacity 0.3s;
 }
 
 .close-share {

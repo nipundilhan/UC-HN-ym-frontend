@@ -54,6 +54,9 @@ export class ViewTutorialsComponent implements OnInit {
   completedTasks: number = 0;
   showTooltip: string = ''; // Variable to hold the tooltip message
 
+  showDeleteConfirmationPopup: boolean = false; // For delete confirmation
+
+  isShareModalOpen: boolean = false;
   private submitEventSubscription!: Subscription;
 
   constructor(
@@ -276,7 +279,39 @@ export class ViewTutorialsComponent implements OnInit {
 
   shareAchievement(): void {
     this.isAchievementPopupOpen = false;
-    this.router.navigate(['/achievements']);
+    let badge = '';
+    let ref = '';
+
+    if (this.showBadge01 == true){
+      badge = 'badge1';
+      ref = 'Game1Badge1'
+    }
+    else if (this.showBadge02 == true){
+      badge = 'badge2';
+      ref = 'Game1Badge2'
+    }
+ 
+    const requestBody = 
+
+      {
+        studentId : this.userAuthService.getUserId(),
+        gameCode : "game1",
+        badgeCode : badge,
+        reference : ref
+      };
+
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.MODULES.SHARE_BADGE, requestBody).subscribe(
+      async (response: any) => {
+        this.openShareModal();
+
+      },
+      (httpError: any) => {
+        console.log(httpError);
+        alert("An error occurred while sharing the badge");
+      }
+    );
+
+    // this.router.navigate(['/notifications']);
   }
 
   onSubmit(): void {
@@ -358,27 +393,33 @@ export class ViewTutorialsComponent implements OnInit {
     this.tutorialForm.reset();
   }
 
+  openDeleteConfirmationPopup(): void {
+    this.showDeleteConfirmationPopup = true; // Show confirmation popup
+    // this.isTaskModalOpen = true;
+  }
+  
+  cancelDelete(): void {
+    this.showDeleteConfirmationPopup = false; // Hide confirmation popup
+  }
 
   deleteTask(task: any): void {
-    const confirmDelete = confirm(`Are you sure you want to delete the tutorial/lab: ${task.name}?`);
-    if (confirmDelete) {
-      // const taskIndex = this.studentData.module1.game1.tasks.findIndex((t: any) => t._id === task._id);
-      // if (taskIndex !== -1) {
-      //   this.studentData.module1.game1.tasks.splice(taskIndex, 1);
-        
-        // Update the backend with the new task list
+    // const confirmDelete = confirm(`Are you sure you want to delete the tutorial/lab: ${task.name}?`);
         this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.TUTORIALS.BASE + '/' + this.studentData._id + '/' + task._id)
           .subscribe(
             response => {
+              this.closeTaskModal();
+              this.cancelDelete(); // Close confirmation popup after deleting
               this.getStudentData(); // Refresh the data
+
             },
             error => {
               console.error("Error deleting task:", error);
               alert("An error occurred while deleting the task.");
             }
           );
+
      // }
-    }
+    // }
   }
   getStatusClass(status: string): string {
     switch (status) {
@@ -395,7 +436,9 @@ export class ViewTutorialsComponent implements OnInit {
 
 
   get totalPages(): number {
-    return Math.ceil(this.tutorials.length / this.tutorialsPerPage);
+    // return Math.ceil(this.tutorials.length / this.tutorialsPerPage);
+    return Math.max(1, Math.ceil(this.tutorials.length / this.tutorialsPerPage));
+
   }
 
   get paginatedQuestions(): any[] {
@@ -413,5 +456,22 @@ export class ViewTutorialsComponent implements OnInit {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
+}
+
+
+// Method to open the share badge popup
+openShareModal(): void {
+  this.isShareModalOpen = true;
+}
+
+// Method to close the share badge  popup
+closeShareModal(): void {
+  this.isShareModalOpen = false;
+}
+
+
+viewSharedBadge(): void {
+  // Navigate to the shared questions page (assuming you have a route for this)
+  this.router.navigate(['share/notifications']);
 }
 }

@@ -82,6 +82,7 @@
   flex-direction: column;
 }
 
+
 .sidenav .badge {
   display: flex;
   flex-direction: column;
@@ -94,9 +95,23 @@
   margin-bottom: 10px;
 }
 
+.sidenav .badge .badge-title {
+  font-size: 1.1em;
+  color: #4a4a4a;
+  margin-bottom: 5px; /* space between title and subtitle */
+}
+
+.sidenav .badge .badge-subtitle {
+  font-size: 1em;
+  color: #7a7a7a;  /* subtler color for subtitle */
+  font-style: italic;  /* optional for distinguishing */
+  margin-bottom: 0px;
+}
+
 .sidenav .badge p {
   font-size: 1.2em;
   color: #4a4a4a;
+  margin-bottom: 0;
 }
 
 /* 
@@ -146,7 +161,7 @@
   /* SideNav becomes a row on top for mobile */
   .sidenav {
     width: 100%;
-    height: auto;
+    /* height: auto; */
     position: relative; /* Make it relative for smaller screens */
 
   }
@@ -289,7 +304,7 @@
   }
   
 /* Modal background */
-.modal {
+/* .modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -298,11 +313,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* Ensure it appears above other content */
-  /* visibility: hidden;  */
-  /* opacity: 0;  */
-  /* transition: opacity 0.3s ease, visibility 0.3s ease; */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+} */
+
+/* Modal styling */
+.modal {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modal when visible */
@@ -336,12 +362,49 @@
   border-radius: 10px;
 }
 
+.modal-content-share{
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  /* width: 50%; */
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #978681;
+}
+
+.close-share {
+  top: 10px;
+  font-size: 1.5em;
+  color: #aaa;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}
+
 .close-btn {
   position: absolute;
   top: 5px;
   right: 20px;
   font-size: 2em;
   cursor: pointer;
+}
+
+.success-tick {
+  font-size: 60px;
+  color: #28a745;  /* Green color for success */
+  margin-bottom: 15px;
+}
+
+.view-shared-btn {
+  background-color: #e69216;
+}
+
+.view-shared-btn:hover {
+  background-color: #c78421;
+  color: white;
 }
 
 .edit-btn {
@@ -412,6 +475,23 @@
 .add-button:hover{
   background-color: #ce8928;
 }
+
+.delete-confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  z-index: 1000;
+  width: 400px; /* Adjust the width as necessary */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally */
+}
+
 
 .achievement-popup h2, 
 .achievement-popup p
@@ -708,12 +788,22 @@
 }
 
 @media (max-width: 480px) {
+  .modal-background{
+    width:90%;
+  }
   .sidenav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 0;
+    height:20%;
      /* Allow badges to wrap to the next line */
   }
+
+  .badge-header{
+    padding-top: 0;
+  }
+ 
+  
   .game-title {
     font-size: 1.8em;
 }
@@ -749,9 +839,7 @@
 
 
 @media (max-width: 768px) {
-  .container {
-    justify-content: center;
-  }
+
 
   .records-container{
     justify-content: center;

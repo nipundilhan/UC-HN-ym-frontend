@@ -33,6 +33,7 @@ export class MindmapSubmissionComponent implements OnInit {
   isSaveEnabled = false;
   selectedFile: File | null = null;
   isAchievementPopupOpen = false;
+  showDeleteConfirmationPopup: boolean = false;
   loading = true;
   studentData: any;
   badgeClass: string = 'badge-grey'; // Initially grey
@@ -260,13 +261,6 @@ export class MindmapSubmissionComponent implements OnInit {
     this.closeAddMindmapModal(); // Close modal after submission
   }
 
-  // openMindmapDetails(mindmap: any): void {
-  //   this.selectedMindmap = mindmap;
-  //   this.isMindmapModalOpen = true;
-  // }
-
-
-
     // Method to open mindmap details
     openMindmapDetails(mindmap: any): void {
       this.selectedMindmap = { ...mindmap };
@@ -300,6 +294,7 @@ export class MindmapSubmissionComponent implements OnInit {
       this.originalDescription= mindmap.description;      // Store the original mindmap description
       this.isMindmapModalOpen = true;
     }
+
     viewFile(file: File) {
       const fileUrl = URL.createObjectURL(file); // Create a blob URL for the file
       window.open(fileUrl, '_blank');  // Open the file in a new tab
@@ -315,6 +310,7 @@ export class MindmapSubmissionComponent implements OnInit {
 
   closeMindmapModal(): void {
     this.isMindmapModalOpen = false;
+    console.log("closed")
   }
 
   onUpdateMindmap(): void {
@@ -342,19 +338,40 @@ export class MindmapSubmissionComponent implements OnInit {
       },
       (httpError: any) => {
         console.log(httpError);
-        alert("An error occurred while saving the mindmap");
       }
     );
 
   }
+  openDeleteConfirmationPopup(selectedMindmap: any): void {
+    this.showDeleteConfirmationPopup = true; // Show confirmation popup
+  }
 
+  cancelDelete(): void {
+    this.showDeleteConfirmationPopup = false; // Hide confirmation popup
+  }
   
 
   deleteMindmap(mindmap: any): void {
-    this.mindmaps = this.mindmaps.filter(m => m !== mindmap);
-    this.closeMindmapModal();
+    const studentId =  this.userAuthService.getUserId();
+    this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.MINDMAPS.BASE + '/' + studentId + '/' + mindmap._id)
+      .subscribe(
+        response => {
+          // Close the modal after the deletion is successful
+          this.closeMindmapModal(); 
+          this.cancelDelete();
+          
+          // Wait for points update before getting the mindmaps
+          setTimeout(() => {
+            this.fetchUpdatedStudentPoints();
+            this.fetchBadgeMargin();  // update the points in header and fetches latest tutorial data
+          }, 100);
+        },
+        error => {
+          console.error("Error deleting mindmap:", error);
+        }
+      );
   }
-
+  
   getTodayDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];

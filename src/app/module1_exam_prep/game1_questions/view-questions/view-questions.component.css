@@ -318,6 +318,21 @@
     position: relative;
     background-image: url('/assets/background-img/brick_background.jpg'); 
   }
+  .delete-user-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Adjust the width as necessary */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+  }
 
 /* Close button styling */
 .close {
@@ -352,7 +367,7 @@
   }
   
   /* Buttons styles */
-  .save-btn, .share-popup .delete-btn{
+  .save-btn, .share-popup,.cancel-btn, .delete-btn{
     background-color: #c27d2a; 
     color: white;
     border: none;
@@ -379,10 +394,15 @@
     background-color: #218838;
   }
 
+  .cancel-btn{
+    background-color: #7c7b7b;
+  }
+
   
 .save-btn:hover,
 .share-btn:hover, 
-.delete-btn:hover{
+.delete-btn:hover,
+.cancel-btn:hover{
   opacity: 0.8;
 }
 

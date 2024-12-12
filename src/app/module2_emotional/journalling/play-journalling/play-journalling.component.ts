@@ -454,12 +454,13 @@ onDelete(selectedJournal: any): void {
     response => {
       this.closeJournalDetailPopup();
       this.cancelDelete(); // Close confirmation popup after deleting
-      this.getLoggedSessions(); // Refresh the data
-
+      setTimeout(() => {
+        this.fetchUpdatedStudentPoints(); 
+        this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+      }, 100); 
     },
     error => {
       console.error("Error deleting journal record:", error);
-      alert("An error occurred while deleting the journal record.");
     }
   );
 
