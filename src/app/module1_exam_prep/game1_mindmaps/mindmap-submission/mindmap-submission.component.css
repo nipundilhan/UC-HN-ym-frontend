@@ -146,38 +146,88 @@
 
 /* Mind map card styling */
 .mind-map-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    transition: box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: centre;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    height: 200px; /* Min height for smaller screens */
-    cursor: pointer;
-    justify-content: flex-start; /* Ensure items stay at the top */
-    text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space items properly */
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 220px; /* Fixed width */
+  cursor: pointer;
 }
 
 .mind-map-card:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
-
-
 
 /* Mind map image styling */
 .mind-map-image {
-    height: 120px;
-    object-fit: contain; /* Ensures the image covers the area while maintaining its aspect ratio */
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ecebea;
-    cursor: pointer;
+  width: 100%; /* Ensure it spans the container */
+  height: 120px; /* Fixed height for images */
+  object-fit: contain; /* Maintain aspect ratio and fit within area */
+  border-radius: 4px;
+  border: 1px solid #ecebea;
+  margin-bottom: 10px;
 }
+
+/* Title styling */
+.mind-map-card h5 {
+  font-size: 18px; /* Adjust font size */
+  font-weight: bold;
+  color: #333333;
+  word-break: break-word; /* Break long words */
+    text-align: center; /* Center align the text */
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Push footer to the bottom of the card */
+  font-size: 0.9rem;
+  padding-top: 8px;
+  /* border-top: 1px solid #e0e0e0;  */
+}
+
+/* Shared and Not Shared Tag Styling */
+.shared-tag,
+.not-shared-tag {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+
+.shared-tag {
+  background-color: #4caf50; /* Green for shared */
+}
+
+.not-shared-tag {
+  background-color: #d4631f; /* Red for not shared */
+}
+
+/* Likes Section */
+.likes {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.heart-like-icon {
+  color: #f7a542; /* Red color for liked */
+  margin-right: 5px;
+}
+
+.heart-like-icon:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+
 
 /* Container for the preview image in the modal */
 .image-preview {
@@ -751,6 +801,7 @@ button[type="submit"]:hover {
     .mind-map-grid {
         grid-template-columns: 1fr; /* One card per row */
         width: 90%;
+        justify-items: center;
     }
     .camera-icon{
         left: 80px;
@@ -782,7 +833,7 @@ button[type="submit"]:hover {
         padding: 15px;
     }
     .mind-map-card {
-        width: 100%; /* Full width for very small screens */
+        width: 80%; /* Full width for very small screens */
         min-height: 240px; /* Reduce height for smaller screens */
     }
     .button-container {

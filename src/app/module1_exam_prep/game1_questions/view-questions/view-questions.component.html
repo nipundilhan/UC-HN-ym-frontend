@@ -65,6 +65,18 @@
                 <a *ngIf="question.question.length > 100" class="see-more" (click)="openQuestionDetails(question)">
                   See More
                 </a> </p>
+
+                <div class="card-footer">
+                  <!-- Shared Tag -->
+                  <div class="shared-tag" *ngIf="question.sharedStatus === 'SHARED'">Shared</div>
+                  <div class="not-shared-tag" *ngIf="question.sharedStatus === 'NOT_SHARED'">Not Shared</div>
+            
+                  <!-- Likes -->
+                  <div class="likes" *ngIf="question.sharedStatus === 'SHARED'">
+                    <i class="fas fa-heart heart-like-icon"></i>
+                    <span class="like-count">{{ question.likesCount }}</span>
+                  </div>
+                </div>
             </div>
         </div>
 
@@ -178,13 +190,13 @@
                     type="text" 
                     id="lesson" 
                     formControlName="lesson" 
-                    maxlength="25" 
+                    maxlength="30" 
                     class="form-control" 
                     [ngClass]="{ 'is-invalid': submitted && f['lesson'].errors }"
                   />
                   <div *ngIf="submitted && f['lesson'].errors" class="invalid-feedback">
                     <div *ngIf="f['lesson'].errors['required']">Lesson is required</div>
-                    <div *ngIf="f['lesson'].errors['maxlength']">Lesson cannot exceed 25 characters</div>
+                    <div *ngIf="f['lesson'].errors['maxlength']">Lesson cannot exceed 30 characters</div>
                   </div>
           
                 

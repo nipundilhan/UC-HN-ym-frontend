@@ -60,7 +60,7 @@ tips = [
     {
       text: `<h3>How to Play the Game</h3>
              <p>Welcome to your learning adventure! This game helps you log tutorials and labs and keep track of your progress. Here’s how to make the most of your experience while revising tutorials, quizzes, and labs:</p> 
-             <p><strong>Log Your Tutorials:</strong> As you revise programming tutorials, labs, or quizzes, log the details to monitor your learning. Include the tutorial/lab name, date, description, and select a progress status from the dropdown (Started, In Progress, or Completed).</p>`,
+             <p><strong>Log Your Tutorials:</strong> As you revise programming tutorials, labs, or quizzes, log the details to monitor your learning. Include the tutorial/lab name, date, description, and select a progress status from the dropdown (Started, In Progress, or Completed). You will earn a <b>point</b> for each record.</p>`,
       images: ["assets/tutorials/log-new-tutorial.png"],
       video: null
     },

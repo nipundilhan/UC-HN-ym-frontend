@@ -73,7 +73,7 @@ export class MindmapSubmissionComponent implements OnInit {
   ) {
     this.mindmapForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(30)]], // Use array for multiple validators
-      description: ['', Validators.required],
+      description: [''],
       image: [null, Validators.required] // Ensure image is required
     });
   }

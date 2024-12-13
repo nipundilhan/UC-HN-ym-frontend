@@ -70,6 +70,18 @@
               <!-- <h5>{{ mindmap.title | slice: 0:20}}</h5> -->
               <h5>{{ mindmap.title }}</h5>
         
+              <div class="card-footer">
+                <!-- Shared Tag -->
+                <div class="shared-tag" *ngIf="mindmap.sharedStatus === 'SHARED'">Shared</div>
+                <div class="not-shared-tag" *ngIf="mindmap.sharedStatus === 'NOT_SHARED'">Not Shared</div>
+          
+                <!-- Likes -->
+                <div class="likes" *ngIf="mindmap.sharedStatus === 'SHARED'">
+                  <i class="fas fa-heart heart-like-icon"></i>
+                  <span class="like-count">{{ mindmap.likesCount }}</span>
+                </div>
+              </div>
+
             </div>
           </div>  
   
@@ -147,11 +159,15 @@
                 <div *ngIf="f['title'].errors['maxlength']">Title cannot exceed 30 characters</div>
               </div>
   
-                <label for="description">Description:</label>
+                <!-- <label for="description">Description:</label>
                 <textarea id="description" formControlName="description" rows="4" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
                 <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
                   <div *ngIf="f['description'].errors['required']">Description is required</div>
-                </div>
+                </div> -->
+
+                 <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" rows="4" class="form-control"></textarea>
+                
 
                 <label for="image">Upload Mindmap Image:</label>
                 <input type="file" id="image" (change)="onFileSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">

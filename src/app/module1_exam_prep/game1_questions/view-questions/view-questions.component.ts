@@ -55,7 +55,7 @@ export class ViewQuestionsComponent implements OnInit {
   isShareModalBadgeOpen = false;
   showDeleteConfirmationPopup: boolean = false;
   currentPage: number = 1; // Current page number
-  QnAPerPage: number = 9; // Number of questions to display per page
+  QnAPerPage: number = 6; // Number of questions to display per page
   QnA: any[] = [];
 
   editorContent: string = '';  // This will store the editor's content
@@ -95,7 +95,7 @@ export class ViewQuestionsComponent implements OnInit {
 
   ) {
     this.questionForm = this.fb.group({
-      lesson: ['', Validators.required, Validators.maxLength(25)],
+      lesson: ['', Validators.required, Validators.maxLength(30)],
       question: ['', Validators.required],
       // date: [this.getTodayDate(), Validators.required],
       answer: ['', Validators.required],

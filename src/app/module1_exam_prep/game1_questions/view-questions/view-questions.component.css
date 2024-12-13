@@ -191,7 +191,7 @@
     justify-content: centre;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 300px;
-    max-height: 120px; /* Min height for smaller screens */
+    /* max-height: 120px; */
     cursor: pointer;
     justify-content: flex-start; /* Ensure items stay at the top */
     text-align: center;
@@ -200,6 +200,55 @@
 .question-card:hover {
     transform: scale(1.02);
 }
+.question-card h5{
+  font-size: 1rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Push footer to the bottom of the card */
+  font-size: 0.9rem;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0; /* Add a light separator line */
+}
+
+/* Shared and Not Shared Tag Styling */
+.shared-tag,
+.not-shared-tag {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+
+.shared-tag {
+  background-color: #4caf50; /* Green for shared */
+}
+
+.not-shared-tag {
+  background-color: #d4631f; /* Red for not shared */
+}
+
+/* Likes Section */
+.likes {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.heart-like-icon {
+  color: #f7a542; /* Red color for liked */
+  margin-right: 5px;
+}
+
+.heart-like-icon:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+
 
 .no-questions{
     display: flex;

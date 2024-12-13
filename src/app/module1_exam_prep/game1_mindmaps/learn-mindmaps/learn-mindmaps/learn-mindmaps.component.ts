@@ -72,49 +72,59 @@ tips = [
     video: null
   },
   {
-    text: `<p>🌟 <b>Watch this helpful video to learn the basics and start creating your own maps with confidence!</p>
-           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`, 
+    text: `<p>🌟 <b>Watch this helpful video to learn the basics and start creating your own maps with confidence!</p>`,
     images: [],
-    video: null
+    video: 'https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq'
   },
   {
     text: `<h3>How to Play the Game</h3>
            Here’s how to make the most out of your experience while creating mind maps:</p> 
            <p><strong>Log Your Mind Maps:</strong> As you create mind maps based on your lessons, log the details to track your progress. 
-           Enter the lesson title and add an optional description to reflect on your thought process and learning.</p> 
+           Enter the lesson title and add an optional description to reflect on your thought process and learning.</p> `,
+    images: ['assets/mindmapping/add-mindmap.png'],
+    video: null
+  },
+  {
+    text: `<h3>How to Play the Game</h3>
            <p><strong>Review Your Progress:</strong> Keep track of how your mind mapping skills evolve over time by revisiting your logged maps. 
            Use this record as a visual tool to monitor your growth and deepen your understanding of topics.</p>`,
-    images: ["assets/mind-mapping/view-mindmaps.png"],
+    images: ['assets/mindmapping/view-mindmaps.png'],
     video: null
   },
   {
     text: `<h3>Share Your Mind Maps</h3>
            <p>Sharing your creative work is both easy and rewarding! Here’s how you can inspire others and showcase your skills:</p>
            <ol>
-             <li><strong>Log Your Mind Map:</strong> Ensure your mind map is logged with all essential details, including an image.</li>
+             <li><strong>Log Your Mind Map:</strong> Ensure your mind map is logged with all essential details, including an image and earn a <b>point</b> for each record.</li>
+             <p></p>
              <li><strong>Click the Share Button:</strong> Look for the <b>"Share"</b> button at the bottom of your logged mind map. Click it to share with your friends.</li>
+              <p></p>
              <li><strong>Engage and Collaborate:</strong> Once shared, your mind map will be visible to others, allowing them to view and appreciate your work.</li>
-             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your mind maps. The more likes you collect, the closer you’ll be to earning the <b>Pharaoh’s Crown Badge</b>!</li>
+              <p></p>
+             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your mind maps. The more likes you collect, the closer you’ll be to earning the <b>Rising Star Badge</b>!</li>
            </ol>
            <p>Sharing your mind maps not only helps others but also fosters collaborative learning and feedback!</p>`,
     images: [],
     video: null
   },
   {
-    text: `<p><strong>Earn Badges:</strong> Showcase your creativity and engagement with three exclusive badges:</p>
+    text: `<h3>Earn Badges</h3>
            <ul>
              <div class="tip-block">
-               <li><b>Silver Ankh Badge:</b> Log <strong>2 mind maps</strong> to earn this badge, marking the beginning of your journey to mastering mind mapping.</li>
+               <li><b>Beginner Badge:</b> Log <strong>2 mind maps</strong> to earn this badge, marking the beginning of your journey to mastering mind mapping.</li>
+               <img src = "/assets/badges/badge02_a.png" class="badge-image">
              </div>
              <div class="tip-block">
-               <li><b>Gold Ankh Badge:</b> Log <strong>5 mind maps</strong> to achieve this badge, highlighting your growing expertise in organizing ideas visually.</li>
+               <li><b>Master Badge:</b> Log <strong>5 mind maps</strong> to achieve this badge, highlighting your growing expertise in organizing ideas visually.</li>
+               <img src = "/assets/badges/badge02_b.png" class="badge-image">
              </div>
              <div class="tip-block">
-               <li><b>Pharaoh’s Crown Badge:</b> Collect <strong>10 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
+               <li><b>Rising Star Badge:</b> Collect <strong>10 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
+               <img src = "/assets/badges/badge02_c.png" class="badge-image">
              </div>
            </ul>
            <p>Track your achievements, share your work, and celebrate your progress as you create more mind maps!</p>`,
-    images: ["assets/badges/mindmap-badge.png"],
+    images: [],
     video: null
   },
   {
@@ -174,75 +184,34 @@ tips = [
     this.displayTip();
   }
 
-  // Method to display the current tip (can include text, image, or video)
-  // displayTip(): void {
-  //   const currentTip = this.tips[this.currentTipIndex];
+  displayTip(): void {
+    const currentTip = this.tips[this.currentTipIndex];
 
-  //   // Update the tip text
-  //   const tipTextElement = document.getElementById('tip-text');
-  //   if (tipTextElement) {
-  //     tipTextElement.textContent = currentTip.text;
-  //   }
+    // Update text content
+    const tipTextElement = document.getElementById('tip-text');
+    if (tipTextElement) {
+      tipTextElement.innerHTML = currentTip.text;
+    }
 
-  //   // Optionally, update the image
-  //   const tipImageElement = document.getElementById('tip-image') as HTMLImageElement;
-  //   if (tipImageElement && currentTip.image) {
-  //     tipImageElement.src = currentTip.image;
-  //     tipImageElement.style.display = 'block';
-  //   } else if (tipImageElement) {
-  //     tipImageElement.style.display = 'none'; // Hide image if none available
-  //   }
+    // Update images dynamically
+    const tipImagesContainer = document.getElementById('tip-images');
+    if (tipImagesContainer) {
+      tipImagesContainer.innerHTML = ''; // Clear old images
+      currentTip.images.forEach((src: string) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = src;
+        imgElement.style.width = '200px';
+        tipImagesContainer.appendChild(imgElement);
+      });
+    }
 
-  //   // Optionally, handle video content (if any)
-  //   const tipVideoElement = document.getElementById('tip-video') as HTMLVideoElement;
-  //   if (tipVideoElement && currentTip.video) {
-  //     tipVideoElement.src = currentTip.video;
-  //     tipVideoElement.style.display = 'block';
-  //   } else if (tipVideoElement) {
-  //     tipVideoElement.style.display = 'none'; // Hide video if none available
-  //   }
-  // }
-
-    // Method to display the current tip (can include text, images, or video)
-    displayTip(): void {
-      const currentTip = this.tips[this.currentTipIndex];
-  
-      // Update the tip text with HTML
-      const tipTextElement = document.getElementById('tip-text');
-      if (tipTextElement) {
-        tipTextElement.innerHTML = currentTip.text; // Use innerHTML to render HTML tags
-      }
-  
-      // Optionally, update multiple images
-      const tipImagesContainer = document.getElementById('tip-images');
-      if (tipImagesContainer) {
-        tipImagesContainer.innerHTML = ''; // Clear previous images
-  
-        currentTip.images.forEach((imageSrc: string) => {
-          const imgElement = document.createElement('img');
-          imgElement.src = imageSrc;
-          imgElement.style.width = '200px'; // Example: adjust image size
-          tipImagesContainer.appendChild(imgElement);
-        });
-      }
-  
-     // Optionally, handle video content (if any)
-    //  const tipVideoElement = document.getElementById('tip-video') as HTMLIFrameElement;
-    //  if (tipVideoElement && currentTip.video) {
-    //    this.safeVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(currentTip.video);
-    //    tipVideoElement.src = this.safeVideoUrl as string;
-    //    tipVideoElement.style.display = 'block';
-    //  } else if (tipVideoElement) {
-    //    tipVideoElement.style.display = 'none'; 
-    //  }
-
-      // Handle video content (if any)
+    // Handle video dynamically
     if (currentTip.video) {
       this.safeVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(currentTip.video);
-  } else {
-      this.safeVideoUrl = null; // Reset if no video
+    } else {
+      this.safeVideoUrl = null; // Clear video if not present
+    }
   }
-   }
 
    goToMainMenu(): void {
     this.router.navigate(['/home']);

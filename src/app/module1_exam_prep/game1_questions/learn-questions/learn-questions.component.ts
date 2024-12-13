@@ -81,10 +81,15 @@ tips = [
     text: `<h3>How to Play the Game</h3>
            <p>Welcome to your creative study adventure! Here’s how to maximize your experience by logging your crafted questions:</p> 
            <p><strong>Log Your Questions:</strong> As you create questions and answers based on your lessons, log the details to track your progress. 
-           Enter the lesson title, your question, and its corresponding answer to build a personalized study guide.</p> 
+           Enter the lesson title, your question, and its corresponding answer to build a personalized study guide. You will earn a <b>point</b> for each question created.</p> `,
+    images: ["assets/questions/add-question.png"],
+    video: null
+  },
+  {
+    text: `<h3>How to Play the Game</h3>
            <p><strong>Review Your Questions:</strong> Revisit your logged questions to see how your understanding of the topic grows. 
            Use this record as a revision tool to identify gaps in your knowledge and strengthen your programming skills.</p>`,
-    images: ["assets/crafting-questions/view-questions.png"],
+    images: ["assets/questions/view-questions.png"],
     video: null
   },
   {
