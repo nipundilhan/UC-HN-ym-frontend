@@ -34,6 +34,7 @@ export class SelectavatarComponent implements OnInit {
   usrSngUp : UserSignup = {
     username : "",
     password : "",
+    type: "",
     email : "",
     dob : "",
     gender: "",

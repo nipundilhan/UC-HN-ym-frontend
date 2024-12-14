@@ -156,6 +156,7 @@ export class SignupComponent implements OnInit {
       const usrSngUp: UserSignup = {
         username: this.form.value.username?? '',
         password: this.form.value.password?? '',
+        type: 'GAMIFIED_STUDENT',
         email: this.form.value.email?? '',
         dob: this.form.value.dob?? '',
         gender: this.form.value.gender?? '',
