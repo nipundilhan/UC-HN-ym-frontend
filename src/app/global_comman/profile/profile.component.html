@@ -15,13 +15,13 @@
     </i>
   </div>
   <div class="profile-info">
-    <h2>{{userName}}</h2>
+    <h2> {{userName}}</h2>
     <p><i>{{userEmail}}</i></p>
     <!-- <p><strong>Email:</strong> {{userEmail}}</p> -->
     <!-- <p><strong>Birthday:</strong> {{userBirthday}}</p>
     <p><strong>Gender:</strong> {{userGender}}</p> -->
     <div class="profile-buttons">
-      <button class="btn-edit" (click)="openEditDetailsModal()">Edit Details</button>
+      <button class="btn-edit" (click)="openEditDetailsModal()">View Details</button>
       <button class="btn-password" (click)="openChangePasswordModal()">Change Password</button>
     </div>
   </div>
@@ -47,35 +47,37 @@
 <div class="modal" [class.show]="isEditDetailsModalVisible">
   <div class="modal-content">
     <span class="close-btn" (click)="closeEditDetailsModal()">&times;</span>
-    <h2>Edit Profile</h2>
+    <h2>My Details</h2>
 
     <form (ngSubmit)="onSubmit()">
       <!-- Username -->
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" id="username" [(ngModel)]="userName" name="username" (input)="onFieldChange()" required>
+        <input type="text" id="username" [(ngModel)]="userName" name="username" readonly>
       </div>
 
       <!-- Birthday -->
       <div class="form-group">
         <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" [(ngModel)]="userBirthday" name="birthday" (input)="onFieldChange()" required>
+        <input type="date" id="birthday" [(ngModel)]="userBirthday" name="birthday" readonly>
       </div>
 
       <!-- Gender -->
       <div class="form-group">
         <label for="gender">Gender:</label>
-        <select id="gender" [(ngModel)]="userGender" name="gender" (change)="onFieldChange()" required>
+        <input type="text" id="gender" [(ngModel)]="userGender" name="gender" readonly>
+
+        <!-- <select id="gender" [(ngModel)]="userGender" name="gender" readonly>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
-        </select>
+        </select> -->
       </div>
 
       <!-- Save Changes Button (Disabled until changes are made) -->
-      <div class="button-container">
+      <!-- <div class="button-container">
         <button type="submit" class="btn btn-password" [disabled]="!isSaveChangesEnabled">Save Changes</button>
-      </div>
+      </div> -->
       </form>
   </div>
 </div>
@@ -218,10 +220,9 @@
         <div class="exam-date-container">
           <div class="exam-date">
             <label for="exam-date-input">Exam Date : </label>
-            <input type="date" id="exam-date-input" [value]="examDate" [min]="minDate" (change)="onExamDateChange($event)" />
-      
+            <input type="date" id="exam-date-input" [(ngModel)]="examDate" [min]="minDate" />
             <!-- Pencil Icon for Edit -->
-            <i class="fas fa-pencil-alt edit-icon" (click)="enableEdit()"></i>
+            <!-- <i class="fas fa-pencil-alt edit-icon" (click)="enableEdit()"></i> -->
           </div>
           <div class="days-left">
             <p>{{ daysLeftMessage }}</p>

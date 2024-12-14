@@ -132,7 +132,7 @@
     padding-right: 35px; /* Space for the eye icon */
     width: 100%; /* Full width of the container */
     border-radius: 5px;
-    border: 2px solid #c99865;
+    border: 1px solid #c99865;
   }
   
   /* Eye icon inside the input field */
@@ -181,7 +181,9 @@
     padding: 8px; /* Space inside the input */
     box-sizing: border-box; /* Ensure padding is included in width */
     border-radius: 5px;
-    border: 2px solid #c27d2a;
+    /* border: 1px solid #c27d2a; */
+    border: none;
+    background-color: #f0e3d6;
   }
   
   /* Responsive styling */

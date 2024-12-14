@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserAuthService } from './user-auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 interface Avatar {
   code: string;
@@ -22,25 +23,36 @@ export class AvatarService {
     { code: 'AVTR08', path: 'assets/avatar-img/ava08.png' }
   ];
 
-  constructor(private userAuthService: UserAuthService) { }
+  // BehaviorSubject to store the current avatar path
+  private avatarPathSubject = new BehaviorSubject<string>(
+    'assets/avatar-img/default-avatar.png'
+  );
 
-  getAvatarPath(): string {
+  constructor(private userAuthService: UserAuthService) {
+    // Initialize with the user's avatar path
     const user = this.userAuthService.getUser();
-
     if (user) {
-      const parsedUser = JSON.parse(user); // Convert back to an object
-      const avatarCode = parsedUser.avatarCode;
-
-      // Find the avatar path based on the avatarCode
-      const selectedAvatar = this.avatars.find(avatar => avatar.code === avatarCode);
-
-      return selectedAvatar ? selectedAvatar.path : 'assets/avatar-img/default-avatar.png'; // Fallback image path
+      const parsedUser = JSON.parse(user);
+      this.setAvatarByCode(parsedUser.avatarCode);
     }
-    return 'assets/avatar-img/default-avatar.png'; // Fallback image if no user is logged in
   }
 
+  // Observable to let components listen to avatar changes
+  avatarPath$ = this.avatarPathSubject.asObservable();
+
   getAvatarPathByCode(avatarCode: string): string {
-    const selectedAvatar = this.avatars.find(avatar => avatar.code === avatarCode);
-    return selectedAvatar ? selectedAvatar.path : 'assets/avatar-img/default-avatar.png'; // Fallback image path
+    const selectedAvatar = this.avatars.find((avatar) => avatar.code === avatarCode);
+    return selectedAvatar
+      ? selectedAvatar.path
+      : 'assets/avatar-img/default-avatar.png';
+  }
+
+  setAvatarByCode(avatarCode: string): void {
+    const path = this.getAvatarPathByCode(avatarCode);
+    this.avatarPathSubject.next(path); // Update the BehaviorSubject
+  }
+
+  getCurrentAvatarPath(): string {
+    return this.avatarPathSubject.getValue();
   }
 }

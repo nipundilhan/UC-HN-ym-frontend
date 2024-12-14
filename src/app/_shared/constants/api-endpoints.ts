@@ -39,8 +39,9 @@ export const API_ENDPOINTS = {
     GET_INSTRUCTORS: `${USER_BASE}/find-By-role/ADMIN`,
     GET_STUDENTS: `${USER_BASE}/find-By-role/STUDENT`,
     DELETE_USER: `${USER_BASE}/delete-user`,
-    TIME_TRACKING: `${USER_BASE}/update-time-tracking`
-
+    TIME_TRACKING: `${USER_BASE}/update-time-tracking`,
+    UPDATE_STUDENT: `${USER_BASE}/update-student`
+    
   },
   MODULES: {
     BASE: MODULE_BASE,

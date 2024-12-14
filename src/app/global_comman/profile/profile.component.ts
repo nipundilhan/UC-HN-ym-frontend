@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -66,19 +66,21 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private avatarService: AvatarService,
     public apiCallService: ApiCallService,
-    public badgeService: BadgeService) { }
+    public badgeService: BadgeService,
+  public cdr: ChangeDetectorRef) { }
 
     displayedMoods: any[] = [];
     userMoodHistory: any[] = [];
     showPopup = false;
     
     selectedAvatarPath: string = ''; // Default avatar
+    selectedAvatarCode: string = ''; 
 
-    userName: string = 'John Doe';
-    userBirthday: string = '2000-01-01';
-    userGender: string = 'Male';
+    userName: string = '';
+    userBirthday: string = '';
+    userGender: string = '';
     userEmail: string = 'john.doe@example.com';
-    currentPassword: string = 'test';
+    currentPassword: string = '';
     newPassword: string = '';
     confirmPassword: string = '';
 
@@ -97,11 +99,11 @@ export class ProfileComponent implements OnInit {
 
     daysLeftMessage: string = '';
     isEditable: boolean = false;
-    minDate: string = ''; // Class property to hold the min date
-    examDate: string = '2024-09-30'; // Default exam date
+    minDate: string = new Date().toISOString().split('T')[0]; // Class property to hold the min date
+    examDate: string = ''; // Default exam date
 
     showTooltip: string = ''; // Variable to hold the tooltip message
-
+    avatarCode: string = '';
     // selectedBadge: any = null;
     selectedBadge: {
       gameCode: string;
@@ -118,6 +120,8 @@ export class ProfileComponent implements OnInit {
     gamePoints: number = 0;
     gameMargins: GameMargins | null = null;
 
+    avatars: { code: string, path: string, selected: boolean }[] = [];
+    isAvatarSelectionModalVisible: boolean = false;
     // avatars: Avatar[] = [
     //   { code: 'AVTR01', path: 'assets/avatar-img/ava01.png', selected: false},
     //   { code: 'AVTR02', path: 'assets/avatar-img/ava02.png', selected: false },
@@ -128,17 +132,102 @@ export class ProfileComponent implements OnInit {
     //   { code: 'AVTR07', path: 'assets/avatar-img/ava07.png', selected: false },
     //   { code: 'AVTR08', path: 'assets/avatar-img/ava08.png', selected: false }
     // ];
-    avatars: { code: string, path: string, selected: boolean }[] = [];
-    isAvatarSelectionModalVisible: boolean = false;
 
-    initializeAvatarSelection() {
-      this.avatars.forEach(avatar => {
-        avatar.selected = avatar.path === this.selectedAvatarPath;
-      });
-    }
-    
+    ngOnInit(): void {
+       // Fetch the avatar path
+      this.fetchAllData();
+      this.userName = this.getUserName();
+
+      }
+
+
+  // Function to fetch data from API
+  fetchAllData(): void {
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
+      (response: any) => {
+        this.userMoodHistory = response.moods;
+        this.userBirthday = response.dob;
+        this.userGender = response.gender;
+        const isoDate = response.examDate;
+        this.examDate = this.formatToDateOnly(isoDate);
+        this.avatarCode = response.avatarCode;
+        // this.avatarPath = this.avatarService.getAvatarPathByCode(this.avatarCode);
+        // console.log(this.avatarCode);
+
+        this.avatarPath = this.avatarService.getAvatarPathByCode(response.avatarCode);
+        this.avatarService.setAvatarByCode(response.avatarCode); // Update globally
+
+        this.selectedAvatarPath = this.avatarService.getAvatarPathByCode(response.avatarCode); // Make sure this is set first
+
+        this.avatars = this.avatarService['avatars']
+      .filter(avatar => avatar.code !== 'default')  // Exclude default avatar
+      .map(avatar => ({
+        ...avatar, 
+        selected: avatar.path === this.selectedAvatarPath // Add selected property
+        
+      })
+    );
+        this.cdr.detectChanges();
+        this.calculateDaysLeft();
+      this.loadInitialMoods(); // Load initial moods after data is fetched
+  
+        this.gamePoints= response.totalMarks
+            this.gameMargins = {
+              game1margin1: response.game1Margin1,
+              game1margin2: response.game1Margin2,
+              game1marks: response.game1Marks,
+              game1badge1Shared: response.game1Badge1Shared,
+              game1badge2Shared: response.game1Badge2Shared,
+  
+              game2margin1: response.game2Margin2,
+              game2margin2: response.game2Margin2,
+              game2marks: response.game2Marks,
+              game2likesMargin: response.game2LikesMargin,
+              game2likes: response.game2Likes,
+              game2badge1Shared: response.game2Badge1Shared,
+              game2badge2Shared: response.game2Badge2Shared,
+              game2badge3Shared: response.game2Badge3Shared,
+  
+              game3margin1: response.game3Margin1,
+              game3margin2: response.game3Margin2,
+              game3marks: response.game3Marks,
+              game3likesMargin: response.game3LikesMargin,
+              game3likes: response.game3Likes,
+              game3badge1Shared: response.game3Badge1Shared,
+              game3badge2Shared: response.game3Badge2Shared,
+              game3badge3Shared: response.game3Badge3Shared,
+  
+              game4margin1: response.game2Margin2,
+              game4margin2: response.game2Margin2,
+              game4marks: response.game4Marks,
+              game4badge1Shared: response.game4Badge1Shared,
+              game4badge2Shared: response.game4Badge2Shared,
+  
+              game5margin1: response.game2Margin2,
+              game5margin2: response.game2Margin2,
+              game5marks: response.game5Marks,
+              game5badge1Shared: response.game5badge1Shared,
+              game5badge2Shared: response.game5badge2Shared,
+            };
+  
+  
+  
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+    // initializeAvatarSelection() {
+    //   this.avatars.forEach(avatar => {
+    //     avatar.selected = avatar.path === this.selectedAvatarPath;
+    //   });
+    // }
+   
+
     openAvatarSelectionModal() {
-      this.initializeAvatarSelection();  // Initialize avatar selection
+      // this.initializeAvatarSelection();  // Initialize avatar selection
       this.isAvatarSelectionModalVisible = true;
     }
   
@@ -150,13 +239,34 @@ export class ProfileComponent implements OnInit {
     selectImage(avatar: { code: string, path: string, selected: boolean }) {
       this.avatars.forEach(av => av.selected = av.code === avatar.code);  // Deselect other avatars
       this.selectedAvatarPath = avatar.path;  // Update selected avatar path
+      this.selectedAvatarCode = avatar.code; 
     }
   
   
     confirmAvatarSelection() {
-      // Save the selected avatar or perform necessary actions
-      // For example, update user profile with the selected avatar
-      this.closeAvatarSelectionModal();
+      const requestBody = {
+        _id: this.userAuthService.getUserId(),
+        avatarCode: this.selectedAvatarCode, 
+        gender:"dummy",
+        dob:"dummy"
+      };
+  
+      this.apiCallService.executePutNoAuth(API_ENDPOINTS.USERS.UPDATE_STUDENT, requestBody).subscribe(
+        (response: any) => {
+
+          this.closeAvatarSelectionModal();
+
+          this.fetchAllData();
+       
+          this.cdr.detectChanges();
+          // Handle success response
+        },
+        (httpError: any) => {
+          console.log(httpError);
+          alert("An error occurred while updating");
+        }
+      );
+  
     }
 
 // Open modal and store initial values
@@ -243,20 +353,11 @@ onChangePasswordSubmit() {
   this.closeChangePasswordModal();
 }
 
-    // saveChanges() {
-    //   // Save the changes (e.g., make an API call)
-    //   this.originalUserName = this.userName;
-    //   this.originalUserBirthday = this.userBirthday;
-    //   this.originalUserGender = this.userGender;
-    //   this.originalUserEmail = this.userEmail;
-    //   this.closeModal();
-    // }
 
     loadInitialMoods() {
       // Load the last 7 days of mood data
       // this.displayedMoods = this.userMoodHistory.slice(-5).reverse();
       this.displayedMoods = this.userMoodHistory.slice(0, 5);
-      console.log(this.userMoodHistory);
     }
 
 
@@ -269,87 +370,18 @@ onChangePasswordSubmit() {
     }
 
   
-    userBadges = [
-      { name: 'Eye of Horus', image: 'assets/badges/badge01.png', earned: true },
-      { name: 'The Phoenix', image: 'assets/badges/badge02.png', earned: false },
-      { name: 'The Ankh', image: 'assets/badges/badge03.png', earned: false }
-    ];
 
     getMoodIcon(mood: string): string {
       return `assets/moods/${mood}.jpg`;
     }
 
 
-  ngOnInit(): void {
-    this.avatars = this.avatarService['avatars']
-    .filter(avatar => avatar.code !== 'default')  // Exclude default avatar
-    .map(avatar => ({
-      ...avatar, 
-      selected: avatar.path === this.selectedAvatarPath // Add selected property
-    }));
-    
-    // Initialize selected avatar path
-    this.selectedAvatarPath = this.avatarService.getAvatarPath();
-    this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
-    // this.loadInitialMoods();
-    this.fetchAllData();
-    this.calculateDaysLeft();
-    this.minDate = this.getTodayDate();
-
-    }
-// Function to fetch data from API
-fetchAllData(): void {
-  this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
-    (response: any) => {
-      this.userMoodHistory = response.moods;
-      this.loadInitialMoods(); // Load initial moods after data is fetched
-
-      this.gamePoints= response.totalMarks
-          this.gameMargins = {
-            game1margin1: response.game1Margin1,
-            game1margin2: response.game1Margin2,
-            game1marks: response.game1Marks,
-            game1badge1Shared: response.game1Badge1Shared,
-            game1badge2Shared: response.game1Badge2Shared,
-
-            game2margin1: response.game2Margin2,
-            game2margin2: response.game2Margin2,
-            game2marks: response.game2Marks,
-            game2likesMargin: response.game2LikesMargin,
-            game2likes: response.game2Likes,
-            game2badge1Shared: response.game2Badge1Shared,
-            game2badge2Shared: response.game2Badge2Shared,
-            game2badge3Shared: response.game2Badge3Shared,
-
-            game3margin1: response.game3Margin1,
-            game3margin2: response.game3Margin2,
-            game3marks: response.game3Marks,
-            game3likesMargin: response.game3LikesMargin,
-            game3likes: response.game3Likes,
-            game3badge1Shared: response.game3Badge1Shared,
-            game3badge2Shared: response.game3Badge2Shared,
-            game3badge3Shared: response.game3Badge3Shared,
-
-            game4margin1: response.game2Margin2,
-            game4margin2: response.game2Margin2,
-            game4marks: response.game4Marks,
-            game4badge1Shared: response.game4Badge1Shared,
-            game4badge2Shared: response.game4Badge2Shared,
-
-            game5margin1: response.game2Margin2,
-            game5margin2: response.game2Margin2,
-            game5marks: response.game5Marks,
-            game5badge1Shared: response.game5badge1Shared,
-            game5badge2Shared: response.game5badge2Shared,
-          };
 
 
-
-    },
-    (error) => {
-      console.error('Error fetching data:', error);
-    }
-  );
+// Utility function to format date
+formatToDateOnly(isoString: string): string {
+  const date = new Date(isoString);
+  return date.toISOString().split('T')[0]; // Extracts 'yyyy-MM-dd'
 }
 
 isBadgeShared(sharedKey: keyof GameMargins): boolean {
@@ -398,29 +430,40 @@ getTodayDate(): string {
     return this.userAuthService.getUserName();
 
   }
-  calculateDaysLeft() {
+
+  calculateDaysLeft(): void {
+    // if (!this.examDate) return; // Safety check if examDate is empty
+
     const examDate = new Date(this.examDate);
     const currentDate = new Date();
 
+    // Remove time component
+    examDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
     const timeDifference = examDate.getTime() - currentDate.getTime();
     const daysLeft = Math.ceil(timeDifference / (1000 * 3600 * 24));
-
-    if (daysLeft >= 0) {
+    if (daysLeft > 0) {
       this.daysLeftMessage = `${daysLeft} day(s) left until the exam.`;
+    } else if (daysLeft === 0) {
+      this.daysLeftMessage = 'The exam is today!';
     } else {
       this.daysLeftMessage = 'The exam has passed.';
     }
   }
 
-  onExamDateChange(event: any) {
-    this.examDate = event.target.value;
-    this.calculateDaysLeft();
-  }
+  // // Handle changes to the exam date input
+  // onExamDateChange(event: Event): void {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   this.examDate = inputElement.value;
+  //   this.calculateDaysLeft();
+  // }
+
 
   // Method to enable editing of the exam date
-  enableEdit() {
-    this.isEditable = true;
-  }
+  // enableEdit() {
+  //   this.isEditable = true;
+  // }
 
 
 
