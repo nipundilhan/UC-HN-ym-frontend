@@ -14,7 +14,7 @@ import { PointsService } from 'src/app/_services/points.service';
   styleUrls: ['./game1-breathing.component.css']
 })
 export class Game1BreathingComponent implements OnInit {
-  breathingForm: FormGroup;
+  // breathingForm: FormGroup;
   isPopupVisible: boolean = false;
   breathingModalOpen: boolean = false;
   BreathingData: any[] = [];
@@ -36,6 +36,9 @@ export class Game1BreathingComponent implements OnInit {
   showPracticeOptions: boolean = false; // Controls radio button visibility
   selectedTechnique: string = '';
   submitButtonText: string = 'Next';
+
+  selectedOption: string | null = null;
+  popupForm!: FormGroup;
 
 
   isAchievementPopupOpen = false;
@@ -70,56 +73,55 @@ music: HTMLAudioElement | null = null;
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
-    this.breathingForm = this.fb.group({
-      technique: ['', Validators.required],
-      practiceOption: ['system', Validators.required], 
-       // Only shown for Box or 4-7-8
-      cycles: [2], // For practicing within the system
-      timeSpent: [''], // For logging details
-      relaxationMusic: [false] 
-    });
+ this.popupForm = this.fb.group({
+  technique: ['', Validators.required],
+  cycles: [1, [Validators.required, Validators.min(1)]],
+  relaxationMusic: [false],
+  timeSpent: [null, [Validators.required, Validators.min(1)]],
+});
+    
   }
 
   ngOnInit(): void {
     this.getLoggedSessions();
-    this.breathingForm.get('technique')?.valueChanges.subscribe((technique) => {
-      this.selectedTechnique = technique;
-      this.handleTechniqueChange(technique);
-    });
     this.fetchBadgeMargin();
   }
 
-  handleTechniqueChange(technique: string): void {
-    if (technique === 'Box-breathing' || technique === '4-7-8') {
-      this.showPracticeOptions = true; // Show practice/log radio buttons
-    } else if (technique === 'Belly Breathing') {
-      this.showPracticeOptions = false; // Skip directly to logging details
-      this.breathingForm.patchValue({ practiceOption: 'log' });
+  selectOption(option: string): void {
+    this.selectedOption = option;
+  
+    // Reset form values for the technique when the option changes
+    this.popupForm.reset({ technique: '' });
+  
+    // Dynamically adjust validators based on the selected option
+    const cyclesControl = this.popupForm.get('cycles');
+    const timeSpentControl = this.popupForm.get('timeSpent');
+    
+    if (option === 'practice') {
+      cyclesControl?.setValidators([Validators.required, Validators.min(1)]);
+      timeSpentControl?.clearValidators();
+    } else if (option === 'log') {
+      timeSpentControl?.setValidators([Validators.required, Validators.min(1)]);
+      cyclesControl?.clearValidators();
     }
-    else if (technique === 'Alternate Nostril Breathing') {
-      this.showPracticeOptions = false; // Skip directly to logging details
-      this.breathingForm.patchValue({ practiceOption: 'log' });
+  
+    // Update validation state
+    cyclesControl?.updateValueAndValidity();
+    timeSpentControl?.updateValueAndValidity();
+  }
+  
+
+  goToNextPage() {
+    this.popupForm.get('technique')?.markAsTouched();
+  
+    if (this.popupForm.get('technique')?.valid) {
+      this.popupCurrentPage = 2;
     }
   }
 
-  goToNextPage(): void {
-    if (this.popupCurrentPage === 1) {
-      if (this.selectedTechnique === 'belly' || this.selectedTechnique === 'alternate'){
-        this.popupCurrentPage = 2; // Move to time input page directly
-      } else {
-        const practiceOption = this.breathingForm.value.practiceOption;
-        if (practiceOption) this.popupCurrentPage = 2; // Move to next step based on radio selection
-      }
-    } else if (this.popupCurrentPage === 2) {
-      this.onSubmit();
-    }
-  }
-
-  goToPreviousPage(): void {
-    if (this.popupCurrentPage > 1) {
-      this.popupCurrentPage--;
-    }
-  }
+goToPreviousPage() {
+  this.popupCurrentPage = 1;
+}
 
 
   getLoggedSessions(): Promise<void> {
@@ -160,85 +162,97 @@ music: HTMLAudioElement | null = null;
     }
 
   openBreathingPopup() {
-    console.log("hi");
     this.isPopupVisible = true;
   }
 
   closeBreathingPopup() {
     this.isPopupVisible = false;
+    this.popupCurrentPage = 1;
+    this.selectedOption = null;
     this.resetForm();
-
-  }
-
-
-  onTechniqueChange(): void {
-    this.selectedTechnique = this.breathingForm.value.technique;
-
-    // Show time input only for alternate and belly breathing or if logging details
-    if (this.selectedTechnique === 'alternate' || this.selectedTechnique === 'belly' ) {
-      this.showTimeInput = true;
-    } else {
-      this.showTimeInput = this.breathingForm.value.practiceOption === 'log';
-    }
   }
 
   onSubmit(): void {
-    const formData = this.breathingForm.value;
+    if (this.popupForm.invalid) {
+      this.popupForm.markAllAsTouched();
+      return;
+    }
   
-    // Prepare the request body based on practiceOption
+    const formData = this.popupForm.value;
+  
     const requestBody: any = {
       studentId: this.userAuthService.getUserId(),
       techniqueCode: formData.technique,
     };
   
-    if (formData.practiceOption === 'system') {
-      requestBody.cycles = formData.cycles; // Save cycles only
-    } else if (formData.practiceOption === 'log') {
-      requestBody.time = formData.timeSpent; // Save timeSpent only
+    if (this.selectedOption === 'practice') {
+      requestBody.cycles = formData.cycles;
+    } else if (this.selectedOption === 'log') {
+      requestBody.time = formData.timeSpent;
     }
   
-    // Make the API call to save the data
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.BREATHING.BASE, requestBody).subscribe(
-      (response: any) => {
-        // Update sessions after successful save
-
+      () => {
         setTimeout(() => {
-          this.fetchUpdatedStudentPoints(); 
-          this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
-        }, 100); // Delay to ensure data consistency
-
-        this.checkAchievement(); // Check for achievement after data fetch
+          this.fetchUpdatedStudentPoints();
+          this.fetchBadgeMargin();
+        }, 100);
+        this.checkAchievement();
       },
-      (httpError: any) => {
-        console.log(httpError);
+      (error: any) => {
+        console.log(error);
         alert("An error occurred while recording the session");
       }
     );
   
-    // Close the popup and reset the form
     this.isPopupVisible = false;
     this.resetForm();
   }
+  
   
 
   resetForm(): void {
     this.popupCurrentPage = 1;
     this.showPracticeOptions = false;
-    this.breathingForm.reset({
+    this.selectedOption = null; // Clear the selected option
+  
+    // Reset the form controls and clear their values
+    this.popupForm.reset({
       technique: '',
-      practiceOption: 'system',
-      cycles: 2,
+      cycles: '',
       timeSpent: '',
+      relaxationMusic: false
     });
+  
+    // Clear validators from the form
+    this.popupForm.clearValidators();
+    
+    // Re-initialize validation for controls as needed
+    const cyclesControl = this.popupForm.get('cycles');
+    const timeSpentControl = this.popupForm.get('timeSpent');
+    cyclesControl?.clearValidators();
+    timeSpentControl?.clearValidators();
+  
+    // Reapply validators based on the selected option
+    if (this.selectedOption === 'practice') {
+      cyclesControl?.setValidators([Validators.required, Validators.min(1)]);
+    } else if (this.selectedOption === 'log') {
+      timeSpentControl?.setValidators([Validators.required, Validators.min(1)]);
+    }
+  
+    cyclesControl?.updateValueAndValidity();
+    timeSpentControl?.updateValueAndValidity();
   }
+  
 
 
   startBreathingSession(): void {
     this.isPopupVisible = false;
-    this.selectedTechnique = this.breathingForm.value.technique;
-    this.cycleCount = this.breathingForm.value.cycles;
-    this.relaxationMusicEnabled = this.breathingForm.value.relaxationMusic;
+    this.selectedTechnique = this.popupForm.value.technique;
+    this.cycleCount = this.popupForm.value.cycles;
+    this.relaxationMusicEnabled = this.popupForm.value.relaxationMusic;
 
+    console.log(this.popupForm.value);
     if (this.relaxationMusicEnabled) {
       this.music = new Audio('/assets/relaxation-music.mp3');
       this.music.loop = true; // Ensure the music plays continuously
@@ -271,7 +285,7 @@ music: HTMLAudioElement | null = null;
   // Method to run the session (with dynamic cycling logic based on technique)
 runSession() {
   // Set the interval duration based on the selected technique
-  const intervalDuration = this.selectedTechnique === '4-7-8' ? 18000 : 17000;
+  const intervalDuration = this.selectedTechnique === '4-7-8 Breathing' ? 18000 : 17000;
 
   this.interval = setInterval(() => {
     if (!this.sessionPaused) {
@@ -284,9 +298,9 @@ runSession() {
 }
 
     updateGifSource(): void {
-      if (this.selectedTechnique === 'Box-breathing') {
+      if (this.selectedTechnique === 'Box-Breathing') {
         this.gifSource = '/assets/gifs/box-breathing.gif'; 
-      } else if (this.selectedTechnique === '4-7-8') {
+      } else if (this.selectedTechnique === '4-7-8 Breathing') {
         this.gifSource = '/assets/gifs/4-7-8-breathing.gif';  
       } 
     }

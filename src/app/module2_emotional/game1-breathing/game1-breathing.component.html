@@ -69,114 +69,93 @@
             <div class="modal-content">
               <span class="close-icon" (click)="closeBreathingPopup()">&times;</span>
         
-              <h2>Breathing Exercise</h2>
-        
-              <form [formGroup]="breathingForm">
-                <!-- Page 1: Select Technique -->
-                <div *ngIf="popupCurrentPage === 1">
-                  <div class="form-group">
-                    <label for="technique">Breathing Technique:</label>
-                    <select id="technique" formControlName="technique">
-                      <option value="" disabled selected>Select Technique</option>
-                      <option value="Box-breathing">Box Breathing</option>
-                      <option value="4-7-8">4-7-8 Technique</option>
-                      <option value="Belly Breathing">Belly Breathing</option>
-                      <option value="Alternate Nostril Breathing">Alternate Nostril Breathing</option>
-                    </select>
+              <!-- Page 1: Select Practice or Log -->
+              <div *ngIf="popupCurrentPage === 1">
+                <h4>
+                  What do you want to do today?
+                  <span class="info-icon">
+                    ℹ
+                    <span class="tooltip-text">
+                      <b>Practice Session:</b> Follow guided breathing exercises (Box breathing or 4-7-8 breathing) within the app, with animations and relaxation music. The session will be automatically logged for you.
+                      <br><br>
+                      <b>Log Session:</b> Manually log your breathing exercises (Box breathing, 4-7-8 breathing, Belly breathing, or Alternate Nostril Breathing) if you have already completed them outside the app.
+                    </span>
+                  </span>
+                </h4>
+                <div class="selection-boxes">
+                  <div class="option-box" [class.active]="selectedOption === 'practice'" (click)="selectOption('practice')">
+                    Practice Session
                   </div>
-        
-                                  <!-- Practice Options -->
-                <div *ngIf="showPracticeOptions" class="form-group-radio">
-                  <label>Practice Option:</label>
-
-                  <div class="info-icon-container">
-                    <span class="info-icon">i</span>
-                    <div class="tooltip-i">
-                      <p><strong>Practice within Application:</strong> You can use this option to practice the Box Breathing or 4-7-8 Techniques directly within the application! </p>
-                      <p><strong>Log Details Only:</strong> Choose this option to record your progress when you practice on your own. </p>
-                    </div>
-                  </div>
-
-                  <div class="radio-group">
-                    <div class="radio-item">
-                      <input
-                        type="radio"
-                        formControlName="practiceOption"
-                        value="system"
-                        id="systemOption"
-                      />
-                      <label for="systemOption">Practice within Application</label>
-                    </div>
-                    <div class="radio-item">
-                      <input
-                        type="radio"
-                        formControlName="practiceOption"
-                        value="log"
-                        id="logOption"
-                      />
-                      <label for="logOption">Log Details Only</label>
-                    </div>
+                  <div class="option-box" [class.active]="selectedOption === 'log'" (click)="selectOption('log')">
+                    Log Session
                   </div>
                 </div>
-
-
-                  <!-- Next Button -->
-                  <div class="button-group">
-                    <button class="back-next-btn" (click)="goToNextPage()">Next</button>
+        
+                <div *ngIf="selectedOption" [formGroup]="popupForm">
+                  <label for="technique">Select Technique:</label>
+                  <select id="technique" formControlName="technique">
+                    <option value="" disabled>Select a Technique</option>
+                    <option value="Box-Breathing">Box-Breathing</option>
+                    <option value="4-7-8 Breathing">4-7-8 Breathing</option>
+                    <option *ngIf="selectedOption === 'log'" value="Belly Breathing">Belly Breathing</option>
+                    <option *ngIf="selectedOption === 'log'" value="Alternate Nostril Breathing">Alternate Nostril Breathing</option>
+                  </select>
+                  <div *ngIf="popupForm.get('technique')?.invalid && popupForm.get('technique')?.touched" class="error">
+                    Technique is required.
                   </div>
-                  </div>
-          
-                  <!-- Page 2: Time or Cycles Input -->
-                  <div *ngIf="popupCurrentPage === 2">
-                    <!-- For Diaphragmatic or Logging Time -->
-                    <div *ngIf="selectedTechnique === 'Belly Breathing' || selectedTechnique === 'Alternate Nostril Breathing' || breathingForm.value.practiceOption === 'log'">
-                      <label for="timeSpent">Time Spent (minutes):</label>
-                      <input id="timeSpent" type="number" formControlName="timeSpent" />
-                    </div>
-          
-                    <!-- For Practicing Cycles -->
-                    <div *ngIf="breathingForm.value.practiceOption === 'system'">
-                      <label for="cycles">Number of Cycles:</label>
-                      <select id="cycles" formControlName="cycles">
-                        <option *ngFor="let cycle of [2, 5, 10, 15, 20]" [value]="cycle">{{ cycle }} Cycles</option>
-                      </select>
-                    </div>
-                  
-
-                  <!-- Option for Relaxation Music -->
-                <div *ngIf="breathingForm.value.practiceOption === 'system'" >
-                  <label>
-                    <input
-                      type="checkbox"
-                      formControlName="relaxationMusic"
-                    />
-                    Practice with Relaxation Music
-                  </label>
+                </div>
+        
+                <div class="button-group">
+                  <button class="back-next-btn" (click)="goToNextPage()">Next</button>
                 </div>
               </div>
-                  <!-- Navigation Buttons -->
-                  <div class="button-group">
-                    <!-- Back Button -->
-                    <button *ngIf="popupCurrentPage > 1" class="back-next-btn" (click)="goToPreviousPage()">Back</button>
-          
-                    <!-- Start Session Button -->
-                    <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'system'" 
+        
+              <!-- Page 2: Time or Cycles Input -->
+              <div *ngIf="popupCurrentPage === 2" [formGroup]="popupForm">
+                <div *ngIf="selectedOption === 'practice'">
+                  <label for="cycles">Number of Cycles:</label>
+                  <input type="number" id="cycles" formControlName="cycles" min="1" max="10" />
+                  <div *ngIf="popupForm.get('cycles')?.invalid && popupForm.get('cycles')?.touched" class="error">
+                    Please enter a valid number of cycles (minimum 1).
+                  </div>
+                  <div>
+                    <input type="checkbox" formControlName="relaxationMusic" />
+                    <label for="relaxationMusic">Play Relaxation Music</label>
+                  </div>
+                </div>
+        
+                <div *ngIf="selectedOption === 'log'">
+                  <label for="timeSpent">Time Spent (minutes):</label>
+                  <input type="number" id="timeSpent" formControlName="timeSpent" min="1" />
+                  <div *ngIf="popupForm.get('timeSpent')?.invalid && popupForm.get('timeSpent')?.touched" class="error">
+                    Please enter a valid time (minimum 1 minute).
+                  </div>
+                </div>
+        
+                <div class="button-group">
+                  <button class="back-next-btn" type="button" (click)="goToPreviousPage()">Back</button>
+                  <button 
+                    *ngIf="selectedOption === 'practice'" 
                     class="log-start-btn" 
+                    [disabled]="popupForm.invalid" 
                     (click)="startBreathingSession()">
                     Start Session
-                    </button>
-  
-                    <!-- Log Details Button -->
-                    <button *ngIf="popupCurrentPage === 2 && breathingForm.value.practiceOption === 'log'" 
+                  </button>
+                  <button 
+                    *ngIf="selectedOption === 'log'" 
+                    type="submit"
                     class="log-start-btn" 
+                    [disabled]="popupForm.invalid" 
                     (click)="onSubmit()">
                     Log Details
-                    </button>
-                  </div>
-                </form>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>  
+          </div>
+        </div>
+        
+        
         
 <!-- Breathing session controls (display after session starts) -->
 <div *ngIf="sessionRunning" class="modal">

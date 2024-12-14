@@ -146,6 +146,7 @@ form {
 
 label {
   margin-top: 10px;
+  margin-right: 5px;
   /* font-weight: bold; */
 }
 
@@ -154,7 +155,8 @@ input[type="date"],
 input[type="checkbox"],
 select,
 textarea {
-  margin-top: 5px;    
+  margin-top: 5px;  
+  margin-right: 5px;  
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #c99865;
@@ -166,7 +168,6 @@ input[type="file"] {
 
 button[type="submit"] {
   display: block; /* Make the button a block-level element */
-  margin-top: 15px;
   padding: 8px 15px;
   background-color: #c27d2a; 
   color: white;
@@ -261,10 +262,15 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.back-next-btn{
-  background-color: #ea8f18;
+.log-start-btn:disabled{
+  background-color: #999c9a;
   color: white;
-  padding: 10px 20px;
+}
+
+.back-next-btn{
+  background-color: #28a745;
+  color: white;
+  padding: 8px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -752,7 +758,7 @@ button {
   cursor: not-allowed; /* Change cursor for disabled */
   color: #878787;
 }
-
+/* 
 .info-icon-container {
   display: inline-block;
   position: relative;
@@ -803,7 +809,7 @@ button {
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent #333 transparent;
-}
+} */
 
 .gif-animation{
   width: 400px;
@@ -885,4 +891,88 @@ button {
   }
   
   
+}
+.selection-boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.option-box {
+  flex: 1;
+  padding: 15px;
+  margin: 0 10px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  color: #555;
+}
+
+.option-box:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.option-box.active {
+  background-color: #f3812a;
+  color: #fff;
+  border-color: #c87637;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+input.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+
+.info-icon {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+  /* font-size: 0.8rem;
+  color: #555; */
+  cursor: pointer;
+
+  width: 18px;
+  background-color: #007bff;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.info-icon .tooltip-text {
+  visibility: hidden;
+  width: 250px;
+  background-color: #fff;
+  color: #333;
+  text-align: left;
+  padding: 8px;
+  border-radius: 5px;
+  
+  position: absolute;
+  top: 100%; /* Tooltip appears below the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+.info-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
