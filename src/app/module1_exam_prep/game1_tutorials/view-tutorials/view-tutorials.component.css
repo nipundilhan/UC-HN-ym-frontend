@@ -753,6 +753,10 @@
   background-color: #e4af0e;
 }
 
+.tutorial-box .btn-submit:disabled{
+  background-color: #999191;
+}
+
 .form-group {
   width: 100%; /* Ensure the parent container has 100% width */
 }

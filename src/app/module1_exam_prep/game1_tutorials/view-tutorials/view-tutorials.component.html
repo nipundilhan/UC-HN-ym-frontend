@@ -10,7 +10,7 @@
               'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
               'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
             }"
-          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more tutorial/labs needed') : ''"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more completed tutorial/labs needed') : ''"
           (mouseleave)="showTooltip = ''">
           <img src="/assets/badges/badge01_a.png" alt="Eye of Horus">
           <p class="badge-title">Eye of Horus</p>
@@ -23,7 +23,7 @@
           'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
           'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
         }"
-        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more tutorial/labs needed') : ''"
+        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more completed tutorial/labs needed') : ''"
         (mouseleave)="showTooltip = ''">
         <img src="/assets/badges/badge01_b.png" alt="Eye of Horus">
         <p class="badge-title">Eye of Horus</p>
@@ -113,9 +113,24 @@
             <input type="date" id="taskDate" [(ngModel)]="selectedTask.date" name="date" [disabled]="false" [max]="getTodayDate()" required />
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="taskStatus">Status:</label>
             <select id="taskStatus" name="taskStatus" [(ngModel)]="selectedTask.status" [disabled]="!isStatusEditable" required>
+              <option value="Started">Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div> -->
+
+          <div class="form-group">
+            <label for="taskStatus">Status:</label>
+            <select 
+              id="taskStatus" 
+              name="taskStatus" 
+              [(ngModel)]="selectedTask.status" 
+              [disabled]="isDropdownDisabled()" 
+              required
+            >
               <option value="Started">Started</option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
@@ -184,6 +199,9 @@
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
             </select>
+            <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+              <div *ngIf="f['status'].errors['required']">Status is required</div>
+          </div>
           </div>
 
           <div class="form-group">
@@ -193,15 +211,21 @@
                   formControlName="description"
                   rows="4"
                   class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
               ></textarea>
-              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+              <!-- <textarea
+                  id="description"
+                  formControlName="description"
+                  rows="4"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+              ></textarea> -->
+              <!-- <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
                   <div *ngIf="f['description'].errors['required']">Description is required</div>
-              </div>
+              </div> -->
           </div>
 
           <div class="form-group">
-              <button type="submit" class="btn-submit">Submit</button>
+              <button type="submit" class="btn-submit"  [disabled]="!tutorialForm.valid">Submit</button>
           </div>
       </form>
     </div>

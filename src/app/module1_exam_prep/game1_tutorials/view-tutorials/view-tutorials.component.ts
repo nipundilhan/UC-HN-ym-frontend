@@ -70,7 +70,7 @@ export class ViewTutorialsComponent implements OnInit {
     private pointsService: PointsService
   ) {
     this.tutorialForm = this.formBuilder.group({
-      description: ['', Validators.required],
+      description: [''],
       date: [this.getTodayDate(), Validators.required], // Set default date to today
       status: ['', Validators.required],  // Add status field
       tutorialName: ['', Validators.required]
@@ -127,12 +127,6 @@ export class ViewTutorialsComponent implements OnInit {
     this.selectedTask = { ...task };
     this.originalTask = { ...task };
     this.isTaskModalOpen = true;
-
-    // if (this.selectedTask.status === 'Completed') {
-    //   this.tutorialForm.get('taskStatus')?.disable();
-    // } else {
-    //   this.tutorialForm.get('taskStatus')?.enable();
-    // }
   }
 
   closeTaskModal(): void {
@@ -147,8 +141,13 @@ export class ViewTutorialsComponent implements OnInit {
       return JSON.stringify(this.selectedTask) !== JSON.stringify(this.originalTask);
   }
 
-  get isStatusEditable(): boolean {
-    return this.selectedTask.status !== 'Completed';
+  // get isStatusEditable(): boolean {
+  //   return this.selectedTask.status !== 'Completed';
+  // }
+
+  isDropdownDisabled(): boolean {
+    return this.originalTask.status === 'Completed'; 
+    // Use originalTask to check if the record was already Completed when opened.
   }
 
   openModal(): void {
@@ -391,6 +390,7 @@ export class ViewTutorialsComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.tutorialForm.reset();
+    this.tutorialForm.patchValue({ date: this.getTodayDate() });
   }
 
   openDeleteConfirmationPopup(): void {
