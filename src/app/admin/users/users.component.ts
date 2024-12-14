@@ -23,6 +23,13 @@ export class UsersComponent implements OnInit {
   studentCount: number = 0;
   instructorCount: number = 0;
 
+  selectedTimeTracking: any[] = []; // Stores the selected user's time tracking data
+  isTimeTrackingPopupOpen: boolean = false; // Controls popup visibility
+
+  currentTimePage: number = 1;
+  itemsPerPage: number = 10; // Adjust as needed
+  totalTimePages: number = 1;
+
   newUser: any = {
     role: '',
     username: '',
@@ -60,7 +67,12 @@ export class UsersComponent implements OnInit {
     getStudents(): any[] {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.GET_STUDENTS).subscribe(
         (response: any) => {
-          this.users = response.users;
+          // this.users = response.users;
+          this.users = response.users.map((user: any) => {
+            // Calculate total time by summing durations
+            const totalTime = user.timeTracking?.reduce((sum: number, record: any) => sum + record.duration, 0) || 0;
+            return { ...user, totalTime }; // Add totalTime property to user
+          });
            this.studentCount = response.totalCount;
         },
         (error) => {
@@ -95,6 +107,55 @@ export class UsersComponent implements OnInit {
     this.loadUsers('INSTRUCTOR'); // Load instructors
   }
 
+  // openTimeTrackingPopup(user: any): void {
+  //   this.selectedTimeTracking = user.timeTracking; // Assign user's timeTracking details
+  //   this.isTimeTrackingPopupOpen = true; // Open popup
+  // }
+
+  openTimeTrackingPopup(user: any): void {
+    this.selectedTimeTracking = user.timeTracking; // Assign user's timeTracking details
+    this.calculateTotalPages();
+    this.isTimeTrackingPopupOpen = true; // Open popup
+  }
+
+
+  closeTimeTrackingPopup(): void {
+    this.isTimeTrackingPopupOpen = false; // Close popup
+  }
+
+  calculateTotalPages(): void {
+    this.totalTimePages = Math.ceil(this.selectedTimeTracking.length / this.itemsPerPage);
+  }
+
+  getPaginatedRecords(): any[] {
+    const startIndex = (this.currentTimePage - 1) * this.itemsPerPage;
+    return this.selectedTimeTracking.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  // Move to the next page
+  nextPageTime(): void {
+    if (this.currentTimePage < this.totalTimePages) {
+      this.currentTimePage++;
+    }
+  }
+
+  // Move to the previous page
+  previousPageTime(): void {
+    if (this.currentTimePage > 1) {
+      this.currentTimePage--;
+    }
+  }
+
+
+  
+  // Format time from seconds to HH:MM:SS
+  formatTime(duration: number): string {
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+    const seconds = duration % 60;
+    return `${hours}h ${minutes}m ${seconds}s`;
+  }
+  
   openAddUserPopup(): void {
     this.showAddUserPopup = true;
   }
@@ -114,6 +175,7 @@ export class UsersComponent implements OnInit {
         role: 'student',
         username: this.newUser.username,
         password: this.newUser.password,
+        type: 'GAMIFIED_STUDENT',
         email: this.newUser.email,
         dob: this.newUser.dob,
         gender: this.newUser.gender,
@@ -125,6 +187,7 @@ export class UsersComponent implements OnInit {
         role: 'instructor',
         username: this.newUser.username,
         password: this.newUser.password,
+        type: 'INSTRUCTOR',
         email: this.newUser.email,
         gender: this.newUser.gender,
         avatarCode: 'default'

@@ -25,27 +25,8 @@
 
   
   </div>
-    <!-- <div class="user-type-cards">
-      <div 
-        class="card" 
-        (click)="switchToStudents()" 
-        [ngClass]="{ 'active-card': userType === 'STUDENT' }">
-        <img src="/assets/admin/students.png" alt="Students" class="card-icon" />
-        <h4>Students</h4>
-        <span class="user-count">{{ studentCount || 0 }}</span>
+   
 
-      </div>
-      <div 
-        class="card" 
-        (click)="switchToInstructors()" 
-        [ngClass]="{ 'active-card': userType === 'INSTRUCTOR' }">
-        <img src="/assets/admin/instructor.png" alt="Instructors" class="card-icon" />
-        <h4>Instructors</h4>
-        <span class="user-count">{{ instructorCount || 0 }}</span> 
-
-      </div>
-    </div>
-   -->
     <!-- User List -->
     <div class="user-list">
       <table>
@@ -54,7 +35,8 @@
             <th>Name</th>
             <th>Email</th>
             <th>Gender</th>
-            <th>Join Date</th>
+            <th *ngIf = "userType === 'STUDENT'">Join Date</th>
+            <th *ngIf = "userType === 'STUDENT'">Engagement</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -63,7 +45,12 @@
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.gender }}</td>
-            <td>{{ user.signupDate }}</td>
+            <td *ngIf = "userType === 'STUDENT'">{{ user.signupDate }}</td>
+            <td *ngIf = "userType === 'STUDENT'">
+              <button (click)="openTimeTrackingPopup(user)">
+                {{ formatTime(user.totalTime) }}
+              </button>
+            </td>
             <td class="user-actions">
               <button (click)="openEditUserPopup(user)">
                 <span class="material-icons">edit</span>
@@ -100,6 +87,68 @@
       <button class="add-button " (click)="updateUser()">Save changes</button>
     </form>
   </div>
+
+  <!-- <div class="modal" *ngIf="isTimeTrackingPopupOpen">
+    <div class="modal-content">
+      <span class="close-btn" (click)="closeTimeTrackingPopup()">&times;</span>
+      <h2>Time Tracking Details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Number of Logins Per Day</th>
+            <th>Last Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of selectedTimeTracking">
+            <td>{{ record.date }}</td>
+            <td>{{ formatTime(record.duration) }}</td>
+            <td>{{ record.times }}</td>
+            <td>{{ record.lastActionFormatTime }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+
+ <div class="modal" *ngIf="isTimeTrackingPopupOpen">
+    <div class="modal-content">
+  <!-- <div class="popup-container" *ngIf="isTimeTrackingPopupOpen"> -->
+    <div class="popup-header">
+      <h2>Time Tracking Details</h2>
+      <span class="close-popup" (click)="closeTimeTrackingPopup()">×</span>
+    </div>
+    
+    <table class="time-tracking-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+            <th>Duration</th>
+            <th>Number of Logins Per Day</th>
+            <th>Last Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of getPaginatedRecords()">
+          <td>{{ record.date }}</td>
+          <td>{{ formatTime(record.duration) }}</td>
+          <td>{{ record.times }}</td>
+          <td>{{ record.lastActionFormatTime }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-controls">
+      <button (click)="previousPageTime()" [disabled]="currentTimePage === 1">Previous</button>
+      <span>Page {{ currentTimePage }} of {{ totalTimePages }}</span>
+      <button (click)="nextPageTime()" [disabled]="currentTimePage === totalTimePages">Next</button>
+    </div>
+  </div>
+  </div>
+  
+  
   
   <!-- Delete Confirmation Popup -->
   <div *ngIf="showDeleteConfirmationPopup" class="delete-user-popup">
