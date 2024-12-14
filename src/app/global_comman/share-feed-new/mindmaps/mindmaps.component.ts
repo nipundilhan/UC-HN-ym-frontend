@@ -34,7 +34,15 @@ export class MindmapsComponent implements OnInit {
       this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MINDMAPS.SHARED_MINDMAPS + "/" + this.userAuthService.getUserId()).subscribe(
         (response: any) => {
           this.AllData = response;
-          this.mindmaps = response.data.mindMaps;
+          // this.mindmaps = response.data.mindMaps;
+
+          this.mindmaps = response.data.mindMaps.map((mindmap: any) => {
+            return {
+              ...mindmap,
+              description: mindmap.description && mindmap.description !== "null" ? mindmap.description : "No description"
+            };
+          });
+          resolve();
           // this.currentPage = 1; // Reset to first page after loading
           resolve(); // Resolve the promise after the data is successfully fetched
         },
