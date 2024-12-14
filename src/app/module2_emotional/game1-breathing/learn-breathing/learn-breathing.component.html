@@ -56,10 +56,35 @@
                         </li>
                     </ul>
                     </div>
-    
+
+                    <div *ngIf="introStep === 3" class="guidelines">
+                      <h4>How to Get Practice and Log Breathing Sessions</h4>
+                      <p>Within this application, you can choose to either practice or log breathing sessions based on your needs. However, among the breathing techniques available, only the Box Breathing (4-4-4) and 4-7-8 Breathing techniques can be practiced within the app with helpful animations. 
+                        Other techniques, such as Belly Breathing and Alternate Nostril Breathing, need to be practiced manually on your own, but you can still log the details of these sessions within the app.</p>
+                      </div>
+
+                      <div *ngIf="introStep === 4" class="guidelines">
+                        <p> Here's how to log and practice breathing techniques:</p>
+                      
+                        <ul class="animated-list">
+                            <li>
+                              <b>Practice Session (Only applicable for Box Breathing and 4-7-8 Breathing):</b> To practice these techniques within the app, click on Practice Session. Then select the breathing technique (Box or 4-7-8) from the dropdown menu and click Next.
+                            Choose the number of cycles you want to practice. Optionally, you can enable relaxation music by ticking the checkbox (you can unmute it at any time). Your session details will be recorded automatically.
+                            <li>
+                            <b>Log session:</b> You can log details of any breathing session you practice on your own (for any technique taught within the app), click on Log Session. Then select the breathing technique from the dropdown menu and click Next. Enter the duration of your practice (in minutes). Click Submit to save the details.
+                            </li>
+
+                        </ul>
+                        </div>
+      
+                        <div *ngIf="introStep === 5" class="guidelines">
+                          <h4>How to Get Practice and Log Breathing Sessions</h4>
+                          <img style ="height: 400px; margin-bottom: 5px;" src = "/assets/breathing/log-breathing.png">
+
+                          </div>
               
     
-                <div *ngIf="introStep === 3">
+                <div *ngIf="introStep === 6">
                     <h4>Earn Points and Unlock Badges!</h4>
                         <p>
                             Each breathing session you log will earn you points to show your progress. The more consistent you are, the more points you’ll collect.
@@ -76,7 +101,7 @@
                             <img style ="height: 80px; margin-bottom: 5px;" src = "/assets/badges/badge04_b.png">
                         </ul>
                     </div>
-                <div *ngIf="introStep === 4">
+                <div *ngIf="introStep === 7">
                     <h4>Ready to Begin?</h4>
                     <p>
                         Explore the "Learn" section to master these breathing techniques. When you're ready, head to the "Play" section to start practicing or log your manual sessions.
@@ -88,8 +113,8 @@
     
                 <div class="button-container">                
                     <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
-                    <button class = "btn-next" *ngIf="introStep < 4" (click)="nextStep()">Next</button>
-                    <button class = "btn-next" *ngIf="introStep == 4" (click)="closeIntro()">Start</button>
+                    <button class = "btn-next" *ngIf="introStep < 7" (click)="nextStep()">Next</button>
+                    <button class = "btn-next" *ngIf="introStep == 7" (click)="goToGame()">Start</button>
     
                 </div>
             </div>

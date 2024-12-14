@@ -20,7 +20,7 @@ export class LearnBreathingComponent implements OnInit {
 
   // Handle the "Next" button click in the intro dialog
   nextStep(): void {
-    if (this.introStep < 4) {
+    if (this.introStep < 7) {
       this.introStep++; // Go to the next step
     } else {
       this.showIntroDialog = false; // End the intro once we've gone through all steps
@@ -36,6 +36,7 @@ export class LearnBreathingComponent implements OnInit {
 
   closeIntro(): void {
     this.showIntroDialog = false; // Close the intro dialog
+
   }
 
   
@@ -279,6 +280,11 @@ export class LearnBreathingComponent implements OnInit {
   closeHelpPopup() {
     this.helpPopupVisible = false;
   }
+
+  goToGame(): void {
+    // Example: redirecting to the game route
+    this.router.navigate(['/play-breathing']); // Update '/game' to the actual route for your game page
+}
 
 
 }
