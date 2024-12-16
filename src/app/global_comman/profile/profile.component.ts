@@ -138,6 +138,16 @@ export class ProfileComponent implements OnInit {
       this.fetchAllData();
       this.userName = this.getUserName();
 
+      this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+      .subscribe(
+        response => {
+  
+        },
+        error => {
+          // console.error("Error deleting the user:", error);
+        }
+      );
+  
       }
 
 

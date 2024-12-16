@@ -107,6 +107,16 @@ export class ViewQuestionsComponent implements OnInit {
     this.getQuestions(); // Fetch existing questions
     this.fetchBadgeMargin();
 
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+    .subscribe(
+      response => {
+
+      },
+      error => {
+        // console.error("Error deleting the user:", error);
+      }
+    );
+
   }
 
 

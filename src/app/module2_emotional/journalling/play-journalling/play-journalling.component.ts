@@ -113,6 +113,17 @@ export class PlayJournallingComponent implements OnInit {
       this.selectedTechnique = technique;
     });
     this.fetchBadgeMargin();
+
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+    .subscribe(
+      response => {
+
+      },
+      error => {
+        // console.error("Error deleting the user:", error);
+      }
+    );
+
   }
 
   onTechniqueChange(): void {

@@ -85,6 +85,17 @@ music: HTMLAudioElement | null = null;
   ngOnInit(): void {
     this.getLoggedSessions();
     this.fetchBadgeMargin();
+
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+    .subscribe(
+      response => {
+
+      },
+      error => {
+        // console.error("Error deleting the user:", error);
+      }
+    );
+
   }
 
   selectOption(option: string): void {

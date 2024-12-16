@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
+import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
+import { ApiCallService } from 'src/app/_services/api-call.service';
 
 @Component({
   selector: 'app-share-feed-new',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShareFeedNewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userAuthService: UserAuthService,
+    public apiCallService: ApiCallService,
+  ) { }
 
   ngOnInit(): void {
+    this.apiCallService.executeGetNoAuth(API_ENDPOINTS.USERS.TIME_TRACKING + '/' + this.userAuthService.getUserId())
+    .subscribe(
+      response => {
+
+      },
+      error => {
+        // console.error("Error deleting the user:", error);
+      }
+    );
+
   }
 
   selectedTab: string = 'notifications'; // Default tab
