@@ -63,24 +63,33 @@
                 <p>In the "Learn" section, you’ll discover different journaling techniques to help you boost your mood, reduce stress, and stay focused. Whether it’s gratitude, self-compassion, or reflective journaling, you’ll find powerful methods that will enhance your well-being.</p>
                 <p>Once you’ve mastered the techniques, head over to the "Play" section to start journaling! </p>
             </div> -->
+
+
             <div *ngIf="introStep === 4">
-                <h4>How to play the game?</h4>
+              <h4>How to play the game?</h4>
 
-                <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> -->
-                <ul class="animated-list"> 
-                    <li><b>Select Your Journaling Technique</b>
-                Choose from the techniques you’ve learned. You can even add your own personal prompt to make it unique!</li>
-                
-                <li><b>Write Your Journal Entries</b>
-                    Answer the prompts, share your thoughts, and track your progress as you journal through the game!</li>
-                
-                <li><b>Your Privacy Matters</b>
-                      Rest assured, your journal entries are encrypted and stored safely. Only you can view your entries—your thoughts are private and secure.
-                </li>
-                </ul>
+              <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> -->
+              <div class="breathing-step-block"> 
+                <p><b>Select Your Journaling Technique:</b>
+              Choose from the techniques you’ve learned.</p>
+                         
+                <p><b>Write Your Journal Entries:</b>
+                  Select two prompts from the dropdown and write your thoughts. You can even add your own personal prompt to make it unique!</p>
+
+                  <p><b>Your Privacy Matters:</b>
+                    Rest assured, your journal entries are encrypted and stored safely. Only you can view your entries—your thoughts are private and secure.
+              </p>
             </div>
+          </div>
 
-            <div *ngIf="introStep === 5">
+          <div *ngIf="introStep === 5">
+            <h4>How to play the game?</h4>
+            <img style ="height: 400px; margin-bottom: 5px;" src = "/assets/journalling/log-journal.png">
+          </div>
+
+
+
+            <div *ngIf="introStep === 6">
                 <h4>Earn Points and Unlock Badges!</h4>
                   <p>Each time you log a journal entry, you earn valuable<b> points</b> that help you level up in the game. The more you write, the more points you collect!</p>
                 <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> --> 
@@ -96,16 +105,16 @@
 
                 </ul>
             </div>
-            <div *ngIf="introStep === 6">
+            <div *ngIf="introStep === 7">
                 <h5>Ready to Get Started?</h5>
-                <p>Now that you know how it works, it’s time to begin! Explore the "Learn" section to master your journaling skills, and then jump into "Play" to start earning points and unlocking badges. 🎮</p> 
+                <p>Now that you know how it works, it’s time to begin! Explore the "Learn" section to master your journaling skills, and then jump into "Play" to start earning points and unlocking badges.</p> 
                 <p>Your adventure awaits, and every journal entry brings you closer to your goals—both in-game and in real life. Let’s go, adventurer!</p>
                 </div>
 
             <div class="button-container">                
                 <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
-                <button class = "btn-next" *ngIf="introStep < 6" (click)="nextStep()">Next</button>
-                <button class = "btn-next" *ngIf="introStep == 6" (click)="closeIntro()">Start</button>
+                <button class = "btn-next" *ngIf="introStep < 7" (click)="nextStep()">Next</button>
+                <button class = "btn-next" *ngIf="introStep == 7" (click)="closeIntro()">Start</button>
 
             </div>
         </div>

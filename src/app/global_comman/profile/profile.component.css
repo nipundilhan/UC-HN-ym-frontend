@@ -727,6 +727,13 @@
     margin-right: 3px;
   }
 
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
+
 @media (max-width: 1024px) {
     .game-box {
       flex: 1 1 calc(50% - 15px); /* Adjust to 2 boxes per row for tablets */

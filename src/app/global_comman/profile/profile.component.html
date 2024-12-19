@@ -84,6 +84,7 @@
 
                                                                                                                                                     
 <!-- Change Password Modal -->
+<!-- Change Password Modal -->
 <div class="modal" [class.show]="isChangePasswordModalVisible">
   <div class="modal-content">
     <span class="close-btn" (click)="closeChangePasswordModal()">&times;</span>
@@ -91,15 +92,19 @@
 
     <form (ngSubmit)="onChangePasswordSubmit()">
       <!-- Current Password -->
-      <div class="form-group">
+      <div class="form-group password-group">
         <label for="current-password">Current Password:</label>
         <input
-          type="password"
+        [type]="isOldPasswordVisible ? 'text' : 'password'"
           id="current-password"
           [(ngModel)]="currentPassword"
           name="currentPassword"
+          (input)="onPasswordFieldChange()"
           required
         />
+        <i class="eye-icon" (click)="togglePasswordVisibility('old')">
+          <i [class]="isOldPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </i>
       </div>
 
       <!-- New Password -->
@@ -112,7 +117,7 @@
           name="newPassword"
           (input)="onPasswordFieldChange()"
           required
-          minlength="6" 
+          minlength="6"
         />
         <i class="eye-icon" (click)="togglePasswordVisibility('new')">
           <i [class]="isNewPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
@@ -141,12 +146,17 @@
         </div>
       </div>
 
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <!-- Submit Button -->
       <div class="button-container">
         <button
           type="submit"
           class="btn btn-password"
-          [disabled]="!isSaveChangesEnabled || newPassword.length < 6 || confirmPassword !== newPassword"
+          [disabled]="!isSaveChangesEnabled"
         >
           Change Password
         </button>
@@ -154,7 +164,6 @@
     </form>
   </div>
 </div>
-
 
  <!-- Mood History Section -->
 <!-- Mood History Section -->

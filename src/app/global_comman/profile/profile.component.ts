@@ -79,14 +79,20 @@ export class ProfileComponent implements OnInit {
     userName: string = '';
     userBirthday: string = '';
     userGender: string = '';
-    userEmail: string = 'john.doe@example.com';
+    userEmail: string = '';
+
     currentPassword: string = '';
     newPassword: string = '';
     confirmPassword: string = '';
 
+    errorMessage: string = ''; // To store error message
+
+
     // Variables to control the visibility of passwords
+    isOldPasswordVisible: boolean = false;
     isNewPasswordVisible: boolean = false;
     isConfirmPasswordVisible: boolean = false;
+    // public oldPassword: string = 'UserOldPassword123'; // Replace this securely in real scenarios
 
     isEditDetailsModalVisible: boolean = false;
     isChangePasswordModalVisible: boolean = false;
@@ -158,6 +164,7 @@ export class ProfileComponent implements OnInit {
         this.userMoodHistory = response.moods;
         this.userBirthday = response.dob;
         this.userGender = response.gender;
+        this.userEmail = response.email;
         const isoDate = response.examDate;
         this.examDate = this.formatToDateOnly(isoDate);
         this.avatarCode = response.avatarCode;
@@ -303,7 +310,7 @@ closeChangePasswordModal() {
   // Reset new and confirm passwords to empty when closing
   this.newPassword = '';
   this.confirmPassword = '';
-  this.currentPassword = 'test';
+  this.currentPassword = '';
   this.isSaveChangesEnabled = false;
   this.isChangePasswordModalVisible = false;
 }
@@ -312,8 +319,12 @@ closeChangePasswordModal() {
 togglePasswordVisibility(field: string) {
   if (field === 'new') {
     this.isNewPasswordVisible = !this.isNewPasswordVisible;
+
   } else if (field === 'confirm') {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
+  }
+  else if (field === 'old') {
+    this.isOldPasswordVisible = !this.isOldPasswordVisible;
   }
 }
 // Detect field changes and enable Save Changes button only if a change is made
@@ -331,10 +342,12 @@ onFieldChange() {
 
 // Check if any password field has changed
 onPasswordFieldChange() {
-  this.isSaveChangesEnabled = 
-    this.newPassword.length >= 6 && 
+  this.isSaveChangesEnabled =
+    this.currentPassword.length > 0 && // Ensure current password is entered
+    this.newPassword.length >= 6 &&
     this.newPassword === this.confirmPassword;
 }
+
 
 // Submit form for editing profile details
 onSubmit() {
@@ -347,20 +360,31 @@ onSubmit() {
 
 // Handle form submission
 onChangePasswordSubmit() {
-  if (this.newPassword.length < 6) {
-    alert('Password must be at least 6 characters long');
-    return;
-  }
 
-  if (this.newPassword !== this.confirmPassword) {
-    alert('Passwords do not match');
-    return;
-  }
+  this.errorMessage = '';
+  const requestBody = {
+    userId: this.userAuthService.getUserId(),
+    oldPassword: this.currentPassword, // Provided old password
+    newPassword: this.newPassword      // New password to be set
+  };
 
-  // Process password change logic here
-  alert('Password changed successfully');
-  
-  this.closeChangePasswordModal();
+  // Call API to validate old password and update to new password
+  this.apiCallService.executePutNoAuth(API_ENDPOINTS.USERS.UPDATE_PASSWORD, requestBody)
+    .subscribe(
+      (response: any) => {
+        // Handle success (password updated)
+         alert('Password changed successfully');
+        this.closeChangePasswordModal(); // Close modal after success
+      },
+      (httpError: any) => {
+        // Handle error (e.g., old password is incorrect)
+        if (httpError.status === 400) { // Incorrect old password
+          this.errorMessage = 'Incorrect old password. Please try again.';
+        } else {
+          this.errorMessage = 'An error occurred while changing the password. Please try later.';
+        }
+      }
+    );
 }
 
 

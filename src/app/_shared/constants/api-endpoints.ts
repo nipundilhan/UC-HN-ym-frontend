@@ -40,8 +40,8 @@ export const API_ENDPOINTS = {
     GET_STUDENTS: `${USER_BASE}/find-By-role/STUDENT`,
     DELETE_USER: `${USER_BASE}/delete-user`,
     TIME_TRACKING: `${USER_BASE}/update-time-tracking`,
-    UPDATE_STUDENT: `${USER_BASE}/update-student`
-    
+    UPDATE_STUDENT: `${USER_BASE}/update-student`,
+    UPDATE_PASSWORD: `${USER_BASE}/update-password`
   },
   MODULES: {
     BASE: MODULE_BASE,

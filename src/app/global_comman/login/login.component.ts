@@ -15,7 +15,7 @@ import { API_ENDPOINTS } from 'src/app/_shared/constants/api-endpoints';
 export class LoginComponent implements OnInit {
 
   errorMessage: string = ''; // To store error message for incorrect login
-
+  isPasswordVisible: boolean = false;
 
   constructor(    
     private userAuthService: UserAuthService ,  
@@ -63,4 +63,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/signup']);
     }
 
+    togglePasswordVisibility(field: string) {
+      if (field === 'password') {
+        this.isPasswordVisible = !this.isPasswordVisible;
+    }
+
+}
 }

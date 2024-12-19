@@ -9,7 +9,6 @@
             ngModel
             name="username"
             id="username"
-            class="form-control mb-3"
             required
             #username="ngModel"
           />
@@ -22,14 +21,20 @@
         <div class="input-group">
           <label for="password">Password:</label>
           <input
-            type="password"
+          [type]="isPasswordVisible ? 'text' : 'password'"
             ngModel
             name="pw"
             id="pw"
-            class="form-control mb-3"
             required
             #password="ngModel"
           />
+          <i
+      class="eye-icon fas"
+      [class.fa-eye]="!isPasswordVisible"
+      [class.fa-eye-slash]="isPasswordVisible"
+      (click)="togglePasswordVisibility('password')"
+      style="position: absolute; right: 10px; top: 60%; cursor: pointer; color: #777;"
+    ></i>
           <!-- Password Error Message -->
           <div *ngIf="password.invalid && password.touched" class="error-message">
             <small *ngIf="password.errors?.['required']">Password is required.</small>

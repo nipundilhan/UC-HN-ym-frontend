@@ -81,7 +81,7 @@
     color: red;
     font-size: 0.9em;
     text-align: center; /* Center the text inside the error message container */
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
   
   .center-error {

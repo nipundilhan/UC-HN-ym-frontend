@@ -20,7 +20,7 @@ export class LearnJournallingComponent implements OnInit {
 
   // Handle the "Next" button click in the intro dialog
   nextStep(): void {
-    if (this.introStep < 6) {
+    if (this.introStep < 7) {
       this.introStep++; // Go to the next step
     } else {
       this.showIntroDialog = false; // End the intro once we've gone through all steps
