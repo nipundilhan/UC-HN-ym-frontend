@@ -9,9 +9,9 @@
 
       <div class="collapse navbar-collapse show"> <!--Ensure .show class is added to keep it visible -->
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link d-flex align-items-center" routerLink="/admin">admin</a>
-            </li>
+            </li> -->
            
             <!-- Dropdown for Messages -->
     <li class="nav-item dropdown">
@@ -121,7 +121,7 @@
                   <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                       <li> <a class="dropdown-item" routerLink="/home"><i class="fas fa-home icon-home" style="color: #070707;"></i>  Home</a></li>
                       <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user-circle"></i>  Profile</a></li>
-                      <li><a class="dropdown-item"routerLink="/share"><i class="fas fa-users" style="color: #070707;"></i>Share Feed</a></li>
+                      <li><a class="dropdown-item"routerLink="/share"><i class="fas fa-users" style="color: #070707;"></i>  Share Feed</a></li>
                       <!-- <li><a class="dropdown-item"routerLink="/upload"><i class="fas fa-users" style="color: #070707;"></i>  Upload</a></li> -->
                       <li><a class="dropdown-item" href="/hometest"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li>
                       <li><hr class="dropdown-divider"></li>

@@ -1,4 +1,3 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiCallService } from 'src/app/_services/api-call.service';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
@@ -7,6 +6,8 @@ import { AvatarService } from 'src/app/_services/avatar.service';  // Import the
 import { PointsService } from 'src/app/_services/points.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+
 
 interface Avatar {
   code: string;
@@ -32,6 +33,7 @@ importantMsgCount: number = 0;
 messages: any[] = [];
 recentMessages: any[] = [];
 selectedMessage: any = null;
+// avatarPath: string = '';
 
   studentData: any = {}; // Initialize as an empty object
 
@@ -39,6 +41,9 @@ selectedMessage: any = null;
   userName: string = '';
 
  
+  private inactivityTimeout: any; // Timer for inactivity
+  private INACTIVITY_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
+  private autoLogoutEnabled: boolean = false; // Set to 'false' to disable auto logout
 
   constructor(
     private userAuthService: UserAuthService ,
@@ -50,37 +55,6 @@ selectedMessage: any = null;
     private datePipe: DatePipe 
   ) { }
 
-  // loadMessages() {
-
-  //   this.apiCallService.executeGetNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES).subscribe(
-  //     (response: Message[]) => {
-  //       this.messages = response.map(msg => ({
-  //         ...msg,
-  //         sanitizedMessage: this.sanitizer.bypassSecurityTrustHtml(msg.message),
-  //         relativeDate: this.getRelativeTime(msg.date),  // Format date to relative time
-  //       }));
-        
-  //       this.importantMsgCount = this.messages.filter(msg => msg.status ==="IMPORTANT").length;
-
-  //       const importantMessages = this.messages
-  //       .filter(msg => msg.status === 'IMPORTANT')
-  //       // .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  
-  //     const normalMessages = this.messages
-  //       .filter(msg => msg.status !== 'IMPORTANT')
-  //       // .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  
-  //     // Combine important and normal, limit to the last 3
-  //     this.recentMessages = [...importantMessages, ...normalMessages].slice(0, 3);
-
-
-        
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 
   loadMessages() {
     this.apiCallService.executeGetNoAuth(API_ENDPOINTS.NOTIFICATIONS.MESSAGES).subscribe(
@@ -143,15 +117,17 @@ selectedMessage: any = null;
 
   ngOnInit(): void {
     this.loadMessages(); // Initialize with dummy data
- 
+    this.avatarService.avatarPath$.subscribe((path) => {
+      this.avatarPath = path;
+    });
 
-    this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
+    // this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
 
     this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
 
       (response: any) => {
         this.studentData = response;
-
+        this.avatarPath = this.avatarService.getAvatarPathByCode(this.studentData.avatarCode);
       },
       (httpError: any) => {
         console.log(httpError);
@@ -161,8 +137,21 @@ selectedMessage: any = null;
     this.pointsService.totalMarks$.subscribe((newTotalMarks) => {
       this.studentData.totalMarks = newTotalMarks; // Update points in the header
     });
+    if (this.autoLogoutEnabled) {
+    this.resetInactivityTimer();
+    this.addActivityListeners();
+    this.addUnloadListener();
+    }
   }
 
+
+  ngOnDestroy(): void {
+    if (this.autoLogoutEnabled) {
+    this.removeActivityListeners();
+    this.removeUnloadListener();
+    clearTimeout(this.inactivityTimeout);
+    }
+  }
 
 // Opens the popup with the selected message details
 openMessagePopup(msg: any, event: MouseEvent) {
@@ -197,15 +186,51 @@ redirectToMessagesPage() {
   }
 
 
-  // public getPoints() {
-  //   return this.userAuthService.getUser();
-    
-  // }
+  // Reset inactivity timer
+  private resetInactivityTimer() {
+    if (!this.autoLogoutEnabled) return; 
 
-  
-  
+    clearTimeout(this.inactivityTimeout); // Clear any existing timer
+    this.inactivityTimeout = setTimeout(() => {
+      this.logout(); // Auto-logout after inactivity
+    }, this.INACTIVITY_DURATION);
+  }
 
-  
+  // Add listeners for user activity
+  private addActivityListeners() {
+    if (!this.autoLogoutEnabled) return;
+
+    window.addEventListener('mousemove', () => this.resetInactivityTimer());
+    window.addEventListener('keydown', () => this.resetInactivityTimer());
+    window.addEventListener('scroll', () => this.resetInactivityTimer());
+    window.addEventListener('click', () => this.resetInactivityTimer());
+  }
+
+  private removeActivityListeners() {
+    if (!this.autoLogoutEnabled) return;
+    window.removeEventListener('mousemove', () => this.resetInactivityTimer());
+    window.removeEventListener('keydown', () => this.resetInactivityTimer());
+    window.removeEventListener('scroll', () => this.resetInactivityTimer());
+    window.removeEventListener('click', () => this.resetInactivityTimer());
+  }
+
+  // Handle browser/tab close
+  private addUnloadListener() {
+    if (!this.autoLogoutEnabled) return;
+    window.addEventListener('beforeunload', this.handleUnload.bind(this));
+  }
+
+  private removeUnloadListener() {
+    if (!this.autoLogoutEnabled) return;
+    window.removeEventListener('beforeunload', this.handleUnload.bind(this));
+  }
+
+  private handleUnload(event: BeforeUnloadEvent) {
+    if (!this.autoLogoutEnabled) return;
+    this.logout(); // Log the user out on tab or browser close
+    // Optionally show a warning (commented out)
+    // event.returnValue = ''; // Standard behavior for showing a close warning
+  }
 
 
 }
