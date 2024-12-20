@@ -1,0 +1,83 @@
+.pyramid-map-container {
+    background-image: url('/assets/background-img/background03.jpg');
+    background-size: cover;
+    /* background-repeat: no-repeat;
+    background-position: center center; */
+    /* width: 100%; */
+    height: 100%; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'MedievalSharp', sans-serif;
+    color: white;
+    align-content: center;
+  }
+  .header-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pyramid-map {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    /* margin: auto; */
+  }
+  
+  .chamber {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    border: 2px solid rgb(255, 255, 255); /* Gold border for the chambers */
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    transition: transform 0.3s ease; /* Hover effect */
+    position: relative;
+    width: 150px; /* Fixed width for chambers */
+    height: 200px; /* Fixed height for chambers */
+    color: black;
+  }
+  
+  .chamber:hover {
+    transform: scale(1.1); /* Scale up on hover */
+    z-index: 1; /* Bring to front */
+  }
+  
+  .chamber-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chamber-icon img {
+    width: 80px; /* Resize game icons */
+  }
+  
+  .progress {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.7em;
+    text-align: center;
+    height: fit-content;
+    align-content: center;
+    /* display: none;  */
+  }
+  
+  .chamber:hover .progress {
+    display: block; /* Show progress on hover */
+  }
+
+  .footer-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
