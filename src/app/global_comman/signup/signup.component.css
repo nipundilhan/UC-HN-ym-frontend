@@ -99,6 +99,23 @@
   margin-bottom: 15px; /* Maintain spacing between input groups */
 }
 
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  text-align: center; /* Center the text inside the error message container */
+  margin-top: 10px;
+  font-family: 'MedievalSharp', sans-serif; 
+}
+
+.center-error {
+  margin-bottom: -10px;/* Add space between error message and login button */
+}
+
+/* Optional: Style the error message container for better visibility */
+.error-message small {
+  display: block;
+  margin: 5px 0;
+}
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .signup-box {

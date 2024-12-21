@@ -14,6 +14,7 @@ import Validation from '../../utils';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  errorMessage: string = ''; // To store error message for incorrect login
 
   form = new FormGroup(
     
@@ -118,7 +119,46 @@ export class SignupComponent implements OnInit {
     // this.usrSngUp.gender = this.gender;
 
     // this.dataTrnfrSrvc.setData(this.usrSngUp);
-    this.router.navigate(['/select-avatar']);
+    // this.router.navigate(['/select-avatar']);
+
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+    if (this.form.valid) {
+
+      const usrSngUp: UserSignup = {
+        username: this.form.value.username?? '',
+        password: this.form.value.password?? '',
+        type: 'NON_GAMIFIED_STUDENT',
+        email: this.form.value.email?? '',
+        dob: this.form.value.dob?? '',
+        gender: this.form.value.gender?? '',
+        avatarCode: "default"
+      }
+  
+    
+    this.apiCallService.executePostNoAuth(API_ENDPOINTS.USERS.SIGNUP, usrSngUp).subscribe(
+      (response: any) => {
+
+
+        // alert("you have successfully registered");
+        this.router.navigate(['/welcome']);
+        
+
+
+      },
+    
+      (httpError: any) => {
+        if (httpError.status === 400) {
+          this.errorMessage = httpError.error.message;
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+      }
+    );
+  }
   }
 
   get f(): { [key: string]: AbstractControl } {
