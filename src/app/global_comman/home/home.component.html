@@ -4,7 +4,7 @@
         <div class="white-block" [ngClass]="{ 'special-block': game.id === 4 || game.id === 5 }">
           <div class="game-details" (click)="navigateToGame(game)">
             <h3 class="game-title">{{ game.name }}</h3>
-            <h4 class="game-subtitle">{{ game.subtitle }}</h4>  
+            <!-- <h4 class="game-subtitle">{{ game.subtitle }}</h4>   -->
             <img class="hieroglyph-image" [src]="game.hieroglyphImage" alt="Hieroglyph">
           </div>
         </div>
@@ -14,7 +14,7 @@
   
     <!-- Narrator Image and Mood Selector -->
   <div id="narrator-container" class="narrator-container">
-    <img id="narrator" class="narrator-image" src="/assets/narrator.png" alt="Egyptian God">
+    <!-- <img id="narrator" class="narrator-image" src="/assets/narrator.png" alt="Egyptian God"> -->
     <div class="dialog-box">
       <p>How are you feeling today?</p>
       <div class="mood-options">

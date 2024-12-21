@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">YM</a> 
+      <a class="navbar-brand" routerLink="/home">YoungMind-NG</a> 
       
       <!-- Comment out or remove the navbar-toggler button -->
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +100,7 @@
             
             
                     <!-- Points Nav Item -->
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a *ngIf=" isLoggedIn()" class="nav-link d-flex align-items-center">
                   <img src="assets/coin.png" alt="Points" class="points-icon me-2">
                   <span class="points-count" *ngIf="studentData?.totalMarks !== undefined; else loading"> 
@@ -110,12 +110,12 @@
                     <span>Loading points...</span>
                   </ng-template>              
                 </a>
-              </li>
+              </li> -->
 
 
-              <li class="nav-item dropdown">
-                  <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img [src]="avatarPath" alt="" class="profile-pic me-2">
+              <li class="nav-item dropdown centered-dropdown">
+                  <a *ngIf=" isLoggedIn()"class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <!-- <img [src]="avatarPath" alt="" class="profile-pic me-2"> -->
                       {{getUserName()}}
                   </a>
                   <ul *ngIf="isLoggedIn()" class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
@@ -123,7 +123,7 @@
                       <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user-circle"></i>  Profile</a></li>
                       <li><a class="dropdown-item"routerLink="/share"><i class="fas fa-users" style="color: #070707;"></i>  Share Feed</a></li>
                       <!-- <li><a class="dropdown-item"routerLink="/upload"><i class="fas fa-users" style="color: #070707;"></i>  Upload</a></li> -->
-                      <li><a class="dropdown-item" href="/hometest"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li>
+                      <!-- <li><a class="dropdown-item" href="/hometest"><i class="fas fa-question-circle" style="color: #070707;"></i>  Help</a></li> -->
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-power-off" style="color: #070707;"></i>  Logout</a></li>
                   </ul>

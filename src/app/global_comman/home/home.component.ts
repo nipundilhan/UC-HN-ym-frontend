@@ -15,7 +15,7 @@ games = [
   {
     id: 1,
     // name: '<span class="game-title">Eye of Horus</span><span class="game-subtitle">Tutorial Quest</span>',
-    name: 'Eye of Horus',
+    name: 'Tutorial and Labs Quest',
     subtitle: 'Tutorial and Labs Quest',
     // hieroglyph: '𓂀',
     hieroglyphImage: 'assets/hieroglyph1.png', 
@@ -24,7 +24,7 @@ games = [
   },
   {
     id: 2,
-    name: 'Ankh’s Chronicle',
+    name: 'Mind Mapping Mastery',
     subtitle: 'Mind Mapping Mastery',
     hieroglyphImage: 'assets/hieroglyph2.png', 
     // hieroglyph: '𓋹',
@@ -34,7 +34,7 @@ games = [
   },
   {
     id: 3,
-    name: 'Pharaoh’s Trial',
+    name: 'Question Mastery',
     subtitle: 'Question Mastery',
     hieroglyphImage: 'assets/hieroglyph3.png', 
     // hieroglyph: '𓎛',
@@ -42,7 +42,7 @@ games = [
   },
   {
     id: 4,
-    name: 'Whispers of the Sphinx',
+    name: 'Breathing Mastery',
     subtitle: 'Breathing Mastery',
     hieroglyphImage: 'assets/hieroglyph4.png', 
     // hieroglyph: '𓎛',
@@ -52,7 +52,7 @@ games = [
   },
   {
     id: 5,
-    name: 'Calm of the Scarab',
+    name: 'Journalling Mastery',
     subtitle: 'Journalling Mastery',
     hieroglyphImage: 'assets/hieroglyph5.png', 
     // hieroglyph: '𓎛',

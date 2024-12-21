@@ -13,7 +13,7 @@
 .navbar-brand {
   color: white;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
   font-family: 'MedievalSharp', sans-serif;
   margin: 0; /* Reset margin to ensure alignment */
 }
@@ -79,6 +79,13 @@
   height: 42px; 
   object-fit: contain;
   margin-right: 8px; /* Space between icon and text */
+}
+
+.centered-dropdown {
+  display: flex;
+  justify-content: center; /* Horizontally centers content */
+  align-items: center;     /* Vertically aligns content (if needed) */
+  margin: 0 auto;          /* Ensures auto-margin centering */
 }
 
 .envelope-icon {
