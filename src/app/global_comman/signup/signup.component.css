@@ -40,6 +40,12 @@
   font-size: 1.1rem; /* Font size for buttons */
 }
 
+
+.signup-box .input-group label span {
+  font-size: 0.85rem; /* Make text within parentheses smaller */
+  color: #3d30f3; /* Slightly lighter color for instruction text */
+}
+
 .signup-box .input-group2 label {
   display: inline;
   margin-bottom: 5px;
