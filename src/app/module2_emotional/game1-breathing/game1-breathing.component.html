@@ -39,7 +39,7 @@
         <button class="add-button" (click)="openBreathingPopup()">✨ Click here to practice or log a breathing session ✨</button>
 
         <div class="records-container" *ngIf="AllData?.breathingPractises?.length > 0">
-          <div class="record-card" *ngFor="let breathing of paginatedQuestions">
+          <div class="record-card" *ngFor="let breathing of paginatedQuestions" (click)="openBreathingDetails(breathing)">
             <div class="record-image">
               <img src="/assets/breathing-icon.png" alt="Egyptian Theme">
             </div>
@@ -48,10 +48,14 @@
             </div>
             <div>
               <ng-container *ngIf="breathing.cycles; else timeSpentTemplate">
-                <div class= "time-cycle" >{{ breathing.cycles }} cycles</div>
+                <div class="time-cycle">
+                  {{ breathing.cycles }} {{ breathing.cycles === 1 ? 'cycle' : 'cycles' }}
+                </div>
               </ng-container>
               <ng-template #timeSpentTemplate>
-                <div class="time-cycle">{{ breathing.time }} minutes</div>
+                <div class="time-cycle">
+                  {{ breathing.time }} {{ breathing.time === 1 ? 'minute' : 'minutes' }}
+                </div>
               </ng-template>
             </div>
             <div class="status-tag">
@@ -193,6 +197,47 @@
   <div *ngIf="showCompletionMessage" class="modal">
     <div class="completion-message">
       <p>Breathing session complete!</p>
+    </div>
+  </div>
+
+  <div *ngIf="isBreathingOpen" class="modal">
+    <div class="modal-background">
+      <div class="modal-content">
+        <span class="close" (click)="closeBreathingModal()">&times;</span>
+        <h2>{{ selectedBreathing.techniqueCode }}</h2>
+
+
+        <form>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" [(ngModel)]="selectedBreathing.date" name="date" readonly />
+
+   
+              <label for="time" *ngIf="selectedBreathing.time !== null">Time (in minutes):</label>
+              <input type="text" *ngIf="selectedBreathing.time !== null" id="time" [(ngModel)]="selectedBreathing.time" name="time" readonly />
+           
+
+            <!-- Conditionally display Number of Cycles field -->
+              <label *ngIf="selectedBreathing.cycles !== null" for="cycles">Number of Cycles:</label>
+              <input *ngIf="selectedBreathing.cycles !== null" type="text" id="cycles" [(ngModel)]="selectedBreathing.cycles" name="cycles" readonly />
+          
+            
+          <div class="button-container">
+            <!-- <button class="btn delete-btn">Delete</button> -->
+            <button class="btn delete-btn" (click)="openDeleteConfirmationPopup(selectedBreathing)">Delete</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDeleteConfirmationPopup" class="delete-user-popup">
+    
+    <p>Do you want to delete this breathing session record?</p>
+    <div class="button-container">
+        <button class = "btn delete-btn" (click)="deleteBreathing(selectedBreathing)">Yes</button>
+        <button class = "btn cancel-btn" (click)="cancelDelete()">No</button>
     </div>
   </div>
 
