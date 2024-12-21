@@ -33,6 +33,12 @@
   margin-bottom: 15px;
 }
 
+
+.signup-box .input-group label span {
+  font-size: 0.85rem; /* Make text within parentheses smaller */
+  color: #3d30f3; /* Slightly lighter color for instruction text */
+}
+
 .signup-box .input-group label {
   margin-bottom: 3px;
   color: #333;
