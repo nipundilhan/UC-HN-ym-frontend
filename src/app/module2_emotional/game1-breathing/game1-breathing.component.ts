@@ -24,7 +24,8 @@ export class Game1BreathingComponent implements OnInit {
   gamePoints: number = 0;
   gameMargins: { margin1: number; margin2: number;} | null = null; 
   completedTasks: number = 0;
-  
+  showDeleteConfirmationPopup: boolean = false;
+
   showTimeInput: boolean = false; // Show time input condition
 
   // currentPage: number = 1; // Tracks the current page of the popup
@@ -48,6 +49,8 @@ export class Game1BreathingComponent implements OnInit {
   showBadge02: Boolean = false;
 
   isShareModalOpen: Boolean = false;
+  isBreathingOpen: Boolean = false;
+  selectedBreathing: any;
 
   BreathingPerPage: number = 6; // Number of questions to display per page
 
@@ -181,6 +184,17 @@ goToPreviousPage() {
     this.popupCurrentPage = 1;
     this.selectedOption = null;
     this.resetForm();
+  }
+
+
+
+  openBreathingDetails(breathing: any): void {
+    this.selectedBreathing = { ...breathing };
+    this.isBreathingOpen = true;
+  }
+
+  closeBreathingModal() {
+    this.isBreathingOpen = false;
   }
 
   onSubmit(): void {
@@ -496,6 +510,38 @@ viewSharedBadge(): void {
   // Navigate to the shared questions page (assuming you have a route for this)
   this.router.navigate(['share/notifications']);
 }
+
+openDeleteConfirmationPopup(selectedBreathing: any): void {
+  this.showDeleteConfirmationPopup = true; // Show confirmation popup
+}
+
+cancelDelete(): void {
+  this.showDeleteConfirmationPopup = false; // Hide confirmation popup
+}
+
+
+deleteBreathing(breathing: any): void {
+  const studentId =  this.userAuthService.getUserId();
+  // this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.QANDA.BASE + '/' + studentId + '/' + question._id)
+  //   .subscribe(
+  //     response => {
+  //       // Close the modal after the deletion is successful
+  //       this.closeQuestionModal(); 
+  //       this.cancelDelete();
+        
+  //       // Wait for points update before getting the mindmaps
+  //       setTimeout(() => {
+  //         this.fetchUpdatedStudentPoints();
+  //         this.fetchBadgeMargin();  // update the points in header and fetches latest tutorial data
+  //       }, 100);
+
+  //     },
+  //     error => {
+  //       console.error("Error deleting the question:", error);
+  //     }
+  //   );
+}
+
 
 
   get totalPages(): number {

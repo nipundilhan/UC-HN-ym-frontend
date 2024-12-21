@@ -23,7 +23,7 @@
   /* .container {
     max-width: 1000px; 
     padding: 10px;
-    font-family: Georgia, serif;
+    font-family: 'MedievalSharp', sans-serif;
     display: flex;
     flex-direction: column;
     align-items:  center;
@@ -31,14 +31,10 @@
   } */
 
   .container{
-    max-width: calc(100% - 280px); /* Adjusting the width to account for the sidenav */
+    /* max-width: calc(100% - 280px);  */
     padding: 10px;
-    /* display: flex; */
-    /* flex-direction: column;
-    align-items: center; */
     font-family: 'MedievalSharp', sans-serif;
-    position: absolute;
-    /* left:0; */
+    /* position: absolute; */
     height:100%;
     display: flex;
     flex-direction: column;
@@ -211,7 +207,7 @@
     /* display: block;
     justify-content: center; */
     align-self: center ;
-    width: 70%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #c27d2a;
