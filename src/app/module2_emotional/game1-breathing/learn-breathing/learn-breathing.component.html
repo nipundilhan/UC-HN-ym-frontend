@@ -114,7 +114,7 @@
                 <div class="button-container">                
                     <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
                     <button class = "btn-next" *ngIf="introStep < 7" (click)="nextStep()">Next</button>
-                    <button class = "btn-next" *ngIf="introStep == 7" (click)="goToGame()">Start</button>
+                    <button class = "btn-next" *ngIf="introStep == 7" (click)="closeIntro()">Start</button>
     
                 </div>
             </div>
