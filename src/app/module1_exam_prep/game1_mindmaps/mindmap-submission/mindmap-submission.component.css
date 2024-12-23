@@ -135,6 +135,11 @@
     background-color: #d2a269;
 }
 
+.add-button:disabled{
+  background-color: #898886;
+  cursor: none;
+}
+
 /* Mind map grid layout */
 .mind-map-grid {
     display: grid;
