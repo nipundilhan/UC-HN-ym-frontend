@@ -74,6 +74,7 @@ export const API_ENDPOINTS = {
   BREATHING: {
     BASE: BREATHING_BASE,
     GET_BY_STUDENT_ID: `${BREATHING_BASE}/findByStudent/`,
+    DELETE: `${BREATHING_BASE}/delete/`,
   },
   JOURNAL: {
     BASE: JOURNAL_BASE,

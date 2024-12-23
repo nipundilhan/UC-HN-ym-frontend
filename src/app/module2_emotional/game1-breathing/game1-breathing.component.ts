@@ -220,9 +220,9 @@ goToPreviousPage() {
       () => {
         setTimeout(() => {
           this.fetchUpdatedStudentPoints();
-          this.fetchBadgeMargin();
+          // this.fetchBadgeMargin();
         }, 100);
-        this.checkAchievement();
+        // this.checkAchievement();
       },
       (error: any) => {
         console.log(error);
@@ -522,24 +522,24 @@ cancelDelete(): void {
 
 deleteBreathing(breathing: any): void {
   const studentId =  this.userAuthService.getUserId();
-  // this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.QANDA.BASE + '/' + studentId + '/' + question._id)
-  //   .subscribe(
-  //     response => {
-  //       // Close the modal after the deletion is successful
-  //       this.closeQuestionModal(); 
-  //       this.cancelDelete();
+  this.apiCallService.executeDeleteNoAuth(API_ENDPOINTS.BREATHING.DELETE + studentId + '/' + breathing._id)
+    .subscribe(
+      response => {
+        // Close the modal after the deletion is successful
+        this.closeBreathingModal(); 
+        this.cancelDelete();
         
-  //       // Wait for points update before getting the mindmaps
-  //       setTimeout(() => {
-  //         this.fetchUpdatedStudentPoints();
-  //         this.fetchBadgeMargin();  // update the points in header and fetches latest tutorial data
-  //       }, 100);
+        // Wait for points update before getting the mindmaps
+        setTimeout(() => {
+          this.fetchUpdatedStudentPoints();
+          // this.fetchBadgeMargin();  // update the points in header and fetches latest tutorial data
+        }, 100);
 
-  //     },
-  //     error => {
-  //       console.error("Error deleting the question:", error);
-  //     }
-  //   );
+      },
+      error => {
+        console.error("Error deleting the question:", error);
+      }
+    );
 }
 
 
