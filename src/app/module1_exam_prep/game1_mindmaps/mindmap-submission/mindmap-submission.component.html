@@ -136,7 +136,7 @@
        <!-- Delete Confirmation Popup -->
   <div *ngIf="showDeleteConfirmationPopup" class="delete-user-popup">
     
-    <p>Do you want to delete this journal record?</p>
+    <p>Do you want to delete this mindmap record?</p>
     <div class="button-container">
         <button class = "delete-btn" (click)="deleteMindmap(selectedMindmap)">Yes</button>
         <button class = "cancel-btn" (click)="cancelDelete()">No</button>
@@ -169,7 +169,7 @@
                 <textarea id="description" formControlName="description" rows="4" class="form-control"></textarea>
                 
 
-                <label for="image">Upload Mindmap Image:</label>
+                <label for="image">Upload Mindmap Image<span style ="font-size: 12px;"> (Maximum upload file size : 1MB)</span></label>
                 <input type="file" id="image" (change)="onFileSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
                 <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
                   <div *ngIf="f['image'].errors?.['required']">Mindmap Image is required</div>

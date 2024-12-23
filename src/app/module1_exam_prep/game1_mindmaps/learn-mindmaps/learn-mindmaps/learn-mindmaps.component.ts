@@ -80,7 +80,7 @@ tips = [
     text: `<h3>How to Play the Game</h3>
            Here’s how to make the most out of your experience while creating mind maps:</p> 
            <p><strong>Log Your Mind Maps:</strong> As you create mind maps based on your lessons, log the details to track your progress. 
-           Enter the lesson title and add an optional description to reflect on your thought process and learning.</p> `,
+           Enter the lesson title,mind map image and an optional description to reflect on your thought process and learning.</p> `,
     images: ['assets/mindmapping/add-mindmap.png'],
     video: null
   },
