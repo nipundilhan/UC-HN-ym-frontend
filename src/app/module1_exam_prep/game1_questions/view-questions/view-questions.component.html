@@ -69,7 +69,7 @@
                 <div class="card-footer">
                   <!-- Shared Tag -->
                   <div class="shared-tag" *ngIf="question.sharedStatus === 'SHARED'">Shared</div>
-                  <div class="not-shared-tag" *ngIf="question.sharedStatus === 'NOT_SHARED'">Not Shared</div>
+                  <div class="not-shared-tag" *ngIf="question.sharedStatus === 'NOT_SHARED' || question.sharedStatus === 'HIDE'">Not Shared</div>
             
                   <!-- Likes -->
                   <div class="likes" *ngIf="question.sharedStatus === 'SHARED'">
