@@ -63,6 +63,12 @@
     transition: background-color 0.3s;
 }
 
+
+.add-button:disabled{
+  background-color: #898886;
+  cursor: none;
+}
+
 .no-mindmaps{
   display: flex;
   flex-wrap: wrap;
