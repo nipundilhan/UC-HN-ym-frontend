@@ -20,7 +20,7 @@ export class LearnJournallingComponent implements OnInit {
 
   // Handle the "Next" button click in the intro dialog
   nextStep(): void {
-    if (this.introStep < 7) {
+    if (this.introStep < 6) {
       this.introStep++; // Go to the next step
     } else {
       this.showIntroDialog = false; // End the intro once we've gone through all steps
@@ -101,7 +101,6 @@ export class LearnJournallingComponent implements OnInit {
         },
         { 
           text: `<h4>Ready to Begin?</h4> 
-                 <p>Start small—just a sentence or two is enough to feel the impact. Each journal entry earns you <b>points</b> in the game, helping you unlock <b>badges</b> and track your progress!</p>
                  <p>Your gratitude journal is your path to a stronger, happier, and calmer you.</p>`, 
           image: null, 
           video: null 
@@ -166,7 +165,6 @@ export class LearnJournallingComponent implements OnInit {
         },
         { 
           text: `<h4>Ready to Begin?</h4> 
-                 <p>Start by giving yourself permission to be imperfect. Remember, every journal entry you log earns you <b>points</b> in the game and brings you closer to unlocking <b>badges</b> for self-growth!</p>
                  <p>Your self-compassion journal is your personal coach to remind you how far you’ve come and encourage you to keep going.</p>`, 
           image: null, 
           video: null 
@@ -227,7 +225,7 @@ export class LearnJournallingComponent implements OnInit {
         },
         { 
           text: `<h4>Ready to Reflect?</h4> 
-                 <p>As you log your reflective journal entries, you’ll gain <b>points</b> to level up in the game and unlock valuable <b>badges</b>! 
+                 <p> 
                  Your journal is your personal mirror—it shows where you’ve been and lights the path ahead.</p>
                  <p>Start now, and make every study session a step toward mastering your exams!</p>`, 
           image: null, 

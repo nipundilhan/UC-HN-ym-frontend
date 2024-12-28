@@ -20,7 +20,7 @@ export class LearnBreathingComponent implements OnInit {
 
   // Handle the "Next" button click in the intro dialog
   nextStep(): void {
-    if (this.introStep < 7) {
+    if (this.introStep < 6) {
       this.introStep++; // Go to the next step
     } else {
       this.showIntroDialog = false; // End the intro once we've gone through all steps
@@ -82,7 +82,6 @@ export class LearnBreathingComponent implements OnInit {
           },
           { 
             text: `<h4>Ready to Practice?</h4> 
-                   <p>Each practice session earns you <b>points</b> in the game, bringing you closer to unlocking <b>badges</b> for your dedication!</p>
                    <p>Box Breathing is your tool for staying calm, focused, and ready to tackle challenges.</p>`, 
             image: null, 
             video: null 
@@ -126,7 +125,6 @@ export class LearnBreathingComponent implements OnInit {
         },
         { 
           text: `<h4>Ready to Practice?</h4> 
-                 <p>With every practice session, you earn <b>points</b> and progress towards <b>badges</b> that celebrate your commitment to calmness!</p>
                  <p>Let 4-7-8 Breathing guide you to a peaceful, stress-free state of mind.</p>`, 
           image: null, 
           video: null 
@@ -175,7 +173,6 @@ export class LearnBreathingComponent implements OnInit {
         },
         { 
           "text": `<h4>Ready to Practice?</h4> 
-                   <p>Each belly breathing session earns you <b>points</b> and moves you closer to unlocking <b>badges</b> for relaxation mastery!</p>
                    <p>Let belly breathing help you achieve balance and inner calm.</p>`, 
           "image": null, 
           "video": null 
@@ -226,7 +223,6 @@ export class LearnBreathingComponent implements OnInit {
         },
         { 
           "text": `<h4>Ready to Practice?</h4> 
-                   <p>Each session of alternate nostril breathing earns you <b>points</b> and takes you one step closer to unlocking <b>badges</b> that celebrate your journey to balance!</p>
                    <p>Let alternate nostril breathing help you feel centered and refreshed.</p>`, 
           "image": null, 
           "video": null 
@@ -281,10 +277,12 @@ export class LearnBreathingComponent implements OnInit {
     this.helpPopupVisible = false;
   }
 
-  goToGame(): void {
-    // Example: redirecting to the game route
-    this.router.navigate(['/play-breathing']); // Update '/game' to the actual route for your game page
-}
+//   goToGame(): void {
+//     // Example: redirecting to the game route
+//     this.router.navigate(['/play-breathing']); // Update '/game' to the actual route for your game page
+// }
+
+
 
 
 }

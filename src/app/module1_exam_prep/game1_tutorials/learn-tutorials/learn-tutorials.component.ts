@@ -12,8 +12,8 @@ export class LearnTutorialsComponent implements OnInit {
   // Tips array which can include text, images, and even videos
 tips = [
     {
-      text: `<p>Welcome to <b><i>Eye of Horus: Tutorial and Labs Mastery</i></b>, brave adventurer!</p>
-             <p>In this challenge, I’ll guide you through tips to sharpen your revision skills and help you master programming tutorials, labs, and quizzes.</p>
+      text: `<p>Welcome to <b><i>Tutorial and Labs Mastery</i></b>!</p>
+             <p>Here you will be guided through tips to sharpen your revision skills and help you master programming tutorials, labs, and quizzes.</p>
              <p>By applying these techniques, you’ll reinforce your knowledge, identify gaps, and improve your exam performance—all while staying focused and motivated.</p>
              <p>Click the <b>next arrow</b> to uncover the secrets of effective revision...</p>`,
       images: [],
@@ -58,38 +58,25 @@ tips = [
       video: null
     },
     {
-      text: `<h3>How to Play the Game</h3>
-             <p>Welcome to your learning adventure! This game helps you log tutorials and labs and keep track of your progress. Here’s how to make the most of your experience while revising tutorials, quizzes, and labs:</p> 
-             <p><strong>Log Your Tutorials:</strong> As you revise programming tutorials, labs, or quizzes, log the details to monitor your learning. Include the tutorial/lab name, date, description, and select a progress status from the dropdown (Started, In Progress, or Completed). You will earn a <b>point</b> for each record.</p>`,
+      text: `<h3>How to Practice the Revision Skills</h3>
+            <p>Once you complete the <strong>Learn</strong> section here, click on the <b>Start</b> button at the end, and you will be redirected to the practice page. This feature of the application helps you log tutorials and labs and keep track of your progress.</p>
+
+             <p><strong>Log Your Tutorials:</strong> As you revise programming tutorials, labs, or quizzes, log the details to monitor your learning. Include the tutorial/lab name, date, description, and select a progress status from the dropdown (Started, In Progress, or Completed).</p>`,
       images: ["assets/tutorials/log-new-tutorial.png"],
       video: null
     },
     {
-      text: `<h3>How to Play the Game</h3>
+      text: `<h3>How to Practice the Revision Skills</h3>
              <p><strong>Track Improvements:</strong> Review your logged revisions to identify improvements or areas needing more practice.</p> 
              <p><strong>Track Partially Completed Work:</strong> Don’t worry if you haven’t finished a tutorial or quiz! Log partially completed ones and update them later once you finish. This flexibility ensures every step of your learning journey counts. <b>You’ve got this!</b></p>
              <p>Stay consistent and watch your programming skills grow!</p>`,
       images: ["assets/tutorials/tutorial-records.png"],
       video: null
     },
+
     {
-      text: `<h3>Earn Badges</h3>
-             <ul>
-               <div class="tip-block">
-                 <li><b>Beginner Badge:</b> Log revisions for <strong>2 tutorials or labs</strong> to earn this badge and showcase your commitment to mastering programming concepts.</li>
-                 <img src="/assets/badges/badge01_a.png" class="badge-image">
-               </div>
-               <div class="tip-block">
-                 <li><b>Master Badge:</b> Log revisions for <strong>5 tutorials or labs</strong> to earn this badge, celebrating your dedication to continuous improvement!</li>
-                 <img src="/assets/badges/badge01_b.png" class="badge-image">
-               </div>
-             </ul>
-             <p>Track your achievements and become a revision master as you progress!</p>`,
-      images: [],
-      video: null
-    },
-    {
-      text: `<p>Take the challenge, sharpen your skills, and let this game transform the way you revise programming tutorials and labs!</p>`,
+      text: ` <p>Track your achievements and become a revision master as you progress!</p>
+<p>Take the challenge, sharpen your skills, and let this game transform the way you revise programming tutorials and labs!</p>`,
       images: [],
       video: null
     }

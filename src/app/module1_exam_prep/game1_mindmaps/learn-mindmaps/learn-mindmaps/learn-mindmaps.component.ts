@@ -14,7 +14,7 @@ export class LearnMindmapsComponent implements OnInit {
 tips = [
 
   {
-    text: `<p>Welcome to <b><i>Ankh’s Chronicle : Mind Mapping Mastery</i></b>, brave adventurer!</p>
+    text: `<p>Welcome to <b><i>Mind Mapping Mastery</i></b>!</p>
   <p>As you progress, I’ll provide you with helpful tips to teach you a very important and fun skill: <b>mind mapping</b>.</p>
   <p>Mind mapping will help you prepare for your lab test with confidence and reduce stress. It’s a powerful tool for organizing your thoughts, enhancing your memory, and boosting your problem-solving abilities.</p>
   <p>Click the <b>next arrow</b> to begin learning more...</p>`,
@@ -77,15 +77,15 @@ tips = [
     video: 'https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq'
   },
   {
-    text: `<h3>How to Play the Game</h3>
+    text: `<h3>How to Practice the Skill?</h3>
            Here’s how to make the most out of your experience while creating mind maps:</p> 
-           <p><strong>Log Your Mind Maps:</strong> As you create mind maps based on your lessons, log the details to track your progress. 
-           Enter the lesson title and add an optional description to reflect on your thought process and learning.</p> `,
+           <p><strong>Log Your Mind Maps:</strong> Head to the <strong>Practice</strong> section after completing the <strong>Learn</strong> section. As you create mind maps based on your lessons, log the details to track your progress. 
+           Enter the lesson title, mindm map image and add an optional description to reflect on your thought process and learning.</p> `,
     images: ['assets/mindmapping/add-mindmap.png'],
     video: null
   },
   {
-    text: `<h3>How to Play the Game</h3>
+    text: `<h3>How to Practice the Skill?</h3>
            <p><strong>Review Your Progress:</strong> Keep track of how your mind mapping skills evolve over time by revisiting your logged maps. 
            Use this record as a visual tool to monitor your growth and deepen your understanding of topics.</p>`,
     images: ['assets/mindmapping/view-mindmaps.png'],
@@ -95,40 +95,20 @@ tips = [
     text: `<h3>Share Your Mind Maps</h3>
            <p>Sharing your creative work is both easy and rewarding! Here’s how you can inspire others and showcase your skills:</p>
            <ol>
-             <li><strong>Log Your Mind Map:</strong> Ensure your mind map is logged with all essential details, including an image and earn a <b>point</b> for each record.</li>
+             <li><strong>Log Your Mind Map:</strong> Ensure your mind map is logged with all essential details, including an image.</li>
              <p></p>
              <li><strong>Click the Share Button:</strong> Look for the <b>"Share"</b> button at the bottom of your logged mind map. Click it to share with your friends.</li>
               <p></p>
              <li><strong>Engage and Collaborate:</strong> Once shared, your mind map will be visible to others, allowing them to view and appreciate your work.</li>
-              <p></p>
-             <li><strong>Earn Likes:</strong> Gain recognition by receiving likes for your mind maps. The more likes you collect, the closer you’ll be to earning the <b>Rising Star Badge</b>!</li>
+           
            </ol>
            <p>Sharing your mind maps not only helps others but also fosters collaborative learning and feedback!</p>`,
     images: [],
     video: null
   },
   {
-    text: `<h3>Earn Badges</h3>
-           <ul>
-             <div class="tip-block">
-               <li><b>Beginner Badge:</b> Log <strong>2 mind maps</strong> to earn this badge, marking the beginning of your journey to mastering mind mapping.</li>
-               <img src = "/assets/badges/badge02_a.png" class="badge-image">
-             </div>
-             <div class="tip-block">
-               <li><b>Master Badge:</b> Log <strong>5 mind maps</strong> to achieve this badge, highlighting your growing expertise in organizing ideas visually.</li>
-               <img src = "/assets/badges/badge02_b.png" class="badge-image">
-             </div>
-             <div class="tip-block">
-               <li><b>Rising Star Badge:</b> Collect <strong>10 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
-               <img src = "/assets/badges/badge02_c.png" class="badge-image">
-             </div>
-           </ul>
-           <p>Track your achievements, share your work, and celebrate your progress as you create more mind maps!</p>`,
-    images: [],
-    video: null
-  },
-  {
-    text: `<p>So dive in, start mapping, and let this game transform the way you learn and remember!</p>`,
+    text: `<p>Track your achievements, share your work, and celebrate your progress as you create more mind maps!</p>
+    <p>So dive in, start mapping, and let this game transform the way you learn and remember!</p>`,
     images: [],
     video: null
   }

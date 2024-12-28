@@ -4,13 +4,13 @@
     <!-- Intro Dialog Box -->
     <div *ngIf="showIntroDialog" class="intro-dialog">
         <div class="sage-dialogue-wrapper">
-            <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+            <!-- <img class="sage-image" src="assets/narrator.png" alt="Sage" /> -->
             <div class="dialogue-box">
                 <span class="close-icon" (click)="closeIntro()">&#10005;</span>
     
                 <!-- Step 1 -->
                 <div *ngIf="introStep === 0">
-                        <h4>Welcome to the <b><i>Whispers of the Sphinx</i></b>, brave adventurer!</h4>
+                        <h4>Welcome to the <b><i>Bretahing Mastery</i></b>!</h4>
                         <p>
                           As exams approach, stress can cloud even the sharpest of minds. But fear not! Here, you'll discover breathing techniques that help to calm your nerves, sharpen your focus, and boost your confidence.
                         </p>
@@ -18,7 +18,7 @@
     
                 <!-- Step 2 -->
                 <div *ngIf="introStep === 1">
-                    <p>In this quest, you’ll learn four breathing techniques to help you along the way:</p>  
+                    <p>You’ll learn four breathing techniques to help you along the way:</p>  
                         <div class="techniques-container-intro">
                         <div class="technique-block">
                         <p><b>4-4-4 (Box Breathing)</b></p>
@@ -58,9 +58,10 @@
                     </div>
 
                     <div *ngIf="introStep === 3" class="guidelines">
-                      <h4>How to Get Practice and Log Breathing Sessions</h4>
-                      <p>Within this application, you can choose to either practice or log breathing sessions based on your needs. However, among the breathing techniques available, only the Box Breathing (4-4-4) and 4-7-8 Breathing techniques can be practiced within the app with helpful animations. 
-                        Other techniques, such as Belly Breathing and Alternate Nostril Breathing, need to be practiced manually on your own, but you can still log the details of these sessions within the app.</p>
+                      <h4>How to Practice and Log Breathing Sessions</h4>
+                      <p>Firstly, head to the <strong>Practice</strong> section after completing the <strong>Learn</strong> section. Click on the <strong>Practice or Log Breathing Session</strong> button to start/log a new breathing session. </p>
+                      <p>Within this application, you can choose to either practice or log breathing sessions based on your needs. However, among the breathing techniques available, only the Box Breathing (4-4-4) and 4-7-8 Breathing techniques can be practiced within the app with helpful animations. </p>
+                      <p>Other techniques, such as Belly Breathing and Alternate Nostril Breathing, need to be practiced manually on your own, but you can still log the details of these sessions within the app.</p>
                       </div>
 
                       <div *ngIf="introStep === 4" class="guidelines">
@@ -78,43 +79,27 @@
                         </div>
       
                         <div *ngIf="introStep === 5" class="guidelines">
-                          <h4>How to Get Practice and Log Breathing Sessions</h4>
+                          <h4>How to Practice and Log Breathing Sessions</h4>
                           <img style ="height: 400px; margin-bottom: 5px;" src = "/assets/breathing/log-breathing.png">
 
                           </div>
               
     
+                
                 <div *ngIf="introStep === 6">
-                    <h4>Earn Points and Unlock Badges!</h4>
-                        <p>
-                            Each breathing session you log will earn you points to show your progress. The more consistent you are, the more points you’ll collect.
-                        </p>
-                        <p>Here are the badges you can unlock:</p>
-                        <ul>
-                            <li><b>Beginner Badge: Whispers of the Sphinx</b>  
-                            Earned after logging your first session. Congratulations on taking the first step toward calm!
-                            </li>
-                            <img style ="height: 80px; margin-bottom: 5px;" src = "/assets/badges/badge04_a.png">
-                            <li><b>Master Badge: Whispers of the Sphinx</b>  
-                            Unlocked after consistently logging your fifth session. You're building a healthy habit—keep going!
-                            </li>
-                            <img style ="height: 80px; margin-bottom: 5px;" src = "/assets/badges/badge04_b.png">
-                        </ul>
-                    </div>
-                <div *ngIf="introStep === 7">
                     <h4>Ready to Begin?</h4>
                     <p>
-                        Explore the "Learn" section to master these breathing techniques. When you're ready, head to the "Play" section to start practicing or log your manual sessions.
+                        Explore the "Learn" section to master these breathing techniques. When you're ready, head to the "Practice" section to start practicing or log your manual sessions.
                     </p>
                     <p>
-                        With every session, you'll feel calmer and more focused for your exams. Unlock badges, earn points, and make stress a thing of the past. Your journey starts now!
+                        With every session, you'll feel calmer and more focused for your exams. Your journey starts now!
                     </p>
                     </div>
     
                 <div class="button-container">                
                     <button class = "btn-skip" *ngIf="introStep > 0" (click)="previousStep()">Back</button>
-                    <button class = "btn-next" *ngIf="introStep < 7" (click)="nextStep()">Next</button>
-                    <button class = "btn-next" *ngIf="introStep == 7" (click)="goToGame()">Start</button>
+                    <button class = "btn-next" *ngIf="introStep < 6" (click)="nextStep()">Next</button>
+                    <button class = "btn-next" *ngIf="introStep == 6" (click)="closeIntro()">Start Learning</button>
     
                 </div>
             </div>
@@ -142,7 +127,7 @@
         <!-- Sage Dialogue Box -->
         <div class="intro-dialog" *ngIf="selectedTechnique">
         <div class="sage-dialogue-wrapper">
-            <img class="sage-image" src="assets/narrator.png" alt="Sage" />
+            <!-- <img class="sage-image" src="assets/narrator.png" alt="Sage" /> -->
             <div class="dialogue-box">
               <span class="close-icon" (click)="closeDialogue()">&#10005;</span>
               <ng-container *ngIf="currentTip">

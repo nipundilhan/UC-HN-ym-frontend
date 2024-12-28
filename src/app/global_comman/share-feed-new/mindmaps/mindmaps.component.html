@@ -14,7 +14,7 @@
 
  <div *ngFor="let item of paginatedMindmaps" class="mindmap-card" (click)="openMindMap(item)">
         <div class="user-info">
-          <img [src]="getUserAvatar(item.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+          <!-- <img src="/assets/avatar-img/default-avatar.png" alt="User Avatar" class="user-avatar"> -->
           <div class="user-details">
             <span class="username">{{ item.ownerStudentName }}</span>
             <span class="shared-date">{{ item.date | date:'dd MMMM \'at\' HH:mm a' }}</span>

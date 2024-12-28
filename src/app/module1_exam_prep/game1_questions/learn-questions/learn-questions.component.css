@@ -42,7 +42,7 @@
     animation: fadeIn 1s ease-in-out; /* Speech bubble animation */
     /* text-align: center; */
     overflow: auto; /* Allow scrolling if content is too large */
-    max-height: 80vh; /* Ensures bubble doesn't get too large */
+    max-height: 95vh; /* Ensures bubble doesn't get too large */
     width: 100%; /* Ensure it doesn't overflow on mobile */
     padding: 15px; /* More compact padding for smaller screens */
   }

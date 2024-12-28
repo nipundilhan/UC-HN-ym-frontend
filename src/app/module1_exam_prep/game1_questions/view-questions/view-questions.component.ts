@@ -383,10 +383,10 @@ closeShareModal(): void {
 
           setTimeout(() => {
             this.fetchUpdatedStudentPoints(); 
-            this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+            // this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
           }, 100); // Delay to ensure data consistency
 
-          this.checkAchievement(); // Check for achievement after data fetch
+          // this.checkAchievement(); // Check for achievement after data fetch
           
       },
       (httpError: any) => {

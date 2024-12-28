@@ -72,7 +72,7 @@
               <div class="card-footer">
                 <!-- Shared Tag -->
                 <div class="shared-tag" *ngIf="mindmap.sharedStatus === 'SHARED'">Shared</div>
-                <div class="not-shared-tag" *ngIf="mindmap.sharedStatus === 'NOT_SHARED'">Not Shared</div>
+                <div class="not-shared-tag" *ngIf="mindmap.sharedStatus === 'NOT_SHARED' || mindmap.sharedStatus === 'HIDE'">Not Shared</div>
           
                 <!-- Likes -->
                 <div class="likes" *ngIf="mindmap.sharedStatus === 'SHARED'">

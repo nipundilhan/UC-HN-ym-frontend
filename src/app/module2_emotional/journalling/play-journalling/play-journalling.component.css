@@ -26,14 +26,9 @@ background-size: cover;
 } */
 
 .container{
-  max-width: calc(100% - 280px); /* Adjusting the width to account for the sidenav */
+  max-width: 1000px; /* Adjusting the width to account for the sidenav */
   padding: 10px;
-  /* display: flex; */
-  /* flex-direction: column;
-  align-items: center; */
   font-family: 'MedievalSharp', sans-serif;
-  position: absolute;
-  /* left:0; */
   height:100%;
   display: flex;
   flex-direction: column;

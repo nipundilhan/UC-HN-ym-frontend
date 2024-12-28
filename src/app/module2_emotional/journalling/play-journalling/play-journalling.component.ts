@@ -153,8 +153,7 @@ export class PlayJournallingComponent implements OnInit {
         (response: any) => {
           this.AllData = response;
           this.JournallingData = this.AllData.journalLogs;
-          console.log(this.JournallingData.length);
-          // this.gamePoints = response.gamePoints;
+
           this.gamePoints = this.AllData.gamePoints;
    
           resolve(); // Resolve the promise after the data is successfully fetched
@@ -213,10 +212,10 @@ export class PlayJournallingComponent implements OnInit {
 
         setTimeout(() => {
           this.fetchUpdatedStudentPoints(); 
-          this.fetchBadgeMargin();  //update the points in header and fetches latest data
+          // this.fetchBadgeMargin(); 
         }, 100); // Delay to ensure data consistency
 
-        this.checkAchievement(); // Check for achievement after data fetch
+        // this.checkAchievement(); 
       },
     
       (httpError: any) => {
@@ -467,7 +466,7 @@ onDelete(selectedJournal: any): void {
       this.cancelDelete(); // Close confirmation popup after deleting
       setTimeout(() => {
         this.fetchUpdatedStudentPoints(); 
-        this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+        // this.fetchBadgeMargin();  
       }, 100); 
     },
     error => {

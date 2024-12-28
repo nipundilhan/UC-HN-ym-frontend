@@ -196,9 +196,9 @@ export class ViewTutorialsComponent implements OnInit {
  
         this.getStudentData(); // Refresh the data
 
-        if (newTask.status === 'Completed'){
-          this.checkAchievement(); // Check for achievement after data fetch
-       }
+      //   if (newTask.status === 'Completed'){
+      //     this.checkAchievement(); // Check for achievement after data fetch
+      //  }
 
        setTimeout(() => {
         this.fetchUpdatedStudentPoints();
@@ -355,12 +355,12 @@ export class ViewTutorialsComponent implements OnInit {
         
           setTimeout(() => {
             this.fetchUpdatedStudentPoints(); 
-            this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
+            // this.fetchBadgeMargin();  //update the points in header and fetches latest tutorial data
           }, 100); // Delay to ensure data consistency
          
-          if (newTask.status === 'Completed'){
-           this.checkAchievement(); // Check for achievement after data fetch
-          }
+          // if (newTask.status === 'Completed'){
+          //  this.checkAchievement(); // Check for achievement after data fetch
+          // }
 
           this.closeModal(); // Close modal after saving
           
