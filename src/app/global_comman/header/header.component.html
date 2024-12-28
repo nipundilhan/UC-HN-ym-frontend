@@ -40,7 +40,7 @@
               <span class="fw-bold">{{ msg.title }}</span>
 
               <div class="message-content">
-                <div (click)="openMessagePopup(msg, $event)" [innerHTML]="msg.message | slice: 0:50">
+                <div (click)="openMessagePopup(msg, $event)" [innerHTML]="msg.message | slice: 0:40">
                 </div>
                 <a href="#" (click)="openMessagePopup(msg, $event)" class="see-more">See more...</a>
               </div>

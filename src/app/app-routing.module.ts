@@ -73,11 +73,11 @@ const routes: Routes = [
  { path: 'share',
     component: ShareFeedNewComponent,
     children: [
-      { path: 'notifications', component: NotificationsComponent },
-      { path: 'peers', component: PeersComponent },
+      // { path: 'notifications', component: NotificationsComponent },
+      // { path: 'peers', component: PeersComponent },
       { path: 'mindmaps', component: MindmapsComponent },
       { path: 'questions', component: QuestionsComponent },
-      { path: '', redirectTo: 'notifications', pathMatch: 'full' }  // Default to notifications tab
+      { path: '', redirectTo: 'mindmaps', pathMatch: 'full' }  // Default to notifications tab
     ]
   },
   // { path: '**', redirectTo: '/share/notifications' } ,
