@@ -10,7 +10,7 @@
               'achieved-badge': hasEarnedBadge(gameMargins?.margin1), 
               'not-earned-badge': !hasEarnedBadge(gameMargins?.margin1) 
             }"
-          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more questions needed') : ''"
+          (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin1) ? 'Badge unlocked' : (gameMargins.margin1 - completedTasks) + ' more mindmaps needed') : ''"
           (mouseleave)="showTooltip = ''">
           <img src="/assets/badges/badge02_a.png" alt="Ankh's Chronicle">
            <!-- Badge Title -->
@@ -26,7 +26,7 @@
           'achieved-badge': hasEarnedBadge(gameMargins?.margin2), 
           'not-earned-badge': !hasEarnedBadge(gameMargins?.margin2) 
         }"
-        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more questions needed') : ''"
+        (mouseenter)="showTooltip = gameMargins ? (hasEarnedBadge(gameMargins.margin2) ? 'Badge unlocked' : (gameMargins.margin2 - completedTasks) + ' more mindmaps needed') : ''"
         (mouseleave)="showTooltip = ''">
         <img src="/assets/badges/badge02_b.png" alt="Ankh's Chronicle">
         <p class="badge-title">Ankh's Chronicle</p>
