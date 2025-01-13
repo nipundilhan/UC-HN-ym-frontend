@@ -92,10 +92,14 @@ const routes: Routes = [
       { path: 'user-activity', component: UserActivityComponent },      
       { path: 'messages', component: AdminMsgsComponent },
 
+      { path: '', redirectTo: '/admin', pathMatch: 'full' }, // Redirect root to /admin
+      { path: '**', redirectTo: '/admin' } // Fallback route
     ]
+
+
   },
-  { path: '', redirectTo: '/admin', pathMatch: 'full' }, // Redirect root to /admin
-  { path: '**', redirectTo: '/admin' } // Fallback route
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect root to /admin
+  { path: '**', redirectTo: '/login' } // Fallback route
 
 
 
