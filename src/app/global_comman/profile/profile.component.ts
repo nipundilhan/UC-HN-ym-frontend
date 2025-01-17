@@ -196,7 +196,7 @@ export class ProfileComponent implements OnInit {
               game1badge1Shared: response.game1Badge1Shared,
               game1badge2Shared: response.game1Badge2Shared,
   
-              game2margin1: response.game2Margin2,
+              game2margin1: response.game2Margin1,
               game2margin2: response.game2Margin2,
               game2marks: response.game2Marks,
               game2likesMargin: response.game2LikesMargin,
@@ -214,19 +214,19 @@ export class ProfileComponent implements OnInit {
               game3badge2Shared: response.game3Badge2Shared,
               game3badge3Shared: response.game3Badge3Shared,
   
-              game4margin1: response.game2Margin2,
+              game4margin1: response.game2Margin1,
               game4margin2: response.game2Margin2,
               game4marks: response.game4Marks,
               game4badge1Shared: response.game4Badge1Shared,
               game4badge2Shared: response.game4Badge2Shared,
   
-              game5margin1: response.game2Margin2,
+              game5margin1: response.game2Margin1,
               game5margin2: response.game2Margin2,
               game5marks: response.game5Marks,
               game5badge1Shared: response.game5badge1Shared,
               game5badge2Shared: response.game5badge2Shared,
             };
-  
+  console.log(this.gameMargins);
   
   
       },

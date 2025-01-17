@@ -128,14 +128,41 @@ export class MindmapsComponent implements OnInit {
     return this.avatarService.getAvatarPathByCode(ownerAvatarCode); // Existing method from your service
   }
 
+  // downloadMindMap(): void {
+  //   if (this.selectedMindMap && this.selectedMindMap.imageUrl) {
+  //     const link = document.createElement('a');
+  //     link.href = this.selectedMindMap.imageUrl; // URL of the image
+  //     link.download = `mindmap-${this.selectedMindMap.id}.png`; // Set a filename for download
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   }
+  // }
+
   downloadMindMap(): void {
-    if (this.selectedMindMap && this.selectedMindMap.imageUrl) {
+    if (this.selectedMindMap && this.selectedMindMap.attachments?.[0]?.data) {
+      // Get the Base64 data and file name from the response
+      const base64Data = this.selectedMindMap.attachments[0].data;
+      const filename = this.selectedMindMap.attachments[0].filename || 'mindmap.png';
+  
+      // Convert Base64 data to a Blob
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+  
+      // Create a temporary download link
       const link = document.createElement('a');
-      link.href = this.selectedMindMap.imageUrl; // URL of the image
-      link.download = `mindmap-${this.selectedMindMap.id}.png`; // Set a filename for download
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    } else {
+      console.error('No image data available to download.');
     }
   }
 
