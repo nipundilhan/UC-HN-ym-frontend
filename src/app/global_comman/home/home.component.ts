@@ -18,7 +18,7 @@ games = [
     name: 'Tutorial and Labs Quest',
     subtitle: 'Tutorial and Labs Quest',
     // hieroglyph: '𓂀',
-    hieroglyphImage: 'assets/hieroglyph1.png', 
+    hieroglyphImage: 'assets/icons/tutorial-icon.png', 
     scrollImage: 'assets/scroll.png',
     route: '/view-tutorials' 
   },
@@ -26,7 +26,7 @@ games = [
     id: 2,
     name: 'Mind Mapping Mastery',
     subtitle: 'Mind Mapping Mastery',
-    hieroglyphImage: 'assets/hieroglyph2.png', 
+    hieroglyphImage: 'assets/icons/mindmap-icon.png', 
     // hieroglyph: '𓋹',
     scrollImage: 'assets/scroll.png',
     route: '/play-mindmaps' 
@@ -36,7 +36,7 @@ games = [
     id: 3,
     name: 'Question Mastery',
     subtitle: 'Question Mastery',
-    hieroglyphImage: 'assets/hieroglyph3.png', 
+    hieroglyphImage: 'assets/icons/qna-icon.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png'
   },
@@ -44,7 +44,7 @@ games = [
     id: 4,
     name: 'Breathing Mastery',
     subtitle: 'Breathing Mastery',
-    hieroglyphImage: 'assets/hieroglyph4.png', 
+    hieroglyphImage: 'assets/icons/breathing-icon.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png',
     route: '/breathing' 
@@ -54,7 +54,7 @@ games = [
     id: 5,
     name: 'Journalling Mastery',
     subtitle: 'Journalling Mastery',
-    hieroglyphImage: 'assets/hieroglyph5.png', 
+    hieroglyphImage: 'assets/icons/journalling-icon.png', 
     // hieroglyph: '𓎛',
     scrollImage: 'assets/scroll.png'
   }
