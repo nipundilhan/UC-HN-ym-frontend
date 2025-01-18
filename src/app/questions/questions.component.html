@@ -4,7 +4,7 @@
   <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'">
 
   <div class="user-info">
-      <img [src]="getUserAvatar(question.ownerAvatarCode)" alt="User Avatar" class="user-avatar">
+      <!-- <img [src]="getUserAvatar(question.ownerAvatarCode)" alt="User Avatar" class="user-avatar"> -->
       <div class="user-details">
         <span class="username">{{ question.ownerStudentName }}</span>
         <!-- <span class="shared-date">{{ question.sharedDate | date:'dd MMMM \'at\' HH:mm a' }}</span> -->

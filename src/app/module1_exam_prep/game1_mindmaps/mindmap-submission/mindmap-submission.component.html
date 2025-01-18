@@ -108,7 +108,7 @@
                 </span>
               
                 <!-- Hidden input for file selection -->
-                <input type="file" id="imageUpload" style="display: none;" (change)="onFileSelected($event)">
+                <input type="file" id="imageUpload" class ="image-display-status" (change)="onFileSelected($event)">
                 <!-- <button type="button" class="btn btn-primary" (click)="viewFile(file) ; $event.stopPropagation()">View</button> -->
 
               </div>   
@@ -178,7 +178,7 @@
                 <div class="file-preview-container">
                   <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
                       <div>
-                          <img style="width: 120px;height: 120px;" [src]="filePreviews[0]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
+                          <img class="image-preview-container" [src]="filePreviews[0]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
                       </div>
                   </div>
               </div>

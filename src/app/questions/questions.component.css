@@ -84,7 +84,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 .question-content {
-    margin-left: 65px;
+    /* margin-left: 65px; */
     text-align: left;
     text-wrap: wrap;
     height: 50px;
@@ -334,9 +334,9 @@
 
     } */
 
-    .question-content {
+    /* .question-content {
         margin-left: 55px;    
-    }
+    } */
 
     .question-card {
         width: 100%; /* Make sure the card width is 100% of its container */
