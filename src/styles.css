@@ -19,6 +19,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for scaling and shadow */
   }
+  .journalling-tip-block p{
+    margin-top:0; 
+    margin-bottom:0.5rem;
+  }
   
   /* Hover effect for the entire block */
   .journalling-tip-block:hover {

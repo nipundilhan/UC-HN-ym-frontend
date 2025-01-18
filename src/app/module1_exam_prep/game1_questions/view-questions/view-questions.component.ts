@@ -55,7 +55,7 @@ export class ViewQuestionsComponent implements OnInit {
   isShareModalBadgeOpen = false;
   showDeleteConfirmationPopup: boolean = false;
   currentPage: number = 1; // Current page number
-  QnAPerPage: number = 6; // Number of questions to display per page
+  QnAPerPage: number = 8; // Number of questions to display per page
   QnA: any[] = [];
 
   editorContent: string = '';  // This will store the editor's content

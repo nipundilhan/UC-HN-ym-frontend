@@ -132,7 +132,7 @@
     padding-right: 35px; /* Space for the eye icon */
     width: 100%; /* Full width of the container */
     border-radius: 5px;
-    border: 1px solid #c99865;
+    border: 1px solid #218838;
   }
   
   /* Eye icon inside the input field */
@@ -183,7 +183,7 @@
     border-radius: 5px;
     /* border: 1px solid #c27d2a; */
     border: none;
-    background-color: #f0e3d6;
+    background-color: #e9f5ec;
   }
   
   /* Responsive styling */
@@ -262,7 +262,7 @@
   }
   
   .btn-edit {
-    background-color: #4CAF50; /* Green */
+    background-color: #c19f30; /* Green */
     color: white;
     border: none;
     border-radius: 4px;
@@ -276,7 +276,7 @@
 
   
   .btn-password {
-    background-color: #c27d2a; /* Red */
+    background-color: #218838; /* Red */
     color: white;
     border: none;
     border-radius: 4px;

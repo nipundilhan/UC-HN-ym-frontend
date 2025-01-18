@@ -1,8 +1,5 @@
   :host ::ng-deep .background {
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.3), /* Semi-transparent white */
-      rgba(255, 255, 255, 0.76)
-    ), url('/assets/background-img/background05.jpg');
+    background-image: url('/assets/background-img/background03.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -223,7 +220,7 @@
     flex-wrap: wrap;
     gap: 20px; 
      justify-content: flex-start; 
-     margin-left: 60px;
+     /* margin-left: 60px; */
 }
 
   .record-card { 
@@ -257,7 +254,7 @@
   }
   
   .record-image img {
-    width: 30%;
+    width: 20%;
     height: auto;
     object-fit: cover; /* Ensure image covers the area */
   }
@@ -334,7 +331,8 @@
 } 
 
 .modal-content-add {
-  background-image: url('/assets/background-img/brick_background.jpg'); 
+  /* background-image: url('/assets/background-img/brick_background.jpg');  */
+  background-color: #218838;
   border-radius: 15px;
   padding: 10px;
   width: 80%;
@@ -349,11 +347,12 @@
   max-width: 1000px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
-  background-image: url('/assets/background-img/brick_background.jpg'); 
+  /* background-image: url('/assets/background-img/brick_background.jpg');  */
+  background-color: #218838;
 }
 
 .modal-content-view {
-  background-color: #f9e7d4;
+  background-color: #e9f5ec;
   padding: 18px;
   border-radius: 10px;
 }
@@ -433,7 +432,7 @@
   width: 100%;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #c99865;
+  border: 1px solid #218838;
 }
 
 .form-group textarea {
@@ -450,7 +449,7 @@
 
 /* Buttons styles */
 .save-btn, .cancel-btn, .delete-btn{
-  background-color: #c27d2a; 
+  background-color: #218838;; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -691,7 +690,7 @@
 
 
 .tutorial-box {
-  background-color: #f9e7d4;
+  background-color: #e9f5ec;
   border-radius: 15px; 
   padding: 18px; /* Increased padding for a larger box */
   width: 800px; /* Adjust width to be larger */
@@ -723,7 +722,7 @@
 .tutorial-box .form-group textarea {
   width: 100%;
   padding: 3px;
-  border: 1px solid #c99865;
+  border: 1px solid #218838;
   border-radius: 5px;
   box-sizing: border-box; 
 }
@@ -733,7 +732,7 @@
   width: 40%;
   margin: 0 auto;
   padding: 10px;
-  background-color: #d96e10; /* Dark button color */
+  background-color: #218838;; /* Dark button color */
   color: #ffffff; /* Dark text */
   border: none;
   border-radius: 10px;
@@ -746,7 +745,7 @@
 
 .tutorial-box .btn-submit:hover {
   /*background-color: #ffeb09; /* Slightly lighter on hover */
-  background-color: #e4af0e;
+  opacity: 0.7;
 }
 
 .tutorial-box .btn-submit:disabled{

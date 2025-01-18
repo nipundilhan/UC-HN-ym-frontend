@@ -46,7 +46,7 @@ export class ViewTutorialsComponent implements OnInit {
   isPadlockVisible: boolean = false;  // Declare isPadlockVisible
 
   currentPage: number = 1; // Current page number
-  tutorialsPerPage: number = 6; // Number of questions to display per page
+  tutorialsPerPage: number = 8; // Number of questions to display per page
   tutorials: any[] = [];
 
   gamePoints: number = 0;

@@ -1,8 +1,6 @@
 :host ::ng-deep .background {
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.65), /* Semi-transparent white */
-      rgba(255, 255, 255, 0.8)
-    ), url('/assets/background-img/background05.jpg');
+    background-image:
+ url('/assets/background-img/background03.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -148,6 +146,7 @@
   }
 
   .help-popup {
+    font-family: Arial, sans-serif;
     position: fixed;
     top: 50%;
     left: 50%;

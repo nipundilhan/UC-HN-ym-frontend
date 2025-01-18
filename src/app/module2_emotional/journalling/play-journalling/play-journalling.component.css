@@ -2,7 +2,7 @@
     background-image: linear-gradient(
       rgba(255, 255, 255, 0.3), /* Semi-transparent white */
       rgba(255, 255, 255, 0.76)
-    ), url('/assets/background-img/background09.jpg');
+    ), url('/assets/background-img/background05.jpg');
 background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -78,7 +78,7 @@ background-size: cover;
 
 /* Modal content styling */
 .modal-content {
-  background-color: #f6f0e5;
+  background-color: #e9f5ec;
   padding: 20px;
   border-radius: 8px;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -93,7 +93,7 @@ background-size: cover;
   max-width: 1000px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
-  background-image: url('/assets/background-img/brick_background.jpg'); 
+  background-color: #218838;
 }
 
 
@@ -152,7 +152,7 @@ textarea {
   /* margin-top: 5px;     */
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #c99865;
+  border: 1px solid #218838;
   /* resize: vertical;  */
 }
 
@@ -164,7 +164,7 @@ button[type="submit"] {
   display: block; 
   margin-top: 15px;
   padding: 8px 15px;
-  background-color: #c27d2a; 
+  background-color: #218838; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -264,7 +264,7 @@ button[type="submit"]:hover {
 .form-group input {
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #c99865;
+  border: 1px solid #218838;
   width: 100%; /* Full width of the group */
 }
 

@@ -1,9 +1,6 @@
 /* Container styling */
 :host ::ng-deep .background {
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.3), /* Semi-transparent white */
-      rgba(255, 255, 255, 0.76)
-    ), url('/assets/background-img/background05.jpg');
+    background-image: url('/assets/background-img/background03.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -258,6 +255,11 @@
     transform: scale(1.05);
   }
 
+  .image-preview-container{
+    width: 120px;
+    height: 120px;
+  }
+
   .camera-icon {
     position: absolute;
     left: 180px;
@@ -298,7 +300,7 @@
 
 /* Modal content styling */
 .modal-content {
-  background-color: #f6f0e5;
+  background-color: #e9f5ec;
   padding: 20px;
   border-radius: 8px;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -313,7 +315,7 @@
   max-width: 1000px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
-  background-image: url('/assets/background-img/brick_background.jpg'); 
+  background-color: #218838;
 }
 
   .delete-user-popup {
@@ -404,7 +406,7 @@ textarea {
     margin-top: 5px;    
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #c99865;
+    border: 1px solid #218838;
 }
 
 input[type="file"] {
@@ -415,7 +417,7 @@ button[type="submit"] {
     display: block; /* Make the button a block-level element */
     margin-top: 15px;
     padding: 8px 15px;
-    background-color: #c27d2a; 
+    background-color: #218838; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -611,7 +613,9 @@ button[type="submit"]:hover {
     position: absolute;
   }
   
-
+  .image-display-status{
+    display: none;
+  }
 /* Unlocking animation */
 @keyframes unlockBadge {
     0% {

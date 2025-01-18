@@ -1,8 +1,8 @@
 :host ::ng-deep .background {
   background-image: linear-gradient(
-    rgba(255, 255, 255, 0.3), /* Semi-transparent white */
+    rgba(255, 255, 255, 0.6), /* Semi-transparent white */
     rgba(255, 255, 255, 0.76)
-  ), url('/assets/background-img/background08.jpg');
+  ), url('/assets/background-img/background02.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -43,8 +43,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 300px;
+  width: 350px;
+  height: 250px;
   background-size: contain; /* Ensure the whole image is shown */
   background-repeat: no-repeat; /* Prevent image repetition */
   background-position: center; /* Center the image */
@@ -62,11 +62,11 @@
 
 /* Specific images for Learn and Play blocks */
 .learn-block {
-  background-image: url('/assets/learn.png'); /* Add the image path */
+  background-image: url('/assets/play_n_learn_btn.png'); /* Add the image path */
 }
 
 .play-block {
-  background-image: url('/assets/play.png'); /* Add the image path */
+  background-image: url('/assets/play_n_learn_btn.png'); /* Add the image path */
 }
 
 /* Centered text styling */
@@ -79,9 +79,9 @@
 }
 
 /* Add margin-left to the option-text in the first block */
-.option-block:nth-child(1) .option-text {
-  margin-left: 45px; /* Add a small left margin to the text in the first block */
-}
+/* .option-block:nth-child(1) .option-text {
+  margin-left: 45px;
+} */
 
 /* Hover effect */
 .option-block:hover {
@@ -107,7 +107,7 @@
   }
 
     /* Add margin-left to the second block only in responsive mode */
-    .option-block:nth-child(2) {
-      margin-left: 50px; /* Add margin-left to the second block */
-    }
+    /* .option-block:nth-child(2) {
+      margin-left: 50px;
+    } */
 }

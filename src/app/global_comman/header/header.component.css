@@ -1,6 +1,6 @@
 /* General navbar styling */
 .navbar {
-  background-color: rgb(205, 65, 18);
+  background-color: rgb(59 110 14);
   display: flex;
   /* justify-content: space-between;  */
   /* align-items: center;  */
@@ -105,9 +105,9 @@
 
 .bg-danger{
   /* padding: 2px; */
-  background-color: rgb(134 5 5) !important;
+  background-color: rgb(195 220 188) !important;
   border: 1px solid #ffffff;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Dropdown menu styling */
@@ -131,7 +131,7 @@
 }
 
 .dropdown-item:hover {
-  background-color: rgba(236, 119, 81, 0.343);
+  background-color: rgba(122, 236, 81, 0.343);
   border-radius: 15px;
 }
 

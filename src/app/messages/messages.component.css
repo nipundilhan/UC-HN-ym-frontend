@@ -4,7 +4,7 @@
     background-image: linear-gradient(
         rgba(255, 255, 255, 0.3), /* Semi-transparent white */
         rgba(255, 255, 255, 0.76)
-      ), url('/assets/background-img/background03.jpg');
+      ), url('/assets/background-img/background01.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -69,7 +69,7 @@
   }
   
   .open-btn {
-    background-color: #cc4211;
+    background-color: #0b860a;
     flex-shrink: 0;
     border: none;
     color: white;
