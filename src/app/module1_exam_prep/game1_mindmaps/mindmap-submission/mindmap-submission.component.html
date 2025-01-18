@@ -109,7 +109,7 @@
                 </span>
               
                 <!-- Hidden input for file selection -->
-                <input type="file" id="imageUpload" style="display: none;" (change)="onFileSelected($event)">
+                <input type="file" id="imageUpload" class="image-show" (change)="onFileSelected($event)">
                 <!-- <button type="button" class="btn btn-primary" (click)="viewFile(file) ; $event.stopPropagation()">View</button> -->
 
               </div>   
@@ -169,7 +169,7 @@
                 <textarea id="description" formControlName="description" rows="4" class="form-control"></textarea>
                 
 
-                <label for="image">Upload Mindmap Image<span style ="font-size: 12px;"> (Maximum upload file size : 1MB)</span></label>
+                <label for="image">Upload Mindmap Image<span class="image-span-font"> (Maximum upload file size : 1MB)</span></label>
                 <input type="file" id="image" (change)="onFileSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
                 <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
                   <div *ngIf="f['image'].errors?.['required']">Mindmap Image is required</div>
@@ -179,7 +179,7 @@
                 <div class="file-preview-container">
                   <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
                       <div>
-                          <img style="width: 120px;height: 120px;" [src]="filePreviews[0]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
+                          <img [src]="filePreviews[0]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
                       </div>
                   </div>
               </div>

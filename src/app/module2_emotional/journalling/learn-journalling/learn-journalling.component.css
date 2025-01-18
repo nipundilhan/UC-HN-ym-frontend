@@ -385,6 +385,16 @@
     margin-right: 10px;
   }
   
+  .how-to-log-journal-img{
+    height: 400px; 
+    margin-bottom: 5px;
+  }
+
+  .badge-img{
+    height: 80px;
+     margin-bottom: 5px;
+  }
+  
   /* Keyframe animation to reveal the items */
   @keyframes revealItem {
     0% {

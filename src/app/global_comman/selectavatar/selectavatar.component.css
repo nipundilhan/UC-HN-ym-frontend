@@ -184,3 +184,7 @@ h2 {
   display: block;
   margin: 5px 0;
 }
+
+.custom-padding{
+  padding: 1em;
+}

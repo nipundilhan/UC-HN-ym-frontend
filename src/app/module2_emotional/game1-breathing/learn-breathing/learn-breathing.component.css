@@ -369,7 +369,16 @@
     height: 24px;
     margin-right: 10px;
   }
+
+  .practice-img{
+    height: 400px; 
+    margin-bottom: 5px;
+  }
   
+  .badge-img{
+    height: 80px; 
+    margin-bottom: 5px;
+  }
   /* Keyframe animation to reveal the items */
   @keyframes revealItem {
     0% {

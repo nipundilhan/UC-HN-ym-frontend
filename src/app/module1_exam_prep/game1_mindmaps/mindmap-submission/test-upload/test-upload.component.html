@@ -20,9 +20,8 @@
           <img *ngIf="attachment.contentType.startsWith('image/')"
             [src]="'data:' + attachment.contentType + ';base64,' + attachment.data" 
             alt="{{ attachment.filename }}" 
-            style="width: 120px;height: 120px; display: block; margin: 10px 0;" 
           />
-          <img *ngIf="attachment.contentType === 'application/pdf'" style="width: 120px;height: 120px;" src="assets/pdf-icon.png" alt="PDF Preview" />
+          <img *ngIf="attachment.contentType === 'application/pdf'" src="assets/pdf-icon.png" alt="PDF Preview" />
           <p>{{ attachment.filename }}</p>
         </div>
         </div>
@@ -49,10 +48,10 @@
         <div class="file-preview-container">
             <div *ngFor="let file of uploadedFiles; let i = index" class="file-preview">
                 <div>
-                    <img style="width: 120px;height: 120px;" *ngIf="isImage(file); else pdfPreview" [src]="filePreviews[i]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
+                    <img *ngIf="isImage(file); else pdfPreview" [src]="filePreviews[i]" alt="Preview" /> <!--*ngIf="isImage(file)"-->
                     <p>{{ file.name }}</p>
                     <ng-template #pdfPreview>
-                    <img style="width: 120px;height: 120px;" src="assets/pdf-icon.png" alt="PDF Preview" />
+                    <img src="assets/pdf-icon.png" alt="PDF Preview" />
                     </ng-template>
                     <div>
                     <button type="button" class="btn btn-danger" (click)="removeFile(file)">Remove</button>

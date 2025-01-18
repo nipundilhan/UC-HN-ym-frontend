@@ -609,6 +609,13 @@ button[type="submit"]:hover {
     position: absolute;
   }
   
+  .image-span-font{
+   font-size: 12px;
+  }
+
+  .image-show{
+    display: none;
+  }
 
 /* Unlocking animation */
 @keyframes unlockBadge {
@@ -674,9 +681,11 @@ button[type="submit"]:hover {
 }
 
 .file-preview img {
-    width: 100%; /* Make images responsive */
-    height: auto; /* Maintain aspect ratio */
+    /* width: 100%;  */
+    /* height: auto;  */
     border-radius: 5px; /* Optional: add rounded corners */
+   width: 120px;
+   height: auto;
 }
 
 .file-preview p {

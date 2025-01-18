@@ -71,15 +71,15 @@ export class LearnJournallingComponent implements OnInit {
           text: `<h4>How to Start Gratitude Journaling?</h4>
                  <h6>Prompts to Get You Started</h6>
                  <div class="journalling-tip-block">
-                   <p style="margin-bottom:0.5rem"><b>Name three things you’re grateful for today:</b></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“The quiet morning I spent reading.”</i></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“The help I received during a group study session.”</i></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“My favorite snack break after studying.”</i></p>
+                   <p><b>Name three things you’re grateful for today:</b></p>
+                   <p><i>“The quiet morning I spent reading.”</i></p>
+                   <p><i>“The help I received during a group study session.”</i></p>
+                   <p><i>“My favorite snack break after studying.”</i></p>
                  </div>
                  <div class="journalling-tip-block">
-                   <p style="margin-bottom:0.5rem"><b>What made you smile today?</b></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“A funny joke from my classmate.”</i></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“A sunny walk after my study session.”</i></p>
+                   <p><b>What made you smile today?</b></p>
+                   <p><i>“A funny joke from my classmate.”</i></p>
+                   <p><i>“A sunny walk after my study session.”</i></p>
                  </div>
                  <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>`,
           image: null, 
@@ -137,14 +137,14 @@ export class LearnJournallingComponent implements OnInit {
           text: `<h4>How to Start Self-Compassion Journaling?</h4>
                  <h6>Prompts to Get You Started</h6>
                  <div class="journalling-tip-block">
-                    <p style="margin-bottom:0.5rem"><b>Write a kind note to yourself.</b></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“You are doing great! Keep going—you’ve got this!”</i></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“I am proud of how far I’ve come, and I know I can handle whatever comes next.”</i></p>
+                    <p><b>Write a kind note to yourself.</b></p>
+                    <p><i>“You are doing great! Keep going—you’ve got this!”</i></p>
+                    <p><i>“I am proud of how far I’ve come, and I know I can handle whatever comes next.”</i></p>
                   </div>
                  <div class="journalling-tip-block">
-                   <p style="margin-bottom:0.5rem"><b>Write about a challenge you faced today and how you handled it:</b></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“I struggled with a tough math problem but stayed patient and tried different methods.”</i></p>
-                   <p style="margin-top:0; margin-bottom:0.5rem"><i>“I felt overwhelmed, but I took a break and came back stronger.”</i></p>
+                   <p><b>Write about a challenge you faced today and how you handled it:</b></p>
+                   <p><i>“I struggled with a tough math problem but stayed patient and tried different methods.”</i></p>
+                   <p><i>“I felt overwhelmed, but I took a break and came back stronger.”</i></p>
                  </div>
                  <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>
 `, 
@@ -197,14 +197,14 @@ export class LearnJournallingComponent implements OnInit {
           text: `<h4>How to Start Reflective Journaling?</h4>
                  <h6>Prompts to Get You Started</h6>
                  <div class="journalling-tip-block">
-                    <p style="margin-bottom:0.5rem"><b>What is one thing I can do today to get closer to my goal?</b></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“Start revising for my upcoming test in small chunks.”</i></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“Reach out to a mentor for advice on my career path.”</i></p>
+                    <p><b>What is one thing I can do today to get closer to my goal?</b></p>
+                    <p><i>“Start revising for my upcoming test in small chunks.”</i></p>
+                    <p><i>“Reach out to a mentor for advice on my career path.”</i></p>
                   </div>
                   <div class="journalling-tip-block">
-                    <p style="margin-bottom:0.5rem"><b>I am proud of myself for .......</b></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“Staying consistent with my studies this week.”</i></p>
-                    <p style="margin-top:0; margin-bottom:0.5rem"><i>“Helping a friend understand a tough concept.”</i></p>
+                    <p><b>I am proud of myself for .......</b></p>
+                    <p><i>“Staying consistent with my studies this week.”</i></p>
+                    <p><i>“Helping a friend understand a tough concept.”</i></p>
                   </div>
                  <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>
 `, 

@@ -48,13 +48,13 @@ tips = [
   <ul>
     <li>
       <p><b>Theoretical Questions:</b> These assess your understanding of concepts and definitions. Aim for clarity and depth. For example:</p>
-      <p style="margin: 0;"><i>- What is the purpose of a loop in programming?</i></p>
-      <p style="margin: 0;"><i>- Explain the differences between a 'for' loop and a 'while' loop with examples.</i></p>
+      <p><i>- What is the purpose of a loop in programming?</i></p>
+      <p><i>- Explain the differences between a 'for' loop and a 'while' loop with examples.</i></p>
     </li>
     <li>
-      <p style="color: black !important;"><b>Practical Questions:</b> These test your ability to apply theoretical knowledge to solve problems. Ensure they are realistic and relevant to what you're learning. For example:</p>
-      <p style="margin: 0;"><i>- Write a Python function to reverse a string.</i></p>
-      <p style="margin: 0;"><i>- Design an algorithm to find the second-largest number in a list.</i></p>
+      <p><b>Practical Questions:</b> These test your ability to apply theoretical knowledge to solve problems. Ensure they are realistic and relevant to what you're learning. For example:</p>
+      <p><i>- Write a Python function to reverse a string.</i></p>
+      <p><i>- Design an algorithm to find the second-largest number in a list.</i></p>
     </li>
   </ul>
 </div>
