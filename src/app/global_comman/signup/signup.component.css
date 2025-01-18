@@ -105,6 +105,20 @@
   margin-bottom: 15px; /* Maintain spacing between input groups */
 }
 
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .signup-box {
