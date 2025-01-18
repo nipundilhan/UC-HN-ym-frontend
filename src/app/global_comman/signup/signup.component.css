@@ -58,7 +58,7 @@
 .signup-box .input-group select {
   width: 100%;
   padding: 3px;
-  border: 1px solid #c99865;
+  border: 1px solid #0e8214;
   border-radius: 5px;
   box-sizing: border-box; 
 }
@@ -68,7 +68,7 @@
   width: 40%;
   margin: 0 auto;
   padding: 0px;
-  background-color: #d96e10; /* Dark button color */
+  background-color: #0e8214; /* Dark button color */
   color: #ffffff; /* White text */
   border: none;
   border-radius: 10px;
@@ -80,7 +80,7 @@
 }
 
 .signup-box .btn-submit:hover {
-  background-color: #ffeb09; /* Slightly lighter on hover */
+  opacity: 0.7; /* Slightly lighter on hover */
 }
 
 .form-group {
@@ -121,6 +121,20 @@
 .error-message small {
   display: block;
   margin: 5px 0;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
 }
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
