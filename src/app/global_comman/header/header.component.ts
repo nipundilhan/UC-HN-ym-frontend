@@ -174,7 +174,7 @@ redirectToMessagesPage() {
   public logout() {
     // Clear user data and navigate
     this.userAuthService.clear();
-    this.router.navigate(['/introduction']);
+    this.router.navigate(['/']);
   }
 
   public isLoggedIn() {

@@ -99,7 +99,7 @@ ngOnInit(): void {
     },
     (httpError: any) => {
       console.log(httpError);
-      alert("An error occurred while fetching mood data");
+      // alert("An error occurred while fetching mood data");
     }
   );
 
@@ -120,7 +120,7 @@ ngOnInit(): void {
           },
           (httpError: any) => {
             console.log(httpError);
-            alert("An error occurred while logging the mood");
+            // alert("An error occurred while logging the mood");
           }
         );
 
@@ -163,7 +163,7 @@ fetchMoodData(): void {
 
     },
     (error) => {
-      console.error('Error fetching mood data:', error);
+      // console.error('Error fetching mood data:', error);
     }
   );
 }
