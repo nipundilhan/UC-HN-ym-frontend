@@ -459,6 +459,11 @@
     /* flex: 1 1 calc(33.333% - 20px);  */
     margin-bottom: 0;
   }
+
+  .how-to-log-journal-img{
+    height: 400px; 
+    margin-bottom: 5px;
+  }
   
   .technique-block:hover {
     transform: translateY(-5px);
