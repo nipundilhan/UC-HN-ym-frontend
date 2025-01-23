@@ -246,6 +246,10 @@
   
   
   @media screen and (max-width: 768px) {
+    .guidelines p{
+      font-size: 12px;
+    }
+
     .sage-dialogue-wrapper {
       flex-direction: column;
       align-items: center;
@@ -254,7 +258,7 @@
     }
   
     .sage-image {
-      width: 100px; /* Adjust for smaller screens */
+      width: 70px; /* Adjust for smaller screens */
       /* margin-bottom: 16px; */
     }
   
@@ -475,12 +479,34 @@
     .technique-block {
       width: 80%;
     }
+    .technique-block p{
+      font-size: 12px;
+    }
     .techniques-container-intro{
       flex-wrap: wrap;
         gap: 20px;
         align-items: center;
         margin-bottom: 10px;
         justify-content: center;
+    }
+
+    .how-to-log-journal-img{
+      height: 300px;
+    }
+
+    ul.animated-list li{
+      font-size:12px;
+    }
+
+    ul.badge-list li{
+      font-size:12px;
+    }
+    .badge-img{
+      height: 60px;
+    }
+
+    .popup-content{
+      font-size: 12px;
     }
   }
   

@@ -246,6 +246,14 @@
   
   
   @media screen and (max-width: 768px) {
+
+    ul.animated-list li {
+      font-size: 12px;
+    }
+     .guidelines{
+      font-size: 14px;
+     }
+
     .sage-dialogue-wrapper {
       flex-direction: column;
       align-items: center;
@@ -254,7 +262,7 @@
     }
   
     .sage-image {
-      width: 100px; /* Adjust for smaller screens */
+      width: 70px; /* Adjust for smaller screens */
       /* margin-bottom: 16px; */
     }
   
@@ -290,6 +298,21 @@
         position: fixed;
         align-self: center;
     }
+
+    .badge-info p{
+      font-size: 12px;
+    }
+    .badge-info ul{
+      font-size: 12px;
+   }
+   .badge-img{
+    height: 60px; 
+  }
+
+   .practice-img{
+    height: 300px; 
+  }
+
   }
 
   .button-container {

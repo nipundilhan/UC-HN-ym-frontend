@@ -51,7 +51,7 @@ export class LearnJournallingComponent implements OnInit {
       icon: 'assets/journalling/gratitude.png',
       tips: [
         { 
-          text: `<h3>What is Gratitude Journaling?</h3> 
+          text: `<h5>What is Gratitude Journaling?</h5> 
                  <p>Gratitude journaling is about focusing on the good things in your life by writing them down. 
                  It’s your personal treasure map to happiness and calm.</p>
                  <p>It can be as simple as appreciating a peaceful moment, a kind word from a friend, or a delicious meal. 
@@ -60,7 +60,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>Why Practice Gratitude Journaling?</h4>
+          text: `<h5>Why Practice Gratitude Journaling?</h5>
                  <div class="journalling-tip-block">🌟 <b>Improves Focus:</b> Reflecting on gratitude clears mental clutter and helps you concentrate on studies.</div>
                  <div class="journalling-tip-block">✨ <b>Enhances Mood:</b> A gratitude habit can uplift your spirits, even on tough days.</div>
                  <div class="journalling-tip-block">🛡️ <b>Builds Inner Strength:</b> Being thankful teaches you to find joy, even in small victories.</div>`, 
@@ -68,7 +68,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>How to Start Gratitude Journaling?</h4>
+          text: `<h5>How to Start Gratitude Journaling?</h5>
                  <h6>Prompts to Get You Started</h6>
                  <div class="journalling-tip-block">
                    <p><b>Name three things you’re grateful for today:</b></p>
@@ -86,7 +86,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>Here are some more prompts to guide you and spark new ideas for your gratitude journaling:</h4>
+          text: `<h5>Here are some more prompts to guide you and spark new ideas for your gratitude journaling:</h5>
           <ul>
             <li>What small act of kindness made your day better?</li>
             <li>What is something beautiful you saw today?</li>
@@ -100,7 +100,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>Ready to Begin?</h4> 
+          text: `<h5>Ready to Begin?</h5> 
                  <p>Start small—just a sentence or two is enough to feel the impact. Each journal entry earns you <b>points</b> in the game, helping you unlock <b>badges</b> and track your progress!</p>
                  <p>Your gratitude journal is your path to a stronger, happier, and calmer you.</p>`, 
           image: null, 
@@ -178,15 +178,15 @@ export class LearnJournallingComponent implements OnInit {
       icon: 'assets/journalling/reflective.png',
       tips: [
         { 
-          text: `<h3>What is Reflective Journaling?</h3> 
-                 <p>Reflective journaling is a way to look back on your experiences, analyze them, and learn from them. 
+          text: `<h5>What is Reflective Journaling?</h5> 
+                 <p class="tip-content">Reflective journaling is a way to look back on your experiences, analyze them, and learn from them. 
                  It helps you understand what’s working, what isn’t, and how to improve.</p>
-                 <p>This practice allows you to connect your actions with your goals, turning everyday study sessions into meaningful progress.</p>`, 
+                 <p class="tip-content">This practice allows you to connect your actions with your goals, turning everyday study sessions into meaningful progress.</p>`, 
           image: 'assets/journalling/Reflective-intro.png', 
           video: null 
         },
         { 
-          text: `<h4>Why Practice Reflective Journaling?</h4>
+          text: `<h5>Why Practice Reflective Journaling?</h5>
                  <div class="journalling-tip-block">🧠 <b>Improves Self-Awareness:</b> Helps you understand your strengths and areas to work on.</div>
                   <div class="journalling-tip-block">💡 <b>Sparks Insight:</b> Helps you see patterns, discover what works for you, and make informed decisions in any area of your life.</div>
                  <div class="journalling-tip-block">🎯 <b>Strengthens Focus:</b> Keeps you aligned with your goals and motivated to push forward.</div>`, 
@@ -194,7 +194,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>How to Start Reflective Journaling?</h4>
+          text: `<h5>How to Start Reflective Journaling?</h5>
                  <h6>Prompts to Get You Started</h6>
                  <div class="journalling-tip-block">
                     <p><b>What is one thing I can do today to get closer to my goal?</b></p>
@@ -212,7 +212,7 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>Here are some more prompts to inspire your reflective journaling and deepen your self-awareness:</h4>
+          text: `<h5>Here are some more prompts to inspire your reflective journaling and deepen your self-awareness:</h5>
               <ul>
                 <li>What did you learn about yourself today?</li>
                 <li>How did you grow today, even if in a small way?</li>
@@ -226,10 +226,10 @@ export class LearnJournallingComponent implements OnInit {
           video: null 
         },
         { 
-          text: `<h4>Ready to Reflect?</h4> 
-                 <p>As you log your reflective journal entries, you’ll gain <b>points</b> to level up in the game and unlock valuable <b>badges</b>! 
+          text: `<h5>Ready to Reflect?</h5> 
+                 <p class= "tip-content">As you log your reflective journal entries, you’ll gain <b>points</b> to level up in the game and unlock valuable <b>badges</b>! 
                  Your journal is your personal mirror—it shows where you’ve been and lights the path ahead.</p>
-                 <p>Start now, and make every study session a step toward mastering your exams!</p>`, 
+                 <p class= "tip-content">Start now, and make every study session a step toward mastering your exams!</p>`, 
           image: null, 
           video: null 
         }

@@ -938,6 +938,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 15px;
      /* Allow badges to wrap to the next line */
   }
 

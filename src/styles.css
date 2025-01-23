@@ -81,11 +81,19 @@
   @media screen and (max-width: 480px) {
     .journalling-tip-block {
         padding: 10px;
+        font-size:12px;
     }
     .badge-image{
       width: 50px;
     }
+
+    .breathing-step-block p{
+      font-size:12px;
   }
+  .tip-content{
+    font-size: 12px;
+  }
+}
 
   @media (max-width: 600px) {
     .video-container {

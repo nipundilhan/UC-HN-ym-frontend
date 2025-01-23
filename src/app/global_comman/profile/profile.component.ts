@@ -231,7 +231,7 @@ export class ProfileComponent implements OnInit {
   
       },
       (error) => {
-        console.error('Error fetching data:', error);
+        // console.error('Error fetching data:', error);
       }
     );
   }

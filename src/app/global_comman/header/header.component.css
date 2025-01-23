@@ -271,4 +271,8 @@
   .points-count {
     font-size: 14px; /* Adjust font size for very small screens */
   }
+
+  .custom-width{
+    width: 240px;
+  }
 }

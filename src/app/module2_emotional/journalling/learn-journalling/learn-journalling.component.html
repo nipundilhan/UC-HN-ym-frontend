@@ -9,15 +9,15 @@
             <span class="close-icon" (click)="closeIntro()">&#10005;</span>
 
             <!-- Step 1 -->
-            <div *ngIf="introStep === 0">
-                <h4>Welcome to the <b><i>Calm of the Oasis : Journalling Mastery</i></b>, brave adventurer! </h4>
+            <div *ngIf="introStep === 0" class="guidelines">
+                <h5>Welcome to the <b><i>Calm of the Oasis : Journalling Mastery</i></b>, brave adventurer! </h5>
                 <p>As you embark on this journey, I'll share powerful tips to help you master the practice of journaling. 
                 Together, we'll turn your thoughts and reflections into treasures that fuel your confidence and focus during exams. 
                 Click next, and let's uncover the secrets to starting your journaling quest!</p>
             </div>
 
             <!-- Step 2 -->
-            <div *ngIf="introStep === 1">
+            <div *ngIf="introStep === 1" class="guidelines">
                 <p>In this quest, you’ll learn three powerful journaling techniques to help you along the way:</p>  
 
                 <div class="techniques-container-intro">
@@ -49,7 +49,7 @@
                 </div>
 
             <!-- Final Step -->
-            <div *ngIf="introStep === 3">
+            <div *ngIf="introStep === 3" class="guidelines">
                 <h4>How to get started?</h4>
                 <ul class="animated-list">
                     <li><b>Be Honest:</b> Write freely and without judgment. This is your space to be yourself.</li>  
@@ -89,12 +89,12 @@
 
 
 
-            <div *ngIf="introStep === 6">
+            <div *ngIf="introStep === 6" class="guidelines">
                 <h4>Earn Points and Unlock Badges!</h4>
                   <p>Each time you log a journal entry, you earn valuable<b> points</b> that help you level up in the game. The more you write, the more points you collect!</p>
                 <!-- <p>Once you’ve learned all the techniques, head over to the "Play" section to start your journaling adventure. 🏃‍♂️💨 In this part of the game, you’ll get to:</p> --> 
                    <p>As you journal, you’ll also unlock badges and achievements! Here’s what you’ll get:</p>
-                    <ul>
+                    <ul class="badge-list">
                     <li><b>Beginner Badge: Calm of the Scarab</b>
                     Awarded after logging your second journal entry—this means you’ve officially started your journaling journey. Great job!</li>
                     <img class="badge-img" src = "/assets/badges/badge05_a.png">
@@ -105,7 +105,7 @@
 
                 </ul>
             </div>
-            <div *ngIf="introStep === 7">
+            <div *ngIf="introStep === 7" class="guidelines">
                 <h5>Ready to Get Started?</h5>
                 <p>Now that you know how it works, it’s time to begin! Explore the "Learn" section to master your journaling skills, and then jump into "Play" to start earning points and unlocking badges.</p> 
                 <p>Your adventure awaits, and every journal entry brings you closer to your goals—both in-game and in real life. Let’s go, adventurer!</p>
