@@ -159,6 +159,7 @@
     border-radius: 8px;
     padding: 16px;
     z-index: 2000;
+    font-family: Georgia, serif;
   }
   
   .tip-block{
@@ -490,6 +491,10 @@
         align-items: center;
         margin-bottom: 10px;
         justify-content: center;
+    }
+
+    .popup-content{
+      font-size: 12px;
     }
   }
   
