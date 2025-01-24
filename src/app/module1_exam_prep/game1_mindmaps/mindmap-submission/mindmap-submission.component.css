@@ -721,7 +721,9 @@ button[type="submit"]:hover {
 }
 
 
-
+.warning-class{
+  font-size:12px;
+}
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .mind-map-grid {

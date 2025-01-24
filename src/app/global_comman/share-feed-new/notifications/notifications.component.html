@@ -1,7 +1,6 @@
 <div class="notification-grid" *ngIf="AllData?.length > 0">
 
 <div *ngFor="let item of paginatedNotifications" class="feed-item">
-  <!-- <div *ngFor="let item of paginatedNotifications" class="feed-item" [style.borderBottom]="'1px solid #e0e0e0'"> -->
 
     <div class="user-info">
       <img [src]="getUserAvatar(item.avatarCode)" alt="User Avatar" class="user-avatar">

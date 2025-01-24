@@ -1,7 +1,6 @@
 <div class = "question-grid" *ngIf="AllData?.data?.QandA?.length > 0">
   <!-- <div class="question-grid"*ngIf="AllData?.data?.QandA?.length > 0"> -->
-<!-- <div *ngFor="let question of questions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'"> -->
-  <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestion(question)" [style.borderBottom]="'1px solid #e0e0e0'">
+  <div *ngFor="let question of paginatedQuestions" class="question-card" (click)="openQuestion(question)">
 
   <div class="user-info">
       <!-- <img [src]="getUserAvatar(question.ownerAvatarCode)" alt="User Avatar" class="user-avatar"> -->
