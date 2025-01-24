@@ -484,6 +484,9 @@
         margin-bottom: 10px;
         justify-content: center;
     }
+    .popup-content  {
+      font-size: 12px;
+    }
   }
   
   
