@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, AbstractControl, FormControl, Validators  } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -66,7 +66,6 @@ export class ViewTutorialsComponent implements OnInit {
     private userAuthService: UserAuthService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private renderer: Renderer2,
     private pointsService: PointsService
   ) {
     this.tutorialForm = this.formBuilder.group({

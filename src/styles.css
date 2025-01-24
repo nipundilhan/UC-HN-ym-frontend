@@ -1,12 +1,30 @@
+@font-face {
+  font-family: 'MedievalSharp';
+  src: url('/assets/fonts/MedievalSharp-Regular.woff2') format('woff2'),
+       url('/assets/fonts/MedievalSharp-Regular.woff') format('woff'),
+       url('/assets/fonts/MedievalSharp-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/assets/fonts/Lato-Regular.woff2') format('woff2'),
+       url('/assets/fonts/Lato-Regular.woff') format('woff'),
+       url('/assets/fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .p1dv1{
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    margin-left: 10%;
-    margin-right: auto;
-    margin-top:2%;
-    background-color: darkgrey;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-left: 10%;
+  margin-right: auto;
+  margin-top:2%;
+  background-color: darkgrey;
 }
 
 /* Container for the journaling tip block */
