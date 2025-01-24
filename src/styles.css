@@ -9,6 +9,23 @@
     margin-top:2%;
     background-color: darkgrey;
 }
+@font-face {
+  font-family: 'MedievalSharp';
+  src: url('/assets/fonts/MedievalSharp-Regular.woff2') format('woff2'),
+       url('/assets/fonts/MedievalSharp-Regular.woff') format('woff'),
+       url('/assets/fonts/MedievalSharp-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/assets/fonts/Lato-Regular.woff2') format('woff2'),
+       url('/assets/fonts/Lato-Regular.woff') format('woff'),
+       url('/assets/fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* Container for the journaling tip block */
 .journalling-tip-block {
