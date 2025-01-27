@@ -7,6 +7,7 @@ import { environment } from './environments/environment';
 
 import 'bootstrap/dist/js/bootstrap.min.js';
 import '@popperjs/core/lib/index.js';
+import 'material-icons/iconfont/material-icons.css';
 
 if (environment.production) {
   enableProdMode();
