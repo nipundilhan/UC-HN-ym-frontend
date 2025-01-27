@@ -9,6 +9,15 @@
     margin-top:2%;
     background-color: darkgrey;
 }
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/Material-icons.woff2') format('woff2');
+}
+
+
 @font-face {
   font-family: 'MedievalSharp';
   src: url('/assets/fonts/MedievalSharp-Regular.woff2') format('woff2'),
