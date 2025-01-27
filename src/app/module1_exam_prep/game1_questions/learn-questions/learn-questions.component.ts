@@ -119,7 +119,7 @@ tips = [
 
              </div>
              <div class="tip-block">
-               <li><b>Rising Star Badge:</b> Collect <strong>10 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
+               <li><b>Rising Star Badge:</b> Collect <strong>5 likes</strong> across your shared questions to unlock this prestigious badge, awarded for inspiring and engaging with the community.</li>
                <img src = "/assets/badges/badge03_c.png" class="badge-image">
 
              </div>

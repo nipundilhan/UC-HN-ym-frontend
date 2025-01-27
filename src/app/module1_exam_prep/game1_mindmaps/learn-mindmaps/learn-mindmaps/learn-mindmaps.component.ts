@@ -119,7 +119,7 @@ tips = [
                <img src = "/assets/badges/badge02_b.png" class="badge-image">
              </div>
              <div class="tip-block">
-               <li><b>Rising Star Badge:</b> Collect <strong>10 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
+               <li><b>Rising Star Badge:</b> Collect <strong>5 likes</strong> across your shared mind maps to unlock this prestigious badge, recognizing your creativity and impact on the community.</li>
                <img src = "/assets/badges/badge02_c.png" class="badge-image">
              </div>
            </ul>
