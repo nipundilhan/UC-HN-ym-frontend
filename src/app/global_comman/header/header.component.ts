@@ -43,7 +43,7 @@ selectedMessage: any = null;
  
   private inactivityTimeout: any; // Timer for inactivity
   private INACTIVITY_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
-  private autoLogoutEnabled: boolean = false; // Set to 'false' to disable auto logout
+  private autoLogoutEnabled: boolean = true; // Set to 'false' to disable auto logout
 
   constructor(
     private userAuthService: UserAuthService ,
@@ -137,8 +137,8 @@ selectedMessage: any = null;
     this.pointsService.totalMarks$.subscribe((newTotalMarks) => {
       this.studentData.totalMarks = newTotalMarks; // Update points in the header
     });
-    if (this.autoLogoutEnabled) {
-    this.resetInactivityTimer();
+    if (this.userAuthService.isLoggedIn() && this.autoLogoutEnabled) {
+      this.resetInactivityTimer();
     this.addActivityListeners();
     this.addUnloadListener();
     }
@@ -227,6 +227,13 @@ redirectToMessagesPage() {
 
   private handleUnload(event: BeforeUnloadEvent) {
     if (!this.autoLogoutEnabled) return;
+
+
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+      // Do nothing, the page is being refreshed
+      return;
+    }
+    
     this.logout(); // Log the user out on tab or browser close
     // Optionally show a warning (commented out)
     // event.returnValue = ''; // Standard behavior for showing a close warning
