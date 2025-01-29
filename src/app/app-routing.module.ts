@@ -98,8 +98,8 @@ const routes: Routes = [
 
 
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect root to /admin
-  { path: '**', redirectTo: '/login' } // Fallback route
+  { path: '', redirectTo: '/introduction', pathMatch: 'full' }, // Redirect root to /introduction
+  { path: '**', redirectTo: '/introduction' } // Fallback route
 
 
 
