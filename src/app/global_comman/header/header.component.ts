@@ -122,7 +122,7 @@ selectedMessage: any = null;
     });
 
     // this.avatarPath = this.avatarService.getAvatarPath(); // Fetch the avatar path
-
+   if (this.userAuthService.getUserId()){
     this.apiCallService.executeGetNoAuth(API_ENDPOINTS.MODULES.GET_BY_STUDENT_ID + this.userAuthService.getUserId()).subscribe(
 
       (response: any) => {
@@ -133,6 +133,7 @@ selectedMessage: any = null;
         console.log(httpError);
       }
     );
+  }
     // Subscribe to total marks updates
     this.pointsService.totalMarks$.subscribe((newTotalMarks) => {
       this.studentData.totalMarks = newTotalMarks; // Update points in the header
