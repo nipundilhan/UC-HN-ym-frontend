@@ -8,7 +8,8 @@ export class ApiCallService {
 
 
   
-  PATH_OF_API = 'https://csse-youngmind.canterbury.ac.nz/api/YM';
+  // PATH_OF_API = 'https://csse-youngmind.canterbury.ac.nz/api/YM';
+  PATH_OF_API = 'http://localhost:3000/YM';
   
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
