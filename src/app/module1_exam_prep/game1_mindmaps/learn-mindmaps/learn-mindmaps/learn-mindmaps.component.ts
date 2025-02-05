@@ -72,11 +72,6 @@ tips = [
     video: null
   },
   {
-    text: `<p>🌟 <b>Watch this helpful video to learn the basics and start creating your own maps with confidence!</p>`,
-    images: [],
-    video: 'https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq'
-  },
-  {
     text: `<h3>How to Play the Game</h3>
            Here’s how to make the most out of your experience while creating mind maps:</p> 
            <p><strong>Log Your Mind Maps:</strong> As you create mind maps based on your lessons, log the details to track your progress. 

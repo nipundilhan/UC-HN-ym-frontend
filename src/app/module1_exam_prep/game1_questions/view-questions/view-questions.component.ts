@@ -482,11 +482,11 @@ closeShareModal(): void {
 
     if (this.showBadge01 == true){
       badge = 'badge1';
-      ref = 'Game2Badge1'
+      ref = 'Game3Badge1'
     }
     else if (this.showBadge02 == true){
       badge = 'badge2';
-      ref = 'Game2Badge2'
+      ref = 'Game3Badge2'
     }
  
     const requestBody = 
