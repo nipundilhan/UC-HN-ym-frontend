@@ -75,8 +75,8 @@
 
 /* Points Icon styling */
 .points-icon {
-  width: 42px; 
-  height: 42px; 
+  width: 45px; 
+  height: 45px; 
   object-fit: contain;
   margin-right: 8px; /* Space between icon and text */
 }
