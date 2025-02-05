@@ -167,7 +167,13 @@ export class LearnBreathingComponent implements OnInit {
         {
           "text": `<h4>Ready to See How It's Done?</h4>
            <p>Follow along with the video to master the technique!</p>
-           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/OXjlR4mXxSk?si=gVEGEtC_h9m_UmTi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`, 
+           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/OXjlR4mXxSk?si=gVEGEtC_h9m_UmTi&rel=0&modestbranding=1&iv_load_policy=3&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+           <p>
+              If have trouble watching the video above, please visit 
+              <a href="https://www.youtube.com/embed/OXjlR4mXxSk?si=gVEGEtC_h9m_UmTi&rel=0&modestbranding=1&iv_load_policy=3&autoplay=1" target="_blank" rel="noopener noreferrer">
+                this link
+              </a>.
+            </p>`, 
           "image": null, 
           "video": null 
         },
@@ -216,7 +222,23 @@ export class LearnBreathingComponent implements OnInit {
         {
           "text": `<h4>Ready to See How It's Done?</h4>
            <p>Follow along with the video to master the technique!</p>
-           <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/a7re4bKxB3A?si=Gnm0siaE_GEFOUPr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/a7re4bKxB3A?si=Gnm0siaE_GEFOUPr&rel=0&modestbranding=1&iv_load_policy=3&autoplay=1"  
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                </iframe>
+           </div>
+
+           <p>
+            If you have trouble watching video above, please visit 
+            <a href="https://www.youtube.com/embed/a7re4bKxB3A?si=Gnm0siaE_GEFOUPr&rel=0&modestbranding=1&iv_load_policy=3&autoplay=1" target="_blank" rel="noopener noreferrer">
+              this link
+            </a>.
+          </p>
 </div>`, 
           "image": null, 
           "video": null 

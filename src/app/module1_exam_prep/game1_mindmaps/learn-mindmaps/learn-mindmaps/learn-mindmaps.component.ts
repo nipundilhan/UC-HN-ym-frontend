@@ -72,19 +72,6 @@ tips = [
     video: null
   },
   {
-    text: `<p>🌟 <b>Watch this helpful video to learn the basics and start creating your own maps with confidence!</p>`,
-    images: [],
-    video: 'https://www.youtube.com/embed/g7j_CoKD1Xs?si=4QAeMG3yGm1cXgrq'
-  },
-  {
-    text: `<h3>How to Practice the Skill?</h3>
-           Here’s how to make the most out of your experience while creating mind maps:</p> 
-           <p><strong>Log Your Mind Maps:</strong> Head to the <strong>Practice</strong> section after completing the <strong>Learn</strong> section. As you create mind maps based on your lessons, log the details to track your progress. 
-           Enter the lesson title, mindm map image and add an optional description to reflect on your thought process and learning.</p> `,
-    images: ['assets/mindmapping/add-mindmap.png'],
-    video: null
-  },
-  {
     text: `<h3>How to Practice the Skill?</h3>
            <p><strong>Review Your Progress:</strong> Keep track of how your mind mapping skills evolve over time by revisiting your logged maps. 
            Use this record as a visual tool to monitor your growth and deepen your understanding of topics.</p>`,
