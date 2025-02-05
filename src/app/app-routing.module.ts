@@ -86,8 +86,8 @@ const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent, data: { hideHeader: true },// Admin layout with sidebar
     children: [
-      { path: '', component: AdminDashboardComponent }, // Default to dashboard
-      { path: 'users', component: UsersComponent },
+      // { path: '', component: AdminDashboardComponent }, // Default to dashboard
+      { path: '', component: UsersComponent },
       { path: 'games', component: GamesComponent },
       { path: 'user-activity', component: UserActivityComponent },      
       { path: 'messages', component: AdminMsgsComponent },
