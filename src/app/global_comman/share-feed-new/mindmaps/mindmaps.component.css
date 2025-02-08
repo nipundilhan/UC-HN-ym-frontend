@@ -209,9 +209,9 @@
   }
   
   .large-mindmap-image {
-    width: 60%;
-    height: auto;
-    max-width: 600px; /* Set a max-width for large images */
+    width: auto;
+    height: 340px;
+    /* max-width: 600px;  */
     border-radius: 10px;
     margin-bottom: 20px; /* Space between image and buttons */
   }
