@@ -8,6 +8,19 @@ import { UserSignup } from 'src/app/_shared/resources/UserSignup';
 
 import Validation from '../../utils';
 
+export function ucliveEmailValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const email = control.value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@uclive\.ac\.nz$/;
+
+    if (!email || emailPattern.test(email)) {
+      return null; // Valid email or empty field (handled by 'required' validator)
+    }
+
+    return { invalidUcliveEmail: true };
+  };
+}
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -58,7 +71,7 @@ export class SignupComponent implements OnInit {
               Validators.maxLength(10),
             ],
           ],
-          email: ['', [Validators.required, Validators.email]],
+          email: ['', [Validators.required, Validators.email, ucliveEmailValidator()]],
           gender: ['', Validators.required],
           dob: ['', [Validators.required, this.dateValidator(today)]],
           password: [
@@ -84,6 +97,8 @@ export class SignupComponent implements OnInit {
     // this.form.get('dob')?.setValidators([Validators.required, this.dateValidator(today)]);
     // this.form.get('dob')?.updateValueAndValidity();
   }
+
+  
 
   dateValidator(today: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
