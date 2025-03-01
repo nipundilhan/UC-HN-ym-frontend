@@ -173,7 +173,7 @@ export class MindmapSubmissionComponent implements OnInit {
     this.fileSizeError = false; // Reset file size error
     const files = event.target.files;
   
-    const maxFileSize = 1 * 1024 * 1024; // 1 MB
+    const maxFileSize = 2 * 1024 * 1024; // 2 MB
     const allowedFileTypes = ['image/jpeg', 'image/png'];
     const maxFilesAllowed = 1; // Maximum allowed files
   
@@ -189,7 +189,7 @@ export class MindmapSubmissionComponent implements OnInit {
       if (file.size > maxFileSize) {
         this.fileSizeError = true;
         this.mindmapForm.get('image')?.setErrors({ size: true }); // Mark control as invalid
-        alert(`File exceeds the maximum size of 1 MB.`);
+        alert(`File exceeds the maximum size of 2MB.`);
         continue; // Skip this file
       }
   
