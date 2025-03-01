@@ -26,7 +26,7 @@
           <img class = "arrow-btn" *ngIf="currentTipIndex > 0" src="/assets/previous-arrow.png" alt="Previous" (click)="previousTip()">
           <img class = "arrow-btn" *ngIf="currentTipIndex < tips.length - 1" src="/assets/next-arrow.png" alt="Next" (click)="nextTip()">
 
-          <button *ngIf="currentTipIndex === tips.length - 1" class="game-button" (click)="goToGame()">Start Game</button>
+          <button *ngIf="currentTipIndex === tips.length - 1" class="game-button" (click)="goToGame()">Start Practising</button>
 
         </div>
 

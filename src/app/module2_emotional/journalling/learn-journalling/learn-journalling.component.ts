@@ -81,7 +81,7 @@ export class LearnJournallingComponent implements OnInit {
                    <p><i>“A funny joke from my classmate.”</i></p>
                    <p><i>“A sunny walk after my study session.”</i></p>
                  </div>
-                 <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>`,
+                 <p>🌟 <b>Bonus:</b> Here, you can also create and answer your own personalized questions!</p>`,
           image: null, 
           video: null 
         },
@@ -145,7 +145,7 @@ export class LearnJournallingComponent implements OnInit {
                    <p><i>“I struggled with a tough math problem but stayed patient and tried different methods.”</i></p>
                    <p><i>“I felt overwhelmed, but I took a break and came back stronger.”</i></p>
                  </div>
-                 <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>
+                 <p>🌟 <b>Bonus:</b> Here, you can also create and answer your own personalized questions!</p>
 `, 
           image: null, 
           video: null 
@@ -204,7 +204,7 @@ export class LearnJournallingComponent implements OnInit {
                     <p><i>“Staying consistent with my studies this week.”</i></p>
                     <p><i>“Helping a friend understand a tough concept.”</i></p>
                   </div>
-                 <p>🌟 <b>Bonus:</b> In the game, you can also create and answer your own personalized questions!</p>
+                 <p>🌟 <b>Bonus:</b> Here, you can also create and answer your own personalized questions!</p>
 `, 
           image: null, 
           video: null 
