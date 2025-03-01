@@ -173,7 +173,7 @@
                 <input type="file" id="image" (change)="onFileSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
                 <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
                   <div *ngIf="f['image'].errors?.['required']">Mindmap Image is required</div>
-                  <div *ngIf="fileSizeError">File size exceeds the 1MB limit.</div>
+                  <div *ngIf="fileSizeError">File size exceeds the 2MB limit.</div>
                 </div>
 
                 <div class="file-preview-container">
