@@ -136,6 +136,12 @@
 .signup-link a:hover {
   text-decoration: underline;
 }
+
+
+.username-input {
+  text-transform: lowercase;
+}
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .signup-box {

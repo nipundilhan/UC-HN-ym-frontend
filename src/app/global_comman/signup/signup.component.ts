@@ -221,4 +221,14 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['/select-avatar']);
     }
   }
+
+
+  onUsernameInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input) {
+      const lowercaseValue = input.value.toLowerCase();
+      this.form.get('username')?.setValue(lowercaseValue, { emitEvent: false });
+    }
+  }
+  
 }

@@ -27,7 +27,11 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm) {
     this.errorMessage = ''; // Reset error message on each submit attempt
-
+    
+    if (loginForm.value.username) {
+      loginForm.value.username = loginForm.value.username.toLowerCase();
+    }
+    
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.AUTH.AUTHENTICATE, loginForm.value).subscribe(
       (response: any) => {
         // On successful login, store token and role
