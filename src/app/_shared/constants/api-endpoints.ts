@@ -41,7 +41,10 @@ export const API_ENDPOINTS = {
     DELETE_USER: `${USER_BASE}/delete-user`,
     TIME_TRACKING: `${USER_BASE}/update-time-tracking`,
     UPDATE_STUDENT: `${USER_BASE}/update-student`,
-    UPDATE_PASSWORD: `${USER_BASE}/update-password`
+    UPDATE_PASSWORD: `${USER_BASE}/update-password`,
+    SEND_OTP_EMAIL: `${USER_BASE}/reset-password-email`,
+    PASSWORD_EMAIL: `${USER_BASE}/password-reset`,
+
   },
   MODULES: {
     BASE: MODULE_BASE,

@@ -50,6 +50,8 @@ import { LearnBreathingComponent } from './module2_emotional/game1-breathing/lea
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
 import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
+import { ForgotPasswordComponent } from './global_comman/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './global_comman/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
     LearnQuestionsComponent,
     WelcomeComponent,
     AdminMsgsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     
     ],
   imports: [
