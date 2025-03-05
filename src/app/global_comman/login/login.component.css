@@ -168,3 +168,17 @@
 }
 
 
+.forgot-password {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot-password a{
+  color: #d96e10;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+  color: #000000;
+}

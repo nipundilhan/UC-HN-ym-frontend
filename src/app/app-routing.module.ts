@@ -36,12 +36,14 @@ import { LearnJournallingComponent } from './module2_emotional/journalling/learn
 import { LearnQuestionsComponent } from './module1_exam_prep/game1_questions/learn-questions/learn-questions.component';
 import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
+import { ForgotPasswordComponent } from './global_comman/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './global_comman/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'test', component: TestComponent },
   { path: 'signup', component: SignupComponent,  data: { hideHeader: true }  },
-  { path: 'select-avatar', component: SelectavatarComponent },
+  { path: 'select-avatar', component: SelectavatarComponent, data: { hideHeader: true }  },
   { path: 'tutorial-submission', component: TutorialSubmissionComponent },
   { path: 'login', component: LoginComponent,  data: { hideHeader: true }  },
   { path: 'hometest', component: HometestComponent },
@@ -69,6 +71,10 @@ const routes: Routes = [
   { path: 'learn-journalling', component: LearnJournallingComponent },
 
   { path: 'messages', component: MessagesComponent },
+
+  { path: 'forgot-password', component: ForgotPasswordComponent, data: { hideHeader: true }  },
+  { path: 'reset-password', component: ResetPasswordComponent, data: { hideHeader: true }  },
+
 
  { path: 'share',
     component: ShareFeedNewComponent,
