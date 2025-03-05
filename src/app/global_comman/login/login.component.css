@@ -182,3 +182,6 @@
   text-decoration: underline;
   color: #000000;
 }
+.username-input {
+  text-transform: lowercase;
+}

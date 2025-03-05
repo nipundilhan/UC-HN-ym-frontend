@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
   login(loginForm: NgForm) {
     this.errorMessage = ''; // Reset error message on each submit attempt
 
+    if (loginForm.value.username) {
+      loginForm.value.username = loginForm.value.username.toLowerCase();
+    }
+    
     this.apiCallService.executePostNoAuth(API_ENDPOINTS.AUTH.AUTHENTICATE, loginForm.value).subscribe(
       (response: any) => {
         // On successful login, store token and role
@@ -68,5 +72,12 @@ export class LoginComponent implements OnInit {
         this.isPasswordVisible = !this.isPasswordVisible;
     }
 
+}
+
+onUsernameInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input) {
+    input.value = input.value.toLowerCase();  // Directly update input value to lowercase
+  }
 }
 }

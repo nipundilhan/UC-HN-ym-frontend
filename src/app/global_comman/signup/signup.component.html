@@ -15,8 +15,9 @@
                 <input
                   type="text"
                   formControlName="username"
-                  class="form-control"
+                  class="form-control username-input"
                   [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+                  (input)="onUsernameInput($event)"
                 />
                 <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                   <div *ngIf="f['username'].errors['required']">Username is required</div>
