@@ -75,10 +75,9 @@
                   formControlName="gender"
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }">
-                  <option value="MALE">Male</option>
-                  <option value="FEMALE">Female</option>
-                  <option value="OTHER">Other</option>
-                  <option value="NOT PREFERRED">Prefer not to say</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Another Gender">Another Gender</option>
                 </select>  
 
                 <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
