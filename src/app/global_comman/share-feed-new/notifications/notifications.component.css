@@ -99,6 +99,19 @@
     color: #878787;
   }
   
+  .no-achievements{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    height: 200px;
+    /* width: 70%; */
+    font-size: 1.5rem;
+    align-self: center;
+}
 
   @media (max-width: 768px) {
     /* .feed-item{

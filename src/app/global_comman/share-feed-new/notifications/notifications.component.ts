@@ -69,7 +69,8 @@ export class NotificationsComponent implements OnInit {
 
   get totalPages(): number {
     // console.log(this.QnA.length);
-    return Math.ceil(this.notifications.length / this.NotificationsPerPage);
+    return Math.max(1, Math.ceil(this.notifications.length / this.NotificationsPerPage));
+    // return Math.ceil(this.notifications.length / this.NotificationsPerPage);
   }
 
   get paginatedNotifications(): any[] {
