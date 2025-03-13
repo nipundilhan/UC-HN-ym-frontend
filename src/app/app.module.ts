@@ -52,6 +52,7 @@ import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
 import { ForgotPasswordComponent } from './global_comman/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './global_comman/reset-password/reset-password.component';
+import { ActivityComponent } from './admin/activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ResetPasswordComponent } from './global_comman/reset-password/reset-pas
     AdminMsgsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    ActivityComponent,
     
     ],
   imports: [

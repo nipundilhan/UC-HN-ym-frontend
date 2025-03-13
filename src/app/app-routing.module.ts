@@ -38,6 +38,7 @@ import { WelcomeComponent } from './global_comman/welcome/welcome.component';
 import { AdminMsgsComponent } from './admin/admin-msgs/admin-msgs.component';
 import { ForgotPasswordComponent } from './global_comman/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './global_comman/reset-password/reset-password.component';
+import { ActivityComponent } from './admin/activity/activity.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -96,6 +97,7 @@ const routes: Routes = [
       { path: 'games', component: GamesComponent },
       { path: 'user-activity', component: UserActivityComponent },      
       { path: 'messages', component: AdminMsgsComponent },
+      { path: 'activity', component: ActivityComponent },
 
       { path: '', redirectTo: '/admin', pathMatch: 'full' }, // Redirect root to /admin
       { path: '**', redirectTo: '/admin' } // Fallback route

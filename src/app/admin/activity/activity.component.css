@@ -1,0 +1,67 @@
+.task-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    overflow-x: auto; /* Allows for horizontal scrolling on smaller screens */
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Ensures the table becomes scrollable on smaller screens */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: auto; /* Adjust column width automatically */
+    font-size: 12px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  th[colspan] {
+    background-color: #d9d9d9; /* Slightly darker for game category headers */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Styling for responsive table */
+  @media (max-width: 768px) {
+    table, th, td {
+      font-size: 12px; /* Reduce font size for small screens */
+    }
+    th, td {
+      padding: 8px; /* Reduce padding for compact view */
+    }
+    /* Ensure the task name column does not shrink */
+    th:first-child, td:first-child {
+      min-width: 150px;
+    }
+    /* Make sure other columns don't shrink too much */
+    td {
+      min-width: 100px;
+    }
+  }
+  
