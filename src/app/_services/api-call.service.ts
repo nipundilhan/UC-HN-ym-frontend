@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiCallService {
 
-  PATH_OF_API = 'https://yng-mnd-back-end.onrender.com';
+  PATH_OF_API = 'https://yng-mnd-back-end.onrender.com/YM';
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
 
