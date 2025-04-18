@@ -6,7 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiCallService {
 
-  PATH_OF_API = 'https://csse-youngmind-ng.canterbury.ac.nz/api/YM';
+  //PATH_OF_API = 'https://csse-youngmind.canterbury.ac.nz/api/YM';
+  PATH_OF_API = 'https://yng-mnd-back-end.onrender.com/YM';
+
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
 
