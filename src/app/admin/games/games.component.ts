@@ -10,7 +10,7 @@ export class GamesComponent implements OnInit {
   games: any[] = [
     {
       id: 1,
-      name: 'Eye of Horus : Tutorial and Labs Quest',
+      name: 'Eye of Horus : Tutorial and Labs Mastery',
       active: true,
       badgeImage: 'assets/badges/badge01.png',
       margin: 5,

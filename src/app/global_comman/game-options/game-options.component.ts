@@ -10,7 +10,7 @@ export class GameOptionsComponent implements OnInit {
   game: any;
 
   games = [
-    { id: 1, name: 'Tutorial and Labs Quest', playRoute: '/view-tutorials', learnRoute: '/learn-tutorials' },
+    { id: 1, name: 'Tutorial and Labs Mastery', playRoute: '/view-tutorials', learnRoute: '/learn-tutorials' },
     { id: 2, name: 'Mind Mapping Mastery', playRoute: '/play-mindmaps', learnRoute: '/learn-mindmaps' },
     { id: 3, name: 'Question Mastery', playRoute: '/play-questions', learnRoute: '/learn-questions' },
     { id: 4, name: 'Breathing Mastery', playRoute: '/play-breathing', learnRoute: '/learn-breathing' },

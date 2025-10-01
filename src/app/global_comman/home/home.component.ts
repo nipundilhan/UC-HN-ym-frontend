@@ -16,7 +16,7 @@ games = [
     id: 1,
     // name: '<span class="game-title">Eye of Horus</span><span class="game-subtitle">Tutorial Quest</span>',
     name: 'Eye of Horus',
-    subtitle: 'Tutorial and Labs Quest',
+    subtitle: 'Lab Revision Mastery',
     // hieroglyph: '𓂀',
     hieroglyphImage: 'assets/hieroglyph1.png', 
     scrollImage: 'assets/scroll.png',
